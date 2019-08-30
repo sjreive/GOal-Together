@@ -60,3 +60,42 @@ act2 = Activity.create(
   commitment_id: cmt1.id
 )
 
+puts "Finding or Creating Votes ..."
+
+# User 1 votes
+act1.votes.create!({
+  attended?: true,
+  attendee_id: usr1.id,
+  voter_id: usr2.id
+})
+  
+act1.votes.create!({
+  attended?: false,
+  attendee_id: usr1.id,
+  voter_id: usr3.id
+})
+
+# User 2 Votes
+act1.votes.create!({
+  attended?: true,
+  attendee_id: usr2.id,
+  voter_id: usr1.id
+})
+act1.votes.create!({
+  attended?: false,
+  attendee_id: usr2.id,
+  voter_id: usr3.id
+})
+
+# User 3 Votes
+act1.votes.create!({
+  attended?: true,
+  attendee_id: usr3.id,
+  voter_id: usr1.id
+})
+
+act1.votes.create!({
+  attended?: true,
+  attendee_id: usr3.id,
+  voter_id: usr2.id
+})
