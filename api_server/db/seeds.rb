@@ -30,7 +30,7 @@ usr3 = User.create(
 )
 
 # Commitments
-
+Commitment.destroy_all
 puts "Re-creating Commitments ..."
 cmt1 = Commitment.create(
   name: "Get swoll",
@@ -45,3 +45,18 @@ cmt1 = Commitment.create(
 usr1.commitments << cmt1
 usr2.commitments << cmt1
 usr3.commitments << cmt1
+
+puts "Finding or Creating Activities ..."
+Activity.destroy_all
+act1 = Activity.create(
+  title: "Gym visit 1",
+  date: 5.days.ago,
+  commitment_id: cmt1.id
+)
+
+act2 = Activity.create(
+  title: "Spin class",
+  date: 2.days.ago,
+  commitment_id: cmt1.id
+)
+
