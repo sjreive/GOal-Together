@@ -7,36 +7,38 @@ const reducer = (state, action) => {
       return {
         ...state,
         commitments: action.commitments,
+        votes: action.votes
       };
       default:
         throw new Error(
           "Tried to reduce with unsupported action type: ${action.type}"
-
         )
   };
 }
 
-const useApplicationData = () => {
+export default function useApplicationData() {
 
   const [state, dispatch] = useReducer(reducer, {
-    commitments: []
+    commitments: [],
+    votes: []
   });
     
   useEffect(() => {
     Promise.all([
       axios.get(`http://localhost:3001/api/commitments`),
+      axios.get(`http://localhost:3001/api/votes`)
     ])
     .then(all => {
       dispatch({
-        type: SET_APPLICATION_DATA, 
-        commitments: all[0].data
+        type: "SET_APPLICATION_DATA", 
+        commitments: all[0].data,
+        votes: all[1].data
       });
     });
   }, []);
     
   return { 
-    state,
+    state
   };
 }
 
-export { useApplicationData }

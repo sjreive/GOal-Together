@@ -1,21 +1,19 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import axios from "axios";
-
-const getData = async () => {
-  return await axios
-    .get("http://localhost:3001/api/commitments")
-    .then(response => response);
-};
+import useApplicationData from "./hooks/useApplicationData";
 
 function App() {
+  const {
+    state
+  } = useApplicationData();  
   return (
     <Router>
       <div>
         <Header />
 
         <Route exact path="/" component={Home} />
-        <Route path="/commitments" component={Commitments} />
+        <Route path="/commitments" render={props => (<Commitments {...props} state={state}/>)
+        }/>
         <Route path="/notifications" component={Notifications} />
         <Route path="/newsfeed" component={Newsfeed} />
         <Route path="/stats" component={Stats} />
@@ -33,16 +31,19 @@ function Commitment({ match }) {
   return <h2>Commitment ${match.params.id} </h2>;
 }
 
-function Commitments({ match }) {
+function Commitments({ match, state }) {
+  
+  console.log(state ? state.commitments[0] : "")
   return (
     <div>
       <h2>Commitments</h2>
-      <p>{getData().then(data => console.log(data.data[0].name))}</p>
+      <p></p>
       <ul>
         <li>
           <Link to={`${match.url}/new`}>Create a New Commitment</Link>
         </li>
-        <li>RENDERED COMMITMENTS</li>
+        <li>{state.commitments[0] ? state.commitments[0].name : "Waiting.."}</li>
+        {state.votes[0] ? state.votes.map(vote => <li>{vote.id}</li>) : "Waiting.."}
       </ul>
       <Route path={`${match.path}/:id`} component={Commitment} />
       <Route
