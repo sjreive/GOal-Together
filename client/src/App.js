@@ -1,5 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import axios from "axios";
+
+const getData = async () => {
+  return await axios
+    .get("http://localhost:3001/api/commitments")
+    .then(response => response);
+};
 
 function App() {
   return (
@@ -30,14 +37,13 @@ function Commitments({ match }) {
   return (
     <div>
       <h2>Commitments</h2>
-
+      <p>{getData().then(data => console.log(data.data[0].name))}</p>
       <ul>
         <li>
           <Link to={`${match.url}/new`}>Create a New Commitment</Link>
         </li>
         <li>RENDERED COMMITMENTS</li>
       </ul>
-
       <Route path={`${match.path}/:id`} component={Commitment} />
       <Route
         exact
