@@ -1,3 +1,5 @@
+@import "./styles/variables.module.scss";
+
 .App {
   text-align: center;
 }
@@ -19,6 +21,16 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.bigSquare {
+  height: 200px;
+  width: 200px;
+  background-image: $gradient;
 }

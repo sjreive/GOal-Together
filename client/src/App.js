@@ -1,19 +1,20 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import useApplicationData from "./hooks/useApplicationData";
+import classes from "./App.module.scss";
 
 function App() {
-  const {
-    state
-  } = useApplicationData();  
+  const { state } = useApplicationData();
   return (
     <Router>
       <div>
         <Header />
 
         <Route exact path="/" component={Home} />
-        <Route path="/commitments" render={props => (<Commitments {...props} state={state}/>)
-        }/>
+        <Route
+          path="/commitments"
+          render={props => <Commitments {...props} state={state} />}
+        />
         <Route path="/notifications" component={Notifications} />
         <Route path="/newsfeed" component={Newsfeed} />
         <Route path="/stats" component={Stats} />
@@ -24,7 +25,12 @@ function App() {
 }
 
 function Home() {
-  return <h2>Home</h2>;
+  return (
+    <div>
+      <h2>Home</h2>
+      <div className={classes.bigSquare} />
+    </div>
+  );
 }
 
 function Commitment({ match }) {
@@ -32,8 +38,7 @@ function Commitment({ match }) {
 }
 
 function Commitments({ match, state }) {
-  
-  console.log(state ? state.commitments[0] : "")
+  console.log(state ? state.commitments[0] : "");
   return (
     <div>
       <h2>Commitments</h2>
@@ -42,8 +47,12 @@ function Commitments({ match, state }) {
         <li>
           <Link to={`${match.url}/new`}>Create a New Commitment</Link>
         </li>
-        <li>{state.commitments[0] ? state.commitments[0].name : "Waiting.."}</li>
-        {state.votes[0] ? state.votes.map(vote => <li>{vote.id}</li>) : "Waiting.."}
+        <li>
+          {state.commitments[0] ? state.commitments[0].name : "Waiting.."}
+        </li>
+        {state.votes[0]
+          ? state.votes.map(vote => <li>{vote.id}</li>)
+          : "Waiting.."}
       </ul>
       <Route path={`${match.path}/:id`} component={Commitment} />
       <Route

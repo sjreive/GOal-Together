@@ -1,0 +1,16 @@
+@import "~normalize.css/normalize.css";
+
+@import url("https://fonts.googleapis.com/css?family=Barlow:300,400,700|Varela+Round&display=swap");
+
+@import "./styles/variables.module.scss";
+@import "./styles/reset.module.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $body-font;
+}
