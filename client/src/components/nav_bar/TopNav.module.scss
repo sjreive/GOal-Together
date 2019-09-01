@@ -1,8 +1,15 @@
+@import "../../styles/variables.module.scss";
+
+body {
+  padding-top: 50px !important;
+}
+
 .topNav {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 150px;
-  
+  height: 50px;
+  background-color: $white;
+  border-radius: 0 0 15px 15px
 }

@@ -9,6 +9,11 @@ const reducer = (state, action) => {
         commitments: action.commitments,
         votes: action.votes
       };
+    case "SET_PAGE_TITLE":
+      return {
+        ...state,
+        title: action.title
+      };
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -19,7 +24,8 @@ const reducer = (state, action) => {
 export default function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
     commitments: [],
-    votes: []
+    votes: [],
+    title: ""
   });
 
   useEffect(() => {
@@ -36,6 +42,7 @@ export default function useApplicationData() {
   }, []);
 
   return {
-    state
+    state,
+    dispatch
   };
 }

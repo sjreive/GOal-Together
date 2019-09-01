@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import useApplicationData from "./hooks/useApplicationData";
 import classes from "./App.module.scss";
@@ -6,7 +6,16 @@ import classes from "./App.module.scss";
 import TopNav from "./components/nav_bar/TopNav"
 
 function App() {
-  const { state } = useApplicationData();
+  const { state, dispatch } = useApplicationData();
+
+  useEffect(() => {
+    dispatch({
+      type: "SET_PAGE_TITLE",
+      title: document.title
+    })
+  }, [document.title])
+  
+  document.title = "My Commitments"
   return (
     <Router>
       <TopNav/>
