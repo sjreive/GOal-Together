@@ -3,10 +3,13 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import useApplicationData from "./hooks/useApplicationData";
 import classes from "./App.module.scss";
 
+import TopNav from "./components/nav_bar/TopNav"
+
 function App() {
   const { state } = useApplicationData();
   return (
     <Router>
+      <TopNav/>
       <div>
         <Header />
 
