@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import useApplicationData from "./hooks/useApplicationData";
 import classes from "./App.module.scss";
+import CommitmentList from "./components/commitment/CommitmentList";
 
 function App() {
   const { state } = useApplicationData();
@@ -38,29 +39,23 @@ function Commitment({ match }) {
 }
 
 function Commitments({ match, state }) {
+  console.log(state ? state : "");
   console.log(state ? state.commitments[0] : "");
   return (
     <div>
       <h2>Commitments</h2>
-      <p></p>
-      <ul>
-        <li>
-          <Link to={`${match.url}/new`}>Create a New Commitment</Link>
-        </li>
-        <li>
-          {state.commitments[0] ? state.commitments[0].name : "Waiting.."}
-        </li>
-        {state.votes[0]
-          ? state.votes.map(vote => <li>{vote.id}</li>)
-          : "Waiting.."}
-      </ul>
+      {/* Button to Create new commitments will go he */}
+      <Link to={`${match.url}/new`}>Create a New Commitment</Link>
+      {/* SECTION/DIV That will return contain list of commitments */}
+      <CommitmentList commitments={state.commitments} members={state.members} />
+
       <Route path={`${match.path}/:id`} component={Commitment} />
       <Route
         exact
         path={match.path}
         render={() => (
           <h3>
-            This will render the commitment that is clicked on $
+            This will render the commitment that is clicked on
             {match.params.id}
           </h3>
         )}
