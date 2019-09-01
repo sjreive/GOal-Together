@@ -16,6 +16,7 @@ function App() {
   }, [document.title])
   
   document.title = "My Commitments"
+  
   return (
     <Router>
       <TopNav/>

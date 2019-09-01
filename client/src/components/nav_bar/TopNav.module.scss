@@ -1,4 +1,6 @@
 @import "../../styles/variables.module.scss";
+@import "../../styles/mixins.module.scss";
+
 
 body {
   padding-top: 50px !important;
@@ -11,5 +13,6 @@ body {
   right: 0;
   height: 50px;
   background-color: $white;
-  border-radius: 0 0 15px 15px
+  border-radius: 0 0 15px 15px;
+  @include flexThis(center, center, row);
 }
