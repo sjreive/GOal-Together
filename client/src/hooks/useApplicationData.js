@@ -9,7 +9,7 @@ const reducer = (state, action) => {
         commitments: action.commitments,
         votes: action.votes
       };
-    case "SET_PAGE_TITLE":
+    case "SET_TITLE":
       return {
         ...state,
         title: action.title
@@ -41,8 +41,13 @@ export default function useApplicationData() {
     });
   }, []);
 
+  const setTitle = title => dispatch({
+    type: "SET_TITLE",
+    title
+  });
+
   return {
     state,
-    dispatch
+    setTitle
   };
 }

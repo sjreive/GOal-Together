@@ -7,16 +7,14 @@ import TopNav from "./components/nav_bar/TopNav"
 import BottomNav from "./components/nav_bar/BottomNav"
 
 function App() {
-  const { state, dispatch } = useApplicationData();
+  const { 
+    state,
+    setTitle
+   } = useApplicationData();
 
   useEffect(() => {
-    dispatch({
-      type: "SET_PAGE_TITLE",
-      title: document.title
-    })
-  }, [document.title])
-  
-  document.title = "My Commitments"
+    document.title = state.title
+  }, [state.title])
   
   return (
     <Router>
@@ -24,10 +22,13 @@ function App() {
       <div>
         <Header />
 
-        <Route exact path="/" component={Home} />
+        <Route 
+          exact path="/" 
+          render={props => <Home {...props} setTitle={setTitle} />}
+        />
         <Route
           path="/commitments"
-          render={props => <Commitments {...props} state={state} />}
+          render={props => <Commitments {...props} state={state} setTitle={setTitle} />}
         />
         <Route path="/notifications" cTopomponent={Notifications} />
         <Route path="/newsfeed" componTopent={Newsfeed} />
@@ -39,7 +40,10 @@ function App() {
   );
 }
 
-function Home() {
+function Home({ match, setTitle }) {
+  if (document.title !== "Home") {
+    setTitle("Home") 
+  }
   return (
     <div>
       <h2>Home</h2>
@@ -52,8 +56,10 @@ function Commitment({ match }) {
   return <h2>Commitment ${match.params.id} </h2>;
 }
 
-function Commitments({ match, state }) {
-  console.log(state ? state.commitments[0] : "");
+function Commitments({ match, state, setTitle }) {
+  if (document.title !== "Commitments") {
+    setTitle("Commitments") 
+  }
   return (
     <div>
       <h2>Commitments</h2>
