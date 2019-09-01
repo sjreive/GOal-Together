@@ -4,6 +4,7 @@ import useApplicationData from "./hooks/useApplicationData";
 import classes from "./App.module.scss";
 
 import TopNav from "./components/nav_bar/TopNav"
+import BottomNav from "./components/nav_bar/BottomNav"
 
 function App() {
   const { state, dispatch } = useApplicationData();
@@ -28,11 +29,12 @@ function App() {
           path="/commitments"
           render={props => <Commitments {...props} state={state} />}
         />
-        <Route path="/notifications" component={Notifications} />
-        <Route path="/newsfeed" component={Newsfeed} />
-        <Route path="/stats" component={Stats} />
+        <Route path="/notifications" cTopomponent={Notifications} />
+        <Route path="/newsfeed" componTopent={Newsfeed} />
+        <Route path="/stats" componentTop={Stats} />
         <Route path="/transactions" component={Transactions} />
       </div>
+      <BottomNav/>
     </Router>
   );
 }
