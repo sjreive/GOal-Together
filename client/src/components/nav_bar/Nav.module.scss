@@ -13,7 +13,13 @@ $nav-height: 50px;
 .bottomNav {
   bottom: 0;
   border-radius: 15px 15px 0 0 ;
-  @include flexThis(center, center, row);
+  @include flexThis(space-between, center, row);
+  padding: 10px 30px;
+
+  .navIcon {
+    height: 25px;
+    width: 25px;
+  }
 }
 
 body {
