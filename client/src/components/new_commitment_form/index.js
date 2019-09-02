@@ -6,7 +6,7 @@ import {useVisualMode } from "../../hooks/useVisualMode";
 import Ready from "./Ready";
 import Type from"./Type";
 import Name from"./Name";
-import Date from"./Date";
+import EndDate from"./EndDate";
 
 export default function NewCommitmentForm(props) {
   const { mode, transition, back } = useVisualMode("FIRST");
@@ -21,7 +21,7 @@ export default function NewCommitmentForm(props) {
       {mode === "FIRST" && <Ready clickNext={e => transition("TYPE")}/>}
       {mode === "TYPE" && <Type clickBack={e => back()} clickNext={e => transition("NAME")} type={type} setType={e => setType(e.target.value)}/>}
       {mode === "NAME" && <Name clickBack={e => back()} clickNext={e => transition("DATE")} name={name} setName={e => setName(e.target.value)} />}
-      {mode === "DATE" && <Date clickBack={e => back()}  form="new-commit-form"/>}
+      {mode === "DATE" && <EndDate clickBack={e => back()}  endDate={endDate} setEndDate={e => setEndDate(e.target.value)} />}
     </form>
   );
 };
