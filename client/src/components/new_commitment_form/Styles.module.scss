@@ -6,7 +6,25 @@
   text-align: center;
   @include flexThis(space-between, center, column);
 
-  h2 {
-    margin-bottom: 20px ;
+  h2, 
+  input,
+  select {
+    margin-bottom: 20px;
   }
+
+  h2 {
+    color: $primary-blue;
+  }
+
+  select,
+  input {
+    display: block;
+    
+    -webkit-appearance: none;
+  }
+
+  .formRow {
+    @include flexThis(space-between, center, column);
+  }
+
 }

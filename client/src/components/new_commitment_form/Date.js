@@ -1,16 +1,16 @@
 import React from "react";
+import classes from "./Styles.module.scss";
 import Button from "../button/Button";
 
 export default function Ready(props) {
   return (
-    <div>
+    <div className={classes.formRow}>
       <Button 
         back={true}
         smallCircle={true}
         onClick={props.clickBack}
       />
-      <h2>Awesome!</h2>
-      <label htmlFor="type"><p>Enter the type of commitment:</p></label>
+      <label htmlFor="type"><h2>When will your commitment end?</h2></label>
       <select>
         <option value="fitness">Fitness</option>
         <option value="academic">Academic</option>
