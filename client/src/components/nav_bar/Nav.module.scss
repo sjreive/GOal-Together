@@ -1,0 +1,59 @@
+@import "../../styles/variables.module.scss";
+@import "../../styles/mixins.module.scss";
+
+$nav-height: 50px;
+$link-size: 25px;
+
+.nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: $nav-height;
+  background-color: $white;
+}
+
+.bottomNav {
+  bottom: 0;
+  border-radius: 15px 15px 0 0 ;
+  @include flexThis(space-between, center, row);
+  padding: 10px 30px;
+
+  .navIcon {
+    height: $link-size;
+    width: $link-size;
+    transition: 0.3s;
+  }
+
+  .navIcon:hover,
+  .navIcon:focus {
+    transform: scale(1.2);
+    color: $primary-blue;
+  }
+
+  a {
+    margin: 0 15px;
+  }
+}
+
+body {
+  padding: $nav-height 0 !important;
+}
+
+.topNav {
+  top: 0;
+  border-radius: 0 0 15px 15px;
+  @include flexThis(center, center, row);
+}
+
+.newCommitButton {
+  position: absolute;
+  bottom: $nav-height / 2.5;
+  left: 50%;
+  margin-left: -$link-size !important;
+}
+
+.newCommitIcon {
+  height: $link-size * 2 !important;
+  width: $link-size * 2 !important;
+  color: $primary-blue;
+}

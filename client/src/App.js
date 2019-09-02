@@ -1,31 +1,64 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import useApplicationData from "./hooks/useApplicationData";
 import classes from "./App.module.scss";
 import CommitmentList from "./components/commitment/CommitmentList";
 
+import TopNav from "./components/nav_bar/TopNav";
+import BottomNav from "./components/nav_bar/BottomNav";
+import Button from "./components/button/Button";
+
 function App() {
-  const { state } = useApplicationData();
+  const { state, setTitle } = useApplicationData();
+
+  useEffect(() => {
+    document.title = state.title;
+  }, [state.title]);
+
   return (
     <Router>
+      <TopNav />
       <div>
         <Header />
 
-        <Route exact path="/" component={Home} />
         <Route
-          path="/commitments"
-          render={props => <Commitments {...props} state={state} />}
+          exact
+          path="/"
+          render={props => <Home {...props} setTitle={setTitle} />}
         />
-        <Route path="/notifications" component={Notifications} />
-        <Route path="/newsfeed" component={Newsfeed} />
-        <Route path="/stats" component={Stats} />
-        <Route path="/transactions" component={Transactions} />
+        <Route
+          exact
+          path="/commitments"
+          render={props => (
+            <Commitments {...props} state={state} setTitle={setTitle} />
+          )}
+        />
+        <Route
+          path="/notifications"
+          render={props => <Notifications {...props} setTitle={setTitle} />}
+        />
+        <Route
+          path="/commitments/new"
+          render={props => <NewCommitment {...props} setTitle={setTitle} />}
+        />
+        <Route
+          path="/profile"
+          render={props => <Profile {...props} setTitle={setTitle} />}
+        />
+        <Route
+          path="/transactions"
+          render={props => <Transactions {...props} setTitle={setTitle} />}
+        />
       </div>
+      <BottomNav Link={Link} />
     </Router>
   );
 }
 
-function Home() {
+function Home({ match, setTitle }) {
+  if (document.title !== "Home") {
+    setTitle("Home");
+  }
   return (
     <div>
       <h2>Home</h2>
@@ -38,9 +71,11 @@ function Commitment({ match }) {
   return <h2>Commitment ${match.params.id} </h2>;
 }
 
-function Commitments({ match, state }) {
-  console.log(state ? state : "");
-  console.log(state ? state.commitments[0] : "");
+function Commitments({ match, state, setTitle }) {
+  if (document.title !== "Commitments") {
+    setTitle("Commitments");
+  }
+
   return (
     <div>
       <h2>Commitments</h2>
@@ -64,19 +99,31 @@ function Commitments({ match, state }) {
   );
 }
 
-function Notifications() {
+function Notifications({ match, state, setTitle }) {
+  if (document.title !== "Notifications") {
+    setTitle("Notifications");
+  }
   return <h2>My Notifications</h2>;
 }
 
-function Newsfeed() {
-  return <h2>My Newsfeed</h2>;
+function NewCommitment({ match, state, setTitle }) {
+  if (document.title !== "New Commitment") {
+    setTitle("New Commitment");
+  }
+  return <h2>My New Commitment</h2>;
 }
 
-function Stats() {
-  return <h2>My Stats</h2>;
+function Profile({ match, state, setTitle }) {
+  if (document.title !== "Profile") {
+    setTitle("Profile");
+  }
+  return <h2>My Profile</h2>;
 }
 
-function Transactions() {
+function Transactions({ match, state, setTitle }) {
+  if (document.title !== "Transactions") {
+    setTitle("Transactions");
+  }
   return <h2>My Transactions</h2>;
 }
 

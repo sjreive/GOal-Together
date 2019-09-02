@@ -10,6 +10,11 @@ const reducer = (state, action) => {
         votes: action.votes,
         members: action.members
       };
+    case "SET_TITLE":
+      return {
+        ...state,
+        title: action.title
+      };
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -21,7 +26,8 @@ export default function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
     commitments: [],
     votes: [],
-    members: []
+    members: [],
+    title: ""
   });
 
   useEffect(() => {
@@ -39,7 +45,14 @@ export default function useApplicationData() {
     });
   }, []);
 
+  const setTitle = title =>
+    dispatch({
+      type: "SET_TITLE",
+      title
+    });
+
   return {
-    state
+    state,
+    setTitle
   };
 }
