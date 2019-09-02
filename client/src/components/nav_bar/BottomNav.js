@@ -7,16 +7,20 @@ import { faBell, faPlusCircle, faUserAlt, faTasks, faDollarSign } from '@fortawe
 
 const classNames = require('classnames');
 
-export default function BottomNav(props) {
+export default function BottomNav({ Link }) {
   const bottomNavClass = classNames(classes.nav, classes.bottomNav);
 
   return (
     <nav className={bottomNavClass}>
-      <FontAwesomeIcon className={classes.navIcon} icon={faUserAlt} />
-      <FontAwesomeIcon className={classes.navIcon} icon={faTasks} />
-      <FontAwesomeIcon className={classes.navIcon} icon={faPlusCircle} />
-      <FontAwesomeIcon className={classes.navIcon} icon={faDollarSign} />
-      <FontAwesomeIcon className={classes.navIcon} icon={faBell} />
+      <span>
+        <Link to={`/profile`}><FontAwesomeIcon className={classes.navIcon} icon={faUserAlt} /></Link>
+        <Link to={`/commitments`}><FontAwesomeIcon className={classes.navIcon} icon={faTasks} /></Link>
+      </span>
+      <Link to={`/commitments/new`}><FontAwesomeIcon className={classes.navIcon} icon={faPlusCircle} /></Link>
+      <span>
+        <Link to={`/transactions`}><FontAwesomeIcon className={classes.navIcon} icon={faDollarSign} /></Link>
+        <Link to={`/notifications`}><FontAwesomeIcon className={classes.navIcon} icon={faBell} /></Link>
+      </span>
     </nav>
   );
 }

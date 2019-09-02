@@ -35,7 +35,7 @@ function App() {
         <Route path="/stats" componentTop={Stats} />
         <Route path="/transactions" component={Transactions} />
       </div>
-      <BottomNav/>
+      <BottomNav Link={Link}/>
     </Router>
   );
 }
