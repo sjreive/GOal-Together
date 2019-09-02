@@ -16,7 +16,6 @@ export default function MemberList(props) {
 
   return (
     <section className={classes.interviewers}>
-      <h4 className={classes.interviewers__header}>Interviewer</h4>
       <ul className={classes.interviewers__list}>{interviewListItems}</ul>
     </section>
   );

@@ -1,13 +1,14 @@
 @import "../../styles/mixins.module.scss";
 @import "../../styles/variables.module.scss";
 
-.interviewers {
+.members {
   &__item {
     @include button-inactive--opacity;
 
     margin-right: 0.5rem;
 
     &_image {
+      max-height: 3rem;
       border-radius: 16px;
     }
 

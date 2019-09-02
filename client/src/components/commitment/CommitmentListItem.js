@@ -1,21 +1,28 @@
 import React from "react";
 
-import "./CommitmentListItem.module.scss";
+import classes from "./CommitmentListItem.module.scss";
 import MemberList from "../members/MemberList";
 
 export default function CommimentListItem(props) {
   return (
-    <main>
-      <section>
-        <img src={props.thumbnail} alt="commitment_category" />
+    <main className={classes.commitmentTile}>
+      <section className={classes.commitmentTile__top}>
+        <img
+          className={classes.commitmentTile__img}
+          src={props.thumbnail}
+          alt="commitment_category"
+        />
       </section>
-      <section>
-        <h2>{props.name}</h2>
-        <p>{props.description}</p>
-      </section>
-      <section>
-        <h4>Members</h4>
-        <MemberList members={props.members} />
+      <section className={classes.commitmentTile__info}>
+        <section className={classes.commitmentTile__txt}>
+          <h2 className={classes.commitmentTile__name}>{props.name}</h2>
+          <p className={classes.commitmentTile__category}>
+            {props.description}
+          </p>
+        </section>
+        <section>
+          <MemberList members={props.members} />
+        </section>
       </section>
     </main>
   );

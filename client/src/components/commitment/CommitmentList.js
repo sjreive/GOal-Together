@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./CommitmentList.module.scss";
+import classes from "./CommitmentList.module.scss";
 import CommitmentListItem from "./CommitmentListItem";
 
 export default function CommitmentList(props) {
@@ -14,5 +14,5 @@ export default function CommitmentList(props) {
     />
   ));
 
-  return <ul>{commitmentListItems}</ul>;
+  return <ul className={classes.commitmentList}>{commitmentListItems}</ul>;
 }
