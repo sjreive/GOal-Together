@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../button/Button";
 
-export default function Type(props) {
+export default function Ready(props) {
   return (
     <div>
       <Button 
@@ -9,7 +9,8 @@ export default function Type(props) {
         smallCircle={true}
         onClick={props.clickBack}
       />
-      <label htmlFor="type"><h2>Enter the type of commitment:</h2></label>
+      <h2>Awesome!</h2>
+      <label htmlFor="type"><p>Enter the type of commitment:</p></label>
       <select>
         <option value="fitness">Fitness</option>
         <option value="academic">Academic</option>
@@ -18,8 +19,9 @@ export default function Type(props) {
         <option value="other">Other</option>
       </select>
       <Button
-        next={true}
-        smallCircle={true}
+        submit={true}
+        form={props.form}
+        wide={true}
         onClick={props.clickNext}
       />
     </div>
