@@ -1,8 +1,8 @@
 @import "../../styles/variables.module.scss";
 @import "../../styles/mixins.module.scss";
+
 $nav-height: 50px;
 $link-size: 25px;
-$half-link: $link-size / 2;
 
 .nav {
   position: fixed;
@@ -21,10 +21,17 @@ $half-link: $link-size / 2;
   .navIcon {
     height: $link-size;
     width: $link-size;
+    transition: 0.3s;
+  }
+
+  .navIcon:hover,
+  .navIcon:focus {
+    transform: scale(1.2);
+    color: $primary-blue;
   }
 
   a {
-    margin: 0 10px;
+    margin: 0 15px;
   }
 }
 
@@ -40,7 +47,13 @@ body {
 
 .newCommitButton {
   position: absolute;
-  bottom: 60px;
+  bottom: $nav-height / 2.5;
   left: 50%;
-  margin-left: $half-link;
+  margin-left: -$link-size / 2 !important;
+}
+
+.newCommitIcon {
+  height: $link-size * 1.8 !important;
+  width: $link-size * 1.8 !important;
+  color: $primary-blue;
 }
