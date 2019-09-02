@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import useApplicationData from "./hooks/useApplicationData";
 import classes from "./App.module.scss";
 
-import TopNav from "./components/nav_bar/TopNav"
-import BottomNav from "./components/nav_bar/BottomNav"
+import TopNav from "./components/nav_bar/TopNav";
+import BottomNav from "./components/nav_bar/BottomNav";
+import Button from "./components/button/Button";
 
 function App() {
   const { 
@@ -72,6 +73,7 @@ function Commitments({ match, state, setTitle }) {
   if (document.title !== "Commitments") {
     setTitle("Commitments") 
   }
+
   return (
     <div>
       <h2>Commitments</h2>
@@ -136,6 +138,12 @@ function Header() {
       <li>
         <Link to="/">Home</Link>
       </li>
+      <Button 
+        add={true} 
+        wide={true} 
+        onClick={e => console.log("clicked")}
+        innerContent="Create New Commitment"
+      />
     </ul>
   );
 }

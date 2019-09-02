@@ -4,20 +4,21 @@ import "./Button.module.scss";
 
 const classNames = require('classnames');
 
-export default function BottomNav({ onClick, disabled, add, innerContent, wide, smallCircle }) {
-  const buttonClass = classNames("button", {
-    "button--wide": wide,
-    "button--small-circle": smallCircle,
-    "button--add": add
-  });
+export default function Button(props) {
+  const buttonClass = classNames(
+    classes.button,
+    props.add ? classes.buttonAdd : "",
+    props.wide ? classes.buttonWide : "",
+    props.smallCircle ? classes.buttonSmallCircle : ""
+  );
 
   return (
-    <button 
+    <button
       className={buttonClass}
-      onClick={onClick}
-      disabled={disabled}
+      onClick={props.onClick}
+      disabled={props.disabled}
     >
-      {innerContent}
+      {props.innerContent}
     </button>
   );
 }
