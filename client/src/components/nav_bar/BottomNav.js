@@ -16,7 +16,7 @@ export default function BottomNav({ Link }) {
         <Link to={`/profile`}><FontAwesomeIcon className={classes.navIcon} icon={faUserAlt} /></Link>
         <Link to={`/commitments`}><FontAwesomeIcon className={classes.navIcon} icon={faTasks} /></Link>
       </span>
-      <Link to={`/commitments/new`}><FontAwesomeIcon className={classes.navIcon} icon={faPlusCircle} /></Link>
+      <Link to={`/commitments/new`} className={classes.newCommitButton}><FontAwesomeIcon className={classes.navIcon} icon={faPlusCircle} /></Link>
       <span>
         <Link to={`/transactions`}><FontAwesomeIcon className={classes.navIcon} icon={faDollarSign} /></Link>
         <Link to={`/notifications`}><FontAwesomeIcon className={classes.navIcon} icon={faBell} /></Link>

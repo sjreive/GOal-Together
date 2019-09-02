@@ -1,6 +1,8 @@
 @import "../../styles/variables.module.scss";
 @import "../../styles/mixins.module.scss";
 $nav-height: 50px;
+$link-size: 25px;
+$half-link: $link-size / 2;
 
 .nav {
   position: fixed;
@@ -17,8 +19,8 @@ $nav-height: 50px;
   padding: 10px 30px;
 
   .navIcon {
-    height: 25px;
-    width: 25px;
+    height: $link-size;
+    width: $link-size;
   }
 
   a {
@@ -39,4 +41,6 @@ body {
 .newCommitButton {
   position: absolute;
   bottom: 60px;
+  left: 50%;
+  margin-left: $half-link;
 }
