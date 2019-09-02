@@ -49,11 +49,11 @@ body {
   position: absolute;
   bottom: $nav-height / 2.5;
   left: 50%;
-  margin-left: -$link-size / 2 !important;
+  margin-left: -$link-size !important;
 }
 
 .newCommitIcon {
-  height: $link-size * 1.8 !important;
-  width: $link-size * 1.8 !important;
+  height: $link-size * 2 !important;
+  width: $link-size * 2 !important;
   color: $primary-blue;
 }

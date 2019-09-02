@@ -142,7 +142,7 @@ function Header() {
         add={true} 
         wide={true} 
         onClick={e => console.log("clicked")}
-        innerContent="Create New Commitment"
+        innerContent="Make new commitment"
       />
     </ul>
   );
