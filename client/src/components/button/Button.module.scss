@@ -13,11 +13,12 @@
   color: $primary-gold;
   background-color: $primary-blue;
   transition: 0.3s;
-  padding-top: -.55rem;
-  
+
   &Add {
-    height: 2.5rem;
-    width: 2.5rem;
+  }
+
+  &Back {
+    font-size: 1rem;
   }
   
   &Wide {
@@ -26,6 +27,7 @@
   }
   
   &SmallCircle {
+    padding: .5rem .6rem;
     border-radius: 100%;
   }
 }

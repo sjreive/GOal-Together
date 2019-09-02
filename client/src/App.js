@@ -37,7 +37,7 @@ function App() {
         />
         <Route 
           path="/commitments/new" 
-          render={props => <NewCommitment {...props} setTitle={setTitle} />}
+          render={props => <NewCommitmentType {...props} setTitle={setTitle} Link={Link} />}
         />
         <Route 
           path="/profile" 
@@ -111,11 +111,18 @@ function Notifications({ match, state, setTitle }) {
   return <h2>My Notifications</h2>;
 }
 
-function NewCommitment({ match, state, setTitle }) {
+function NewCommitmentType({ match, state, setTitle, Link }) {
   if (document.title !== "New Commitment") {
     setTitle("New Commitment") 
   }
-  return <h2>My New Commitment</h2>;
+  return <section> 
+    <Link to="/commitments/new">
+      <Button 
+        back={true}
+        smallCircle={true}
+      />
+    </Link>
+  </section>;
 }
 
 function Profile({ match, state, setTitle }) {

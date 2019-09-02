@@ -50,6 +50,12 @@ body {
   bottom: $nav-height / 2.5;
   left: 50%;
   margin-left: -$link-size !important;
+  transition: 0.3s;
+}
+
+.newCommitButton:hover,
+.newCommitButton:focus {
+  transform: scale(1.1);
 }
 
 .newCommitIcon {
