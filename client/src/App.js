@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import useApplicationData from "./hooks/useApplicationData";
 import classes from "./App.module.scss";
 import CommitmentList from "./components/commitment/CommitmentList";
+import VoterCard from "./components/vote/voterCard";
 
 function App() {
   const { state } = useApplicationData();
@@ -20,6 +21,7 @@ function App() {
         <Route path="/newsfeed" component={Newsfeed} />
         <Route path="/stats" component={Stats} />
         <Route path="/transactions" component={Transactions} />
+        <Route path="/vote" component={Vote} />
       </div>
     </Router>
   );
@@ -34,6 +36,20 @@ function Home() {
   );
 }
 
+function Vote(state) {
+  return (
+    <div>
+      <h2>VOTE!</h2>
+      {/* will also need to pass info about activity id */}
+      <VoterCard
+        members={state.members}
+        user={state.user}
+        activity={state.activity}
+      />
+    </div>
+  );
+}
+
 function Commitment({ match }) {
   return <h2>Commitment ${match.params.id} </h2>;
 }
@@ -44,7 +60,7 @@ function Commitments({ match, state }) {
   return (
     <div>
       <h2>Commitments</h2>
-      {/* Button to Create new commitments will go he */}
+      {/* Button to Create new commitments will go here */}
       <Link to={`${match.url}/new`}>Create a New Commitment</Link>
       {/* SECTION/DIV That will return contain list of commitments */}
       <CommitmentList commitments={state.commitments} members={state.members} />

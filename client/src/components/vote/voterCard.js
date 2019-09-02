@@ -1,11 +1,13 @@
 import React from "react";
 
-import classes from "./MemberList.module.scss";
-import MemberListItem from "./MemberListItem";
+import classes from "./voterCard.module.scss";
+import Attendee from "./attendee";
 
 export default function MemberList(props) {
   const memberListItems = props.members.map(member => (
-    <MemberListItem
+    <Attendee
+      selected={member.id === props.value}
+      attendance={true}
       key={member.id}
       name={member.name}
       avatar={member.avatar_url}

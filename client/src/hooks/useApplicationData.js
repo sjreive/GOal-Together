@@ -8,7 +8,14 @@ const reducer = (state, action) => {
         ...state,
         commitments: action.commitments,
         votes: action.votes,
-        members: action.members
+        members: action.members,
+        user: 1,
+        activity: 1
+      };
+    case "VOTE":
+      return {
+        ...state,
+        votes: action.votes
       };
     default:
       throw new Error(
@@ -38,6 +45,31 @@ export default function useApplicationData() {
       });
     });
   }, []);
+
+  function submitVote(attended, voterId, activityId, attendeeId) {
+    // make a copy of the state of votes
+    const votes = [...state.votes];
+
+    // create vote object
+    const vote = {
+      "attended?": attended,
+      activity_id: activityId,
+      attendee_id: attendeeId,
+      voter_id: voterId
+    };
+
+    // on submit, add new vote to copy of votes state array
+    votes = [...state.votes, vote];
+
+    // put request to "database" so that data persists
+    return axios.post(`http://localhost:3001/api/votes/`, vote).then(
+      // set state
+      dispatch({
+        type: "VOTE",
+        votes: votes
+      })
+    );
+  }
 
   return {
     state
