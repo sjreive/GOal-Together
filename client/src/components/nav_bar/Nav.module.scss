@@ -1,8 +1,7 @@
 @import "../../styles/variables.module.scss";
 @import "../../styles/mixins.module.scss";
 
-$nav-height: 50px;
-$link-size: 25px;
+
 
 .nav {
   position: fixed;
@@ -19,8 +18,8 @@ $link-size: 25px;
   padding: 10px 30px;
 
   .navIcon {
-    height: $link-size;
-    width: $link-size;
+    height: $nav-link-size;
+    width: $nav-link-size;
     transition: 0.3s;
   }
 
@@ -35,10 +34,6 @@ $link-size: 25px;
   }
 }
 
-body {
-  padding: $nav-height 0 !important;
-}
-
 .topNav {
   top: 0;
   border-radius: 0 0 15px 15px;
@@ -49,7 +44,7 @@ body {
   position: absolute;
   bottom: $nav-height / 2.5;
   left: 50%;
-  margin-left: -$link-size !important;
+  margin-left: -$nav-link-size !important;
   transition: 0.3s;
 }
 
@@ -59,7 +54,7 @@ body {
 }
 
 .newCommitIcon {
-  height: $link-size * 2 !important;
-  width: $link-size * 2 !important;
+  height: $nav-link-size * 2 !important;
+  width: $nav-link-size * 2 !important;
   color: $primary-blue;
 }

@@ -5,7 +5,7 @@ import classes from "./App.module.scss";
 
 import TopNav from "./components/nav_bar/TopNav";
 import BottomNav from "./components/nav_bar/BottomNav";
-import Button from "./components/button/Button";
+import NewCommitmentForm from "./components/new_commitment_form/index";
 
 function App() {
   const { 
@@ -20,34 +20,33 @@ function App() {
   return (
     <Router>
       <TopNav/>
-      <div>
-        <Header />
+      
 
-        <Route 
-          exact path="/" 
-          render={props => <Home {...props} setTitle={setTitle} />}
-        />
-        <Route
-          exact path="/commitments"
-          render={props => <Commitments {...props} state={state} setTitle={setTitle} />}
-        />
-        <Route 
-          path="/notifications" 
-          render={props => <Notifications {...props} setTitle={setTitle} />}
-        />
-        <Route 
-          path="/commitments/new" 
-          render={props => <NewCommitmentType {...props} setTitle={setTitle} Link={Link} />}
-        />
-        <Route 
-          path="/profile" 
-          render={props => <Profile {...props} setTitle={setTitle} />}
-        />
-        <Route 
-          path="/transactions" 
-          render={props => <Transactions {...props} setTitle={setTitle} />}
-        />
-      </div>
+      <Route 
+        exact path="/" 
+        render={props => <Home {...props} setTitle={setTitle} />}
+      />
+      <Route
+        exact path="/commitments"
+        render={props => <Commitments {...props} state={state} setTitle={setTitle} />}
+      />
+      <Route 
+        path="/notifications" 
+        render={props => <Notifications {...props} setTitle={setTitle} />}
+      />
+      <Route 
+        path="/commitments/new" 
+        render={props => <NewCommitment {...props} setTitle={setTitle} />}
+      />
+      <Route 
+        path="/profile" 
+        render={props => <Profile {...props} setTitle={setTitle} />}
+      />
+      <Route 
+        path="/transactions" 
+        render={props => <Transactions {...props} setTitle={setTitle} />}
+      />
+
       <BottomNav Link={Link}/>
     </Router>
   );
@@ -111,18 +110,11 @@ function Notifications({ match, state, setTitle }) {
   return <h2>My Notifications</h2>;
 }
 
-function NewCommitmentType({ match, state, setTitle, Link }) {
+function NewCommitment({ match, state, setTitle }) {
   if (document.title !== "New Commitment") {
     setTitle("New Commitment") 
   }
-  return <section> 
-    <Link to="/commitments/new">
-      <Button 
-        back={true}
-        smallCircle={true}
-      />
-    </Link>
-  </section>;
+  return (<section className={classes.newCommitmentSection}><NewCommitmentForm/></section>);
 }
 
 function Profile({ match, state, setTitle }) {

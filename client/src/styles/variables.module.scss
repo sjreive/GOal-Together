@@ -20,3 +20,7 @@ $gradient: linear-gradient(
   #c977be,
   #e793c6
 );
+
+$nav-height: 50px;
+$nav-link-size: 25px;
+$viewport-height: calc(100vh - ($nav-height * 2));
