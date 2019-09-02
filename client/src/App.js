@@ -20,8 +20,6 @@ function App() {
   return (
     <Router>
       <TopNav/>
-      
-
       <Route 
         exact path="/" 
         render={props => <Home {...props} setTitle={setTitle} />}

@@ -14,11 +14,15 @@
   background-color: $primary-blue;
   transition: 0.3s;
 
-  &Add {
+  &Next,
+  &Back {
+    font-size: 1rem;
   }
 
   &Back {
-    font-size: 1rem;
+    position: absolute;
+    top: 20px;
+    left: 20px;
   }
   
   &Wide {

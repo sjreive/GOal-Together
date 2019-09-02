@@ -1,11 +1,12 @@
 @import "../../styles/variables.module.scss";
 @import "../../styles/mixins.module.scss";
 
+.newCommitForm {
+  width: 75%;
+  text-align: center;
+  @include flexThis(space-between, center, column);
 
-
-.newCommitmentSection {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  @include flexThis(center, center, column);
+  h2 {
+    margin-bottom: 20px ;
+  }
 }
