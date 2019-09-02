@@ -138,12 +138,6 @@ function Header() {
       <li>
         <Link to="/">Home</Link>
       </li>
-      <Button 
-        add={true} 
-        wide={true} 
-        onClick={e => console.log("clicked")}
-        innerContent="Make new commitment"
-      />
     </ul>
   );
 }
