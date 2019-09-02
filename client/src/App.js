@@ -27,13 +27,25 @@ function App() {
           render={props => <Home {...props} setTitle={setTitle} />}
         />
         <Route
-          path="/commitments"
+          exact path="/commitments"
           render={props => <Commitments {...props} state={state} setTitle={setTitle} />}
         />
-        <Route path="/notifications" cTopomponent={Notifications} />
-        <Route path="/newsfeed" componTopent={Newsfeed} />
-        <Route path="/stats" componentTop={Stats} />
-        <Route path="/transactions" component={Transactions} />
+        <Route 
+          path="/notifications" 
+          render={props => <Notifications {...props} setTitle={setTitle} />}
+        />
+        <Route 
+          path="/commitments/new" 
+          render={props => <NewCommitment {...props} setTitle={setTitle} />}
+        />
+        <Route 
+          path="/profile" 
+          render={props => <Profile {...props} setTitle={setTitle} />}
+        />
+        <Route 
+          path="/transactions" 
+          render={props => <Transactions {...props} setTitle={setTitle} />}
+        />
       </div>
       <BottomNav Link={Link}/>
     </Router>
@@ -90,19 +102,31 @@ function Commitments({ match, state, setTitle }) {
   );
 }
 
-function Notifications() {
+function Notifications({ match, state, setTitle }) {
+  if (document.title !== "Notifications") {
+    setTitle("Notifications") 
+  }
   return <h2>My Notifications</h2>;
 }
 
-function Newsfeed() {
-  return <h2>My Newsfeed</h2>;
+function NewCommitment({ match, state, setTitle }) {
+  if (document.title !== "New Commitment") {
+    setTitle("New Commitment") 
+  }
+  return <h2>My New Commitment</h2>;
 }
 
-function Stats() {
-  return <h2>My Stats</h2>;
+function Profile({ match, state, setTitle }) {
+  if (document.title !== "Profile") {
+    setTitle("Profile") 
+  }
+  return <h2>My Profile</h2>;
 }
 
-function Transactions() {
+function Transactions({ match, state, setTitle }) {
+  if (document.title !== "Transactions") {
+    setTitle("Transactions") 
+  }
   return <h2>My Transactions</h2>;
 }
 
