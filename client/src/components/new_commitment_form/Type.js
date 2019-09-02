@@ -7,8 +7,10 @@ export default function Ready(props) {
       <Button 
         back={true}
         smallCircle={true}
+        onClick={props.clickBack}
       />
-      <h2>Ready to crush your goal?</h2>
+      <h2>Awesome!</h2>
+      <h2>Enter the type of commitment:</h2>
       <Button
         next={true}
         smallCircle={true}

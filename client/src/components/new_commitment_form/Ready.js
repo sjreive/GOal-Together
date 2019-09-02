@@ -8,6 +8,7 @@ export default function Ready(props) {
       <Button
         next={true}
         smallCircle={true}
+        onClick={props.clickNext}
       />
     </div>
   );
