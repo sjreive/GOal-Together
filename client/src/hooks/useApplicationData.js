@@ -8,14 +8,17 @@ const reducer = (state, action) => {
         ...state,
         commitments: action.commitments,
         votes: action.votes,
-        members: action.members,
-        user: 1,
-        activity: 1
+        members: action.members
       };
-    case "VOTE":
+    case "SUBMIT_VOTE":
       return {
         ...state,
         votes: action.votes
+      };
+    case "SET_TITLE":
+      return {
+        ...state,
+        title: action.title
       };
     default:
       throw new Error(
@@ -28,7 +31,10 @@ export default function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
     commitments: [],
     votes: [],
-    members: []
+    members: [],
+    title: "",
+    user: 1,
+    activity: "Get Swoll"
   });
 
   useEffect(() => {
@@ -65,13 +71,19 @@ export default function useApplicationData() {
     return axios.post(`http://localhost:3001/api/votes/`, vote).then(
       // set state
       dispatch({
-        type: "VOTE",
+        type: "SUBMIT_VOTE",
         votes: votes
       })
     );
   }
+  const setTitle = title =>
+    dispatch({
+      type: "SET_TITLE",
+      title
+    });
 
   return {
-    state
+    state,
+    setTitle
   };
 }

@@ -1,5 +1,22 @@
+@import "../../styles/mixins.module.scss";
+@import "../../styles/variables.module.scss";
+
 .voterCard {
   height: 20rem;
-  width: 100%;
-  color: light-purple;
+  width: 80%;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: $white;
+  text-align: center;
+
+  &__list {
+    width: 80%;
+    margin: 0 auto;
+    @include flexThis(center, center, row);
+  }
+
+  &__submit {
+    margin-top: 1rem;
+  }
 }
