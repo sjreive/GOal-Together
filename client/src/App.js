@@ -10,7 +10,8 @@ import NewCommitmentForm from "./components/new_commitment_form/index";
 function App() {
   const { 
     state,
-    setTitle
+    setTitle,
+    setNewCommitment
    } = useApplicationData();
 
   useEffect(() => {
@@ -34,7 +35,7 @@ function App() {
       />
       <Route 
         path="/commitments/new" 
-        render={props => <NewCommitment {...props} setTitle={setTitle} />}
+        render={props => <NewCommitment {...props} setTitle={setTitle} setNewCommitment={setNewCommitment} />}
       />
       <Route 
         path="/profile" 
@@ -108,11 +109,11 @@ function Notifications({ match, state, setTitle }) {
   return <h2>My Notifications</h2>;
 }
 
-function NewCommitment({ match, state, setTitle }) {
+function NewCommitment({ setNewCommitment, setTitle }) {
   if (document.title !== "New Commitment") {
     setTitle("New Commitment") 
   }
-  return (<section className={classes.newCommitmentSection}><NewCommitmentForm/></section>);
+  return (<section className={classes.newCommitmentSection} ><NewCommitmentForm setNewCommitment={setNewCommitment}/></section>);
 }
 
 function Profile({ match, state, setTitle }) {

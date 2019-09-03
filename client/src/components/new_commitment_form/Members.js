@@ -56,7 +56,7 @@ export default function BuyIn(props) {
       <Button
         form={props.form}
         wide={true}
-        onClick={e => console.log(props.membersArray)}
+        onClick={props.save}
         innerContent="Submit"
       />
     </div>

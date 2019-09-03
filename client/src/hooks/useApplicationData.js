@@ -14,6 +14,12 @@ const reducer = (state, action) => {
         ...state,
         title: action.title
       };
+    case "SET_NEW_COMMITMENT":
+
+      return {
+        ...state,
+        commitments: [...state.commitments, action.commitment]
+      };
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -46,8 +52,22 @@ export default function useApplicationData() {
     title
   });
 
+  const setNewCommitment = commitment => {
+    return new Promise((resolve, reject) => {
+      return axios.post('http://localhost:3001/api/commitments', commitment)
+      .then(async response => {
+        await dispatch({
+          type: "SET_NEW_COMMITMENT",
+          commitment
+        })
+        resolve(response);
+      })
+    });
+  };
+
   return {
     state,
-    setTitle
+    setTitle,
+    setNewCommitment
   };
 }
