@@ -8,12 +8,8 @@ const reducer = (state, action) => {
         ...state,
         commitments: action.commitments,
         votes: action.votes,
-        members: action.members
-      };
-    case "SUBMIT_VOTE":
-      return {
-        ...state,
-        votes: action.votes
+        members: action.members,
+        activities: action.activities
       };
     case "SET_TITLE":
       return {
@@ -34,48 +30,38 @@ export default function useApplicationData() {
     members: [],
     title: "",
     user: 1,
-    activity: "Get Swoll"
+    activity: {
+      id: 2,
+      title: "Spin class",
+      date: "2019-08-31T18:32:42.117Z",
+      created_at: "2019-09-02T18:32:42.118Z",
+      updated_at: "2019-09-02T18:32:42.118Z",
+      commitment_id: 1
+    }
   });
 
   useEffect(() => {
     Promise.all([
       axios.get(`http://localhost:3001/api/commitments`),
       axios.get(`http://localhost:3001/api/votes`),
-      axios.get(`http://localhost:3001/api/users`)
+      axios.get(`http://localhost:3001/api/users`),
+      axios.get(`http://localhost:3001/api/activities`)
     ]).then(all => {
       dispatch({
         type: "SET_APPLICATION_DATA",
         commitments: all[0].data,
         votes: all[1].data,
-        members: all[2].data
+        members: all[2].data,
+        activities: all[3].data
       });
     });
   }, []);
 
-  function submitVote(attended, voterId, activityId, attendeeId) {
-    // make a copy of the state of votes
-    const votes = [...state.votes];
-
-    // create vote object
-    const vote = {
-      "attended?": attended,
-      activity_id: activityId,
-      attendee_id: attendeeId,
-      voter_id: voterId
-    };
-
-    // on submit, add new vote to copy of votes state array
-    votes = [...state.votes, vote];
-
-    // put request to "database" so that data persists
-    return axios.post(`http://localhost:3001/api/votes/`, vote).then(
-      // set state
-      dispatch({
-        type: "SUBMIT_VOTE",
-        votes: votes
-      })
-    );
-  }
+  const submitVote = function(voteData) {
+    return axios
+      .post(`http://localhost:3001/api/votes/`, voteData)
+      .then(data => console.log(`This was sent to the server ${data}`));
+  };
   const setTitle = title =>
     dispatch({
       type: "SET_TITLE",
@@ -84,6 +70,7 @@ export default function useApplicationData() {
 
   return {
     state,
-    setTitle
+    setTitle,
+    submitVote
   };
 }

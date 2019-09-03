@@ -10,7 +10,7 @@ import BottomNav from "./components/nav_bar/BottomNav";
 import Button from "./components/button/Button";
 
 function App() {
-  const { state, setTitle } = useApplicationData();
+  const { state, setTitle, submitVote } = useApplicationData();
 
   useEffect(() => {
     document.title = state.title;
@@ -53,7 +53,12 @@ function App() {
         <Route
           path="/vote"
           render={props => (
-            <Vote {...props} state={state} setTitle={setTitle} />
+            <Vote
+              {...props}
+              state={state}
+              setTitle={setTitle}
+              submitVote={submitVote}
+            />
           )}
         />
       </div>
@@ -74,7 +79,7 @@ function Home({ match, setTitle }) {
   );
 }
 
-function Vote({ state }) {
+function Vote({ state, submitVote }) {
   return (
     <div>
       {/* will also need to pass info about activity id */}
@@ -82,6 +87,7 @@ function Vote({ state }) {
         members={state.members}
         user={state.user}
         activity={state.activity}
+        submitVote={submitVote}
       />
     </div>
   );

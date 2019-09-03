@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import classes from "./voterCard.module.scss";
 import Attendee from "./attendee";
@@ -14,21 +14,29 @@ export default function MemberList(props) {
 
   const submitData = function(activityVotes, activity, user) {
     return {
-      voter_id: user,
-      activity_id: activity,
+      voter: user,
+      activity_id: activity.id,
       attendees: activityVotes
     };
   };
 
+  // sets attendance value to true initially
+  useEffect(() => {
+    const newVotes = props.members.reduce((votes, member) => {
+      const value =
+        typeof activityVotes[member.id] === "boolean"
+          ? activityVotes[member.id]
+          : true;
+
+      return { ...votes, [member.id]: value };
+    }, {});
+    addActivityVotes(newVotes);
+  }, [props.members]);
+
   const memberListItems = props.members.map(member => {
-    // sets attendance value to true initially
-    const value =
-      typeof activityVotes[member.id] === "boolean"
-        ? activityVotes[member.id]
-        : true;
     return (
       <Attendee
-        value={value}
+        value={activityVotes[member.id]}
         id={member.id}
         clickHandler={changeAttendance}
         key={member.id}
@@ -41,20 +49,27 @@ export default function MemberList(props) {
   return (
     <section className={classes.voterCard}>
       <h2 className={classes.voterCard__header}>
-        Who attended {props.activity} on DATE?
+        Who attended {props.activity.title} on {props.activity.date} ?
       </h2>
       <p className={classes.voterCard__txt}>
-        Click to select members who were there
+        Click on a member to change their attendance.
       </p>
       <ul className={classes.voterCard__list}>{memberListItems}</ul>
       <section className={classes.voterCard__submit}>
-        <Button
-          onClick={() =>
-            console.log(submitData(activityVotes, props.activity, props.user))
-          }
-          wide={true}
-          innerContent={"Submit your vote!"}
-        />
+        <form onSubmit={event => event.preventDefault()}>
+          <Button
+            onClick={() => {
+              console.log(
+                submitData(activityVotes, props.activity, props.user)
+              );
+              props.submitVote(
+                submitData(activityVotes, props.activity, props.user)
+              );
+            }}
+            wide={true}
+            innerContent={"Submit your vote!"}
+          />
+        </form>
       </section>
     </section>
   );
