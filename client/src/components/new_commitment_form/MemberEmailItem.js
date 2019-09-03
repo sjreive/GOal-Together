@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./Styles.module.scss";
 import Button from "../button/Button";
 
 export default function MemberEmailItem(props) {
+  const [member, setMember] = useState(props.member || "");
   return (
     <div className={classes.formRow}>
       <Button 
