@@ -21,7 +21,7 @@ export default function NewCommitmentForm(props) {
   const [error, setError] = useState("");
   
   if (membersArray.length === 0) {
-    for (let i = 0; i <= 2; i++ ) {
+    for (let i = 0; i <= 0; i++ ) {
       setMembersArray(prev => [...prev, ""])
     }
   }
