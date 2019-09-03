@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./Styles.module.scss";
 import Button from "../button/Button";
 
-export default function EndDate(props) {
+export default function BuyIn(props) {
   return (
     <div className={classes.formRow}>
       <Button 
@@ -10,8 +10,9 @@ export default function EndDate(props) {
         smallCircle={true}
         onClick={props.clickBack}
       />
-      <label htmlFor="date"><h2>When will your commitment end?</h2></label>
-      <input type="date" name="end-date" value={props.endDate} max="2020-12-31" onChange={props.setEndDate}/>
+      <h2>Put your money where your mouth is!</h2>
+      <label htmlFor="name"><p>How much will members put up to help them stick to this goal?</p></label>
+      <input type="text" placeholder="Enter amount" name="buy-in" value={props.buyIn} onChange={props.setBuyIn}></input>
       <Button
         next={true}
         smallCircle={true}
