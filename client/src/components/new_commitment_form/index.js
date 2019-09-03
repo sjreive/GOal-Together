@@ -19,14 +19,10 @@ export default function NewCommitmentForm(props) {
   const [endDate, setEndDate] = useState(props.endDate || "");
   const [membersArray, setMembersArray] = useState(props.membersArray || []);
   const [error, setError] = useState("");
-
-  const addMemberEmailToArray = memberEmail => {
-    setMembersArray(membersArray => [...membersArray, memberEmail])
-  }
-
+  
   if (membersArray.length === 0) {
     for (let i = 0; i <= 2; i++ ) {
-      addMemberEmailToArray("")
+      setMembersArray(prev => [...prev, ""])
     }
   }
 
@@ -37,7 +33,7 @@ export default function NewCommitmentForm(props) {
       {mode === "NAME" && <Name clickBack={e => back()} clickNext={e => transition("BUYIN")} name={name} setName={e => setName(e.target.value)} />}
       {mode === "BUYIN" && <BuyIn clickBack={e => back()} clickNext={e => transition("DATE")} buyIn={buyIn} setBuyIn={e => setBuyIn(e.target.value)} />}
       {mode === "DATE" && <EndDate clickBack={e => back()} clickNext={e => transition("MEMBERS")}  endDate={endDate} setEndDate={e => setEndDate(e.target.value)} />}
-      {mode === "MEMBERS" && <Members clickBack={e => back()} membersArray={membersArray} setMembersArray={memberEmail => addMemberEmailToArray(memberEmail)} />}
+      {mode === "MEMBERS" && <Members clickBack={e => back()} membersArray={membersArray} setMembersArray={setMembersArray} />}
     </form>
   );
 };
