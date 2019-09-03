@@ -16,14 +16,14 @@ export default function Donut(props) {
   const COLORS = ['#2d3cb1', '#e793c6', '#ffd700', '#00C49F'];
 
   return (
-    <PieChart width={250} height={300} >
+    <PieChart width={300} height={300} >
       <Pie
         data={data}
-        cx={120}
-        cy={200}
+        cx={150}
+        cy={150}
         innerRadius={60}
         outerRadius={80}
-        fill="#8884d8"
+        fill="#2d3cb1"
         paddingAngle={5}
         dataKey="value"
         label={({
@@ -47,7 +47,7 @@ export default function Donut(props) {
             <text
               x={x}
               y={y}
-              fill="#8884d8"
+              fill="#2d3cb1"
               textAnchor={x > cx ? "start" : "end"}
               dominantBaseline="central"
             >

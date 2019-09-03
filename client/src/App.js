@@ -144,22 +144,14 @@ function NewCommitment({ setNewCommitment, setTitle }) {
   if (document.title !== "New Commitment") {
     setTitle("New Commitment");
   }
-  return (
-    <section className={classes.newCommitmentSection}>
-      <NewCommitmentForm setNewCommitment={setNewCommitment} />
-    </section>
-  );
+  return <NewCommitmentForm setNewCommitment={setNewCommitment} />;
 }
 
 function ProfilePage({ match, state, setTitle }) {
   if (document.title !== "Profile") {
     setTitle("Profile");
   }
-  return (
-    <section className={classes.profilSection}>
-      <Profile state={state}/>
-    </section>
-  )
+  return <Profile state={state}/>;
 }
 
 function Transactions({ match, state, setTitle }) {

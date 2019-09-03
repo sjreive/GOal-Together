@@ -11,8 +11,13 @@ export default function Profile(props) {
   const [type, setType] = useState(props.type || "");
   
   return (
-    <div>
-      <Donut data={props.state.attendance}/>
-    </div>
+    <section className={classes.profileSection}>
+      <div className={classes.useStatusContainer}>
+
+      </div>
+      <div className={classes.chartContainer}>
+        <Donut data={props.state.attendance}/>
+      </div>
+    </section>
   );
 };

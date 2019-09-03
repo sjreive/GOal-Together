@@ -1,2 +1,14 @@
 @import "../../styles/variables.module.scss";
 @import "../../styles/mixins.module.scss";
+
+.profileSection {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  @include flexThis(center, center, column);
+}
+
+.recharts-wrapper {
+  @include flexThis(center, center, column);
+  
+}
