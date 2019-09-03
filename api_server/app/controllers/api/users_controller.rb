@@ -40,6 +40,10 @@ module Api
       @user.destroy
     end
 
+    def attendance
+      render json: [{ "Val" => 85 } , { "Liz" => 30 }, { "Celine" => 97 }]
+    end
+
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_user

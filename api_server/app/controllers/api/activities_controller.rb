@@ -38,6 +38,14 @@ module Api
     def destroy
       @activity.destroy
     end
+
+    def attendance
+      render json: {
+        "commitment_id" => 1,
+        "activity_id" => 1,
+        "activity_attendance" => [{ "Frank" => true } , { "Francis" => false }, { "Francita" => true }]
+      }
+    end
   
     private
       # Use callbacks to share common setup or constraints between actions.

@@ -17,7 +17,7 @@ module Api
     # POST /commitments
     def create
       @commitment = Commitment.new(commitment_params)
-      puts "Landed!"
+  
       if @commitment.save
         render json: @commitment, status: :created
       else
@@ -37,6 +37,13 @@ module Api
     # DELETE /commitments/1
     def destroy
       @commitment.destroy
+    end
+
+    def attendance
+      render json: {
+        "commitment_id" => 1,
+        "activity_attendance" => [{ "John" => true } , { "Jane" => false }, { "Bob" => true }]
+      }
     end
 
     private
