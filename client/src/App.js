@@ -155,7 +155,11 @@ function ProfilePage({ match, state, setTitle }) {
   if (document.title !== "Profile") {
     setTitle("Profile");
   }
-  return <Profile state={state}/>;
+  return (
+    <section className={classes.profilSection}>
+      <Profile state={state}/>
+    </section>
+  )
 }
 
 function Transactions({ match, state, setTitle }) {
