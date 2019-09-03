@@ -9,7 +9,6 @@ import Name from"./Name";
 import BuyIn from "./BuyIn";
 import EndDate from"./EndDate";
 import Members from "./Members";
-import MemberEmailItem from "./MemberEmailItem";
 
 export default function NewCommitmentForm(props) {
   const { mode, transition, back } = useVisualMode("FIRST");
@@ -25,14 +24,10 @@ export default function NewCommitmentForm(props) {
     setMembersArray(membersArray => [...membersArray, memberEmail])
   }
 
-  const memberEmailFormItems = [];
-  for (let i = 0; i <= 2; i++ ) {
-    addMemberEmailToArray("")
-    memberEmailFormItems.push(<MemberEmailItem
-      key={i}
-      memberEmail={membersArray[i]}
-      />
-    )
+  if (membersArray.length === 0) {
+    for (let i = 0; i <= 2; i++ ) {
+      addMemberEmailToArray("")
+    }
   }
 
   return (
