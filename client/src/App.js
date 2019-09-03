@@ -8,6 +8,7 @@ import VoterCard from "./components/vote/voterCard";
 import TopNav from "./components/nav_bar/TopNav";
 import BottomNav from "./components/nav_bar/BottomNav";
 import NewCommitmentForm from "./components/new_commitment_form/index";
+import Profile from "./components/profile/index";
 
 function App() {
   const {
@@ -52,7 +53,7 @@ function App() {
       />
       <Route
         path="/profile"
-        render={props => <Profile {...props} setTitle={setTitle} />}
+        render={props => <ProfilePage {...props} setTitle={setTitle} state={state} />}
       />
       <Route
         path="/transactions"
@@ -150,11 +151,11 @@ function NewCommitment({ setNewCommitment, setTitle }) {
   );
 }
 
-function Profile({ match, state, setTitle }) {
+function ProfilePage({ match, state, setTitle }) {
   if (document.title !== "Profile") {
     setTitle("Profile");
   }
-  return <h2>My Profile</h2>;
+  return <Profile state={state}/>;
 }
 
 function Transactions({ match, state, setTitle }) {
@@ -162,16 +163,6 @@ function Transactions({ match, state, setTitle }) {
     setTitle("Transactions");
   }
   return <h2>My Transactions</h2>;
-}
-
-function Header() {
-  return (
-    <ul>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-    </ul>
-  );
 }
 
 export default App;

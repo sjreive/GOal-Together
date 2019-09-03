@@ -9,7 +9,8 @@ const reducer = (state, action) => {
         commitments: action.commitments,
         votes: action.votes,
         members: action.members,
-        activities: action.activities
+        activities: action.activities,
+        attendance: action.attendance
       };
     case "SET_TITLE":
       return {
@@ -50,14 +51,16 @@ export default function useApplicationData() {
       axios.get(`http://localhost:3001/api/commitments`),
       axios.get(`http://localhost:3001/api/votes`),
       axios.get(`http://localhost:3001/api/users`),
-      axios.get(`http://localhost:3001/api/activities`)
+      axios.get(`http://localhost:3001/api/activities`),
+      axios.get('http://localhost:3001/api/attendance')
     ]).then(all => {
       dispatch({
         type: "SET_APPLICATION_DATA",
         commitments: all[0].data,
         votes: all[1].data,
         members: all[2].data,
-        activities: all[3].data
+        activities: all[3].data,
+        attendance: all[4].data
       });
     });
   }, []);
