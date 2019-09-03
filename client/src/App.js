@@ -3,13 +3,19 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import useApplicationData from "./hooks/useApplicationData";
 import classes from "./App.module.scss";
 import CommitmentList from "./components/commitment/CommitmentList";
+import VoterCard from "./components/vote/voterCard";
 
 import TopNav from "./components/nav_bar/TopNav";
 import BottomNav from "./components/nav_bar/BottomNav";
 import NewCommitmentForm from "./components/new_commitment_form/index";
 
 function App() {
-  const { state, setTitle, setNewCommitment } = useApplicationData();
+  const {
+    state,
+    setTitle,
+    setNewCommitment,
+    submitVote
+  } = useApplicationData();
 
   useEffect(() => {
     document.title = state.title;
@@ -52,7 +58,17 @@ function App() {
         path="/transactions"
         render={props => <Transactions {...props} setTitle={setTitle} />}
       />
-
+      <Route
+        path="/vote"
+        render={props => (
+          <Vote
+            {...props}
+            state={state}
+            setTitle={setTitle}
+            submitVote={submitVote}
+          />
+        )}
+      />
       <BottomNav Link={Link} />
     </Router>
   );
@@ -70,6 +86,20 @@ function Home({ match, setTitle }) {
   );
 }
 
+function Vote({ state, submitVote }) {
+  return (
+    <div>
+      {/* will also need to pass info about activity id */}
+      <VoterCard
+        members={state.members}
+        user={state.user}
+        activity={state.activity}
+        submitVote={submitVote}
+      />
+    </div>
+  );
+}
+
 function Commitment({ match }) {
   return <h2>Commitment ${match.params.id} </h2>;
 }
@@ -82,7 +112,7 @@ function Commitments({ match, state, setTitle }) {
   return (
     <div>
       <h2>Commitments</h2>
-      {/* Button to Create new commitments will go he */}
+      {/* Button to Create new commitments will go here */}
       <Link to={`${match.url}/new`}>Create a New Commitment</Link>
       {/* SECTION/DIV That will return contain list of commitments */}
       <CommitmentList commitments={state.commitments} members={state.members} />

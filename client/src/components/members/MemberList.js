@@ -1,13 +1,11 @@
 import React from "react";
 
 import classes from "./MemberList.module.scss";
-import InterviewListItem from "./MemberListItem";
+import MemberListItem from "./MemberListItem";
 
 export default function MemberList(props) {
-  const interviewListItems = props.members.map(member => (
-    <InterviewListItem
-      // selected={listItem.id === props.value}
-      // setInterviewer={() => props.onChange(listItem.id)}
+  const memberListItems = props.members.map(member => (
+    <MemberListItem
       key={member.id}
       name={member.name}
       avatar={member.avatar_url}
@@ -16,7 +14,7 @@ export default function MemberList(props) {
 
   return (
     <section className={classes.interviewers}>
-      <ul className={classes.interviewers__list}>{interviewListItems}</ul>
+      <ul className={classes.interviewers__list}>{memberListItems}</ul>
     </section>
   );
 }

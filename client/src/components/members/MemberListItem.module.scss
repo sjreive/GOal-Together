@@ -35,4 +35,11 @@
       @include button-active--opacity;
     }
   }
+  &__icon_true {
+    color: green;
+  }
+
+  &__icon_false {
+    color: red;
+  }
 }
