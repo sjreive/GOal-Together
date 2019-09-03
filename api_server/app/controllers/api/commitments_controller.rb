@@ -17,9 +17,9 @@ module Api
     # POST /commitments
     def create
       @commitment = Commitment.new(commitment_params)
-
+      puts "Landed!"
       if @commitment.save
-        render json: @commitment, status: :created, location: @commitment
+        render json: @commitment, status: :created
       else
         render json: @commitment.errors, status: :unprocessable_entity
       end
