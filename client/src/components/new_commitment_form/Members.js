@@ -39,7 +39,8 @@ export default function BuyIn(props) {
         smallCircle={true}
         onClick={props.clickBack}
       />
-      <h2>Put your money where your mouth is!</h2>
+      <h2>If you want to go far, go together!</h2>
+      <p>Add email addresses of members you'd like to invite:</p>
       {memberEmailFormItemArray}
       <Button
         add={true}

@@ -3,7 +3,9 @@
 
 .newCommitForm {
   width: 75%;
+  max-height: 70%;
   text-align: center;
+  overflow: scroll;
   @include flexThis(space-between, center, column);
 
   h2, 
@@ -19,12 +21,22 @@
   select,
   input {
     display: block;
-    
     -webkit-appearance: none;
   }
 
   .formRow {
     @include flexThis(space-between, center, column);
+  }
+
+  .formInput {
+    position: relative;
+    @include flexThis(space-between, center, row);
+    margin-bottom: 15px;
+
+    input {
+      margin: 0;
+      margin-left: 10px;      
+    }
   }
 
 }

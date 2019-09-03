@@ -31,9 +31,21 @@
   }
   
   &SmallCircle {
-    padding: .5rem .6rem;
+    height: 2rem;
+    width: 2rem;
+    padding-top: 0;
     border-radius: 100%;
   }
+
+  &FormRemove {
+    font-size: .4rem !important;
+    height: 1.5rem;
+    width: 1.5rem;    
+    background-color: $red;
+    color: $primary-blue;
+    border-color: $red;
+  }
+
 }
 
 .button:hover {

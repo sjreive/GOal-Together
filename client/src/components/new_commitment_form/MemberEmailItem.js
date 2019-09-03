@@ -5,9 +5,9 @@ import Button from "../button/Button";
 export default function MemberEmailItem(props) {
   
   return (
-    <div className={classes.formRow}>
+    <div className={classes.formInput}>
       <Button
-          remove={true}
+          formRemove={true}
           smallCircle={true}
           onClick={e => props.removeMemberEmail()}
           innerContent="-"
