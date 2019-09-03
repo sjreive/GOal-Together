@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./Styles.module.scss";
 import "./Styles.module.scss";
-import { PieChart, Pie, Sector, Cell } from 'recharts';
+import { PieChart, Pie, Cell } from 'recharts';
 
 export default function Donut(props) {
   
@@ -14,7 +14,9 @@ export default function Donut(props) {
       }
     });
   } 
+
   const COLORS = ['#2d3cb1', '#e793c6', '#ffd700', '#00C49F'];
+
   return (
     <div>
       <PieChart width={250} height={300} >
@@ -27,6 +29,35 @@ export default function Donut(props) {
           fill="#8884d8"
           paddingAngle={5}
           dataKey="value"
+          label={({
+            cx,
+            cy,
+            midAngle,
+            innerRadius,
+            outerRadius,
+            value,
+            index
+          }) => {
+            const RADIAN = Math.PI / 180;
+            // eslint-disable-next-line
+            const radius = 25 + innerRadius + (outerRadius - innerRadius);
+            // eslint-disable-next-line
+            const x = cx + radius * Math.cos(-midAngle * RADIAN);
+            // eslint-disable-next-line
+            const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  
+            return (
+              <text
+                x={x}
+                y={y}
+                fill="#8884d8"
+                textAnchor={x > cx ? "start" : "end"}
+                dominantBaseline="central"
+              >
+                {data[index].name}: {value}
+              </text>
+            );
+          }}
         >
           {
             data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
