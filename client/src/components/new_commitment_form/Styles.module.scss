@@ -37,6 +37,18 @@
       margin: 0;
       margin-left: 10px;      
     }
+
+  }
+
+  .memberForm {
+
+    button {
+      margin: 0;
+    }
+
+    > button:last-of-type {
+      margin-top: 15px;
+    }
   }
 
 }

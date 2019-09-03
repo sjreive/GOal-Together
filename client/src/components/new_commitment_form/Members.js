@@ -3,7 +3,12 @@ import classes from "./Styles.module.scss";
 import Button from "../button/Button";
 import MemberEmailItem from "./MemberEmailItem";
 
+const classNames = require('classnames');
 export default function BuyIn(props) {
+    const membersClass = classNames(
+      classes.formRow,
+      classes.memberForm
+    );
 
   const memberEmailFormItemArray = props.membersArray.map((memberEmail, index) => {
     return (
@@ -33,7 +38,7 @@ export default function BuyIn(props) {
   };
 
   return (
-    <div className={classes.formRow}>
+    <div className={membersClass}>
       <Button 
         back={true}
         smallCircle={true}
