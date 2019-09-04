@@ -12,7 +12,7 @@ export default function Tab(props) {
 
   return (
     <li 
-      classNames={tabClass}
+      className={tabClass}
       onClick={props.onClick}
     >
       {props.label}
