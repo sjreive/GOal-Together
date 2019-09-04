@@ -5,10 +5,32 @@
   position: relative;
   width: 100%;
   height: 100%;
-  @include flexThis(center, center, column);
+  @include flexThis(flex-start, center, column);
 }
 
 .recharts-wrapper {
   @include flexThis(center, center, column);
   
+}
+
+.userStatusContainer {
+  @include flexThis(space-between, center, row);
+  height: 10vh;
+
+  .userNameContainer {
+    margin-right: 20px;
+  }
+
+  h3 {
+    color: $primary-blue;
+  }
+
+  img {
+    height: 80%;
+    width: auto;
+  }
+
+  strong {
+    color: $primary-pink;
+  }
 }

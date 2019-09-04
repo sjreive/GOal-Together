@@ -50,11 +50,11 @@ export default function Donut(props) {
   }
 
   return (
-    <PieChart width={300} height={300} >
+    <PieChart width={300} height={250} >
       <Pie
         data={data}
         cx={150}
-        cy={150}
+        cy={115}
         innerRadius={60}
         outerRadius={80}
         fill="#2d3cb1"
