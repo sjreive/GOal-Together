@@ -2,11 +2,11 @@ module Api
   class ActivitiesController < ApplicationController
     before_action :set_activity, only: [:show, :update, :destroy]
   
-    # Checks votes for 
-    def didAttend? user
+    # Checks votes to determine if a member attended
+    def didAttend? member_id
       
-      trueVotesCount = Vote.where("attendee_id = ? AND activity_id = ? AND attended = ?", user, 2, true).count
-      falseVotesCount = Vote.where("attendee_id = ? AND activity_id = ? AND attended = ?", user, 2, false).count
+      trueVotesCount = Vote.where("attendee_id = ? AND activity_id = ? AND attended = ?", member_id, @activity.id, true).count
+      falseVotesCount = Vote.where("attendee_id = ? AND activity_id = ? AND attended = ?", member_id, @activity.id, false).count
 
       if trueVotesCount > falseVotesCount
         return true
@@ -24,7 +24,6 @@ module Api
       attendance_record = {}
       
       @activity_members.each do |member|
-        puts "This is the members id #{member.user_id}, and they did attend. #{didAttend?(member.user_id)}"
         attendance_record[member.user_id] = didAttend?(member.user_id)
       end
       return attendance_record
