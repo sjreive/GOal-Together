@@ -18,7 +18,6 @@ export default function Donut(props) {
   const COLORS = ['#2d3cb1', '#e793c6', '#ffd700', '#00C49F'];
 
   useEffect(() => {
-    console.log("Changed");
   }, [props.chartAnimateToggle])
 
   const renderLabel = ({
@@ -37,7 +36,6 @@ export default function Donut(props) {
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     // eslint-disable-next-linedata
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
-    console.log("Render label");
     return (
       <text
         x={x}

@@ -133,7 +133,7 @@ function CommitmentPage({ match, state, setTitle, getCommitment }) {
     setTitle(commitment.name);
   }
   
-  return <Commitment commitment={match.params.commitmentId} state={state} />;
+  return <Commitment commitment={commitment} state={state} />;
 }
 
 function Commitments({ match, state, setTitle }) {
