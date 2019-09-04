@@ -16,7 +16,20 @@ module Api
       
     end
 
-    
+    # create member attendance record for a given activity
+    def get_members_attendance
+      @commitment_id = @activity.commitment_id
+      @activity_members = Member.where(commitment_id: @commitment_id)
+      
+      attendance_record = {}
+      
+      @activity_members.each do |member|
+        puts "This is the members id #{member.user_id}, and they did attend. #{didAttend?(member.user_id)}"
+        attendance_record[member.user_id] = didAttend?(member.user_id)
+      end
+      return attendance_record
+    end
+
     
     # GET /activities
     def index
@@ -27,8 +40,8 @@ module Api
   
     # GET /activities/1
     def show
-      # members = Users.where()
-      render json: [@activity, { "1": didAttend?(1)}]
+      @members_attendance = get_members_attendance
+      render json: [@activity, @members_attendance]
     end
   
     # POST /activities

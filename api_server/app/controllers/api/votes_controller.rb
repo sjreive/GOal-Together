@@ -3,9 +3,8 @@ module Api
     before_action :set_vote, only: [:show, :update, :destroy]
 
     #Function to check if user has voted for a given activity
-    def voted? voter_id, activity
-
-      votes = Vote.where("voter_id = ? AND activity_id = ?", voter_id, activity).count
+    def voted? voter_id, activity_id
+      votes = Vote.where("voter_id = ? AND activity_id = ?", voter_id, activity_id).count
 
       if votes > 0
         return true
