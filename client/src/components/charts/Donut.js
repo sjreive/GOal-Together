@@ -35,9 +35,9 @@ export default function Donut(props) {
     const radius = 25 + innerRadius + (outerRadius - innerRadius);
     // eslint-disable-next-line
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    // eslint-disable-next-line
+    // eslint-disable-next-linedata
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
+    console.log("Render label");
     return (
       <text
         x={x}
@@ -64,6 +64,7 @@ export default function Donut(props) {
           paddingAngle={5}
           dataKey="value"
           label={renderLabel}
+          isAnimationActive={false}
         >
           {
             data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
