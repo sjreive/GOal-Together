@@ -3,8 +3,11 @@
 
 .profileSection {
   position: relative;
+  overflow: scroll; 
   width: 100%;
   height: 100%;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
   @include flexThis(flex-start, center, column);
 }
 
@@ -33,4 +36,24 @@
   strong {
     color: $primary-pink;
   }
+}
+
+.userLeaderboard {
+  background-color: $white;
+  border-radius: 10px;
+  border-collapse: collapse;
+  th,
+  td {
+    padding: 10px 20px;
+    border: 1px solid $light-gray-bkgrd;
+  }
+
+  th {
+    padding-top: 15px;
+  }
+
+  tr:last-of-type td {
+    padding-bottom: 15px;
+  }
+
 }
