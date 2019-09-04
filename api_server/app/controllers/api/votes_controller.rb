@@ -29,7 +29,7 @@ module Api
     def create
 
       params[:attendees].each do |attendee, attendance|
-        vote_data = {attended?: attendance, activity_id: params[:activity_id], attendee_id: attendee.to_i, voter_id: params[:voter]}
+        vote_data = {attended: attendance, activity_id: params[:activity_id], attendee_id: attendee.to_i, voter_id: params[:voter]}
         puts vote_data
         @vote = Vote.new(vote_data)
         @vote.save!

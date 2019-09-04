@@ -2,16 +2,39 @@ module Api
   class ActivitiesController < ApplicationController
     before_action :set_activity, only: [:show, :update, :destroy]
   
+    # Checks votes for 
+    def didAttend? user
+      
+      trueVotesCount = Vote.where("attendee_id = ? AND activity_id = ? AND attended = ?", user, 2, true).count
+      falseVotesCount = Vote.where("attendee_id = ? AND activity_id = ? AND attended = ?", user, 2, false).count
+      # trueVotesCount = 3
+      # falseVotesCount = 4
+
+      puts trueVotesCount
+      puts falseVotesCount
+
+      if trueVotesCount > falseVotesCount
+        return true
+      else
+        return false
+      end
+      
+    end
+
+    
+    
     # GET /activities
     def index
       @activities = Activity.all
+      @attendance = :attendance
   
       render json: @activities
     end
   
     # GET /activities/1
     def show
-      render json: @activity
+      # members = Users.where()
+      render json: [@activity, { "1": didAttend?(1)}]
     end
   
     # POST /activities
