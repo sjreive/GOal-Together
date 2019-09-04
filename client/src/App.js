@@ -1,21 +1,22 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import useApplicationData from "./hooks/useApplicationData";
 import classes from "./App.module.scss";
-import CommitmentList from "./components/commitment/CommitmentList";
+import CommitmentList from "./components/commitments/CommitmentList";
 import VoterCard from "./components/vote/voterCard";
 
 import TopNav from "./components/nav_bar/TopNav";
 import BottomNav from "./components/nav_bar/BottomNav";
 import NewCommitmentForm from "./components/new_commitment_form/index";
 import Profile from "./components/profile/index";
+import Commitment from "./components/commitment/index";
 
 function App() {
   const {
     state,
     setTitle,
     setNewCommitment,
-    toggleChartAnimation,
+    getCommitment,
     submitVote
   } = useApplicationData();
 
@@ -38,31 +39,52 @@ function App() {
           <Commitments {...props} state={state} setTitle={setTitle} />
         )}
       />
+      <Switch>
+        <Route
+          exact
+          path="/commitments/new"
+          render={props => (
+            <NewCommitment
+              {...props}
+              setTitle={setTitle}
+              setNewCommitment={setNewCommitment}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={`/commitments/:commitmentId`}
+          render={props => (
+            <CommitmentPage 
+              {...props}
+              state={state} 
+              setTitle={setTitle}
+              getCommitment={getCommitment}
+            />
+          )}
+        />
+      </Switch>
       <Route
+        exact
         path="/notifications"
         render={props => <Notifications {...props} setTitle={setTitle} />}
       />
+      
       <Route
-        path="/commitments/new"
-        render={props => (
-          <NewCommitment
-            {...props}
-            setTitle={setTitle}
-            setNewCommitment={setNewCommitment}
-          />
-        )}
-      />
-      <Route
+        exact
         path="/profile"
         render={props => {
-          return <ProfilePage {...props} setTitle={setTitle} state={state} toggleChartAnimation={toggleChartAnimation} />
+          return <ProfilePage {...props} setTitle={setTitle} state={state}  />
         }}
       />
       <Route
+        exact
         path="/transactions"
         render={props => <Transactions {...props} setTitle={setTitle} />}
       />
+      
       <Route
+        exact
         path="/vote"
         render={props => (
           <Vote
@@ -104,8 +126,12 @@ function Vote({ state, submitVote }) {
   );
 }
 
-function Commitment({ match }) {
-  return <h2>Commitment ${match.params.id} </h2>;
+function CommitmentPage({ match, state, setTitle, getCommitment }) {
+  if (document.title !== `Commitment ${match.params.commitmentId}`) {
+    setTitle(`Commitment ${match.params.commitmentId}`);
+  }
+  
+  return <Commitment commitment={match.params.commitmentId} state={state} />;
 }
 
 function Commitments({ match, state, setTitle }) {
@@ -118,20 +144,10 @@ function Commitments({ match, state, setTitle }) {
       <h2>Commitments</h2>
       {/* Button to Create new commitments will go here */}
       <Link to={`${match.url}/new`}>Create a New Commitment</Link>
+      <br></br>
+      <Link to={`${match.url}/1`}>First Commitment</Link>
       {/* SECTION/DIV That will return contain list of commitments */}
       <CommitmentList commitments={state.commitments} members={state.members} />
-
-      <Route path={`${match.path}/:id`} component={Commitment} />
-      <Route
-        exact
-        path={match.path}
-        render={() => (
-          <h3>
-            This will render the commitment that is clicked on
-            {match.params.id}
-          </h3>
-        )}
-      />
     </div>
   );
 }
@@ -150,10 +166,9 @@ function NewCommitment({ setNewCommitment, setTitle }) {
   return <NewCommitmentForm setNewCommitment={setNewCommitment} />;
 }
 
-function ProfilePage({ match, state, setTitle, toggleChartAnimation }) {
+function ProfilePage({ match, state, setTitle }) {
   if (document.title !== "Profile") {
     setTitle("Profile");
-    toggleChartAnimation()
   }
 
   return <Profile state={state}/>;

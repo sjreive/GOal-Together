@@ -10,8 +10,7 @@ const reducer = (state, action) => {
         votes: action.votes,
         members: action.members,
         activities: action.activities,
-        attendance: action.attendance,
-        chartAnimateToggle: true
+        attendance: action.attendance
       };
     case "SET_TITLE":
       return {
@@ -96,17 +95,13 @@ export default function useApplicationData() {
     });
   };
 
-  const toggleChartAnimation = () => {
-    dispatch({
-      type: "TOGGLE_CHART_ANIMATION"
-    })
-  };
+  const getCommitment = id => state.commitments.find(c => c.id === id);
 
   return {
     state,
     setTitle,
     setNewCommitment,
-    toggleChartAnimation,
+    getCommitment,
     submitVote
   };
 }
