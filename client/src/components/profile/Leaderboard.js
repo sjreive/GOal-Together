@@ -26,7 +26,7 @@ export default function UserStatus(props) {
           <td>30%</td>
         </tr>
         <tr>
-          <td>Kendal</td>
+          <td>Kendall</td>
           <td>22%</td>
         </tr>
       </tbody>

@@ -8,6 +8,7 @@
   height: 100%;
   padding-top: 3vh;
   padding-bottom: 3vh;
+  
   @include flexThis(flex-start, center, column);
 }
 
@@ -18,7 +19,10 @@
 
 .userStatusContainer {
   @include flexThis(space-between, center, row);
-  height: 10vh;
+  background-color: $white;
+  border-radius: 20px;
+  padding: 10px 30px;
+  margin: 3vh 0;
 
   .userNameContainer {
     margin-right: 20px;
@@ -29,7 +33,7 @@
   }
 
   img {
-    height: 80%;
+    height: 8vh;
     width: auto;
   }
 
@@ -39,16 +43,33 @@
 }
 
 .userLeaderboard {
+  margin: 3vh 0;
   background-color: $white;
-  border-radius: 10px;
+  border-radius: 20px;
   border-collapse: collapse;
+  text-align: center;
+
+  thead tr {
+    background-image: $gradient;
+    color: $white;
+
+    th:first-of-type {
+      border-radius: 20px 0 0 0;
+    }
+
+    th:last-of-type {
+      border-radius: 0 20px 0 0;
+    }
+  }
+  
   th,
   td {
     padding: 10px 20px;
     border: 1px solid $light-gray-bkgrd;
   }
-
+  
   th {
+    border: 1px solid transparent;
     padding-top: 15px;
   }
 
