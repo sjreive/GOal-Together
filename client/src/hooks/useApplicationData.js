@@ -10,7 +10,8 @@ const reducer = (state, action) => {
         votes: action.votes,
         members: action.members,
         activities: action.activities,
-        attendance: action.attendance
+        attendance: action.attendance,
+        chartAnimateToggle: true
       };
     case "SET_TITLE":
       return {
@@ -21,6 +22,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         commitments: [...state.commitments, action.commitment]
+      };
+    case "TOGGLE_CHART_ANIMATION":
+      return {
+        ...state,
+        chartAnimateToggle: false
       };
     default:
       throw new Error(
@@ -90,10 +96,17 @@ export default function useApplicationData() {
     });
   };
 
+  const toggleChartAnimation = () => {
+    dispatch({
+      type: "TOGGLE_CHART_ANIMATION"
+    })
+  };
+
   return {
     state,
     setTitle,
     setNewCommitment,
+    toggleChartAnimation,
     submitVote
   };
 }

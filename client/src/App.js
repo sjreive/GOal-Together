@@ -15,6 +15,7 @@ function App() {
     state,
     setTitle,
     setNewCommitment,
+    toggleChartAnimation,
     submitVote
   } = useApplicationData();
 
@@ -53,7 +54,9 @@ function App() {
       />
       <Route
         path="/profile"
-        render={props => <ProfilePage {...props} setTitle={setTitle} state={state} />}
+        render={props => {
+          return <ProfilePage {...props} setTitle={setTitle} state={state} toggleChartAnimation={toggleChartAnimation} />
+        }}
       />
       <Route
         path="/transactions"
@@ -147,10 +150,12 @@ function NewCommitment({ setNewCommitment, setTitle }) {
   return <NewCommitmentForm setNewCommitment={setNewCommitment} />;
 }
 
-function ProfilePage({ match, state, setTitle }) {
+function ProfilePage({ match, state, setTitle, toggleChartAnimation }) {
   if (document.title !== "Profile") {
     setTitle("Profile");
+    toggleChartAnimation()
   }
+
   return <Profile state={state}/>;
 }
 

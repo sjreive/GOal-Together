@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { PieChart, Pie, Cell } from 'recharts';
 
 export default function Donut(props) {
@@ -15,6 +15,40 @@ export default function Donut(props) {
 
   const COLORS = ['#2d3cb1', '#e793c6', '#ffd700', '#00C49F'];
 
+  useEffect(() => {
+    console.log("Changed");
+  }, [props.chartAnimateToggle])
+
+  const renderLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    value,
+    index
+  }) => {
+    const RADIAN = Math.PI / 180;
+    // eslint-disable-next-line
+    const radius = 25 + innerRadius + (outerRadius - innerRadius);
+    // eslint-disable-next-line
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    // eslint-disable-next-line
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="#2d3cb1"
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+      >
+        {data[index].name}: {value}
+      </text>
+    );
+  }
+
   return (
     <PieChart width={300} height={300} >
       <Pie
@@ -26,35 +60,7 @@ export default function Donut(props) {
         fill="#2d3cb1"
         paddingAngle={5}
         dataKey="value"
-        label={({
-          cx,
-          cy,
-          midAngle,
-          innerRadius,
-          outerRadius,
-          value,
-          index
-        }) => {
-          const RADIAN = Math.PI / 180;
-          // eslint-disable-next-line
-          const radius = 25 + innerRadius + (outerRadius - innerRadius);
-          // eslint-disable-next-line
-          const x = cx + radius * Math.cos(-midAngle * RADIAN);
-          // eslint-disable-next-line
-          const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-          return (
-            <text
-              x={x}
-              y={y}
-              fill="#2d3cb1"
-              textAnchor={x > cx ? "start" : "end"}
-              dominantBaseline="central"
-            >
-              {data[index].name}: {value}
-            </text>
-          );
-        }}
+        label={renderLabel}
       >
         {
           data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
