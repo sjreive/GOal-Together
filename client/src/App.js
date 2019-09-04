@@ -127,8 +127,10 @@ function Vote({ state, submitVote }) {
 }
 
 function CommitmentPage({ match, state, setTitle, getCommitment }) {
-  if (document.title !== `Commitment ${match.params.commitmentId}`) {
-    setTitle(`Commitment ${match.params.commitmentId}`);
+  const commitment = state.commitments.find(c => c.id === parseInt(match.params.commitmentId, 10));
+
+  if (commitment && document.title !== commitment.name) {
+    setTitle(commitment.name);
   }
   
   return <Commitment commitment={match.params.commitmentId} state={state} />;

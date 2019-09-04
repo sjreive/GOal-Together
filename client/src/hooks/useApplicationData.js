@@ -95,13 +95,10 @@ export default function useApplicationData() {
     });
   };
 
-  const getCommitment = id => state.commitments.find(c => c.id === id);
-
   return {
     state,
     setTitle,
     setNewCommitment,
-    getCommitment,
     submitVote
   };
 }
