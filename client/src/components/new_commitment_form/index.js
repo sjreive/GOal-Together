@@ -40,13 +40,15 @@ export default function NewCommitmentForm(props) {
   };
 
   return (
-    <form className={classes.newCommitForm} onSubmit={e => e.preventDefault()}>
-      {mode === "FIRST" && <Ready clickNext={e => transition("TYPE")}/>}
-      {mode === "TYPE" && <Type clickBack={e => back()} clickNext={e => transition("NAME")} type={type} setType={e => setType(e.target.value)}/>}
-      {mode === "NAME" && <Name clickBack={e => back()} clickNext={e => transition("BUYIN")} name={name} setName={e => setName(e.target.value)} />}
-      {mode === "BUYIN" && <BuyIn clickBack={e => back()} clickNext={e => transition("DATE")} buyIn={buyIn} setBuyIn={e => setBuyIn(e.target.value)} />}
-      {mode === "DATE" && <EndDate clickBack={e => back()} clickNext={e => transition("MEMBERS")}  endDate={endDate} setEndDate={e => setEndDate(e.target.value)} />}
-      {mode === "MEMBERS" && <Members clickBack={e => back()} save={e => save()} membersArray={membersArray} setMembersArray={setMembersArray} />}
-    </form>
+    <section className={classes.newCommitmentSection}>
+      <form className={classes.newCommitForm} onSubmit={e => e.preventDefault()}>
+        {mode === "FIRST" && <Ready clickNext={e => transition("TYPE")}/>}
+        {mode === "TYPE" && <Type clickBack={e => back()} clickNext={e => transition("NAME")} type={type} setType={e => setType(e.target.value)}/>}
+        {mode === "NAME" && <Name clickBack={e => back()} clickNext={e => transition("BUYIN")} name={name} setName={e => setName(e.target.value)} />}
+        {mode === "BUYIN" && <BuyIn clickBack={e => back()} clickNext={e => transition("DATE")} buyIn={buyIn} setBuyIn={e => setBuyIn(e.target.value)} />}
+        {mode === "DATE" && <EndDate clickBack={e => back()} clickNext={e => transition("MEMBERS")}  endDate={endDate} setEndDate={e => setEndDate(e.target.value)} />}
+        {mode === "MEMBERS" && <Members clickBack={e => back()} save={e => save()} membersArray={membersArray} setMembersArray={setMembersArray} />}
+      </form>
+    </section>
   );
 };

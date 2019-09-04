@@ -8,12 +8,14 @@ import VoterCard from "./components/vote/voterCard";
 import TopNav from "./components/nav_bar/TopNav";
 import BottomNav from "./components/nav_bar/BottomNav";
 import NewCommitmentForm from "./components/new_commitment_form/index";
+import Profile from "./components/profile/index";
 
 function App() {
   const {
     state,
     setTitle,
     setNewCommitment,
+    toggleChartAnimation,
     submitVote
   } = useApplicationData();
 
@@ -52,7 +54,9 @@ function App() {
       />
       <Route
         path="/profile"
-        render={props => <Profile {...props} setTitle={setTitle} />}
+        render={props => {
+          return <ProfilePage {...props} setTitle={setTitle} state={state} toggleChartAnimation={toggleChartAnimation} />
+        }}
       />
       <Route
         path="/transactions"
@@ -143,18 +147,16 @@ function NewCommitment({ setNewCommitment, setTitle }) {
   if (document.title !== "New Commitment") {
     setTitle("New Commitment");
   }
-  return (
-    <section className={classes.newCommitmentSection}>
-      <NewCommitmentForm setNewCommitment={setNewCommitment} />
-    </section>
-  );
+  return <NewCommitmentForm setNewCommitment={setNewCommitment} />;
 }
 
-function Profile({ match, state, setTitle }) {
+function ProfilePage({ match, state, setTitle, toggleChartAnimation }) {
   if (document.title !== "Profile") {
     setTitle("Profile");
+    toggleChartAnimation()
   }
-  return <h2>My Profile</h2>;
+
+  return <Profile state={state}/>;
 }
 
 function Transactions({ match, state, setTitle }) {
@@ -162,16 +164,6 @@ function Transactions({ match, state, setTitle }) {
     setTitle("Transactions");
   }
   return <h2>My Transactions</h2>;
-}
-
-function Header() {
-  return (
-    <ul>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-    </ul>
-  );
 }
 
 export default App;
