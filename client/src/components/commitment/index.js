@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-// import classes from "./Styles.module.scss";
-// import "./Styles.module.scss";
 import { useVisualMode } from "../../hooks/useVisualMode";
 
 import PageTabs from "../nav_bar/PageTabs";
+import Stats from "./Stats";
 
 export default function Commitment(props) {
   const { mode, transition } = useVisualMode("ACTIVITIES");
@@ -19,13 +18,13 @@ export default function Commitment(props) {
       label: "Stats",
       mode: "STATS"
     }
-  ]
+  ];
 
   return (
     <section >
       <PageTabs mode={mode} tabs={tabs} transition={transition}/>
       {mode === "ACTIVITIES" && <h2>Activities</h2>}
-      {mode === "STATS" && <h2>STATS</h2>}
+      {mode === "STATS" && <Stats state={props.state}/>}
     </section>
   );
 };

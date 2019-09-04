@@ -3,6 +3,7 @@
 
 .pieChartContainer {
   position: relative;
+  @include flexThis(center, center, row);
 
   .chartLabel {
     position: absolute;
