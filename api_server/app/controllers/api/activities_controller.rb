@@ -7,11 +7,6 @@ module Api
       
       trueVotesCount = Vote.where("attendee_id = ? AND activity_id = ? AND attended = ?", user, 2, true).count
       falseVotesCount = Vote.where("attendee_id = ? AND activity_id = ? AND attended = ?", user, 2, false).count
-      # trueVotesCount = 3
-      # falseVotesCount = 4
-
-      puts trueVotesCount
-      puts falseVotesCount
 
       if trueVotesCount > falseVotesCount
         return true
@@ -26,7 +21,6 @@ module Api
     # GET /activities
     def index
       @activities = Activity.all
-      @attendance = :attendance
   
       render json: @activities
     end
