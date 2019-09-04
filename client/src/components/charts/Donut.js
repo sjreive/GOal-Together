@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { PieChart, Pie, Cell } from 'recharts';
+import classes from "./Styles.module.scss";
+import "./Styles.module.scss";
 
 export default function Donut(props) {
   
@@ -50,22 +52,28 @@ export default function Donut(props) {
   }
 
   return (
-    <PieChart width={300} height={250} >
-      <Pie
-        data={data}
-        cx={150}
-        cy={115}
-        innerRadius={60}
-        outerRadius={80}
-        fill="#2d3cb1"
-        paddingAngle={5}
-        dataKey="value"
-        label={renderLabel}
-      >
-        {
-          data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
-        }
-      </Pie>
-    </PieChart>
+    <div className={classes.pieChartContainer}>
+      <PieChart width={300} height={250} >
+        <Pie
+          data={data}
+          cx={150}
+          cy={115}
+          innerRadius={60}
+          outerRadius={80}
+          fill="#2d3cb1"
+          paddingAngle={5}
+          dataKey="value"
+          label={renderLabel}
+        >
+          {
+            data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+          }
+        </Pie>
+      </PieChart>
+      <span className={classes.chartLabel}>
+        <h5>Liz</h5>
+        <h6>30%</h6>
+      </span>
+    </div>
   );
 };
