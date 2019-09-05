@@ -2,15 +2,46 @@ module Api
   class ActivitiesController < ApplicationController
     before_action :set_activity, only: [:show, :update, :destroy]
     include ::ControllerHelpers
- 
-
- 
     
+    ## CONTROLLER HELPERS ##
+    
+    # create member attendance record for a given activity
+    def get_members_attendance activity
+
+      @commitment_id = @activity["commitment_id"]
+      @activity_members = Member.where(commitment_id: @commitment_id)
+      
+      attendance_record = {}
+      
+      @activity_members.each do |member|
+        attendance_record[member.user_id] = didAttend?(member.user_id)
+      end
+      return attendance_record
+    end 
+
+    # append attendance record to the activity record
+    def append_attendance_record
+      @activities = Activity.all
+      activities_api_data = {};
+
+      @activities.each do |activity|
+        @activity = activity.as_json
+        @activity[:attendance] =  get_members_attendance(@activity)
+        activities_api_data[@activity["id"]] = @activity
+      end
+
+      return activities_api_data
+
+    end
+
+  
+    ## API END POINTS ##
+   
     # GET /activities
     def index
-      @activities = Activity.all
-  
-      render json: @activities
+      
+      activities_api_data = append_attendance_record
+      render json: activities_api_data
     end
   
     # GET /activities/1
@@ -44,13 +75,13 @@ module Api
       @activity.destroy
     end
 
-    def attendance
-      render json: {
-        "commitment_id" => 1,
-        "activity_id" => 1,
-        "activity_attendance" => [{ "Frank" => true } , { "Francis" => false }, { "Francita" => true }]
-      }
-    end
+    # def attendance
+    #   render json: {
+    #     "commitment_id" => 1,
+    #     "activity_id" => 1,
+    #     "activity_attendance" => [{ "Frank" => true } , { "Francis" => false }, { "Francita" => true }]
+    #   }
+    # end
   
     private
       # Use callbacks to share common setup or constraints between actions.

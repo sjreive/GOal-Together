@@ -4,15 +4,17 @@ module Api
     include ::ControllerHelpers 
 
     
-    #Get All attendance for all activities for this commitment
-    def commitment_score
+    # Calculate attendance so for all activities for this commitment
+    def commitment_score commitment
+      
       commitment_score = {}
-      @commitment.activities.each do |activity|
-        @activity = activity
-        @attendance = get_members_attendance
-        puts "attenance for #{@activity.title} is #{@attendance}"
-        @attendance.each do |member, attendance| 
+      activity_count = commitment.activities.count
 
+      commitment.activities.each do |activity|
+        @activity = activity.as_json
+        @attendance = get_members_attendance(@activity)
+
+        @attendance.each do |member, attendance|     
           if commitment_score[member] && attendance = true
             commitment_score[member] += 1
           elsif commitment_score[member] && attendance = false
@@ -23,22 +25,39 @@ module Api
             commitment_score[member] = 1
           end
         end
-        puts "attendance score for #{@activity.title} is #{commitment_score}"
       end
-     puts commitment_score
+
+      commitment_score.each do |member, attendance|
+        commitment_score[member] = attendance / activity_count * 100
+      end
+
+     return commitment_score
+
   end
     
-    
+  # append attendance record to the commitment record
+  def append_attendance_record
+    @commitments = Commitment.all
+    commitments_api_data = {};
+
+    @commitments.each do |commitment|
+      hashed_commitment = commitment.as_json
+      hashed_commitment[:attendance] =  commitment_score(commitment)
+      commitments_api_data[commitment["id"]] = hashed_commitment
+    end
+
+    return commitments_api_data
+
+  end
     # GET /commitments
     def index
-      @commitments = Commitment.all
-
-      render json: @commitments
+      commitments_api_data = append_attendance_record
+      render json: commitments_api_data
     end
 
     # GET /commitments/1
     def show
-      commitment_score
+      
       render json: @commitment
     end
 
