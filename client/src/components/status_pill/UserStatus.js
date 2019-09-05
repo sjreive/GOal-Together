@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import classes from "./Styles.module.scss";
 import "./Styles.module.scss";
 
-export default function StatusPill(props) {
+const classNames = require('classnames');
+
+export default function UserStatus(props) {
+  const userStatus = classNames(classes.statusContainer, classes.statusPill);
   
   return (
-    <div className={classes.userStatusContainer}>
+    <div className={userStatus}>
       <div className={classes.userNameContainer}>
         <h3>Liz</h3>
         <h4>Status: <strong>Sloth!</strong></h4>

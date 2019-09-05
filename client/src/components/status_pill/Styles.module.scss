@@ -1,8 +1,8 @@
 @import "../../styles/variables.module.scss";
 @import "../../styles/mixins.module.scss";
 
-.userStatusContainer {
-  @include flexThis(space-between, center, row);
+.statusContainer {
+  width: 80%;
   background-color: $white;
   border-radius: 20px;
   padding: 10px 30px;
@@ -24,4 +24,12 @@
   strong {
     color: $primary-pink;
   }
+}
+
+.statusPill {
+  @include flexThis(space-between, center, row);
+}
+
+.generalPill {
+  @include flexThis(center, flex-start, column);
 }

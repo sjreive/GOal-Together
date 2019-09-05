@@ -4,19 +4,20 @@ import "./Styles.module.scss";
 import { useVisualMode } from "../../hooks/useVisualMode";
 
 import Donut from "../charts/Donut";
-import StatusPill from "../status_pill/StatusPill";
+import CommitmentStatus from "../status_pill/CommitmentStatus";
+import GeneralPill from "../status_pill/GeneralPill";
 
 
 export default function Stats(props) {
   const [type, setType] = useState(props.type || "");
 
   return (
-    <section className={classes.profileSection}>
-      <StatusPill />
+    <div className={classes.commitmentStatsContainer}>
+      <GeneralPill header="Description" body={props.commitment.description} />
       <div className={classes.chartContainer}>
         <Donut data={props.attendance} title={props.title}/>
       </div>
 
-    </section>
+    </div>
   );
 };

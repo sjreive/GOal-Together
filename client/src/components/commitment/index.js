@@ -22,7 +22,7 @@ export default function Commitment(props) {
     <section >
       <PageTabs mode={mode} tabs={tabs} transition={transition}/>
       {mode === "ACTIVITIES" && <h2>Activities</h2>}
-      {mode === "STATS" && <Stats attendance={props.attendance} title={props.title}/>}
+      {mode === "STATS" && <Stats attendance={props.attendance} title={props.title} commitment={props.commitment}/>}
     </section>
   );
 };
