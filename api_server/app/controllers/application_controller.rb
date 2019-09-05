@@ -1,3 +1,3 @@
 class ApplicationController < ActionController::API
-  # Before action: authentication
+  include ::ActionController::Cookies
 end
