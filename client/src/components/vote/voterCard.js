@@ -6,6 +6,7 @@ import Button from "../button/Button";
 
 export default function MemberList(props) {
   const [activityVotes, addActivityVotes] = useState({});
+  const members = props.members;
 
   // switches attendance from true to false on click
   const changeAttendance = function(value, id) {
@@ -22,26 +23,27 @@ export default function MemberList(props) {
 
   // sets attendance value to true initially
   useEffect(() => {
-    const newVotes = props.members.reduce((votes, member) => {
+    const newVotes = Object.values(members).reduce((votes, member) => {
+      console.log(`member ${member.id}`);
       const value =
         typeof activityVotes[member.id] === "boolean"
           ? activityVotes[member.id]
           : true;
-
+      console.log(`ACTIVITIY VOTES ${activityVotes}`);
       return { ...votes, [member.id]: value };
     }, {});
     addActivityVotes(newVotes);
   }, [props.members]);
 
-  const memberListItems = props.members.map(member => {
+  const memberListItems = Object.keys(members).map((id, member) => {
     return (
       <Attendee
-        value={activityVotes[member.id]}
-        id={member.id}
+        value={activityVotes[id]}
+        id={members[id].id}
         clickHandler={changeAttendance}
-        key={member.id}
-        name={member.name}
-        avatar={member.avatar_url}
+        key={members[id].id}
+        name={members[id].name}
+        avatar={members[id].avatar_url}
       />
     );
   });
@@ -60,7 +62,11 @@ export default function MemberList(props) {
           <Button
             onClick={() => {
               console.log(
-                submitData(activityVotes, props.activity, props.user)
+                `data to submit ${submitData(
+                  activityVotes,
+                  props.activity,
+                  props.user
+                )}`
               );
               props.submitVote(
                 submitData(activityVotes, props.activity, props.user)

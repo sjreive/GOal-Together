@@ -4,11 +4,12 @@ import classes from "./MemberList.module.scss";
 import MemberListItem from "./MemberListItem";
 
 export default function MemberList(props) {
-  const memberListItems = props.members.map(member => (
+  const members = props.members;
+  const memberListItems = Object.keys(members).map((id, member) => (
     <MemberListItem
-      key={member.id}
-      name={member.name}
-      avatar={member.avatar_url}
+      key={members[id].id}
+      name={members[id].name}
+      avatar={members[id].avatar_url}
     />
   ));
 

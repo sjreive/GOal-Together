@@ -9,6 +9,7 @@
   right: 0;
   height: $nav-height;
   background-color: $white;
+  z-index: 9999;
 }
 
 .bottomNav {
@@ -57,4 +58,35 @@
   height: $nav-link-size * 2 !important;
   width: $nav-link-size * 2 !important;
   color: $primary-blue;
+}
+
+
+.tabNav {
+  width: 100%;
+  @include flexThis(center, center, column);
+
+  .tabs {
+    @include flexThis(center, center, row);
+    width: 50%;
+
+    li {
+      margin-top: .5rem;
+      padding: .5rem 2rem;
+      border-right: 1px solid $primary-blue;
+      transition: 0.3s;
+      font-weight: bold;
+      color: $primary-pink;
+      opacity: .5;
+      cursor: pointer;
+    }
+
+    li:last-of-type {
+      border: 1px solid transparent;
+    }
+
+    .selectedTab {
+      color: $primary-blue;
+      opacity: 1;
+    }
+  }
 }

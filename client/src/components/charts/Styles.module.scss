@@ -1,0 +1,60 @@
+@import "../../styles/variables.module.scss";
+@import "../../styles/mixins.module.scss";
+
+.pieChartContainer {
+  position: relative;
+  @include flexThis(center, center, row);
+
+  .chartLabel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 40px;
+    width: 40px;
+    margin-left: -.75rem;
+    margin-top: -1.5rem;
+    @include flexThis(center, center, column);
+    font-size: 1.5rem;
+    h5 {
+      color: $primary-blue;
+    }
+  }
+
+}
+
+.userLeaderboard {
+  margin: 3vh 0;
+  background-color: $white;
+  border-radius: 20px;
+  border-collapse: collapse;
+  text-align: center;
+
+  thead tr {
+    background-image: $gradient;
+    color: $white;
+
+    th:first-of-type {
+      border-radius: 20px 0 0 0;
+    }
+
+    th:last-of-type {
+      border-radius: 0 20px 0 0;
+    }
+  }
+  
+  th,
+  td {
+    padding: 10px 20px;
+    border: 1px solid $light-gray-bkgrd;
+  }
+  
+  th {
+    border: 1px solid transparent;
+    padding-top: 15px;
+  }
+
+  tr:last-of-type td {
+    padding-bottom: 15px;
+  }
+
+}

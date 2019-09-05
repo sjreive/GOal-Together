@@ -4,12 +4,13 @@ import classes from "./CommitmentList.module.scss";
 import CommitmentListItem from "./CommitmentListItem";
 
 export default function CommitmentList(props) {
-  const commitmentListItems = props.commitments.map(commitment => (
+  const commitments = props.commitments;
+  const commitmentListItems = Object.keys(commitments).map((id, commitment) => (
     <CommitmentListItem
-      key={commitment.id}
-      name={commitment.name}
-      thumbnail={commitment.thumbnail}
-      description={commitment.description}
+      key={commitments[id].id}
+      name={commitments[id].name}
+      thumbnail={commitments[id].thumbnail}
+      description={commitments[id].description}
       members={props.members}
     />
   ));

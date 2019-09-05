@@ -16,6 +16,7 @@ module Api
       @activity_members.each do |member|
         attendance_record[member.user_id] = didAttend?(member.user_id)
       end
+        
       return attendance_record
     end 
 

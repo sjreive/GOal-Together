@@ -79,7 +79,7 @@ module Api
 
       # Only allow a trusted parameter "white list" through.
       def vote_params
-        params.require(:vote).permit(:attended?)
+        params.require(:vote).permit(:attended)
       end
     end
 end
