@@ -5,20 +5,21 @@
   width: 80%;
   background-color: $white;
   border-radius: 20px;
-  padding: 10px 30px;
+  padding: 1rem 2rem;
   margin: 3vh 0;
 
   .userNameContainer {
-    margin-right: 20px;
+    width: 70%;
   }
 
   h3 {
     color: $primary-blue;
+    margin-bottom: .5rem;
   }
 
   img {
-    height: 8vh;
-    width: auto;
+    height: auto;
+    width: 20%;
   }
 
   strong {
@@ -32,4 +33,6 @@
 
 .generalPill {
   @include flexThis(center, flex-start, column);
+
+
 }

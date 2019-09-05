@@ -22,3 +22,39 @@
 
 }
 
+.userLeaderboard {
+  margin: 3vh 0;
+  background-color: $white;
+  border-radius: 20px;
+  border-collapse: collapse;
+  text-align: center;
+
+  thead tr {
+    background-image: $gradient;
+    color: $white;
+
+    th:first-of-type {
+      border-radius: 20px 0 0 0;
+    }
+
+    th:last-of-type {
+      border-radius: 0 20px 0 0;
+    }
+  }
+  
+  th,
+  td {
+    padding: 10px 20px;
+    border: 1px solid $light-gray-bkgrd;
+  }
+  
+  th {
+    border: 1px solid transparent;
+    padding-top: 15px;
+  }
+
+  tr:last-of-type td {
+    padding-bottom: 15px;
+  }
+
+}

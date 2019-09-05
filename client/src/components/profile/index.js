@@ -5,7 +5,7 @@ import { useVisualMode } from "../../hooks/useVisualMode";
 
 import Donut from "../charts/Donut";
 import UserStatus from "../status_pill/UserStatus";
-import Leaderboard from "./Leaderboard";
+import Leaderboard from "../charts/Leaderboard";
 
 export default function Profile(props) {
 

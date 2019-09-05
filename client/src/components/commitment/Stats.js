@@ -6,7 +6,7 @@ import { useVisualMode } from "../../hooks/useVisualMode";
 import Donut from "../charts/Donut";
 import CommitmentStatus from "../status_pill/CommitmentStatus";
 import GeneralPill from "../status_pill/GeneralPill";
-
+import Leaderboard from "../charts/Leaderboard";
 
 export default function Stats(props) {
   const [type, setType] = useState(props.type || "");
@@ -17,7 +17,8 @@ export default function Stats(props) {
       <div className={classes.chartContainer}>
         <Donut data={props.attendance} title={props.title}/>
       </div>
-
+      <CommitmentStatus/>
+      <Leaderboard/>
     </div>
   );
 };
