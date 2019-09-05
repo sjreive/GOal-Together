@@ -4,19 +4,17 @@ import "./Styles.module.scss";
 import { useVisualMode } from "../../hooks/useVisualMode";
 
 import Donut from "../charts/Donut";
-import UserStatus from "../profile/UserStatus";
+import StatusPill from "../status_pill/StatusPill";
 
 
 export default function Stats(props) {
-  const { mode, transition, back } = useVisualMode("FIRST");
-
   const [type, setType] = useState(props.type || "");
 
   return (
     <section className={classes.profileSection}>
-      <UserStatus />
+      <StatusPill />
       <div className={classes.chartContainer}>
-        <Donut data={props.state.attendance} title={props.state.title}/>
+        <Donut data={props.attendance} title={props.title}/>
       </div>
 
     </section>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classes from "./Styles.module.scss";
 import "./Styles.module.scss";
 
-export default function UserStatus(props) {
+export default function StatusPill(props) {
   
   return (
     <div className={classes.userStatusContainer}>

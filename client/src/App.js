@@ -133,7 +133,7 @@ function CommitmentPage({ match, state, setTitle, getCommitment }) {
     setTitle(commitment.name);
   }
   
-  return <Commitment commitment={commitment} state={state} />;
+  return <Commitment commitment={commitment} attendance={state.attendance} title={state.title} />;
 }
 
 function Commitments({ match, state, setTitle }) {

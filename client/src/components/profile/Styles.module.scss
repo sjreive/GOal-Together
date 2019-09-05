@@ -17,31 +17,6 @@
   
 }
 
-.userStatusContainer {
-  @include flexThis(space-between, center, row);
-  background-color: $white;
-  border-radius: 20px;
-  padding: 10px 30px;
-  margin: 3vh 0;
-
-  .userNameContainer {
-    margin-right: 20px;
-  }
-
-  h3 {
-    color: $primary-blue;
-  }
-
-  img {
-    height: 8vh;
-    width: auto;
-  }
-
-  strong {
-    color: $primary-pink;
-  }
-}
-
 .userLeaderboard {
   margin: 3vh 0;
   background-color: $white;
