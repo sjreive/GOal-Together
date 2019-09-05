@@ -18,7 +18,7 @@ module Api
           if commitment_score[member] && attendance = true
             commitment_score[member] += 1
           elsif commitment_score[member] && attendance = false
-              commitment_score[member] += 0
+            commitment_score[member] += 0
           elsif !commitment_score[member]  && attendance = false
             commitment_score[member] = 0
           else 
@@ -33,7 +33,7 @@ module Api
 
      return commitment_score
 
-  end
+    end
     
   # append attendance record to the commitment record
   def append_attendance_record

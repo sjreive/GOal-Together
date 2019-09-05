@@ -5,21 +5,6 @@ module ControllerHelpers
     :get_members_attendance
   end
 
-  # Checks votes to determine if a member attended
-    def didAttend? member_id
-      
-      trueVotesCount = Vote.where("attendee_id = ? AND activity_id = ? AND attended = ?", member_id, @activity["id"], true).count
-      falseVotesCount = Vote.where("attendee_id = ? AND activity_id = ? AND attended = ?", member_id, @activity["id"], false).count
-  
-      if trueVotesCount > falseVotesCount
-        return true
-      else
-        return false
-      end
-        
-    end  
-  
-  
      # create member attendance record for a given activity
      def get_members_attendance activity
 
@@ -33,8 +18,4 @@ module ControllerHelpers
       end
       return attendance_record
     end 
-
-
-
-
   end

@@ -3,11 +3,45 @@ module Api
   class UsersController < ApplicationController
     before_action :set_user, only: [:show, :update, :destroy]
 
+    # Calculate attendance so for all this users' commitments
+    def user_commitment_score user
+  
+      user_commitment_score = 0;
+      commitment_count = 0;
+      
+      user.commitments.each do | commitment |
+        if (commitment_score(commitment) != {})
+        commitment_count += 1
+        commitment_score = commitment_score(commitment)
+        puts "This is the score for #{commitment.id} : #{commitment_score.inspect} for #{user.id}"
+        user_commitment_score += commitment_score[user.id]
+        puts "This is the user commitment score #{user_commitment_score}"
+        end
+      end
+      
+      puts "This is the user commitment score #{user_commitment_score/commitment_count}"
+      return user_commitment_score/commitment_count
+    end
+        
+      # append attendance record to the commitment record
+      def append_commitment_score
+        @users = User.all
+        users_api_data = {};
+    
+        @users.each do |user|
+          hashed_user = user.as_json
+          hashed_user[:commitment_score] =  user_commitment_score(user)
+          users_api_data[user["id"]] = hashed_user
+        end
+    
+        return users_api_data
+    
+      end
+    
     # GET /users
     def index
-      @users = User.all
-
-      render json: @users
+      users_api_data = append_commitment_score
+      render json: users_api_data
     end
 
     # GET /users/1
