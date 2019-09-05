@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer } from "react";
 import axios from "axios";
+import reactAppURLS from '../actions/urls';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -53,11 +54,11 @@ export default function useApplicationData() {
 
   useEffect(() => {
     Promise.all([
-      axios.get(`http://localhost:3001/api/commitments`),
-      axios.get(`http://localhost:3001/api/votes`),
-      axios.get(`http://localhost:3001/api/users`),
-      axios.get(`http://localhost:3001/api/activities`),
-      axios.get('http://localhost:3001/api/attendance')
+      axios.get(`${reactAppURLS.API_URL}/commitments`),
+      axios.get(`${reactAppURLS.API_URL}/votes`),
+      axios.get(`${reactAppURLS.API_URL}/users`),
+      axios.get(`${reactAppURLS.API_URL}/activities`),
+      axios.get(`${reactAppURLS.API_URL}/attendance`)
     ]).then(all => {
       dispatch({
         type: "SET_APPLICATION_DATA",
@@ -72,7 +73,7 @@ export default function useApplicationData() {
 
   const submitVote = function(voteData) {
     return axios
-      .post(`http://localhost:3001/api/votes/`, voteData)
+      .post(`${reactAppURLS.API_URL}/votes/`, voteData)
       .then(data => console.log(`This was sent to the server ${data}`));
   };
   const setTitle = title =>
@@ -84,7 +85,7 @@ export default function useApplicationData() {
   const setNewCommitment = commitment => {
     return new Promise((resolve, reject) => {
       return axios
-        .post("http://localhost:3001/api/commitments", commitment)
+        .post(`${reactAppURLS.API_URL}/commitments`, commitment)
         .then(async response => {
           await dispatch({
             type: "SET_NEW_COMMITMENT",
