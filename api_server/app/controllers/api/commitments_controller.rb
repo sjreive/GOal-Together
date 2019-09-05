@@ -1,7 +1,34 @@
 module Api
   class CommitmentsController < ApplicationController
     before_action :set_commitment, only: [:show, :update, :destroy]
+    include ::ControllerHelpers 
 
+    
+    #Get All attendance for all activities for this commitment
+    def commitment_score
+      commitment_score = {}
+      @commitment.activities.each do |activity|
+        @activity = activity
+        @attendance = get_members_attendance
+        puts "attenance for #{@activity.title} is #{@attendance}"
+        @attendance.each do |member, attendance| 
+
+          if commitment_score[member] && attendance = true
+            commitment_score[member] += 1
+          elsif commitment_score[member] && attendance = false
+              commitment_score[member] += 0
+          elsif !commitment_score[member]  && attendance = false
+            commitment_score[member] = 0
+          else 
+            commitment_score[member] = 1
+          end
+        end
+        puts "attendance score for #{@activity.title} is #{commitment_score}"
+      end
+     puts commitment_score
+  end
+    
+    
     # GET /commitments
     def index
       @commitments = Commitment.all
@@ -11,6 +38,7 @@ module Api
 
     # GET /commitments/1
     def show
+      commitment_score
       render json: @commitment
     end
 

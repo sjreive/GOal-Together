@@ -1,6 +1,21 @@
 module Api
   class VotesController < ApplicationController
     before_action :set_vote, only: [:show, :update, :destroy]
+    include ::ControllerHelpers
+
+      # Checks votes to determine if a member attended
+      def didAttend? member_id
+      
+        trueVotesCount = Vote.where("attendee_id = ? AND activity_id = ? AND attended = ?", member_id, @activity.id, true).count
+        falseVotesCount = Vote.where("attendee_id = ? AND activity_id = ? AND attended = ?", member_id, @activity.id, false).count
+    
+        if trueVotesCount > falseVotesCount
+          return true
+        else
+          return false
+        end
+          
+      end  
 
     #Function to check if user has voted for a given activity
     def voted? voter_id, activity_id
