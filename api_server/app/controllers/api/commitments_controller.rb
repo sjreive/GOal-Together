@@ -5,6 +5,7 @@ module Api
 
     # GET /commitments
     def index
+      puts "HERE IS USER:: #{current_user.email}"
       @commitments = Commitment.all
 
       render json: @commitments

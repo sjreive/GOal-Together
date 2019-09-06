@@ -2,6 +2,11 @@ module Api
 
   class UsersController < ApplicationController
     before_action :set_user, only: [:show, :update, :destroy]
+    before_action :authenticate_user
+
+    def find_current_user
+      render :json => current_user.as_json(only: [:id, :first_name])
+    end
 
     def find
       @user = User.find_by(email: params[:user][:email])
