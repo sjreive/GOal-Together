@@ -1,6 +1,7 @@
 module Api
   class CommitmentsController < ApplicationController
     before_action :set_commitment, only: [:show, :update, :destroy]
+    before_action :authenticate_user
 
     # GET /commitments
     def index

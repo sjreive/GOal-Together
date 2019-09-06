@@ -1,6 +1,7 @@
 module Api
   class VotesController < ApplicationController
     before_action :set_vote, only: [:show, :update, :destroy]
+    before_action :authenticate_user
 
     # GET /votes
     def index

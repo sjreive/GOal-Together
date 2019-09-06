@@ -8,6 +8,6 @@ Rails.application.routes.draw do
     get 'commitments/:id/attendance', to: 'commitments#attendance'
     get 'commitments/:id/activities/:id/attendance', to: 'activities#attendance'
     post 'user_token' => 'user_token#create'
-    post 'find_user' => 'users#find'
+    # post 'find_user' => 'users#find'
   end
 end

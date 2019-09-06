@@ -3,6 +3,8 @@ module Api
   class UsersController < ApplicationController
     before_action :set_user, only: [:show, :update, :destroy]
 
+    
+
     def find
       @user = User.find_by(email: params[:user][:email])
       if @user
@@ -62,7 +64,7 @@ module Api
 
       # Only allow a trusted parameter "white list" through.
       def user_params
-        params.require(:user).permit(:name, :email, :password, :avatar_url)
+        params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :avatar_url)
       end
   end
 end

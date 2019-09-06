@@ -10,6 +10,7 @@ import BottomNav from "./components/nav_bar/BottomNav";
 import NewCommitmentForm from "./components/new_commitment_form/index";
 import Profile from "./components/profile/index";
 import Commitment from "./components/commitment/index";
+import Login from "./components/authentication/Login";
 
 function App() {
   const {
@@ -30,7 +31,14 @@ function App() {
       <Route
         exact
         path="/"
-        render={props => <Home {...props} setTitle={setTitle} />}
+        render={props => <h1>Home</h1>}
+      />
+      <Route
+        exact
+        path="/login"
+        render={props => (
+          <LoginPage {...props} state={state} setTitle={setTitle} />
+        )}
       />
       <Route
         exact
@@ -100,15 +108,12 @@ function App() {
   );
 }
 
-function Home({ match, setTitle }) {
+function LoginPage({ match, setTitle }) {
   if (document.title !== "Home") {
     setTitle("Home");
   }
   return (
-    <div>
-      <h2>Home</h2>
-      <div className={classes.bigSquare} />
-    </div>
+    <Login/>
   );
 }
 
