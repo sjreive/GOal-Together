@@ -48,7 +48,8 @@ export default function useApplicationData() {
       created_at: "2019-09-02T18:32:42.118Z",
       updated_at: "2019-09-02T18:32:42.118Z",
       commitment_id: 1
-    }
+    },
+    activities: []
   });
 
   useEffect(() => {
@@ -57,7 +58,7 @@ export default function useApplicationData() {
       axios.get(`http://localhost:3001/api/votes`),
       axios.get(`http://localhost:3001/api/users`),
       axios.get(`http://localhost:3001/api/activities`),
-      axios.get('http://localhost:3001/api/attendance')
+      axios.get("http://localhost:3001/api/attendance")
     ]).then(all => {
       dispatch({
         type: "SET_APPLICATION_DATA",

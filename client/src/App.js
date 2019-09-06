@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import useApplicationData from "./hooks/useApplicationData";
 import classes from "./App.module.scss";
+
+import ActivityList from "./components/activity/ActivityList";
 import CommitmentList from "./components/commitments/CommitmentList";
 import VoterCard from "./components/vote/voterCard";
-
 import TopNav from "./components/nav_bar/TopNav";
 import BottomNav from "./components/nav_bar/BottomNav";
 import NewCommitmentForm from "./components/new_commitment_form/index";
@@ -24,7 +25,6 @@ function App() {
     document.title = state.title;
   }, [state.title]);
 
-  console.log(state);
   return (
     <Router>
       <TopNav />
@@ -68,7 +68,9 @@ function App() {
       <Route
         exact
         path="/notifications"
-        render={props => <Notifications {...props} setTitle={setTitle} />}
+        render={props => (
+          <Notifications {...props} setTitle={setTitle} state={state} />
+        )}
       />
 
       <Route
@@ -166,8 +168,9 @@ function Commitments({ match, state, setTitle }) {
 function Notifications({ match, state, setTitle }) {
   if (document.title !== "Notifications") {
     setTitle("Notifications");
+    console.log(`state: ${{ ...state.activites }}`);
   }
-  return <h2>My Notifications</h2>;
+  return <ActivityList activities={state.activities} />;
 }
 
 function NewCommitment({ setNewCommitment, setTitle }) {

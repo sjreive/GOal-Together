@@ -32,7 +32,6 @@ class VotesControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Vote.count', -1) do
       delete vote_url(@vote), as: :json
     end
-
     assert_response 204
   end
 end

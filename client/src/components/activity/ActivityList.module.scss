@@ -1,0 +1,12 @@
+@import "../../styles/variables.module.scss";
+@import "../../styles/mixins.module.scss";
+@import "../../styles/reset.module.scss";
+
+.activityList {
+  background-color: $light-gray-bkgrd;
+  width: 95%;
+  margin: 0 auto;
+  padding: 2rem;
+  padding-top: 1.5rem;
+  height: 1000px;
+}
