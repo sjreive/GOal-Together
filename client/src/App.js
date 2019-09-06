@@ -106,9 +106,10 @@ function App() {
             state.user.id ? (
               <CommitmentPage 
                 {...props}
-                state={state} 
+                attendance={state.attendance}
+                title={state.title}
+                commitments={state.commitments} 
                 setTitle={setTitle}
-                getCommitment={getCommitment}
               />
               ) : (
               <Redirect to="/login"/>
@@ -210,10 +211,8 @@ function Vote({ state, submitVote }) {
   );
 }
 
-function CommitmentPage({ match, state, setTitle, getCommitment }) {
-  const commitment = state.commitments.find(
-    c => c.id === parseInt(match.params.commitmentId, 10)
-  );
+function CommitmentPage({ match, commitments, attendance, title, setTitle }) {
+  const commitment = commitments[parseInt(match.params.commitmentId, 10)];
 
   if (commitment && document.title !== commitment.name) {
     setTitle(commitment.name);
@@ -222,8 +221,8 @@ function CommitmentPage({ match, state, setTitle, getCommitment }) {
   return (
     <Commitment
       commitment={commitment}
-      attendance={state.attendance}
-      title={state.title}
+      attendance={attendance}
+      title={title}
     />
   );
 }
