@@ -7,14 +7,13 @@ form {
   input {
     border: none;
     border-radius: 15px;
-
+    padding: .75rem 1rem;
   }
 
   input, 
   textarea {
     display: block;
     background: white !important;
-    padding: 10px;
   }
 
   /* Change the white to any color ;) */

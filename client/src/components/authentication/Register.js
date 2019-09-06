@@ -9,7 +9,7 @@ import Button from '../button/Button';
 
 
 export default function Register(props) {
-  const { mode, transition, back } = useVisualMode("FIRST");
+  const { mode, transition } = useVisualMode("NAME");
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -27,35 +27,32 @@ export default function Register(props) {
     <section className={classes.authenticationFormSection}>
       <h2>Register</h2>
         <form onSubmit={handleSubmit} className={classes.authenticationForm}>
-       
-          <Button 
-            back={true}
-            smallCircle={true}
-            onClick={props.clickBack}
-          />
-          <div className={classes.registrationSection}>
+          {mode === "NAME" && (<div className={classes.registrationSection}>
             <div className={classes.formRow}>
-              <label htmlFor="email">Email: </label>
-              <input name="email" id="email" type="email" />
+              <label htmlFor="first_name">First Name: </label>
+              <input name="first_name" id="first_name" type="email" placeholder="First Name" />
             </div>
             <div className={classes.formRow}>
-              <label htmlFor="password">Password:</label>
-              <input name="password" id="password" type="password" />
+              <label htmlFor="last_name">Last Name:</label>
+              <input name="last_name" id="last_name" type="text" placeholder="Last Name"/>
             </div>
             <div className={classes.formRow}>
-              <label htmlFor="password_confirmation">Password Confirmation:</label>
-              <input name="password_confirmation" id="password_confirmation" type="password" />
+              <label htmlFor="avatar_url">Avatar:</label>
+              <input name="avatar_url" id="avatar_url" type="password" />
             </div>
             <Button
               next={true}
               smallCircle={true}
-              onClick={props.clickNext}
+              onClick={e => transition("EMAIL")}
             />
-            
+          </div>)}
 
-          </div>
-
-          <div className={classes.registrationSection}>
+          {mode === "EMAIL" && (<div className={classes.registrationSection}>
+            <Button 
+              back={true}
+              smallCircle={true}
+              onClick={e => transition("NAME")}
+            />
             <div className={classes.formRow}>
               <label htmlFor="email">Email: </label>
               <input name="email" id="email" type="email" />
@@ -74,7 +71,7 @@ export default function Register(props) {
               onClick={handleSubmit}
               innerContent="Submit"
             />
-          </div>
+          </div>)}
         </form>
     </section>
   );
