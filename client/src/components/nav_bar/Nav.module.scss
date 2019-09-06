@@ -10,13 +10,13 @@
   height: $nav-height;
   background-color: $white;
   z-index: 9999;
+  padding: 10px 30px;
 }
 
 .bottomNav {
   bottom: 0;
   border-radius: 15px 15px 0 0 ;
   @include flexThis(space-between, center, row);
-  padding: 10px 30px;
 
   .navIcon {
     height: $nav-link-size;
@@ -24,21 +24,41 @@
     transition: 0.3s;
   }
 
-  .navIcon:hover,
-  .navIcon:focus {
-    transform: scale(1.2);
-    color: $primary-blue;
-  }
-
+  
   a {
     margin: 0 15px;
   }
+}
+.navIcon:hover,
+.navIcon:focus,
+.settingsHamburger:focus,
+.settingsHamburger:hover {
+  transform: scale(1.2);
+  color: $primary-blue;
+  outline: none !important;
 }
 
 .topNav {
   top: 0;
   border-radius: 0 0 15px 15px;
-  @include flexThis(center, center, row);
+  @include flexThis(space-between, center, row);
+
+  .logo,
+  .settingsHamburger {
+    height: 30px;
+    width: 30px;
+  }
+
+  .settingsHamburgerIcon {
+    height: 100%;
+    width: 100%;
+  }
+
+  .settingsHamburger {
+    border: none;
+    background: none;
+    transition: 0.3s;
+  }
 }
 
 .newCommitButton {

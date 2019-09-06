@@ -3,8 +3,9 @@ import classes from "./Styles.module.scss";
 import "./Styles.module.scss";
 import { Redirect } from 'react-router'
 
-const Logout = () => {
+const Logout = props => {
   localStorage.removeItem('jwt');
+  props.setUser({});
   return <Redirect to='/login' />
 }
 

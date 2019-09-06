@@ -57,7 +57,7 @@ function App() {
         exact
         path="/logout"
         render={props => (
-          <LogoutPage {...props} setTitle={setTitle} />
+          <LogoutPage {...props} setUser={setUser} />
         )}
       />
       <Route
@@ -180,12 +180,9 @@ function LoginPage({ match, setUser, setTitle }) {
   );
 };
 
-function LogoutPage({ match, setTitle }) {
-  if (document.title !== "Logout") {
-    setTitle("Logout");
-  }
+function LogoutPage({ match, setUser }) {
   return (
-    <Logout/>
+    <Logout setUser={setUser}/>
   );
 }
 
