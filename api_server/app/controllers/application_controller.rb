@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+<<<<<<< HEAD
   # Before action: authentication
  
   # Checks votes to determine if a member attended
@@ -60,4 +61,7 @@ end
   end 
 
 
+=======
+  include Knock::Authenticable
+>>>>>>> feature/user-auth-with-jwt
 end

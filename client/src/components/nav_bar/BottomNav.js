@@ -8,7 +8,6 @@ import { faBell, faPlusCircle, faUserAlt, faTasks, faDollarSign } from '@fortawe
 const classNames = require('classnames');
 
 export default function BottomNav({ Link }) {
-
   const bottomNavClass = classNames(classes.nav, classes.bottomNav);
 
   return (

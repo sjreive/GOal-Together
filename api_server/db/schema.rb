@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_09_04_014540) do
+=======
+ActiveRecord::Schema.define(version: 2019_09_05_223855) do
+>>>>>>> feature/user-auth-with-jwt
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,12 +50,13 @@ ActiveRecord::Schema.define(version: 2019_09_04_014540) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
+    t.string "first_name"
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
     t.string "avatar_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "last_name"
   end
 
   create_table "votes", force: :cascade do |t|

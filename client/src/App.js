@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 import useApplicationData from "./hooks/useApplicationData";
 import classes from "./App.module.scss";
 
@@ -11,6 +11,9 @@ import BottomNav from "./components/nav_bar/BottomNav";
 import NewCommitmentForm from "./components/new_commitment_form/index";
 import Profile from "./components/profile/index";
 import Commitment from "./components/commitment/index";
+import Login from "./components/authentication/Login";
+import Logout from "./components/authentication/Logout";
+import Register from "./components/authentication/Register";
 
 function App() {
   const {
@@ -18,26 +21,66 @@ function App() {
     setTitle,
     setNewCommitment,
     getCommitment,
+    setUser,
     submitVote
   } = useApplicationData();
-
+  console.log(state);
   useEffect(() => {
     document.title = state.title;
   }, [state.title]);
 
   return (
     <Router>
-      <TopNav />
+      <TopNav Link={Link} user={state.user}/>
       <Route
         exact
         path="/"
-        render={props => <Home {...props} setTitle={setTitle} />}
+        render={() => (
+          state.user.id ? (
+            <Redirect to="/profile"/>
+          ) : (
+            <Redirect to="/login"/>
+          )
+    )}
+      />
+      <Route
+        exact
+        path="/login"
+        render={props => (
+          state.user.id ? (
+            <Redirect to="/profile"/>
+          ) : (
+            <LoginPage {...props} setUser={setUser} setTitle={setTitle} />
+          )
+        )}
+      />
+      <Route
+        exact
+        path="/logout"
+        render={props => (
+          <LogoutPage {...props} setUser={setUser} />
+        )}
+      />
+      <Route
+        exact
+        path="/register"
+        render={props => (
+          state.user.id ? (
+            <Redirect to="/profile"/>
+          ) : (
+            <RegisterPage {...props} setUser={setUser} setTitle={setTitle} />
+          )
+        )}
       />
       <Route
         exact
         path="/commitments"
         render={props => (
-          <Commitments {...props} state={state} setTitle={setTitle} />
+          state.user.id ? (
+            <Commitments {...props} state={state} setTitle={setTitle} />
+            ) : (
+            <Redirect to="/login"/>
+          )
         )}
       />
       <Switch>
@@ -45,23 +88,31 @@ function App() {
           exact
           path="/commitments/new"
           render={props => (
-            <NewCommitment
-              {...props}
-              setTitle={setTitle}
-              setNewCommitment={setNewCommitment}
-            />
+            state.user.id ? (
+              <NewCommitment
+                {...props}
+                setTitle={setTitle}
+                setNewCommitment={setNewCommitment}
+              />
+            ) : (
+              <Redirect to="/login"/>
+            )
           )}
         />
         <Route
           exact
           path={`/commitments/:commitmentId`}
           render={props => (
-            <CommitmentPage
-              {...props}
-              state={state}
-              setTitle={setTitle}
-              getCommitment={getCommitment}
-            />
+            state.user.id ? (
+              <CommitmentPage 
+                {...props}
+                state={state} 
+                setTitle={setTitle}
+                getCommitment={getCommitment}
+              />
+              ) : (
+              <Redirect to="/login"/>
+            )
           )}
         />
       </Switch>
@@ -69,33 +120,51 @@ function App() {
         exact
         path="/notifications"
         render={props => (
-          <Notifications {...props} setTitle={setTitle} state={state} />
+          state.user.id ? (
+            <Notifications {...props} setTitle={setTitle} />
+            ) : (
+            <Redirect to="/login"/>
+          )        
         )}
       />
 
       <Route
         exact
         path="/profile"
-        render={props => {
-          return <ProfilePage {...props} setTitle={setTitle} state={state} />;
-        }}
+        render={props => (
+          state.user.id ? (
+            <ProfilePage {...props} setTitle={setTitle} state={state}  />
+            ) : (
+            <Redirect to="/login"/>
+          )
+        )}
       />
       <Route
         exact
         path="/transactions"
-        render={props => <Transactions {...props} setTitle={setTitle} />}
+        render={props => (
+          state.user.id ? (
+            <Transactions {...props} setTitle={setTitle} />
+            ) : (
+            <Redirect to="/login"/>
+          )
+        )}
       />
 
       <Route
         exact
         path="/vote"
         render={props => (
-          <Vote
-            {...props}
-            state={state}
-            setTitle={setTitle}
-            submitVote={submitVote}
-          />
+          state.user.id ? (
+            <Vote
+              {...props}
+              state={state}
+              setTitle={setTitle}
+              submitVote={submitVote}
+            />
+            ) : (
+            <Redirect to="/login"/>
+          )
         )}
       />
       <BottomNav Link={Link} />
@@ -103,15 +172,27 @@ function App() {
   );
 }
 
-function Home({ match, setTitle }) {
-  if (document.title !== "Home") {
-    setTitle("Home");
+function LoginPage({ match, setUser, setTitle }) {
+  if (document.title !== "Login") {
+    setTitle("Login");
   }
   return (
-    <div>
-      <h2>Home</h2>
-      <div className={classes.bigSquare} />
-    </div>
+    <Login setUser={setUser}/>
+  );
+};
+
+function LogoutPage({ match, setUser }) {
+  return (
+    <Logout setUser={setUser}/>
+  );
+}
+
+function RegisterPage({ match, setTitle }) {
+  if (document.title !== "Register") {
+    setTitle("Register");
+  }
+  return (
+    <Register/>
   );
 }
 

@@ -1,7 +1,11 @@
 module Api
   class VotesController < ApplicationController
     before_action :set_vote, only: [:show, :update, :destroy]
+<<<<<<< HEAD
     include ::ControllerHelpers
+=======
+    before_action :authenticate_user
+>>>>>>> feature/user-auth-with-jwt
 
       # Checks votes to determine if a member attended
       def didAttend? member_id

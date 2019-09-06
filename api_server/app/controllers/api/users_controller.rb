@@ -2,6 +2,21 @@ module Api
 
   class UsersController < ApplicationController
     before_action :set_user, only: [:show, :update, :destroy]
+    before_action :authenticate_user
+
+    def find_current_user
+      render :json => current_user.as_json(only: [:id, :first_name])
+    end
+
+    def find
+      @user = User.find_by(email: params[:user][:email])
+      if @user
+        render json: @user
+      else
+        @errors = @user.errors.full_messages
+        render json: @errors
+      end
+    end
 
     # Calculate attendance so for all this users' commitments
     def user_commitment_score user
@@ -86,7 +101,7 @@ module Api
 
       # Only allow a trusted parameter "white list" through.
       def user_params
-        params.require(:user).permit(:name, :email, :password, :avatar_url)
+        params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :avatar_url)
       end
   end
 end

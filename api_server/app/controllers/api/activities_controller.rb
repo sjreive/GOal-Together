@@ -1,6 +1,7 @@
 module Api
   class ActivitiesController < ApplicationController
     before_action :set_activity, only: [:show, :update, :destroy]
+<<<<<<< HEAD
     include ::ControllerHelpers
     
     ## CONTROLLER HELPERS ##
@@ -38,6 +39,9 @@ module Api
   
     ## API END POINTS ##
    
+=======
+    before_action :authenticate_user
+>>>>>>> feature/user-auth-with-jwt
     # GET /activities
     def index
       

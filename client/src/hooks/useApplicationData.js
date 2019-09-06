@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer } from "react";
 import axios from "axios";
+import reactAppURLS from '../actions/urls';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -22,10 +23,10 @@ const reducer = (state, action) => {
         ...state,
         commitments: [...state.commitments, action.commitment]
       };
-    case "TOGGLE_CHART_ANIMATION":
+    case "SET_USER":
       return {
         ...state,
-        chartAnimateToggle: false
+        user: action.user
       };
     default:
       throw new Error(
@@ -40,7 +41,8 @@ export default function useApplicationData() {
     votes: [],
     members: [],
     title: "",
-    user: 1,
+    user: {},
+    error: "",
     activity: {
       id: 2,
       title: "Spin class",
@@ -53,39 +55,60 @@ export default function useApplicationData() {
   });
 
   useEffect(() => {
-    Promise.all([
-      axios.get(`http://localhost:3001/api/commitments`),
-      axios.get(`http://localhost:3001/api/votes`),
-      axios.get(`http://localhost:3001/api/users`),
-      axios.get(`http://localhost:3001/api/activities`),
-      axios.get("http://localhost:3001/api/attendance")
-    ]).then(all => {
-      dispatch({
-        type: "SET_APPLICATION_DATA",
-        commitments: all[0].data,
-        votes: all[1].data,
-        members: all[2].data,
-        activities: all[3].data,
-        attendance: all[4].data
-      });
-    });
-  }, []);
+    let token = "Bearer " + localStorage.getItem("jwt")
+    axios({method: 'get', url: `${reactAppURLS.API_URL}/find_user`, headers: { 'Authorization': token}})
+    .then(user => {
+      setUser(user.data);
+    })
+  }, [])
+
+  useEffect(() => {
+    let token = "Bearer " + localStorage.getItem("jwt")
+    if (token && state.user.id) {
+      Promise.all([
+        axios({method: 'get', url: `${reactAppURLS.API_URL}/commitments`, headers: { 'Authorization': token}}),
+        axios({method: 'get', url: `${reactAppURLS.API_URL}/votes`, headers: { 'Authorization': token}}),
+        axios({method: 'get', url: `${reactAppURLS.API_URL}/users`, headers: { 'Authorization': token}}),
+        axios({method: 'get', url: `${reactAppURLS.API_URL}/activities`, headers: { 'Authorization': token}}),
+        axios({method: 'get', url: `${reactAppURLS.API_URL}/attendance`, headers: { 'Authorization': token}})
+      ]).then(all => {
+        dispatch({
+          type: "SET_APPLICATION_DATA",
+          commitments: all[0].data,
+          votes: all[1].data,
+          members: all[2].data,
+          activities: all[3].data,
+          attendance: all[4].data
+        });
+      })
+      .catch(error => {
+        console.log(error);
+        
+        // dispatch({
+        //   type: "SET_ERROR_MESSAGE",
+        //   error: error.response
+        // })
+        
+      })
+    }
+  }, [state.user]);
 
   const submitVote = function(voteData) {
     return axios
-      .post(`http://localhost:3001/api/votes/`, voteData)
+      .post(`${reactAppURLS.API_URL}/votes/`, voteData)
       .then(data => console.log(`This was sent to the server ${data}`));
   };
-  const setTitle = title =>
+  const setTitle = title => {
     dispatch({
       type: "SET_TITLE",
       title
     });
+  }
 
   const setNewCommitment = commitment => {
     return new Promise((resolve, reject) => {
       return axios
-        .post("http://localhost:3001/api/commitments", commitment)
+        .post(`${reactAppURLS.API_URL}/commitments`, commitment)
         .then(async response => {
           await dispatch({
             type: "SET_NEW_COMMITMENT",
@@ -96,10 +119,18 @@ export default function useApplicationData() {
     });
   };
 
+  const setUser = user => {
+    dispatch({
+      type: "SET_USER",
+      user
+    });
+  };
+
   return {
     state,
     setTitle,
     setNewCommitment,
+    setUser,
     submitVote
   };
 }

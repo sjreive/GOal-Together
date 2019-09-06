@@ -1,7 +1,9 @@
 @import "../../styles/variables.module.scss";
 @import "../../styles/mixins.module.scss";
 
-
+$top-nav-vertical-padding: 10px;
+$top-nav-horizontal-padding: 30px;
+$border-radius-value: 15px;
 
 .nav {
   position: fixed;
@@ -10,13 +12,13 @@
   height: $nav-height;
   background-color: $white;
   z-index: 9999;
+  padding: $top-nav-vertical-padding $top-nav-horizontal-padding;
 }
 
 .bottomNav {
   bottom: 0;
-  border-radius: 15px 15px 0 0 ;
+  border-radius: $border-radius-value $border-radius-value 0 0 ;
   @include flexThis(space-between, center, row);
-  padding: 10px 30px;
 
   .navIcon {
     height: $nav-link-size;
@@ -24,21 +26,47 @@
     transition: 0.3s;
   }
 
-  .navIcon:hover,
-  .navIcon:focus {
-    transform: scale(1.2);
-    color: $primary-blue;
-  }
-
+  
   a {
     margin: 0 15px;
   }
 }
+.navIcon:hover,
+.navIcon:focus,
+.settingsHamburger:focus,
+.settingsHamburger:hover {
+  transform: scale(1.2);
+  color: $primary-blue;
+  outline: none !important;
+}
 
 .topNav {
   top: 0;
-  border-radius: 0 0 15px 15px;
-  @include flexThis(center, center, row);
+  border-radius: 0 0 $border-radius-value $border-radius-value;
+
+  .topNavContainer {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    @include flexThis(space-between, center, row);
+  
+    .logo,
+    .settingsHamburger {
+      height: 30px;
+      width: 30px;
+    }
+  
+    .settingsHamburgerIcon {
+      height: 100%;
+      width: 100%;
+    }
+  
+    .settingsHamburger {
+      border: none;
+      background: none;
+      transition: 0.3s;
+    }
+  }
 }
 
 .newCommitButton {
@@ -88,5 +116,31 @@
       color: $primary-blue;
       opacity: 1;
     }
+  }
+}
+
+// Drop Down Menu Collapsible
+.collapseDropDownList {
+  position: absolute;
+  right: -$top-nav-horizontal-padding;
+  top: 100%;
+  padding-top: $top-nav-vertical-padding;
+  background-color: $white;
+  border-radius: 0 0 0 $border-radius-value;
+
+  li {
+    text-align: right;
+    padding: .5rem 1rem;
+    background-color: $white;
+    border-bottom: 1px solid $light-gray-bkgrd;
+  }
+
+  li:first-of-type {
+    border-top: 1px solid $light-gray-bkgrd;
+  }
+
+  li:last-of-type {
+    border-radius: 0 0 0 $border-radius-value;
+    border-bottom: 1px solid transparent;
   }
 }
