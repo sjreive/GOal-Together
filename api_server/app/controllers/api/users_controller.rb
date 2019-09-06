@@ -3,8 +3,6 @@ module Api
   class UsersController < ApplicationController
     before_action :set_user, only: [:show, :update, :destroy]
 
-    
-
     def find
       @user = User.find_by(email: params[:user][:email])
       if @user

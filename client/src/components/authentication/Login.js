@@ -3,8 +3,9 @@ import classes from "./Styles.module.scss";
 import "./Styles.module.scss";
 import axios from 'axios';
 import reactAppURLS from '../../actions/urls';
-export default function Profile(props) {
+import { Redirect } from 'react-router'
 
+export default function Login(props) {
   const handleSubmit = e => {
     e.preventDefault();
     const email = document.getElementById('email').value;
@@ -13,6 +14,9 @@ export default function Profile(props) {
     axios.post(`${reactAppURLS.API_URL}/user_token`, request)
       .then(response => {
         localStorage.setItem("jwt", response.data.jwt);
+        
+        
+        
       })
       .catch(error => console.log('error', error));
   }
@@ -27,7 +31,7 @@ export default function Profile(props) {
           </div>
           <div >
             <label htmlFor="password">Password:</label>
-            <input name="password" id="password" type="password" className="form-control" />
+            <input name="password" id="password" type="password" />
           </div>
           <button type="submit" >Submit</button>
         </form>

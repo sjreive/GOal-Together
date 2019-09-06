@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 import useApplicationData from "./hooks/useApplicationData";
 import classes from "./App.module.scss";
 import CommitmentList from "./components/commitments/CommitmentList";
@@ -11,6 +11,8 @@ import NewCommitmentForm from "./components/new_commitment_form/index";
 import Profile from "./components/profile/index";
 import Commitment from "./components/commitment/index";
 import Login from "./components/authentication/Login";
+import Logout from "./components/authentication/Logout";
+import Register from "./components/authentication/Register";
 
 function App() {
   const {
@@ -38,6 +40,20 @@ function App() {
         path="/login"
         render={props => (
           <LoginPage {...props} state={state} setTitle={setTitle} />
+        )}
+      />
+      <Route
+        exact
+        path="/logout"
+        render={props => (
+          <LogoutPage {...props} state={state} setTitle={setTitle} />
+        )}
+      />
+      <Route
+        exact
+        path="/register"
+        render={props => (
+          <RegisterPage {...props} state={state} setTitle={setTitle} />
         )}
       />
       <Route
@@ -109,11 +125,29 @@ function App() {
 }
 
 function LoginPage({ match, setTitle }) {
-  if (document.title !== "Home") {
-    setTitle("Home");
+  if (document.title !== "Login") {
+    setTitle("Login");
   }
   return (
     <Login/>
+  );
+};
+
+function LogoutPage({ match, setTitle }) {
+  if (document.title !== "Logout") {
+    setTitle("Logout");
+  }
+  return (
+    <Logout/>
+  );
+}
+
+function RegisterPage({ match, setTitle }) {
+  if (document.title !== "Register") {
+    setTitle("Register");
+  }
+  return (
+    <Register/>
   );
 }
 
