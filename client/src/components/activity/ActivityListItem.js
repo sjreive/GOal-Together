@@ -25,7 +25,10 @@ export default function ActivityListItem(props) {
   const now = Date.now();
   console.log(now);
   return (
-    <main className={classes.activityTile}>
+    <main
+      className={classes.activityTile}
+      onClick={() => props.setActivity(props)}
+    >
       <section className={classes.activityTile__top}>
         {now < activityDate ? (
           <section className={classes.activityTile__txt}>
