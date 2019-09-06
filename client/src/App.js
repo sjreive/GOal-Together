@@ -33,7 +33,9 @@ function App() {
       <Route
         exact
         path="/"
-        render={props => <h1>Home</h1>}
+        render={() => {
+          
+        }}
       />
       <Route
         exact

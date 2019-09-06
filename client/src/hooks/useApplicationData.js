@@ -23,10 +23,10 @@ const reducer = (state, action) => {
         ...state,
         commitments: [...state.commitments, action.commitment]
       };
-    case "TOGGLE_CHART_ANIMATION":
+    case "SET_AUTH_STATE":
       return {
         ...state,
-        chartAnimateToggle: false
+        loggedIn: action.loggedIn
       };
     default:
       throw new Error(
@@ -42,6 +42,8 @@ export default function useApplicationData() {
     members: [],
     title: "",
     user: 1,
+    loggedIn: false,
+    error: "",
     activity: {
       id: 2,
       title: "Spin class",
@@ -70,7 +72,26 @@ export default function useApplicationData() {
           activities: all[3].data,
           attendance: all[4].data
         });
-      });
+      })
+      .catch(error => {
+        console.log(error);
+        if (error.response.status === 401) {
+          dispatch({
+            type: "SET_AUTH_STATE",
+            loggedIn: false
+          })
+        } else {
+          dispatch({
+            type: "SET_ERROR_MESSAGE",
+            error: error.response
+          })
+        }
+      })
+    } else {
+      dispatch({
+        type: "SET_AUTH_STATE",
+        loggedIn: false
+      })
     }
   }, []);
 
