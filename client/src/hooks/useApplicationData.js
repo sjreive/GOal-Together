@@ -71,7 +71,12 @@ export default function useApplicationData() {
           votes: all[1].data,
           members: all[2].data,
           activities: all[3].data,
-          attendance: all[4].data,
+          attendance: all[4].data
+        });
+      })
+      .then(() => {
+        dispatch({
+          type: "SET_AUTH_STATE",
           loggedIn: true
         });
       })
