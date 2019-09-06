@@ -16,12 +16,12 @@ export default function TopNav({ Link, user }) {
 
   return (
     <nav className={topNavClass}>
-      <img className={classes.logo} src="/images/hands_together.svg" alt="Teamwork by Pham Duy Phuang Hung of the Noun Project"/>
-      <h3>{document.title}</h3>
-      <span className={classes.collapseContainer}>
+      <div className={classes.topNavContainer}>
+        <img className={classes.logo} src="/images/hands_together.svg" alt="Teamwork by Pham Duy Phuang Hung of the Noun Project"/>
+        <h3>{document.title}</h3>
         <button className={classes.settingsHamburger} onClick={e => toggleCollapsed(!collapsed)}><FontAwesomeIcon className={classes.settingsHamburgerIcon} icon={faBars} /></button>
         <CollapseDropDownList collapsed={collapsed} Link={Link} user={user} />
-      </span>
+      </div>
     </nav>
   );
 }
