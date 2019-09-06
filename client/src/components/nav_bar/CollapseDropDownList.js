@@ -4,17 +4,17 @@ import "./Nav.module.scss";
 
 const classNames = require('classnames');
 
-export default function CollapseDropDownList(props) {
+export default function CollapseDropDownList({ collapsed, user, Link}) {
   const collapseDropDownList = classNames(
     classes.collapseDropDownList,
-    !props.collapsed ? classes.collapseDropDownListVisible : null
+    !collapsed ? classes.collapseDropDownListVisible : null
   );
 
   return (
     <ul className={collapseDropDownList}>
-      { !props.collapsed && <li>Login</li>}
-      { !props.collapsed && <li>Register</li>}
-      { !props.collapsed && <li>Logout</li>}
+      { !collapsed && !user.id && <li><Link to={`/login`}>Login</Link></li>}
+      { !collapsed && !user.id && <li><Link to={`/register`}>Register</Link></li>}
+      { !collapsed && user.id && <li><Link to={`/logout`}>Logout</Link></li>}
     </ul>
   );
 }

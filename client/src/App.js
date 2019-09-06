@@ -30,7 +30,7 @@ function App() {
 
   return (
     <Router>
-      <TopNav />
+      <TopNav Link={Link} user={state.user}/>
       <Route
         exact
         path="/"

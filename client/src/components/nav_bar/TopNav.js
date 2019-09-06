@@ -9,7 +9,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 const classNames = require('classnames');
 
-export default function TopNav(props) {
+export default function TopNav({ Link, user }) {
   const topNavClass = classNames(classes.nav, classes.topNav);
 
   const [collapsed, toggleCollapsed] = useState(true);
@@ -20,7 +20,7 @@ export default function TopNav(props) {
       <h3>{document.title}</h3>
       <span className={classes.collapseContainer}>
         <button className={classes.settingsHamburger} onClick={e => toggleCollapsed(!collapsed)}><FontAwesomeIcon className={classes.settingsHamburgerIcon} icon={faBars} /></button>
-        <CollapseDropDownList collapsed={collapsed} />
+        <CollapseDropDownList collapsed={collapsed} Link={Link} user={user} />
       </span>
     </nav>
   );
