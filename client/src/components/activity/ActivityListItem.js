@@ -22,11 +22,12 @@ export default function ActivityListItem(props) {
     .join(" ");
   console.log(dateString);
 
-  const now = Date.now;
+  const now = Date.now();
+  console.log(now);
   return (
     <main className={classes.activityTile}>
       <section className={classes.activityTile__top}>
-        {now > activityDate ? (
+        {now < activityDate ? (
           <section className={classes.activityTile__txt}>
             <p className={classes.activityTile__category}>
               You have an activity coming up on {dateString}:
@@ -36,14 +37,14 @@ export default function ActivityListItem(props) {
         ) : (
           <section className={classes.activityTile__txt}>
             <p className={classes.activityTile__category}>
-              Please confirm attendance for the following event:
+              Click to confirm who attended
             </p>
             <h3 className={classes.activityTile__name}>{props.title}</h3>
           </section>
         )}
 
         <section className={classes.activityTile__icon}>
-          {now > activityDate ? (
+          {now < activityDate ? (
             <FontAwesomeIcon
               className={classes.members__icon_cal}
               icon={faCalendarAlt}

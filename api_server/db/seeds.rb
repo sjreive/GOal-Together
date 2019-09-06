@@ -74,6 +74,18 @@ act2 = Activity.create(
   commitment_id: cmt1.id
 )
 
+act3 = Activity.create(
+  title: "Getting Loaded & Reading the Hobbit",
+  date: 200.days.from_now,
+  commitment_id: cmt2.id
+)
+
+act3 = Activity.create(
+  title: "Body Pump",
+  date: 100.days.from_now,
+  commitment_id: cmt1.id
+)
+
 puts "Finding or Creating Votes ..."
 
 # User 1 votes
