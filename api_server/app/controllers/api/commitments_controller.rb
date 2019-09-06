@@ -1,11 +1,8 @@
 module Api
   class CommitmentsController < ApplicationController
     before_action :set_commitment, only: [:show, :update, :destroy]
-<<<<<<< HEAD
     include ::ControllerHelpers 
-=======
     before_action :authenticate_user
->>>>>>> feature/user-auth-with-jwt
 
     
     # Calculate attendance so for all activities for this commitment
@@ -55,15 +52,8 @@ module Api
   end
     # GET /commitments
     def index
-<<<<<<< HEAD
       commitments_api_data = append_attendance_record
       render json: commitments_api_data
-=======
-      puts "HERE IS USER:: #{current_user.email}"
-      @commitments = Commitment.all
-
-      render json: @commitments
->>>>>>> feature/user-auth-with-jwt
     end
 
     # GET /commitments/1

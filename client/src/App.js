@@ -121,7 +121,7 @@ function App() {
         path="/notifications"
         render={props => (
           state.user.id ? (
-            <Notifications {...props} setTitle={setTitle} />
+            <Notifications {...props} activities={state.activities} setTitle={setTitle} />
             ) : (
             <Redirect to="/login"/>
           )        
@@ -246,12 +246,11 @@ function Commitments({ match, state, setTitle }) {
   );
 }
 
-function Notifications({ match, state, setTitle }) {
+function Notifications({ match, activities, setTitle }) {
   if (document.title !== "Notifications") {
     setTitle("Notifications");
-    console.log(`state: ${{ ...state.activites }}`);
   }
-  return <ActivityList activities={state.activities} />;
+  return <ActivityList activities={activities} />;
 }
 
 function NewCommitment({ setNewCommitment, setTitle }) {
