@@ -6,6 +6,7 @@ $top-nav-horizontal-padding: 30px;
 $border-radius-value: 15px;
 
 .nav {
+  
   position: fixed;
   left: 0;
   right: 0;
@@ -13,7 +14,12 @@ $border-radius-value: 15px;
   background-color: $white;
   z-index: 9999;
   padding: $top-nav-vertical-padding $top-nav-horizontal-padding;
+
+  h1 {
+    font-size: 1.3rem;
+  }
 }
+
 
 .bottomNav {
   bottom: 0;

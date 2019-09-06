@@ -19,7 +19,7 @@ export default function Register(props) {
   }
 
   return (
-    <section className={classes.profileSection}>
+    <section className={classes.authenticationFormSection}>
       <h1>Log In</h1>
         <form onSubmit={handleSubmit}>
           <div >

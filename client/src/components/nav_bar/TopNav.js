@@ -18,7 +18,7 @@ export default function TopNav({ Link, user }) {
     <nav className={topNavClass}>
       <div className={classes.topNavContainer}>
         <img className={classes.logo} src="/images/hands_together.svg" alt="Teamwork by Pham Duy Phuang Hung of the Noun Project"/>
-        <h3>{document.title}</h3>
+        <h1>{document.title}</h1>
         <button className={classes.settingsHamburger} onClick={e => toggleCollapsed(!collapsed)}><FontAwesomeIcon className={classes.settingsHamburgerIcon} icon={faBars} /></button>
         <CollapseDropDownList collapsed={collapsed} Link={Link} user={user} />
       </div>

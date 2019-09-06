@@ -5,6 +5,8 @@ import axios from 'axios';
 import reactAppURLS from '../../actions/urls';
 import { Redirect } from 'react-router'
 
+import Button from '../button/Button';
+
 export default function Login(props) {
   const handleSubmit = e => {
     e.preventDefault();
@@ -24,18 +26,23 @@ export default function Login(props) {
   }
 
   return (
-    <section className={classes.profileSection}>
-      <h1>Log In</h1>
-        <form onSubmit={handleSubmit}>
-          <div >
+    <section className={classes.authenticationFormSection}>
+      <h2>Log In</h2>
+        <form onSubmit={handleSubmit} className={classes.authenticationForm}>
+          <div className={classes.formRow} >
             <label htmlFor="email">Email: </label>
             <input name="email" id="email" type="email" />
           </div>
-          <div >
+          <div className={classes.formRow} >
             <label htmlFor="password">Password:</label>
             <input name="password" id="password" type="password" />
           </div>
-          <button type="submit" >Submit</button>
+          <Button
+            form={props.form}
+            wide={true}
+            onClick={handleSubmit}
+            innerContent="Submit"
+          />
         </form>
     </section>
   );

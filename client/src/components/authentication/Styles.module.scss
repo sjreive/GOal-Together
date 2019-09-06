@@ -1,3 +1,32 @@
 @import "../../styles/variables.module.scss";
 @import "../../styles/mixins.module.scss";
 @import "../../styles/forms.module.scss";
+
+.authenticationFormSection {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  @include flexThis(center, center, column);
+  h2, 
+  input,
+  select {
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    color: $primary-blue;
+  }
+}
+
+.authenticationForm {
+  width: 75%;
+  max-height: 70%;
+  text-align: left;
+  overflow: scroll;
+  @include flexThis(space-between, center, column);
+
+  label {
+    margin-bottom: .5rem;
+  }
+
+}
