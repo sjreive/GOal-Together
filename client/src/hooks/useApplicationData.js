@@ -11,7 +11,8 @@ const reducer = (state, action) => {
         votes: action.votes,
         members: action.members,
         activities: action.activities,
-        attendance: action.attendance
+        attendance: action.attendance,
+        loggedIn: action.loggedIn
       };
     case "SET_TITLE":
       return {

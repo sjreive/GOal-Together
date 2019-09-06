@@ -27,7 +27,7 @@ function App() {
   useEffect(() => {
     document.title = state.title;
   }, [state.title]);
-  console.log(state);
+
   return (
     <Router>
       <TopNav />
@@ -57,21 +57,29 @@ function App() {
         exact
         path="/logout"
         render={props => (
-          <LogoutPage {...props} state={state} setTitle={setTitle} />
+          <LogoutPage {...props} setTitle={setTitle} />
         )}
       />
       <Route
         exact
         path="/register"
         render={props => (
-          <RegisterPage {...props} state={state} setTitle={setTitle} />
+          state.loggedIn ? (
+            <Redirect to="/profile"/>
+          ) : (
+            <RegisterPage {...props} setAuthState={setAuthState} setTitle={setTitle} />
+          )
         )}
       />
       <Route
         exact
         path="/commitments"
         render={props => (
-          <Commitments {...props} state={state} setTitle={setTitle} />
+          state.loggedIn ? (
+            <Commitments {...props} state={state} setTitle={setTitle} />
+            ) : (
+            <Redirect to="/login"/>
+          )
         )}
       />
       <Switch>
@@ -79,55 +87,83 @@ function App() {
           exact
           path="/commitments/new"
           render={props => (
-            <NewCommitment
-              {...props}
-              setTitle={setTitle}
-              setNewCommitment={setNewCommitment}
-            />
+            state.loggedIn ? (
+              <NewCommitment
+                {...props}
+                setTitle={setTitle}
+                setNewCommitment={setNewCommitment}
+              />
+            ) : (
+              <Redirect to="/login"/>
+            )
           )}
         />
         <Route
           exact
           path={`/commitments/:commitmentId`}
           render={props => (
-            <CommitmentPage 
-              {...props}
-              state={state} 
-              setTitle={setTitle}
-              getCommitment={getCommitment}
-            />
+            state.loggedIn ? (
+              <CommitmentPage 
+                {...props}
+                state={state} 
+                setTitle={setTitle}
+                getCommitment={getCommitment}
+              />
+              ) : (
+              <Redirect to="/login"/>
+            )
           )}
         />
       </Switch>
       <Route
         exact
         path="/notifications"
-        render={props => <Notifications {...props} setTitle={setTitle} />}
+        render={props => (
+          state.loggedIn ? (
+            <Notifications {...props} setTitle={setTitle} />
+            ) : (
+            <Redirect to="/login"/>
+          )        
+        )}
       />
       
       <Route
         exact
         path="/profile"
-        render={props => {
-          return <ProfilePage {...props} setTitle={setTitle} state={state}  />
-        }}
+        render={props => (
+          state.loggedIn ? (
+            <ProfilePage {...props} setTitle={setTitle} state={state}  />
+            ) : (
+            <Redirect to="/login"/>
+          )
+        )}
       />
       <Route
         exact
         path="/transactions"
-        render={props => <Transactions {...props} setTitle={setTitle} />}
+        render={props => (
+          state.loggedIn ? (
+            <Transactions {...props} setTitle={setTitle} />
+            ) : (
+            <Redirect to="/login"/>
+          )
+        )}
       />
       
       <Route
         exact
         path="/vote"
         render={props => (
-          <Vote
-            {...props}
-            state={state}
-            setTitle={setTitle}
-            submitVote={submitVote}
-          />
+          state.loggedIn ? (
+            <Vote
+              {...props}
+              state={state}
+              setTitle={setTitle}
+              submitVote={submitVote}
+            />
+            ) : (
+            <Redirect to="/login"/>
+          )
         )}
       />
       <BottomNav Link={Link} />
