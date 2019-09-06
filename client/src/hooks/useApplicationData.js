@@ -11,8 +11,7 @@ const reducer = (state, action) => {
         votes: action.votes,
         members: action.members,
         activities: action.activities,
-        attendance: action.attendance,
-        loggedIn: action.loggedIn
+        attendance: action.attendance
       };
     case "SET_TITLE":
       return {
@@ -24,10 +23,10 @@ const reducer = (state, action) => {
         ...state,
         commitments: [...state.commitments, action.commitment]
       };
-    case "SET_AUTH_STATE":
+    case "SET_USER":
       return {
         ...state,
-        loggedIn: action.loggedIn
+        user: action.user
       };
     default:
       throw new Error(
@@ -42,8 +41,7 @@ export default function useApplicationData() {
     votes: [],
     members: [],
     title: "",
-    user: 1,
-    loggedIn: false,
+    user: {},
     error: "",
     activity: {
       id: 2,
@@ -56,8 +54,16 @@ export default function useApplicationData() {
   });
 
   useEffect(() => {
-    if (localStorage.getItem("jwt")) {
-      let token = "Bearer " + localStorage.getItem("jwt")
+    let token = "Bearer " + localStorage.getItem("jwt")
+    axios({method: 'get', url: `${reactAppURLS.API_URL}/find_user`, headers: { 'Authorization': token}})
+    .then(user => {
+      setUser(user.data);
+    })
+  }, [])
+
+  useEffect(() => {
+    let token = "Bearer " + localStorage.getItem("jwt")
+    if (token && state.user.id) {
       Promise.all([
         axios({method: 'get', url: `${reactAppURLS.API_URL}/commitments`, headers: { 'Authorization': token}}),
         axios({method: 'get', url: `${reactAppURLS.API_URL}/votes`, headers: { 'Authorization': token}}),
@@ -74,33 +80,17 @@ export default function useApplicationData() {
           attendance: all[4].data
         });
       })
-      .then(() => {
-        dispatch({
-          type: "SET_AUTH_STATE",
-          loggedIn: true
-        });
-      })
       .catch(error => {
         console.log(error);
-        if (error.response.status === 401) {
-          dispatch({
-            type: "SET_AUTH_STATE",
-            loggedIn: false
-          })
-        } else {
-          dispatch({
-            type: "SET_ERROR_MESSAGE",
-            error: error.response
-          })
-        }
-      })
-    } else {
-      dispatch({
-        type: "SET_AUTH_STATE",
-        loggedIn: false
+        
+        // dispatch({
+        //   type: "SET_ERROR_MESSAGE",
+        //   error: error.response
+        // })
+        
       })
     }
-  }, []);
+  }, [state.user]);
 
   const submitVote = function(voteData) {
     return axios
@@ -128,10 +118,10 @@ export default function useApplicationData() {
     });
   };
 
-  const setAuthState = loggedIn => {
+  const setUser = user => {
     dispatch({
-      type: "SET_AUTH_STATE",
-      loggedIn
+      type: "SET_USER",
+      user
     });
   };
 
@@ -139,7 +129,7 @@ export default function useApplicationData() {
     state,
     setTitle,
     setNewCommitment,
-    setAuthState,
+    setUser,
     submitVote
   };
 }

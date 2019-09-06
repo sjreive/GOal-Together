@@ -20,10 +20,10 @@ function App() {
     setTitle,
     setNewCommitment,
     getCommitment,
-    setAuthState,
+    setUser,
     submitVote
   } = useApplicationData();
-
+  console.log(state);
   useEffect(() => {
     document.title = state.title;
   }, [state.title]);
@@ -35,7 +35,7 @@ function App() {
         exact
         path="/"
         render={() => (
-          state.loggedIn ? (
+          state.user.id ? (
             <Redirect to="/profile"/>
           ) : (
             <Redirect to="/login"/>
@@ -46,10 +46,10 @@ function App() {
         exact
         path="/login"
         render={props => (
-          state.loggedIn ? (
+          state.user.id ? (
             <Redirect to="/profile"/>
           ) : (
-            <LoginPage {...props} setAuthState={setAuthState} setTitle={setTitle} />
+            <LoginPage {...props} setUser={setUser} setTitle={setTitle} />
           )
         )}
       />
@@ -64,10 +64,10 @@ function App() {
         exact
         path="/register"
         render={props => (
-          state.loggedIn ? (
+          state.user.id ? (
             <Redirect to="/profile"/>
           ) : (
-            <RegisterPage {...props} setAuthState={setAuthState} setTitle={setTitle} />
+            <RegisterPage {...props} setUser={setUser} setTitle={setTitle} />
           )
         )}
       />
@@ -75,7 +75,7 @@ function App() {
         exact
         path="/commitments"
         render={props => (
-          state.loggedIn ? (
+          state.user.id ? (
             <Commitments {...props} state={state} setTitle={setTitle} />
             ) : (
             <Redirect to="/login"/>
@@ -87,7 +87,7 @@ function App() {
           exact
           path="/commitments/new"
           render={props => (
-            state.loggedIn ? (
+            state.user.id ? (
               <NewCommitment
                 {...props}
                 setTitle={setTitle}
@@ -102,7 +102,7 @@ function App() {
           exact
           path={`/commitments/:commitmentId`}
           render={props => (
-            state.loggedIn ? (
+            state.user.id ? (
               <CommitmentPage 
                 {...props}
                 state={state} 
@@ -119,7 +119,7 @@ function App() {
         exact
         path="/notifications"
         render={props => (
-          state.loggedIn ? (
+          state.user.id ? (
             <Notifications {...props} setTitle={setTitle} />
             ) : (
             <Redirect to="/login"/>
@@ -131,7 +131,7 @@ function App() {
         exact
         path="/profile"
         render={props => (
-          state.loggedIn ? (
+          state.user.id ? (
             <ProfilePage {...props} setTitle={setTitle} state={state}  />
             ) : (
             <Redirect to="/login"/>
@@ -142,7 +142,7 @@ function App() {
         exact
         path="/transactions"
         render={props => (
-          state.loggedIn ? (
+          state.user.id ? (
             <Transactions {...props} setTitle={setTitle} />
             ) : (
             <Redirect to="/login"/>
@@ -154,7 +154,7 @@ function App() {
         exact
         path="/vote"
         render={props => (
-          state.loggedIn ? (
+          state.user.id ? (
             <Vote
               {...props}
               state={state}
@@ -171,12 +171,12 @@ function App() {
   );
 }
 
-function LoginPage({ match, setAuthState, setTitle }) {
+function LoginPage({ match, setUser, setTitle }) {
   if (document.title !== "Login") {
     setTitle("Login");
   }
   return (
-    <Login setAuthState={setAuthState}/>
+    <Login setUser={setUser}/>
   );
 };
 

@@ -14,7 +14,11 @@ export default function Login(props) {
     axios.post(`${reactAppURLS.API_URL}/user_token`, request)
       .then(response => {
         localStorage.setItem("jwt", response.data.jwt);
-        props.setAuthState(true);
+        let token = "Bearer " + response.data.jwt;
+        axios({method: 'get', url: `${reactAppURLS.API_URL}/find_user`, headers: { 'Authorization': token}})
+        .then(user => {
+          props.setUser(user.data);
+        })
       })
       .catch(error => console.log('error', error));
   }
