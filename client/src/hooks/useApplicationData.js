@@ -70,7 +70,8 @@ export default function useApplicationData() {
           votes: all[1].data,
           members: all[2].data,
           activities: all[3].data,
-          attendance: all[4].data
+          attendance: all[4].data,
+          loggedIn: true
         });
       })
       .catch(error => {
@@ -100,11 +101,12 @@ export default function useApplicationData() {
       .post(`${reactAppURLS.API_URL}/votes/`, voteData)
       .then(data => console.log(`This was sent to the server ${data}`));
   };
-  const setTitle = title =>
+  const setTitle = title => {
     dispatch({
       type: "SET_TITLE",
       title
     });
+  }
 
   const setNewCommitment = commitment => {
     return new Promise((resolve, reject) => {
@@ -120,10 +122,18 @@ export default function useApplicationData() {
     });
   };
 
+  const setAuthState = loggedIn => {
+    dispatch({
+      type: "SET_AUTH_STATE",
+      loggedIn
+    });
+  };
+
   return {
     state,
     setTitle,
     setNewCommitment,
+    setAuthState,
     submitVote
   };
 }

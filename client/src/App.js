@@ -20,28 +20,37 @@ function App() {
     setTitle,
     setNewCommitment,
     getCommitment,
+    setAuthState,
     submitVote
   } = useApplicationData();
 
   useEffect(() => {
     document.title = state.title;
   }, [state.title]);
-
+  console.log(state);
   return (
     <Router>
       <TopNav />
       <Route
         exact
         path="/"
-        render={() => {
-          
-        }}
+        render={() => (
+          state.loggedIn ? (
+            <Redirect to="/profile"/>
+          ) : (
+            <Redirect to="/login"/>
+          )
+    )}
       />
       <Route
         exact
         path="/login"
         render={props => (
-          <LoginPage {...props} state={state} setTitle={setTitle} />
+          state.loggedIn ? (
+            <Redirect to="/profile"/>
+          ) : (
+            <LoginPage {...props} setAuthState={setAuthState} setTitle={setTitle} />
+          )
         )}
       />
       <Route
@@ -126,12 +135,12 @@ function App() {
   );
 }
 
-function LoginPage({ match, setTitle }) {
+function LoginPage({ match, setAuthState, setTitle }) {
   if (document.title !== "Login") {
     setTitle("Login");
   }
   return (
-    <Login/>
+    <Login setAuthState={setAuthState}/>
   );
 };
 
