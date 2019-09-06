@@ -75,6 +75,7 @@ input[type=button],
 input[type=submit],
 input[type=checkbox],
 input[type=radio],
+input[type=file],
 select
 {
 	-webkit-box-sizing:border-box;
@@ -112,13 +113,7 @@ input[type=radio]
 	height:13px;
 }
 
-/* File Uploads
------------------------------------------------*/
 
-input[type=file]
-{
-
-}
 
 /* Search Input
 -----------------------------------------------*/
@@ -142,7 +137,8 @@ input[type=search]
 button,
 input[type="reset"],
 input[type="button"],
-input[type="submit"]
+input[type="submit"],
+input[type="file"]
 {
 	/* Fix IE7 display bug */
 	overflow:visible;

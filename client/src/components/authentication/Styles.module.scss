@@ -16,6 +16,16 @@
   h2 {
     color: $primary-blue;
   }
+
+  input[type=file] {
+    width: 75%;
+    margin-bottom: 20px;
+  }
+
+  .formRow {
+    width: 100%;
+    @include flexThis(center, center, column);
+  }
 }
 
 .authenticationForm {
@@ -23,7 +33,7 @@
   max-height: 70%;
   text-align: left;
   overflow: scroll;
-  @include flexThis(space-between, center, column);
+  @include flexThis(center, center, column);
 
   label {
     margin-bottom: .5rem;
@@ -33,5 +43,5 @@
 
 .registrationSection {
   width: 100%;
-  @include flexThis(space-between, center, column)
+  @include flexThis(center, center, column)
 }

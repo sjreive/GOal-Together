@@ -38,7 +38,7 @@ export default function Register(props) {
             </div>
             <div className={classes.formRow}>
               <label htmlFor="avatar_url">Avatar:</label>
-              <input name="avatar_url" id="avatar_url" type="password" />
+              <input name="avatar_url" id="avatar_url" type="file" />
             </div>
             <Button
               next={true}
@@ -54,16 +54,16 @@ export default function Register(props) {
               onClick={e => transition("NAME")}
             />
             <div className={classes.formRow}>
-              <label htmlFor="email">Email: </label>
-              <input name="email" id="email" type="email" />
+              <label htmlFor="email">Email:</label>
+              <input name="email" id="email" type="email" placeholder="Email"/>
             </div>
             <div className={classes.formRow}>
               <label htmlFor="password">Password:</label>
-              <input name="password" id="password" type="password" />
+              <input name="password" id="password" type="password" placeholder="Password"/>
             </div>
             <div className={classes.formRow}>
-              <label htmlFor="password_confirmation">Password Confirmation:</label>
-              <input name="password_confirmation" id="password_confirmation" type="password" />
+              <label htmlFor="password_confirmation">Confirm Password:</label>
+              <input name="password_confirmation" id="password_confirmation" type="password" placeholder="Confirm Password"/>
             </div>
             <Button
               form={props.form}

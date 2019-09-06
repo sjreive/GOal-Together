@@ -31,11 +31,11 @@ export default function Login(props) {
         <form onSubmit={handleSubmit} className={classes.authenticationForm}>
           <div className={classes.formRow} >
             <label htmlFor="email">Email: </label>
-            <input name="email" id="email" type="email" />
+            <input name="email" id="email" type="email" placeholder="Email"/>
           </div>
           <div className={classes.formRow} >
             <label htmlFor="password">Password:</label>
-            <input name="password" id="password" type="password" />
+            <input name="password" id="password" type="password" placeholder="Password"/>
           </div>
           <Button
             form={props.form}
