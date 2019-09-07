@@ -4,12 +4,14 @@ import "./Styles.module.scss";
 import axios from 'axios';
 import reactAppURLS from '../../actions/urls';
 import {useVisualMode } from "../../hooks/useVisualMode";
+import urls from '../../actions/urls';
 
 import Button from '../button/Button';
-
+const classNames = require("classnames");
 
 export default function Register(props) {
   const { mode, transition } = useVisualMode("NAME");
+  const uploadContainer = classNames(classes.formRow, "upload");
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -22,6 +24,16 @@ export default function Register(props) {
       })
       .catch(error => console.log('error', error));
   }
+
+  const uploadWidget = window.cloudinary.createUploadWidget({
+    cloudName: urls.CLOUD_NAME, 
+    cropping: true,
+    uploadPreset: urls.PRESET}, (error, result) => { 
+      if (!error && result && result.event === "success") { 
+        console.log('Done! Here is the image info: ', result.info); 
+      }
+    }
+  )
 
   return (
     <section className={classes.authenticationFormSection}>
@@ -36,9 +48,14 @@ export default function Register(props) {
               <label htmlFor="last_name">Last Name:</label>
               <input name="last_name" id="last_name" type="text" placeholder="Last Name"/>
             </div>
-            <div className={classes.formRow}>
+            <div className={uploadContainer}>
               <label htmlFor="avatar_url">Avatar:</label>
-              <input name="avatar_url" id="avatar_url" type="password" />
+              <Button
+                wide={true}
+                onClick={e => {
+                  e.preventDefault()
+                  uploadWidget.open()}}
+              />
             </div>
             <Button
               next={true}
