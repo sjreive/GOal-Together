@@ -188,12 +188,12 @@ function LogoutPage({ match, setUser }) {
   );
 }
 
-function RegisterPage({ match, setTitle }) {
+function RegisterPage({ setUser, setTitle }) {
   if (document.title !== "Register") {
     setTitle("Register");
   }
   return (
-    <Register/>
+    <Register setUser={setUser}/>
   );
 }
 
