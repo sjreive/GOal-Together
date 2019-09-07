@@ -23,10 +23,10 @@ export default function Register(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const request = {"auth": {"email": email, "password": password}};
-    axios.post(`${reactAppURLS.API_URL}/user_token`, request)
+    const user = {"first_name": firstName, "last_name": lastName, "avatar_url": avatarURL, email, password, "password_confirmation": passwordConfirmation };
+    axios.post(`${reactAppURLS.API_URL}/users`, { user })
       .then(response => {
-        localStorage.setItem("jwt", response.data.jwt);
+        
       })
       .catch(error => console.log('error', error));
   }
