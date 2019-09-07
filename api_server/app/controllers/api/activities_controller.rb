@@ -2,33 +2,37 @@ module Api
   class ActivitiesController < ApplicationController
     before_action :set_activity, only: [:show, :update, :destroy]
     include ::ControllerHelpers
-    before_action :authenticate_user
+    # before_action :authenticate_user
     
     ## CONTROLLER HELPERS ##
     
-    # create member attendance record for a given activity
+    # create member attendance record & voting record for a given activity
     def get_members_attendance activity
-
       @commitment_id = @activity["commitment_id"]
       @activity_members = Member.where(commitment_id: @commitment_id)
       
       attendance_record = {}
+      voting_record = {}
       
       @activity_members.each do |member|
         attendance_record[member.user_id] = didAttend?(member.user_id)
+        voting_record[member.user_id] = voted?(member.user_id, activity["id"])
       end
         
-      return attendance_record
+      return attendance_record, voting_record
+
     end 
 
-    # append attendance record to the activity record
+    # append attendance & voting record to the activity record
     def append_attendance_record
       @activities = Activity.all
       activities_api_data = {};
 
       @activities.each do |activity|
         @activity = activity.as_json
-        @activity[:attendance] =  get_members_attendance(@activity)
+        attendance_record, voting_record = get_members_attendance(@activity)
+        @activity[:attendance] = attendance_record
+        @activity[:voted] = voting_record
         activities_api_data[@activity["id"]] = @activity
       end
 

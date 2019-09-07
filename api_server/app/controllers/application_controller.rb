@@ -46,6 +46,20 @@ end
 
   end
 
+      #Function to check if user has voted for a given activity
+      def voted? voter_id, activity_id
+        votes = Vote.where("voter_id = ? AND activity_id = ?", voter_id, activity_id).count
+  
+        if votes > 0
+          return true
+        else
+          return false
+        end
+      end
+
+
+
+
   # create member attendance record for a given activity
   def get_members_attendance activity
 
