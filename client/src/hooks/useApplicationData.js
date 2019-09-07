@@ -43,14 +43,6 @@ export default function useApplicationData() {
     title: "",
     user: {},
     error: "",
-    activity: {
-      id: 2,
-      title: "Spin class",
-      date: "2019-08-31T18:32:42.117Z",
-      created_at: "2019-09-02T18:32:42.118Z",
-      updated_at: "2019-09-02T18:32:42.118Z",
-      commitment_id: 1
-    },
     activities: []
   });
 
@@ -118,9 +110,13 @@ export default function useApplicationData() {
   }, [state.user]);
 
   const submitVote = function(voteData) {
-    return axios
-      .post(`${reactAppURLS.API_URL}/votes/`, voteData)
-      .then(data => console.log(`This was sent to the server ${data}`));
+    let token = "Bearer " + localStorage.getItem("jwt");
+    return axios({
+      method: "post",
+      url: `${reactAppURLS.API_URL}/votes/`,
+      headers: { Authorization: token },
+      data: { voteData }
+    });
   };
   const setTitle = title => {
     dispatch({

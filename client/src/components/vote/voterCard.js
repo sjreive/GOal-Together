@@ -4,7 +4,11 @@ import classes from "./voterCard.module.scss";
 import Attendee from "./attendee";
 import Button from "../button/Button";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+
 export default function MemberList(props) {
+  console.log("voterCard props", props);
   const [activityVotes, addActivityVotes] = useState({});
   const members = props.members;
 
@@ -50,9 +54,14 @@ export default function MemberList(props) {
 
   return (
     <section className={classes.voterCard}>
-      <h2 className={classes.voterCard__header}>
+      <FontAwesomeIcon
+        onClick={props.clickBack}
+        className={classes.voterCard__icon}
+        icon={faArrowLeft}
+      />
+      <h3 className={classes.voterCard__header}>
         Who attended {props.activity.title} on {props.activity.date} ?
-      </h2>
+      </h3>
       <p className={classes.voterCard__txt}>
         Click on a member to change their attendance.
       </p>
