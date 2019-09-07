@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import classes from "./Styles.module.scss";
 import "./Styles.module.scss";
 import axios from 'axios';
 import reactAppURLS from '../../actions/urls';
 import {useVisualMode } from "../../hooks/useVisualMode";
 import urls from '../../actions/urls';
+import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
 
 import Button from '../button/Button';
 const classNames = require("classnames");
@@ -13,10 +14,15 @@ export default function Register(props) {
   const { mode, transition } = useVisualMode("NAME");
   const uploadContainer = classNames(classes.formRow, "upload");
 
+  const [firstName, setFirstName] = useState("");  
+  const [lastName, setLastName] = useState("");
+  const [avatarURL, setAvatarUrl] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+
   const handleSubmit = e => {
     e.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
     const request = {"auth": {"email": email, "password": password}};
     axios.post(`${reactAppURLS.API_URL}/user_token`, request)
       .then(response => {
@@ -30,7 +36,7 @@ export default function Register(props) {
     cropping: true,
     uploadPreset: urls.PRESET}, (error, result) => { 
       if (!error && result && result.event === "success") { 
-        console.log('Done! Here is the image info: ', result.info); 
+        setAvatarUrl(result.info.public_id); 
       }
     }
   )
@@ -42,16 +48,17 @@ export default function Register(props) {
           {mode === "NAME" && (<div className={classes.registrationSection}>
             <div className={classes.formRow}>
               <label htmlFor="first_name">First Name: </label>
-              <input name="first_name" id="first_name" type="email" placeholder="First Name" />
+              <input name="first_name" id="first_name" type="email" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)}/>
             </div>
             <div className={classes.formRow}>
               <label htmlFor="last_name">Last Name:</label>
-              <input name="last_name" id="last_name" type="text" placeholder="Last Name"/>
+              <input name="last_name" id="last_name" type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
             </div>
             <div className={uploadContainer}>
               <label htmlFor="avatar_url">Avatar:</label>
               <Button
                 wide={true}
+                innerContent="Choose File"
                 onClick={e => {
                   e.preventDefault()
                   uploadWidget.open()}}
@@ -72,15 +79,15 @@ export default function Register(props) {
             />
             <div className={classes.formRow}>
               <label htmlFor="email">Email: </label>
-              <input name="email" id="email" type="email" />
+              <input name="email" id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} />
             </div>
             <div className={classes.formRow}>
               <label htmlFor="password">Password:</label>
-              <input name="password" id="password" type="password" />
+              <input name="password" id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
             </div>
             <div className={classes.formRow}>
               <label htmlFor="password_confirmation">Password Confirmation:</label>
-              <input name="password_confirmation" id="password_confirmation" type="password" />
+              <input name="password_confirmation" id="password_confirmation" type="password" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
             </div>
             <Button
               form={props.form}
