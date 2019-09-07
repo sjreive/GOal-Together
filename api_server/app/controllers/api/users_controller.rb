@@ -28,9 +28,9 @@ module Api
         if (commitment_score(commitment) != {})
         commitment_count += 1
         commitment_score = commitment_score(commitment)
-        puts "This is the score for #{commitment.id} : #{commitment_score.inspect} for #{user.id}"
+        puts "This is the score for commitment #{commitment.id} : #{commitment_score.inspect} for user #{user.id}"
         user_commitment_score += commitment_score[user.id]
-        puts "This is the user commitment score #{user_commitment_score}"
+        puts "This is the user commitment score (before division) #{user_commitment_score}"
         end
       end
       
