@@ -39,12 +39,12 @@ usr3 = User.create(
 Commitment.destroy_all
 puts "Re-creating Commitments ..."
 cmt1 = Commitment.create(
-  name: "Get swoll",
+  name: "Get jacked",
   description: "We're getting so fit together",
   start_date: 10.days.ago,
   end_date: 3.days.from_now,
-  buy_in_cents: 10000,
   activity_type: "Fitness",
+  stakes: "Buys everyone a pint",
   thumbnail: "https://media.gettyimages.com/vectors/flat-dumbbell-icon-vector-id501279419?s=612x612"
 )
 
@@ -53,18 +53,43 @@ cmt2 = Commitment.create(
   description: "We mostly just drink wine",
   start_date: 60.days.ago,
   end_date: 60.days.from_now,
-  buy_in_cents: 2000,
   activity_type: "Social",
+  stakes: "Buys snacks",
   thumbnail: "https://pbs.twimg.com/profile_images/1652308321/BookStairs_Icon_400x400.gif"
 )
 
-usr1.commitments << cmt1
-usr2.commitments << cmt1
-usr3.commitments << cmt1
+Member.create!(
+  commitment_id: 1,
+  user_id: 1,
+  joined: false
+)
+Member.create!(
+  commitment_id: 1,
+  user_id: 2,
+  joined: true
+)
+Member.create!(
+  commitment_id: 1,
+  user_id: 3,
+  joined: true
+)
 
-usr1.commitments << cmt2
-usr2.commitments << cmt2
-usr3.commitments << cmt2
+Member.create!(
+  commitment_id: 2,
+  user_id: 1,
+  joined: true
+)
+Member.create!(
+  commitment_id: 2,
+  user_id: 2,
+  joined: false
+)
+Member.create!(
+  commitment_id: 2,
+  user_id: 3,
+  joined: true
+)
+
 
 puts "Finding or Creating Activities ..."
 Activity.destroy_all
