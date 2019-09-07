@@ -44,16 +44,17 @@ module Api
       
     # POST /votes
     def create
-
+      print params[:voter], params[:activity_id]
      if voted?(params[:voter], params[:activity_id])
       render json: "already voted!"
      else
-      params[:attendees].each do |attendee, attendance|
-        vote_data = {attended: attendance, activity_id: params[:activity_id], attendee_id: attendee.to_i, voter_id: params[:voter]}
+      params[:voteData][:attendees].each do |attendee, attendance|
+        vote_data = {attended: attendance, activity_id: params[:voteData][:activity_id], attendee_id: attendee.to_i, voter_id: params[:voteData][:voter][:id]}
         puts vote_data
         @vote = Vote.new(vote_data)
         @vote.save!
       end
+      render json: "your vote has been recorded!"
     end
 
     end

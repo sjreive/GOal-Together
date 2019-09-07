@@ -11,6 +11,7 @@ import {
 
 export default function ActivityListItem(props) {
   const { mode, transition, back } = useVisualMode("FIRST");
+
   // Date formatting
   const formatDate = props.date.split("-");
   const activityDate = new Date(
@@ -31,24 +32,25 @@ export default function ActivityListItem(props) {
   return (
     <div>
       {mode === "FIRST" && (
-        <main
-          className={classes.activityTile}
-          onClick={() => props.setActivity(props)}
-        >
+        <main className={classes.activityTile}>
           <section className={classes.activityTile__top}>
             {now < activityDate ? (
               <section className={classes.activityTile__txt}>
                 <p className={classes.activityTile__category}>
                   You have an activity coming up on {dateString}:
                 </p>
-                <h3 className={classes.activityTile__name}>{props.title}</h3>
+                <h3 className={classes.activityTile__name}>
+                  {props.activity.title}
+                </h3>
               </section>
             ) : (
               <section className={classes.activityTile__txt}>
                 <p className={classes.activityTile__category}>
                   Click to confirm who attended
                 </p>
-                <h3 className={classes.activityTile__name}>{props.title}</h3>
+                <h3 className={classes.activityTile__name}>
+                  {props.activity.title}
+                </h3>
               </section>
             )}
 

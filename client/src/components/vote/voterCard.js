@@ -25,6 +25,19 @@ export default function MemberList(props) {
     };
   };
 
+  const formatDate = props.activity.date.split("-");
+  const activityDate = new Date(
+    formatDate[0],
+    formatDate[1] - 1,
+    formatDate[2].substring(0, 1)
+  );
+  const dateString = activityDate
+    .toString()
+    .split(" ")
+    .slice(0, 4)
+    .join(" ");
+  console.log(dateString);
+
   // sets attendance value to true initially
   useEffect(() => {
     const newVotes = Object.values(members).reduce((votes, member) => {
@@ -60,7 +73,7 @@ export default function MemberList(props) {
         icon={faArrowLeft}
       />
       <h3 className={classes.voterCard__header}>
-        Who attended {props.activity.title} on {props.activity.date} ?
+        Who attended {props.activity.title} on {dateString} ?
       </h3>
       <p className={classes.voterCard__txt}>
         Click on a member to change their attendance.
