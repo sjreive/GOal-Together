@@ -15,6 +15,20 @@ class ApplicationController < ActionController::API
   end
     
 end 
+
+
+ #Function to check if user has voted for a given activity
+ def voted? voter_id, activity_id
+  votes = Vote.where("voter_id = ? AND activity_id = ?", voter_id, activity_id).count
+
+  if votes > 0
+    return true
+  else
+    return false
+  end
+end
+
+
   # Calculate attendance so for all activities for this commitment
    def commitment_score commitment
       

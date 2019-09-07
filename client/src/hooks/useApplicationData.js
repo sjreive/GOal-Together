@@ -28,6 +28,11 @@ const reducer = (state, action) => {
         ...state,
         user: action.user
       };
+    case "SET_NOTIFICATIONS":
+      return {
+        ...state,
+        notifications: [...state.notifications, action.notifications]
+      };
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -43,7 +48,8 @@ export default function useApplicationData() {
     title: "",
     user: {},
     error: "",
-    activities: []
+    activities: [],
+    notifications: []
   });
 
   useEffect(() => {
@@ -136,6 +142,13 @@ export default function useApplicationData() {
           });
           resolve(response);
         });
+    });
+  };
+
+  const setNotifications = activities => {
+    dispatch({
+      type: "SET_NOTIFICATIONS",
+      activities
     });
   };
 
