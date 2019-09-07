@@ -28,6 +28,11 @@ const reducer = (state, action) => {
         ...state,
         user: action.user
       };
+    case "GET_NOTIFICATIONS":
+      return {
+        ...state,
+        notifications: action.notifications
+      };
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -43,7 +48,8 @@ export default function useApplicationData() {
     title: "",
     user: {},
     error: "",
-    activities: []
+    activities: [],
+    notifications: []
   });
 
   useEffect(() => {
@@ -125,6 +131,29 @@ export default function useApplicationData() {
     });
   };
 
+  const getNotifications = () => {
+    // copy of notifications state
+    const notifications = [...state.notifications];
+
+    Object.values(state.activities).filter(activity => {});
+
+    console.log("notifications pre map:", notifications);
+    state.activities &&
+      Object.keys(state.activities).map(id => {
+        console.log(state.activities[id].voted);
+        console.log(state.user.id);
+        if (state.activities[id].voted[state.user.id] === false) {
+          notifications[state.activities[id].id] = state.activities[id];
+        }
+      });
+
+    notifications.filter(activity => activity !== null);
+    dispatch({
+      type: "GET_NOTIFICATIONS",
+      notifications
+    });
+  };
+
   const setNewCommitment = commitment => {
     return new Promise((resolve, reject) => {
       return axios
@@ -151,6 +180,7 @@ export default function useApplicationData() {
     setTitle,
     setNewCommitment,
     setUser,
-    submitVote
+    submitVote,
+    getNotifications
   };
 }

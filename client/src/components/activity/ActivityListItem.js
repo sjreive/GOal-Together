@@ -81,6 +81,7 @@ export default function ActivityListItem(props) {
           user={props.user}
           activity={props.activity}
           submitVote={props.submitVote}
+          transition={e => transition("BLANK")}
           clickBack={e => back()}
         />
       )}
