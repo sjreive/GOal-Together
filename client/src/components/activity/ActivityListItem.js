@@ -29,6 +29,10 @@ export default function ActivityListItem(props) {
   const now = Date.now();
   console.log(now);
 
+  //Function to handle transition after voting
+  const transitionAfterVote = () =>
+    props.title ? transition("VOTED") : transition("BLANK");
+
   return (
     <div>
       {mode === "FIRST" && (
@@ -81,9 +85,24 @@ export default function ActivityListItem(props) {
           user={props.user}
           activity={props.activity}
           submitVote={props.submitVote}
-          transition={e => transition("BLANK")}
+          transition={transitionAfterVote}
           clickBack={e => back()}
         />
+      )}
+
+      {mode === "VOTED" && (
+        <main className={classes.activityTile}>
+          <section className={classes.activityTile__top}>
+            <section className={classes.activityTile__txt}>
+              <h3 className={classes.activityTile__name}>
+                {props.activity.title}
+              </h3>
+            </section>
+          </section>
+          <section className={classes.activityTile__info}>
+            <p className={classes.activityTile__category}>{dateString}</p>
+          </section>
+        </main>
       )}
     </div>
   );

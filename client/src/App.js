@@ -126,7 +126,11 @@ function App() {
                 title={state.title}
                 commitments={state.commitments}
                 setTitle={setTitle}
+                activities={state.activities}
                 getNotifications={getNotifications}
+                members={state.members}
+                submitVote={submitVote}
+                user={state.user}
               />
             ) : (
               <Redirect to="/login" />
@@ -236,16 +240,32 @@ function CommitmentPage({
   attendance,
   title,
   setTitle,
+  activities,
+  submitVote,
+  members,
+  user,
   getNotifications
 }) {
   const commitment = commitments[parseInt(match.params.commitmentId, 10)];
+
+  const commitment_activities = Object.values(activities).filter(
+    activity => activity.commitment_id === commitment.id
+  );
 
   if (commitment && document.title !== commitment.name) {
     setTitle(commitment.name);
   }
 
   return (
-    <Commitment commitment={commitment} attendance={attendance} title={title} />
+    <Commitment
+      activities={commitment_activities}
+      commitment={commitment}
+      attendance={attendance}
+      title={title}
+      submitVote={submitVote}
+      members={members}
+      user={user}
+    />
   );
 }
 
