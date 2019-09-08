@@ -5,22 +5,24 @@ import classes from "./ActivityList.module.scss";
 import ActivityListItem from "./ActivityListItem";
 
 export default function ActivityList(props) {
-  const activities = props.activities;
+  const notifications = props.notifications;
 
-  console.log(`Activity List Props: ${props.activities["1"].id}`);
+  console.log(`Activity List Props: ${notifications}`);
 
   console.log(Object);
 
-  const activityListItems = Object.keys(activities).map((id, Activity) => (
-    <ActivityListItem
-      members={props.members}
-      user={props.user}
-      activity={activities[id]}
-      key={activities[id].id}
-      date={activities[id].date}
-      submitVote={props.submitVote}
-    />
-  ));
+  const activityListItems =
+    notifications &&
+    notifications.map(activity => (
+      <ActivityListItem
+        members={props.members}
+        user={props.user}
+        activity={activity}
+        key={activity.id}
+        date={activity.date}
+        submitVote={props.submitVote}
+      />
+    ));
 
   return <ul className={classes.activityList}>{activityListItems}</ul>;
 }

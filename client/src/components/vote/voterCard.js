@@ -52,6 +52,12 @@ export default function MemberList(props) {
     addActivityVotes(newVotes);
   }, [props.members]);
 
+  //Function to handle submission of vote card
+  const submitVoteHandler = () => {
+    props.submitVote(submitData(activityVotes, props.activity, props.user));
+    props.transition();
+  };
+
   const memberListItems = Object.keys(members).map((id, member) => {
     return (
       <Attendee
@@ -82,18 +88,7 @@ export default function MemberList(props) {
       <section className={classes.voterCard__submit}>
         <form onSubmit={event => event.preventDefault()}>
           <Button
-            onClick={() => {
-              console.log(
-                `data to submit ${submitData(
-                  activityVotes,
-                  props.activity,
-                  props.user
-                )}`
-              );
-              props.submitVote(
-                submitData(activityVotes, props.activity, props.user)
-              );
-            }}
+            onClick={submitVoteHandler}
             wide={true}
             innerContent={"Submit your vote!"}
           />

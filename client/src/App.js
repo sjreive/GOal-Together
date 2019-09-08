@@ -26,6 +26,7 @@ function App() {
     state,
     setTitle,
     setNewCommitment,
+    getNotifications,
     getCommitment,
     setUser,
     submitVote
@@ -34,6 +35,10 @@ function App() {
   useEffect(() => {
     document.title = state.title;
   }, [state.title]);
+
+  useEffect(() => {
+    getNotifications();
+  }, [state.activities]);
 
   return (
     <Router>
@@ -52,7 +57,12 @@ function App() {
           state.user && state.user.id ? (
             <Redirect to="/profile" />
           ) : (
-            <LoginPage {...props} setUser={setUser} setTitle={setTitle} />
+            <LoginPage
+              {...props}
+              setUser={setUser}
+              getNotifications={getNotifications}
+              setTitle={setTitle}
+            />
           )
         }
       />
@@ -68,7 +78,12 @@ function App() {
           state.user && state.user.id ? (
             <Redirect to="/profile" />
           ) : (
-            <RegisterPage {...props} setUser={setUser} setTitle={setTitle} />
+            <RegisterPage
+              {...props}
+              setUser={setUser}
+              getNotifications={getNotifications}
+              setTitle={setTitle}
+            />
           )
         }
       />
@@ -93,6 +108,7 @@ function App() {
                 {...props}
                 setTitle={setTitle}
                 setNewCommitment={setNewCommitment}
+                getNotifications={getNotifications}
               />
             ) : (
               <Redirect to="/login" />
@@ -110,6 +126,7 @@ function App() {
                 title={state.title}
                 commitments={state.commitments}
                 setTitle={setTitle}
+                getNotifications={getNotifications}
               />
             ) : (
               <Redirect to="/login" />
@@ -129,6 +146,7 @@ function App() {
               submitVote={submitVote}
               members={state.members}
               user={state.user}
+              notifications={state.notifications}
             />
           ) : (
             <Redirect to="/login" />
@@ -175,7 +193,7 @@ function App() {
           )
         }
       />
-      <BottomNav Link={Link} />
+      <BottomNav getNotifications={getNotifications} Link={Link} />
     </Router>
   );
 }
@@ -212,7 +230,14 @@ function Vote({ state, submitVote }) {
   );
 }
 
-function CommitmentPage({ match, commitments, attendance, title, setTitle }) {
+function CommitmentPage({
+  match,
+  commitments,
+  attendance,
+  title,
+  setTitle,
+  getNotifications
+}) {
   const commitment = commitments[parseInt(match.params.commitmentId, 10)];
 
   if (commitment && document.title !== commitment.name) {
@@ -224,7 +249,7 @@ function CommitmentPage({ match, commitments, attendance, title, setTitle }) {
   );
 }
 
-function Commitments({ match, state, setTitle }) {
+function Commitments({ match, state, setTitle, getNotifications }) {
   if (document.title !== "Commitments") {
     setTitle("Commitments");
   }
@@ -248,13 +273,15 @@ function Notifications({
   setTitle,
   submitVote,
   members,
-  user
+  user,
+  notifications
 }) {
   if (document.title !== "Notifications") {
     setTitle("Notifications");
   }
   return (
     <ActivityList
+      notifications={notifications}
       activities={activities}
       members={members}
       submitVote={submitVote}
