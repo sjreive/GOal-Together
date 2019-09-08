@@ -290,11 +290,11 @@ function Notifications({
   );
 }
 
-function NewCommitment({ setNewCommitment, setTitle }) {
+function NewCommitment({ history, setNewCommitment, setTitle }) {
   if (document.title !== "New Commitment") {
     setTitle("New Commitment");
   }
-  return <NewCommitmentForm setNewCommitment={setNewCommitment} />;
+  return <NewCommitmentForm history={history} setNewCommitment={setNewCommitment} />;
 }
 
 function ProfilePage({ match, state, setTitle }) {
