@@ -12,6 +12,24 @@ Rails.application.configure do
   # Show full error reports.
   config.consider_all_requests_local = true
 
+  config.action_mailer.delivery_method = :smtp
+  host = 'localhost:3000'
+  config.action_mailer.default_url_options = { :host => 'localhost:3000', protocol: 'http' }
+
+  # host = 'http://localhost:3000/commitments/new' #replace with your own url
+  # config.action_mailer.default_url_options = { host: host }
+
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => ENV["GMAIL_USERNAME"],
+    :password             => ENV['GMAIL_PASSWORD'],
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
+
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
