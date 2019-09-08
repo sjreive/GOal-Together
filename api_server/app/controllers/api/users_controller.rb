@@ -28,9 +28,9 @@ module Api
         if (commitment_score(commitment) != {})
         commitment_count += 1
         commitment_score = commitment_score(commitment)
-        puts "This is the score for commitment #{commitment.id} : #{commitment_score.inspect} for user #{user.id}"
+        puts "This is the score for #{commitment.id} : #{commitment_score.inspect} for #{user.id}"
         user_commitment_score += commitment_score[user.id]
-        puts "This is the user commitment score (before division) #{user_commitment_score}"
+        puts "This is the user commitment score #{user_commitment_score}"
         end
       end
 
@@ -65,12 +65,22 @@ module Api
 
     # POST /users
     def create
-      @user = User.new(user_params)
-      pp user_params
-      if @user.save
-        render json: @user.as_json(only: [:id, :first_name]), status: :created
+      @user = User.find_by(email: user_params[:email])
+      if @user 
+        if @user.first_name
+          render json: @user.errors, status: :conflict
+        else
+          @user.update_attributes(user_params)
+          render json: @user.as_json(only: [:id, :first_name]), status: :created
+        end
       else
-        render json: @user.errors, status: :unprocessable_entity
+        @user = User.new(user_params)
+        
+        if @user.save
+          render json: @user.as_json(only: [:id, :first_name]), status: :created
+        else
+          render json: @user.errors, status: :unprocessable_entity
+        end
       end
     end
 
