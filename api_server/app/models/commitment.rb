@@ -16,7 +16,7 @@ class Commitment < ApplicationRecord
         user_id: @user.id,
         joined: false
       )
-      @member.send_email_invitation
+      MemberMailer.with(user: @user).invite_member.deliver_now
     end
   end
 end
