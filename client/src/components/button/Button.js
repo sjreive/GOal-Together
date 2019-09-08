@@ -21,6 +21,7 @@ export default function Button(props) {
     props.formRemove ? classes.buttonFormRemove : "",
     props.next ? classes.buttonNext : "",
     props.back ? classes.buttonBack : "",
+    props.submit ? classes.buttonSubmit : "",
     props.wide ? classes.buttonWide : "",
     props.smallCircle ? classes.buttonSmallCircle : ""
   );

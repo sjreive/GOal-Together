@@ -12,47 +12,28 @@
   max-height: 70%;
   text-align: center;
   overflow: scroll;
-  @include flexThis(space-between, center, column);
-  
-  div {
-    @include flexThis(center, center, column);
-  }
-  
-  h2, 
-  input,
-  select {
-    margin-bottom: 20px;
-  }
 
   h2 {
     color: $primary-blue;
   }
 
-  .formRow {
-    @include flexThis(space-between, center, column);
-  }
 
   .formInput {
     position: relative;
-    @include flexThis(space-between, center, row);
-    margin-bottom: 15px;
-
-    input {
-      margin: 0;
-      margin-left: 10px;      
-    }
 
   }
+  
 
-  .memberForm {
-
-    button {
-      margin: 0;
-    }
-
-    > button:last-of-type {
-      margin-top: 15px;
-    }
+  input,
+  select,
+  textarea,
+  h2,
+  p {
+    margin-bottom: 1.5rem !important;
   }
 
+}
+
+.submitContainer {
+  @include flexThis(center,center,column)
 }

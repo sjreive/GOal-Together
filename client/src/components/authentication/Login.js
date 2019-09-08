@@ -33,11 +33,11 @@ export default function Login(props) {
         <Form onSubmit={handleSubmit} className={classes.authenticationForm}>
           <Form.Group controlId="formBasicEmail" >
             <Form.Label >Email: </Form.Label>
-            <Form.Control name="email" type="email" value={email} onChange={e => setEmail(e.target.value)} />
+            <Form.Control name="email"  placeholder="Enter email" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           </Form.Group>
           <Form.Group controlId="formBasicPassword" className={classes.formRow} >
             <Form.Label>Password:</Form.Label>
-            <Form.Control name="password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+            <Form.Control name="password"  placeholder="Enter password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
           </Form.Group>
           <Button
             form={props.form}

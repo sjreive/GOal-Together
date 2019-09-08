@@ -2,14 +2,10 @@ import React from "react";
 import classes from "./Styles.module.scss";
 import Button from "../button/Button";
 import MemberEmailItem from "./MemberEmailItem";
+import Form from "react-bootstrap/Form";
 
-const classNames = require('classnames');
 export default function BuyIn(props) {
-    const membersClass = classNames(
-      classes.formRow,
-      classes.memberForm
-    );
-
+  
   const memberEmailFormItemArray = props.membersArray.map((memberEmail, index) => {
     return (
       <MemberEmailItem
@@ -38,14 +34,16 @@ export default function BuyIn(props) {
   };
 
   return (
-    <div className={membersClass}>
+    <Form.Group controlId="newCommitForm.ControlInput4">
       <Button 
         back={true}
         smallCircle={true}
         onClick={props.clickBack}
       />
-      <h2>If you want to go far, go together!</h2>
-      <p>Add email addresses of members you'd like to invite:</p>
+      <Form.Label>
+        <h2>If you want to go far, go together!</h2>
+        <p>Add email addresses of members you'd like to invite:</p>
+      </Form.Label>
       {memberEmailFormItemArray}
       <Button
         add={true}
@@ -53,12 +51,15 @@ export default function BuyIn(props) {
         onClick={e => props.setMembersArray(prev => [...prev, ""])}
         innerContent="+"
       />
-      <Button
-        form={props.form}
-        wide={true}
-        onClick={props.save}
-        innerContent="Submit"
-      />
-    </div>
+      <div className={classes.submitContainer}>
+        <Button
+          form={props.form}
+          wide={true}
+          submit={true}
+          onClick={props.save}
+          innerContent="Submit"
+        />
+      </div>
+    </Form.Group>
   );
 };
