@@ -3,7 +3,7 @@ import classes from "./Styles.module.scss";
 import "./Styles.module.scss";
 import {useVisualMode } from "../../hooks/useVisualMode";
 import Form from 'react-bootstrap/Form';
-
+import { convertDateToString} from '../../helpers/helpers';
 
 import Ready from "./Ready";
 import Type from"./Type";
@@ -31,10 +31,13 @@ export default function NewCommitmentForm(props) {
   }
 
   const save = () => {
+    const start_date = convertDateToString(new Date());
+    
+
     const commitment = {
       name,
       description,
-      start_date: Date.now.toString(),
+      start_date,
       end_date: endDate,
       stakes,
       activity_type: type,
