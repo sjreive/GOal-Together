@@ -18,6 +18,7 @@ export default function Register(props) {
   const [firstName, setFirstName] = useState("");  
   const [lastName, setLastName] = useState("");
   const [avatarURL, setAvatarUrl] = useState("");
+  const [avatarTitle, setAvatarTitle] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -42,6 +43,7 @@ export default function Register(props) {
     cropping: true,
     uploadPreset: urls.PRESET}, (error, result) => { 
       if (!error && result && result.event === "success") { 
+        setAvatarTitle("Uploaded!");
         setAvatarUrl(result.info.public_id); 
       }
     }
@@ -61,7 +63,7 @@ export default function Register(props) {
               <Form.Control name="last_name" type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
             </Form.Group>
             <div className={classes.avatarFormContainer}>
-              <Form.Label >Avatar:</Form.Label>
+              <Form.Label >Avatar: {avatarTitle}</Form.Label>
               <Button
                 wide={true}
                 innerContent="Choose File"

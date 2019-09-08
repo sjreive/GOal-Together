@@ -21,7 +21,7 @@ const reducer = (state, action) => {
     case "SET_NEW_COMMITMENT":
       return {
         ...state,
-        commitments: [...state.commitments, action.commitment]
+        commitments: {...state.commitments, [action.commitment.id]: action.commitment}
       };
     case "SET_USER":
       return {
@@ -107,12 +107,17 @@ export default function useApplicationData() {
 
   const setNewCommitment = commitment => {
     return new Promise((resolve, reject) => {
-      return axios
-        .post(`${reactAppURLS.API_URL}/commitments`, commitment)
+      let token = "Bearer " + localStorage.getItem("jwt")
+      return axios({
+        method: 'post', 
+        url: `${reactAppURLS.API_URL}/commitments`, 
+        headers: { 'Authorization': token}, 
+        data: { commitment }})
         .then(async response => {
+          console.log(response);
           await dispatch({
             type: "SET_NEW_COMMITMENT",
-            commitment
+            commitment: response.data
           });
           resolve(response);
         });
