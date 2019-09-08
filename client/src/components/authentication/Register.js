@@ -61,9 +61,11 @@ export default function Register(props) {
             <Form.Group controlId="registrationForm.ControlInput2">
               <Form.Label >Last Name:</Form.Label>
               <Form.Control name="last_name" type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
-            </Form.Group>
+            </Form.Group >
             <div className={classes.avatarFormContainer}>
-              <Form.Label >Avatar: {avatarTitle}</Form.Label>
+              <div className={classes.avatarFormLabelContainer}>
+                <Form.Label >Avatar: {avatarTitle}</Form.Label>
+              </div>
               <Button
                 wide={true}
                 innerContent="Choose File"
@@ -71,7 +73,7 @@ export default function Register(props) {
                   e.preventDefault()
                   uploadWidget.open()}}
               />
-            </div>
+            </div> 
             <Button
               next={true}
               smallCircle={true}

@@ -16,13 +16,19 @@
   }
 }
 
-.avatarFormContainer {
-  width: 75%;
-  @include flexThis(center, flex-start, column);
-  button {
-    width: 100% !important;
+.avatarFormContainer{
+  @include flexThis(center, center, column);
+  width: 100%;
+
+  .avatarFormLabelContainer {
+    width: 75%;
+    text-align: left;
   }
-  margin-bottom: 1.5rem;
+
+  button {
+    width: 75%;
+    margin-bottom: 1.5rem;
+  }
 }
 
 

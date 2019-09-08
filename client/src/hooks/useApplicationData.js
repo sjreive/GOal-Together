@@ -60,6 +60,7 @@ export default function useApplicationData() {
     .then(user => {
       setUser(user.data);
     })
+    .catch(err => setUser({}));
   }, [])
 
   useEffect(() => {

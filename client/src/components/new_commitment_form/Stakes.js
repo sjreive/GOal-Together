@@ -14,7 +14,8 @@ export default function Stakes(props) {
       
       <Form.Label>
         <h2>Let's set some stakes!</h2>
-        <p>Pick some consequences for whoever doesn't follow through. Loser:</p>
+        <p>Pick some consequences for whoever doesn't follow through.</p>
+        <p><strong>Loser of this commitment...</strong></p>
       </Form.Label>
       
       <Form.Control as="select" name="stakes" value={props.stakes} onChange={props.setStakes}>
