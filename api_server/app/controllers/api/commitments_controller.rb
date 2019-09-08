@@ -65,9 +65,13 @@ module Api
     # POST /commitments
     def create
       @commitment = Commitment.new(commitment_params)
-  
       if @commitment.save
-        @commitment.add_members_and_invite(params[:member_emails])
+        Member.create!(
+          commitment_id: @commitment.id,
+          user_id: current_user.id,
+          joined: true
+        )
+        @commitment.add_members_and_invite(params[:member_emails], User.find(current_user.id))
         render json: @commitment, status: :created
       else
         render json: @commitment.errors, status: :unprocessable_entity

@@ -3,7 +3,7 @@ class Commitment < ApplicationRecord
   has_many :users, through: :members
   has_many :activities
 
-  def add_members_and_invite member_emails_array
+  def add_members_and_invite (member_emails_array, inviting_user)
     member_emails_array.each do |email|
       @user = User.where('lower(email) = ?', email.downcase).first 
       if !@user
@@ -16,7 +16,7 @@ class Commitment < ApplicationRecord
         user_id: @user.id,
         joined: false
       )
-      MemberMailer.with(user: @user).invite_member.deliver_now
+      MemberMailer.with(user: @user, commitment: self, inviting_user: inviting_user).invite_member.deliver_now
     end
   end
 end
