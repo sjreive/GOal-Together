@@ -3,6 +3,7 @@ import classes from "./Styles.module.scss";
 import "./Styles.module.scss";
 import axios from 'axios';
 import reactAppURLS from '../../actions/urls';
+import Form from 'react-bootstrap/Form';
 
 import Button from '../button/Button';
 
@@ -28,22 +29,23 @@ export default function Login(props) {
   return (
     <section className={classes.authenticationFormSection}>
       <h2>Log In</h2>
-        <form onSubmit={handleSubmit} className={classes.authenticationForm}>
-          <div className={classes.formRow} >
-            <label htmlFor="email">Email: </label>
-            <input name="email" id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} />
-          </div>
-          <div className={classes.formRow} >
-            <label htmlFor="password">Password:</label>
-            <input name="password" id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
-          </div>
+      
+        <Form onSubmit={handleSubmit} className={classes.authenticationForm}>
+          <Form.Group controlId="formBasicEmail" >
+            <Form.Label >Email: </Form.Label>
+            <Form.Control name="email" type="email" value={email} onChange={e => setEmail(e.target.value)} />
+          </Form.Group>
+          <Form.Group controlId="formBasicPassword" className={classes.formRow} >
+            <Form.Label>Password:</Form.Label>
+            <Form.Control name="password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+          </Form.Group>
           <Button
             form={props.form}
             wide={true}
             onClick={handleSubmit}
             innerContent="Submit"
           />
-        </form>
+        </Form>
     </section>
   );
 };

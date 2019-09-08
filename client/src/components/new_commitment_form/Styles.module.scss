@@ -25,12 +25,6 @@
     color: $primary-blue;
   }
 
-  select,
-  input {
-    display: block;
-    -webkit-appearance: none;
-  }
-
   .formRow {
     @include flexThis(space-between, center, column);
   }
