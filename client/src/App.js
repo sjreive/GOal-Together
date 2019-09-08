@@ -193,7 +193,7 @@ function App() {
           )
         }
       />
-      <BottomNav getNotifications={getNotifications} Link={Link} />
+      <BottomNav notifications={state.notifications} Link={Link} />
     </Router>
   );
 }
