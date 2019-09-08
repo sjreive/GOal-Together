@@ -156,7 +156,6 @@ export default function useApplicationData() {
   };
 
   const setNewCommitment = submission => {
-    console.log(submission)
     const { commitment, member_emails } = submission;
     return new Promise((resolve, reject) => {
       let token = "Bearer " + localStorage.getItem("jwt")
@@ -168,12 +167,11 @@ export default function useApplicationData() {
                 member_emails }
         })
         .then(async response => {
-          console.log(response);
           await dispatch({
             type: "SET_NEW_COMMITMENT",
             commitment: response.data
           });
-          resolve(response);
+          resolve(response.data);
         });
     });
   };
