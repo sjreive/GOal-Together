@@ -49,7 +49,7 @@ function App() {
         exact
         path="/login"
         render={props =>
-          state.user.id ? (
+          state.user && state.user.id ? (
             <Redirect to="/profile" />
           ) : (
             <LoginPage {...props} setUser={setUser} setTitle={setTitle} />
@@ -65,7 +65,7 @@ function App() {
         exact
         path="/register"
         render={props =>
-          state.user.id ? (
+          state.user && state.user.id ? (
             <Redirect to="/profile" />
           ) : (
             <RegisterPage {...props} setUser={setUser} setTitle={setTitle} />
@@ -76,7 +76,7 @@ function App() {
         exact
         path="/commitments"
         render={props =>
-          state.user.id ? (
+          state.user && state.user.id ? (
             <Commitments {...props} state={state} setTitle={setTitle} />
           ) : (
             <Redirect to="/login" />
@@ -88,7 +88,7 @@ function App() {
           exact
           path="/commitments/new"
           render={props =>
-            state.user.id ? (
+            state.user && state.user.id ? (
               <NewCommitment
                 {...props}
                 setTitle={setTitle}
@@ -103,7 +103,7 @@ function App() {
           exact
           path={`/commitments/:commitmentId`}
           render={props =>
-            state.user.id ? (
+            state.user && state.user.id ? (
               <CommitmentPage
                 {...props}
                 attendance={state.attendance}
@@ -121,7 +121,7 @@ function App() {
         exact
         path="/notifications"
         render={props =>
-          state.user.id ? (
+          state.user && state.user.id ? (
             <Notifications
               {...props}
               activities={state.activities}
@@ -140,7 +140,7 @@ function App() {
         exact
         path="/profile"
         render={props =>
-          state.user.id ? (
+          state.user && state.user.id ? (
             <ProfilePage {...props} setTitle={setTitle} state={state} />
           ) : (
             <Redirect to="/login" />
@@ -151,7 +151,7 @@ function App() {
         exact
         path="/transactions"
         render={props =>
-          state.user.id ? (
+          state.user && state.user.id ? (
             <Transactions {...props} setTitle={setTitle} />
           ) : (
             <Redirect to="/login" />
@@ -163,7 +163,7 @@ function App() {
         exact
         path="/vote"
         render={props =>
-          state.user.id ? (
+          state.user && state.user.id ? (
             <Vote
               {...props}
               state={state}
@@ -191,11 +191,11 @@ function LogoutPage({ match, setUser }) {
   return <Logout setUser={setUser} />;
 }
 
-function RegisterPage({ match, setTitle }) {
+function RegisterPage({ setUser, setTitle }) {
   if (document.title !== "Register") {
     setTitle("Register");
   }
-  return <Register />;
+  return <Register setUser={setUser} />;
 }
 
 function Vote({ state, submitVote }) {

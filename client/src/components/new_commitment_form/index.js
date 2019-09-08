@@ -13,11 +13,11 @@ import Members from "./Members";
 export default function NewCommitmentForm(props) {
   const { mode, transition, back } = useVisualMode("FIRST");
 
-  const [type, setType] = useState(props.type || "");
-  const [name, setName] = useState(props.name || "");
-  const [buyIn, setBuyIn] = useState(props.buyIn || "");
-  const [endDate, setEndDate] = useState(props.endDate || "");
-  const [membersArray, setMembersArray] = useState(props.membersArray || []);
+  const [type, setType] = useState("");
+  const [name, setName] = useState("");
+  const [buyIn, setBuyIn] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [membersArray, setMembersArray] = useState([]);
   const [error, setError] = useState("");
   
   if (membersArray.length === 0) {
