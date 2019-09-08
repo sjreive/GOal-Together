@@ -8,7 +8,7 @@ import {
   faPlusCircle,
   faUserAlt,
   faTasks,
-  faDollarSign,
+  faMedal,
   faCircle
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -42,8 +42,8 @@ export default function BottomNav({ Link, notifications }) {
       </Link>
       <span className={classes.rightSpan}>
         <div>
-          <Link to={`/transactions`}>
-            <FontAwesomeIcon className={classes.navIcon} icon={faDollarSign} />
+          <Link to={`/leaderboard`}>
+            <FontAwesomeIcon className={classes.navIcon} icon={faMedal} />
           </Link>
         </div>
 

@@ -20,6 +20,7 @@ import Commitment from "./components/commitment/index";
 import Login from "./components/authentication/Login";
 import Logout from "./components/authentication/Logout";
 import Register from "./components/authentication/Register";
+import Leaderboard from "./components/leaderboard/Leaderboard";
 
 function App() {
   const {
@@ -167,10 +168,10 @@ function App() {
       />
       <Route
         exact
-        path="/transactions"
+        path="/leaderboard"
         render={props =>
           state.user && state.user.id ? (
-            <Transactions {...props} setTitle={setTitle} />
+            <LeaderBoardPage {...props} attendance={state.attendance} setTitle={setTitle} />
           ) : (
             <Redirect to="/login" />
           )
@@ -305,11 +306,11 @@ function ProfilePage({ match, state, setTitle }) {
   return <Profile state={state} />;
 }
 
-function Transactions({ match, state, setTitle }) {
-  if (document.title !== "Transactions") {
-    setTitle("Transactions");
+function LeaderBoardPage({ attendance, setTitle }) {
+  if (document.title !== "Leaderboard") {
+    setTitle("Leaderboard");
   }
-  return <h2>My Transactions</h2>;
+  return <Leaderboard attendance={attendance} title={document.title}/>;
 }
 
 export default App;

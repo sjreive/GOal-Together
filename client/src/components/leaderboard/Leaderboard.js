@@ -3,7 +3,9 @@ import classes from "./Styles.module.scss";
 import "./Styles.module.scss";
 import { useVisualMode } from "../../hooks/useVisualMode";
 
+import Donut from "../charts/Donut";
 import UserStatus from "../status_pill/UserStatus";
+import Leaderboard from "../charts/LeaderboardTable";
 
 export default function Profile(props) {
 
@@ -11,7 +13,8 @@ export default function Profile(props) {
     <section className={classes.profileSection}>
       <div className={classes.wrapper}>
         <UserStatus />
-
+        <Donut data={props.attendance} title={props.title}/>
+        <Leaderboard />
       </div>
     </section>
   );

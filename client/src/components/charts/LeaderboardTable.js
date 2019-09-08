@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classes from "./Styles.module.scss";
 import "./Styles.module.scss";
 
-export default function UserStatus(props) {
+export default function LeaderboardTable(props) {
   
   return (
     <table className={classes.userLeaderboard}>
