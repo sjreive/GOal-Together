@@ -1,28 +1,29 @@
 import React from "react";
 import classes from "./Styles.module.scss";
 import Button from "../button/Button";
+import Form from 'react-bootstrap/Form';
 
 export default function Type(props) {
   return (
-    <div className={classes.formRow}>
+    <Form.Group controlId="newCommitForm.ControlInput1">
       <Button 
         back={true}
         smallCircle={true}
         onClick={props.clickBack}
       />
-      <label htmlFor="type"><h2>Enter the type of commitment:</h2></label>
-      <select name="type" value={props.type} onChange={props.setType}>
-        <option value="fitness">Fitness</option>
-        <option value="academic">Academic</option>
-        <option value="reading">Reading</option>
-        <option value="social">Social</option>
-        <option value="other">Other</option>
-      </select>
+      <Form.Label ><h2>Enter the type of commitment:</h2></Form.Label>
+      <Form.Control as="select" name="type" value={props.type} onChange={props.setType}>
+        <option>Fitness</option>
+        <option>Academic</option>
+        <option>Reading</option>
+        <option>Social</option>
+        <option>Other</option>
+      </Form.Control>
       <Button
         next={true}
         smallCircle={true}
         onClick={props.clickNext}
       />
-    </div>
+    </Form.Group>
   );
 };

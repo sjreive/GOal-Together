@@ -7,14 +7,17 @@
   height: 100%;
   @include flexThis(center, center, column);
 }
-
 .newCommitForm {
   width: 75%;
   max-height: 70%;
   text-align: center;
   overflow: scroll;
   @include flexThis(space-between, center, column);
-
+  
+  div {
+    @include flexThis(center, center, column);
+  }
+  
   h2, 
   input,
   select {
