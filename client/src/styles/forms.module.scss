@@ -5,15 +5,7 @@ form {
   @include flexThis(space-between, center, column);
 
   input {
-    border: none;
-    border-radius: 15px;
-    padding: .75rem 1rem;
-  }
-
-  input, 
-  textarea {
-    display: block;
-    background: white !important;
+    background-color: $white !important;
   }
 
   /* Change the white to any color ;) */
@@ -21,9 +13,6 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active  {
-  background-color: $white !important;    
-  -webkit-box-shadow: 0 0 0 30px $white inset !important;
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
-
-
 }
