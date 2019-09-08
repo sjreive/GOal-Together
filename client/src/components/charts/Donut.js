@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { PieChart, Pie, Cell } from 'recharts';
+import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import classes from "./Styles.module.scss";
 import "./Styles.module.scss";
 
@@ -51,27 +51,28 @@ export default function Donut(props) {
 
   return (
     <div className={classes.pieChartContainer}>
-      <PieChart width={300} height={250} >
-        <Pie
-          data={data}
-          cx={150}
-          cy={115}
-          innerRadius={60}
-          outerRadius={80}
-          fill="#2d3cb1"
-          paddingAngle={5}
-          dataKey="value"
-          label={renderLabel}
-          isAnimationActive={false}
-        >
-          {
-            data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
-          }
-        </Pie>
-      </PieChart>
+      <ResponsiveContainer  width="100%" height={400}>
+        <PieChart >
+          <Pie
+            data={data}
+            margin={{ top: 20, right: 20, left: 20, bottom: 20 }}
+            innerRadius="50%"
+            outerRadius="60%"
+            fill="#2d3cb1"
+            paddingAngle={5}
+            dataKey="value"
+            label={renderLabel}
+            isAnimationActive={false}
+          >
+            {
+              data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+            }
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
       <span className={classes.chartLabel}>
         <h5>Liz</h5>
-        <h6>30%</h6>
+        <p>30%</p>
       </span>
     </div>
   );

@@ -8,12 +8,14 @@
   height: 100%;
   padding-top: 3vh;
   padding-bottom: 3vh;
-  
   @include flexThis(flex-start, center, column);
 }
 
-.recharts-wrapper {
-  @include flexThis(center, center, column);
-  
+.wrapper {
+  @include flexThis(flex-start, center, column);
+  width: 80%;
+  min-height: 100%;
 }
+
+
 

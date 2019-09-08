@@ -11,11 +11,11 @@ export default function Profile(props) {
 
   return (
     <section className={classes.profileSection}>
-      <UserStatus />
-      <div className={classes.chartContainer}>
+      <div className={classes.wrapper}>
+        <UserStatus />
         <Donut data={props.state.attendance} title={props.state.title}/>
+        <Leaderboard />
       </div>
-      <Leaderboard />
     </section>
   );
 };
