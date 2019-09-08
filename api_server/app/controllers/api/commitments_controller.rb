@@ -67,7 +67,7 @@ module Api
       @commitment = Commitment.new(commitment_params)
   
       if @commitment.save
-        @commitment.add_members(params[:member_emails])
+        @commitment.add_members_and_invite(params[:member_emails])
         render json: @commitment, status: :created
       else
         render json: @commitment.errors, status: :unprocessable_entity
