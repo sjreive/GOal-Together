@@ -16,11 +16,11 @@ module Api
         @attendance = get_members_attendance(@activity)
 
         @attendance.each do |member, attendance|     
-          if commitment_score[member] && attendance = true
+          if commitment_score[member] && attendance == true
             commitment_score[member] += 1
-          elsif commitment_score[member] && attendance = false
+          elsif commitment_score[member] && attendance == false
             commitment_score[member] += 0
-          elsif !commitment_score[member]  && attendance = false
+          elsif !commitment_score[member]  && attendance == false
             commitment_score[member] = 0
           else 
             commitment_score[member] = 1
@@ -67,6 +67,7 @@ module Api
       @commitment = Commitment.new(commitment_params)
   
       if @commitment.save
+        @commitment.add_members(params[:member_emails])
         render json: @commitment, status: :created
       else
         render json: @commitment.errors, status: :unprocessable_entity
@@ -102,7 +103,7 @@ module Api
 
       # Only allow a trusted parameter "white list" through.
       def commitment_params
-        params.require(:commitment).permit(:name, :description, :start_date, :end_date, :buy_in_cents, :activity_type, :thumbnail)
+        params.require(:commitment).permit(:name, :description, :start_date, :end_date, :stakes, :activity_type, :thumbnail)
       end
   end
 end

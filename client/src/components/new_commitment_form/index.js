@@ -34,7 +34,7 @@ export default function NewCommitmentForm(props) {
     const start_date = convertDateToString(new Date());
     
 
-    const commitment = {
+    const  commitment  = {
       name,
       description,
       start_date,
@@ -43,7 +43,7 @@ export default function NewCommitmentForm(props) {
       activity_type: type,
       thumbnail: ""
     };
-    props.setNewCommitment(commitment)
+    props.setNewCommitment( { commitment: commitment , member_emails: membersArray.filter(memberEmail => memberEmail !== "") })
   };
 
   return (

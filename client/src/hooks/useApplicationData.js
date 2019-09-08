@@ -106,14 +106,18 @@ export default function useApplicationData() {
     });
   }
 
-  const setNewCommitment = commitment => {
+  const setNewCommitment = submission => {
+    console.log(submission)
+    const { commitment, member_emails } = submission;
     return new Promise((resolve, reject) => {
       let token = "Bearer " + localStorage.getItem("jwt")
       return axios({
         method: 'post', 
         url: `${reactAppURLS.API_URL}/commitments`, 
         headers: { 'Authorization': token}, 
-        data: { commitment }})
+        data: { commitment,
+                member_emails }
+        })
         .then(async response => {
           console.log(response);
           await dispatch({
