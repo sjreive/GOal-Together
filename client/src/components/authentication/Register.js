@@ -6,6 +6,7 @@ import reactAppURLS from '../../actions/urls';
 import {useVisualMode } from "../../hooks/useVisualMode";
 import urls from '../../actions/urls';
 import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
+import Form from 'react-bootstrap/Form';
 
 import Button from '../button/Button';
 const classNames = require("classnames");
@@ -49,18 +50,18 @@ export default function Register(props) {
   return (
     <section className={classes.authenticationFormSection}>
       <h2>Register</h2>
-        <form onSubmit={handleSubmit} className={classes.authenticationForm}>
+        <Form onSubmit={handleSubmit} className={classes.authenticationForm}>
           {mode === "NAME" && (<div className={classes.registrationSection}>
-            <div className={classes.formRow}>
-              <label htmlFor="first_name">First Name: </label>
-              <input name="first_name" id="first_name" type="email" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)}/>
-            </div>
-            <div className={classes.formRow}>
-              <label htmlFor="last_name">Last Name:</label>
-              <input name="last_name" id="last_name" type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
-            </div>
-            <div className={uploadContainer}>
-              <label htmlFor="avatar_url">Avatar:</label>
+            <Form.Group controlId="registrationForm.ControlInput1">
+              <Form.Label >First Name: </Form.Label>
+              <Form.Control name="first_name" type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)}/>
+            </Form.Group>
+            <Form.Group controlId="registrationForm.ControlInput2">
+              <Form.Label >Last Name:</Form.Label>
+              <Form.Control name="last_name" type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
+            </Form.Group>
+            <div className={classes.avatarFormContainer}>
+              <Form.Label >Avatar:</Form.Label>
               <Button
                 wide={true}
                 innerContent="Choose File"
@@ -82,18 +83,18 @@ export default function Register(props) {
               smallCircle={true}
               onClick={e => transition("NAME")}
             />
-            <div className={classes.formRow}>
-              <label htmlFor="email">Email: </label>
-              <input name="email" id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} />
-            </div>
-            <div className={classes.formRow}>
-              <label htmlFor="password">Password:</label>
-              <input name="password" id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
-            </div>
-            <div className={classes.formRow}>
-              <label htmlFor="password_confirmation">Password Confirmation:</label>
-              <input name="password_confirmation" id="password_confirmation" type="password" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
-            </div>
+            <Form.Group controlId="registrationForm.ControlInput4">
+              <Form.Label >Email: </Form.Label>
+              <Form.Control name="email" type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="registrationForm.ControlInput5">
+              <Form.Label >Password:</Form.Label>
+              <Form.Control name="password" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="registrationForm.ControlInput6">
+              <Form.Label>Password Confirmation:</Form.Label>
+              <Form.Control name="password_confirmation" placeholder="Confirm Password" type="password" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
+            </Form.Group>
             <Button
               form={props.form}
               wide={true}
@@ -101,7 +102,7 @@ export default function Register(props) {
               innerContent="Submit"
             />
           </div>)}
-        </form>
+        </Form>
     </section>
   );
 };
