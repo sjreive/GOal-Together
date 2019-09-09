@@ -18,6 +18,10 @@
     max-height: 8rem;
     padding: 0.5rem 0;
     flex-shrink: 1;
+
+    img {
+      max-height: 7rem;
+    }
   }
 
   &__info {

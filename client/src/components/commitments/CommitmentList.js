@@ -12,6 +12,7 @@ export default function CommitmentList({ Link, match, members, commitments }) {
       <Link to={`${match.url}/${id}`}>
         <CommitmentListItem
           key={commitments[id].id}
+          category={commitments[id].activity_type}
           name={commitments[id].name}
           thumbnail={commitments[id].thumbnail}
           description={commitments[id].description}

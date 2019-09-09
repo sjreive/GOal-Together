@@ -8,4 +8,4 @@ export default {
   API_URL,
   CLOUD_NAME,
   PRESET
-}
+};
