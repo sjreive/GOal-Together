@@ -18,7 +18,7 @@ export default function Stats(props) {
         <Donut data={props.attendance} title={props.title}/>
       </div>
       <CommitmentStatus/>
-      <LeaderboardTable/>
+      {/* <LeaderboardTable/> */}
     </div>
   );
 };
