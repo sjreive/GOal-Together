@@ -15,7 +15,8 @@
   transition: 0.3s;
 
   &Next,
-  &Back {
+  &Back,
+  &BackForm {
     font-size: 1rem;
   }
 
@@ -29,28 +30,27 @@
     display: block;
     margin-top: 1.5rem;
   }
-  
+
   &Wide {
     width: 60%;
     height: 2.2rem;
   }
-  
+
   &SmallCircle {
-    height: 2rem;
-    width: 2rem;
+    height: 2.5rem;
+    width: 2.5rem;
     padding-top: 0;
     border-radius: 100%;
   }
 
   &FormRemove {
-    font-size: .4rem !important;
+    font-size: 0.4rem !important;
     height: 1.5rem;
-    width: 1.5rem;    
+    width: 1.5rem;
     background-color: $red;
     color: $primary-blue;
     border-color: $red;
   }
-
 }
 
 .button:hover {

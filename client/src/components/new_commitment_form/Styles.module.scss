@@ -41,8 +41,39 @@
 .newActivityContainer {
   width: 85%;
   text-align: center;
+  margin: 0 auto;
+}
+
+.newActivityForm {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
   background-color: $white;
   border-radius: 0.5rem;
-  padding: 2rem;
+  padding: 1.5rem;
+  padding-bottom: 0rem;
   color: $primary-blue;
+
+  &__outer {
+    background-color: $white;
+    border-radius: 0.5rem;
+  }
+}
+
+.newActivityButtons {
+  padding: 1rem;
+  margin: 0 auto;
+  width: 90%;
+  @include flexThis(space-between, center, row);
+}
+
+.newActivityHeader {
+  height: 40%;
+  width: 100%;
+  border-radius: 0.5rem;
+  background-image: $gradient;
+  padding: 0.3rem 0.5rem 0.3rem;
+  color: $white;
+  justify-content: space-between;
+  @include flexThis(space-beteween, flex-start, row);
 }

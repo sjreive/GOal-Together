@@ -21,6 +21,7 @@ export default function Button(props) {
     props.formRemove ? classes.buttonFormRemove : "",
     props.next ? classes.buttonNext : "",
     props.back ? classes.buttonBack : "",
+    props.backForm ? classes.buttonBackForm : "",
     props.submit ? classes.buttonSubmit : "",
     props.wide ? classes.buttonWide : "",
     props.smallCircle ? classes.buttonSmallCircle : ""
@@ -35,7 +36,11 @@ export default function Button(props) {
     ? (innerContent = (
         <FontAwesomeIcon className={classes.navIcon} icon={faBackward} />
       ))
-    : innerContent;
+    : (innerContent = props.backForm
+        ? (innerContent = (
+            <FontAwesomeIcon className={classes.navIcon} icon={faBackward} />
+          ))
+        : innerContent);
   innerContent = props.next
     ? (innerContent = (
         <FontAwesomeIcon className={classes.navIcon} icon={faForward} />

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classes from "../new_commitment_form/Styles.module.scss";
 import { useVisualMode } from "../../hooks/useVisualMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faBackward } from "@fortawesome/free-solid-svg-icons";
 
 import Button from "../button/Button";
 import Form from "react-bootstrap/Form";
@@ -35,52 +35,59 @@ export default function NewActivity(props) {
       )}
 
       {mode === "NEWACTIVITY" && (
-        <Form.Group
-          controlId="newActivityForm"
-          className={classes.newCommitFor__activity}
-        >
-          <Form.Label>
-            <h6>Name of this Activity:</h6>
-          </Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Activity Title"
-            name="title"
-            value={activityTitle}
-            onChange={e => setActivityTitle(e.target.value)}
-          />
-          <Form.Label>
-            <h6>Activity Date:</h6>
-          </Form.Label>
-          <Form.Control
-            type="date"
-            name="date"
-            value={activityDate}
-            max="2020-12-31"
-            onChange={e => setActivityDate(e.target.value)}
-          />
+        <div className={classes.newActivityForm__outer}>
+          <div className={classes.newActivityHeader}>
+            <h4>Add an Activity</h4>
+          </div>
+          <div className={classes.newActivityForm}>
+            <Form.Group
+              controlId="newActivityForm"
+              className={classes.newCommitForm__activity}
+            >
+              <Form.Label>
+                <h6>Name of this Activity:</h6>
+              </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Activity Title"
+                name="title"
+                value={activityTitle}
+                onChange={e => setActivityTitle(e.target.value)}
+              />
+              <Form.Label>
+                <h6>Activity Date:</h6>
+              </Form.Label>
+              <Form.Control
+                type="date"
+                name="date"
+                value={activityDate}
+                max="2020-12-31"
+                onChange={e => setActivityDate(e.target.value)}
+              />
+              <div className={classes.newActivityButtons}>
+                <Button
+                  smallCircle={true}
+                  backForm={true}
+                  onClick={() => back()}
+                />
 
-          <Button
-            next={false}
-            smallCircle={true}
-            innerContent={"back"}
-            onClick={() => back()}
-          />
-
-          <form onSubmit={event => event.preventDefault()}>
-            <Button
-              smallCircle={true}
-              innerContent={"submit"}
-              onClick={() =>
-                activitySubmissionHandler({
-                  title: activityTitle,
-                  date: activityDate,
-                  commitment_id: props.commitment.id
-                })
-              }
-            />
-          </form>
-        </Form.Group>
+                <form onSubmit={event => event.preventDefault()}>
+                  <Button
+                    smallCircle={true}
+                    next={true}
+                    onClick={() =>
+                      activitySubmissionHandler({
+                        title: activityTitle,
+                        date: activityDate,
+                        commitment_id: props.commitment.id
+                      })
+                    }
+                  />
+                </form>
+              </div>
+            </Form.Group>
+          </div>
+        </div>
       )}
 
       {mode === "CREATED" && (
