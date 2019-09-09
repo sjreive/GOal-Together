@@ -272,21 +272,27 @@ function CommitmentPage({
     setTitle(commitment.name);
   }
 
-  const attendance = [];
+  let attendance = [];
 
   for (const memberId in commitment.attendance) {
     const name = members[memberId].first_name;
-    const commitmentScore = commitment.attendance[memberId];
-    const memberScoreObject = {};
-    memberScoreObject[name] = commitmentScore;
-    attendance.push(memberScoreObject);
+    if (name) {
+      const commitmentScore = commitment.attendance[memberId];
+      const memberScoreObject = {};
+      memberScoreObject[name] = commitmentScore;
+      attendance.push(memberScoreObject);
+    }
   }
 
+  attendance = attendance.sort((a, b) => Object.values(b)[0] - Object.values(a)[0]);
+   console.log(attendance);
   return (
     <Commitment
+      flakiest={attendance[attendance.length - 1]} 
+      keenest={attendance[0]}
+      attendance={attendance.slice(0, 10)} 
       activities={commitment_activities}
       commitment={commitment}
-      attendance={attendance}
       title={title}
       submitVote={submitVote}
       members={members}

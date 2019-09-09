@@ -13,10 +13,8 @@ export default function Stats(props) {
   return (
     <div className={classes.commitmentStatsContainer}>
       <GeneralPill header="Description" body={props.commitment.description} />
-
-        <Donut data={props.attendance} userName={props.userName} userCommitmentScore={props.userCommitmentScore} title={props.title}/>
-
-      <CommitmentStatus/>
+      <Donut data={props.attendance} userName={props.userName} userCommitmentScore={props.userCommitmentScore} title={props.title}/>
+      <CommitmentStatus flakiest={props.flakiest} stakes={props.commitment.stakes} />
       {/* <LeaderboardTable/> */}
     </div>
   );

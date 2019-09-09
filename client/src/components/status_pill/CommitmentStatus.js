@@ -11,7 +11,7 @@ export default function CommitmentStatus(props) {
     <div className={commitmentStatus}>
       <div className={classes.userNameContainer}>
         <h3>Stakes</h3>
-        <p>Uh oh! Looks like <strong>Liz</strong> is falling behind.</p>
+        <p>Uh oh! At this rate it looks like <strong>{Object.keys(props.flakiest)[0]}</strong> {props.stakes.toLowerCase()}. </p>
       </div>
       <img src="https://image.flaticon.com/icons/svg/427/427518.svg" alt="Freepik sloth from https://www.flaticon.com"/>
     </div>

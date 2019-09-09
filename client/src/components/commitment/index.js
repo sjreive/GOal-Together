@@ -25,7 +25,7 @@ export default function Commitment(props) {
     }
   ];
 
-
+  console.log("FLAKIEST: ", props.flakiest);
 
   return (
     <section className={classes.commitmentSection}>
@@ -47,6 +47,8 @@ export default function Commitment(props) {
       )}
       {mode === "STATS" && (
         <Stats
+          flakiest={props.flakiest}
+          keenest={props.keenest}
           attendance={props.attendance}
           title={props.title}
           commitment={props.commitment}
