@@ -28,6 +28,7 @@ function App() {
     setNewCommitment,
     getNotifications,
     getCommitment,
+    submitActivity,
     setUser,
     submitVote
   } = useApplicationData();
@@ -92,7 +93,12 @@ function App() {
         path="/commitments"
         render={props =>
           state.user && state.user.id ? (
-            <Commitments {...props} state={state} setTitle={setTitle} />
+            <Commitments
+              {...props}
+              state={state}
+              setTitle={setTitle}
+              Link={Link}
+            />
           ) : (
             <Redirect to="/login" />
           )
@@ -131,6 +137,7 @@ function App() {
                 members={state.members}
                 submitVote={submitVote}
                 user={state.user}
+                submitActivity={submitActivity}
               />
             ) : (
               <Redirect to="/login" />
@@ -242,6 +249,7 @@ function CommitmentPage({
   setTitle,
   activities,
   submitVote,
+  submitActivity,
   members,
   user,
   getNotifications
@@ -265,25 +273,23 @@ function CommitmentPage({
       submitVote={submitVote}
       members={members}
       user={user}
+      submitActivity={submitActivity}
     />
   );
 }
 
-function Commitments({ match, state, setTitle, getNotifications }) {
+function Commitments({ match, state, setTitle, Link }) {
   if (document.title !== "Commitments") {
     setTitle("Commitments");
   }
 
   return (
-    <div>
-      <h2>Commitments</h2>
-      {/* Button to Create new commitments will go here */}
-      <Link to={`${match.url}/new`}>Create a New Commitment</Link>
-      <br></br>
-      <Link to={`${match.url}/1`}>First Commitment</Link>
-      {/* SECTION/DIV That will return contain list of commitments */}
-      <CommitmentList commitments={state.commitments} members={state.members} />
-    </div>
+    <CommitmentList
+      commitments={state.commitments}
+      members={state.members}
+      Link={Link}
+      match={match}
+    />
   );
 }
 

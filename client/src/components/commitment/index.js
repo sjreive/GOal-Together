@@ -7,6 +7,8 @@ import PageTabs from "../nav_bar/PageTabs";
 import Stats from "./Stats";
 import ActivityList from "../activity/ActivityList";
 
+import NewActivityForm from "../activity/NewActivity";
+
 export default function Commitment(props) {
   const { mode, transition } = useVisualMode("ACTIVITIES");
 
@@ -27,13 +29,19 @@ export default function Commitment(props) {
     <section className={classes.commitmentSection}>
       <PageTabs mode={mode} tabs={tabs} transition={transition} />
       {mode === "ACTIVITIES" && (
-        <ActivityList
-          title={props.title}
-          activities={props.activities}
-          members={props.members}
-          submitVote={props.submitVote}
-          user={props.user}
-        />
+        <div className={classes.commitmentActivitiesContainer}>
+          <NewActivityForm
+            commitment={props.commitment}
+            submitActivity={props.submitActivity}
+          />
+          <ActivityList
+            title={props.title}
+            activities={props.activities}
+            members={props.members}
+            submitVote={props.submitVote}
+            user={props.user}
+          />
+        </div>
       )}
       {mode === "STATS" && (
         <Stats

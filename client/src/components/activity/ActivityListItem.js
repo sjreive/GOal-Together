@@ -12,6 +12,10 @@ import {
 export default function ActivityListItem(props) {
   const { mode, transition, back } = useVisualMode("FIRST");
 
+  //State used to set title & date in new activity form
+  const [title, setTitle] = useState("");
+  const [date, setDate] = useState("");
+
   // Date formatting
   const formatDate = props.date.split("-");
   const activityDate = new Date(
@@ -41,7 +45,7 @@ export default function ActivityListItem(props) {
             {now < activityDate ? (
               <section className={classes.activityTile__txt}>
                 <p className={classes.activityTile__category}>
-                  You have an activity coming up on {dateString}:
+                  You have an activity coming up:
                 </p>
                 <h3 className={classes.activityTile__name}>
                   {props.activity.title}
@@ -57,7 +61,6 @@ export default function ActivityListItem(props) {
                 </h3>
               </section>
             )}
-
             <section className={classes.activityTile__icon}>
               {now < activityDate ? (
                 <FontAwesomeIcon

@@ -21,7 +21,19 @@ const reducer = (state, action) => {
     case "SET_NEW_COMMITMENT":
       return {
         ...state,
-        commitments: {...state.commitments, [action.commitment.id]: action.commitment}
+        commitments: {
+          ...state.commitments,
+          [action.commitment.id]: action.commitment
+        }
+      };
+
+    case "SET_NEW_ACTIVITY":
+      return {
+        ...state,
+        activities: {
+          ...state.activities,
+          [action.activity.id]: action.activity
+        }
       };
     case "SET_USER":
       return {
@@ -59,11 +71,12 @@ export default function useApplicationData() {
       method: "get",
       url: `${reactAppURLS.API_URL}/find_user`,
       headers: { Authorization: token }
-    }).then(user => {
-      setUser(user.data);
     })
-    .catch(err => setUser({}));
-  }, [])
+      .then(user => {
+        setUser(user.data);
+      })
+      .catch(err => setUser({}));
+  }, []);
 
   useEffect(() => {
     let token = "Bearer " + localStorage.getItem("jwt");
@@ -125,6 +138,27 @@ export default function useApplicationData() {
       data: { voteData }
     });
   };
+
+  const submitActivity = activity => {
+    console.log("submitting:", activity);
+    return new Promise((resolve, reject) => {
+      let token = "Bearer " + localStorage.getItem("jwt");
+      return axios({
+        method: "post",
+        url: `${reactAppURLS.API_URL}/activities/`,
+        headers: { Authorization: token },
+        data: { activity }
+      }).then(async response => {
+        console.log(response);
+        await dispatch({
+          type: "SET_NEW_ACTIVITY",
+          activity: response.data
+        });
+        resolve(response);
+      });
+    });
+  };
+
   const setTitle = title => {
     dispatch({
       type: "SET_TITLE",
@@ -136,14 +170,16 @@ export default function useApplicationData() {
     // copy of notifications state
     const notifications = [...state.notifications];
 
-    Object.values(state.activities).filter(activity => {});
+    Object.values(state.activities).filter(activity => activity === {});
 
-    console.log("notifications pre map:", notifications);
     state.activities &&
       Object.keys(state.activities).map(id => {
         console.log(state.activities[id].voted);
         console.log(state.user.id);
-        if (state.activities[id].voted[state.user.id] === false) {
+        if (
+          state.activities[id].voted &&
+          state.activities[id].voted[state.user.id] === false
+        ) {
           notifications[state.activities[id].id] = state.activities[id];
         }
       });
@@ -156,25 +192,23 @@ export default function useApplicationData() {
   };
 
   const setNewCommitment = submission => {
-    console.log(submission)
+    console.log(submission);
     const { commitment, member_emails } = submission;
     return new Promise((resolve, reject) => {
-      let token = "Bearer " + localStorage.getItem("jwt")
+      let token = "Bearer " + localStorage.getItem("jwt");
       return axios({
-        method: 'post', 
-        url: `${reactAppURLS.API_URL}/commitments`, 
-        headers: { 'Authorization': token}, 
-        data: { commitment,
-                member_emails }
-        })
-        .then(async response => {
-          console.log(response);
-          await dispatch({
-            type: "SET_NEW_COMMITMENT",
-            commitment: response.data
-          });
-          resolve(response);
+        method: "post",
+        url: `${reactAppURLS.API_URL}/commitments`,
+        headers: { Authorization: token },
+        data: { commitment, member_emails }
+      }).then(async response => {
+        console.log(response);
+        await dispatch({
+          type: "SET_NEW_COMMITMENT",
+          commitment: response.data
         });
+        resolve(response);
+      });
     });
   };
 
@@ -191,6 +225,7 @@ export default function useApplicationData() {
     setNewCommitment,
     setUser,
     submitVote,
-    getNotifications
+    getNotifications,
+    submitActivity
   };
 }

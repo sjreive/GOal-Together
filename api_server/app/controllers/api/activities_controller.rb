@@ -59,10 +59,11 @@ module Api
   
     # POST /activities
     def create
+      puts [activity_params]
       @activity = Activity.new(activity_params)
   
       if @activity.save
-        render json: @activity, status: :created, location: @activity
+        render json: @activity, status: :created
       else
         render json: @activity.errors, status: :unprocessable_entity
       end
@@ -98,7 +99,7 @@ module Api
   
       # Only allow a trusted parameter "white list" through.
       def activity_params
-        params.require(:activity).permit(:title, :date)
+        params.require(:activity).permit(:title, :date, :commitment_id)
       end
   end
 end

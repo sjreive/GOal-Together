@@ -5,11 +5,10 @@ import classes from "./ActivityList.module.scss";
 import ActivityListItem from "./ActivityListItem";
 
 export default function ActivityList(props) {
+  // Will display either activities or notifications, depending on page
   const activities = props.notifications
     ? props.notifications
     : props.activities;
-
-  console.log("activities", activities);
 
   const activityListItems =
     activities &&
