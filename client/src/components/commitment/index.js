@@ -25,6 +25,8 @@ export default function Commitment(props) {
     }
   ];
 
+
+
   return (
     <section className={classes.commitmentSection}>
       <PageTabs mode={mode} tabs={tabs} transition={transition} />
@@ -48,6 +50,8 @@ export default function Commitment(props) {
           attendance={props.attendance}
           title={props.title}
           commitment={props.commitment}
+          userName={props.user.first_name}
+          userCommitmentScore={props.userCommitmentScore}
         />
       )}
     </section>

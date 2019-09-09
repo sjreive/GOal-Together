@@ -253,7 +253,6 @@ function Vote({ state, submitVote }) {
 function CommitmentPage({
   match,
   commitments,
-  attendance,
   title,
   setTitle,
   activities,
@@ -273,6 +272,16 @@ function CommitmentPage({
     setTitle(commitment.name);
   }
 
+  const attendance = [];
+
+  for (const memberId in commitment.attendance) {
+    const name = members[memberId].first_name;
+    const commitmentScore = commitment.attendance[memberId];
+    const memberScoreObject = {};
+    memberScoreObject[name] = commitmentScore;
+    attendance.push(memberScoreObject);
+  }
+
   return (
     <Commitment
       activities={commitment_activities}
@@ -282,6 +291,7 @@ function CommitmentPage({
       submitVote={submitVote}
       members={members}
       user={user}
+      userCommitmentScore={members[user.id].commitment_score}
       submitActivity={submitActivity}
     />
   );
@@ -349,13 +359,23 @@ function LeaderBoardPage({ setTitle, members, user }) {
   const attendance = [];
   for (const id in members) {
     const name = members[id].first_name
-    const commitmentScore = members[id].commitment_score
-    attendance.push({ name, commitmentScore });
+    if (name) {
+      const commitmentScore = members[id].commitment_score
+      attendance.push({ name, commitmentScore });
+    }
   }
-  attendance.sort((a, b) => a.commitmentScore - b.commitmentScore);
+  attendance.sort((a, b) => b.commitmentScore - a.commitmentScore);
 
   let userCommitmentScore = findUserCommitmentScore(user.email, members);
-  return <Leaderboard attendance={attendance} title={document.title} userName={user.first_name} userCommitmentScore={userCommitmentScore} />;
+
+  return <Leaderboard 
+    flakiest={attendance[attendance.length - 1]} 
+    keenest={attendance[0]}
+    attendance={attendance.slice(0, 10)} 
+    title={document.title} 
+    userName={user.first_name} 
+    userCommitmentScore={userCommitmentScore} 
+  />;
 }
 
 export default App;

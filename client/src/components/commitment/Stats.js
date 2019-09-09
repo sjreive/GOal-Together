@@ -9,14 +9,13 @@ import GeneralPill from "../status_pill/GeneralPill";
 import LeaderboardTable from "../charts/LeaderboardTable";
 
 export default function Stats(props) {
-  const [type, setType] = useState(props.type || "");
-
+  console.log("HERE ATT:",props.attendance)
   return (
     <div className={classes.commitmentStatsContainer}>
       <GeneralPill header="Description" body={props.commitment.description} />
-      <div className={classes.chartContainer}>
-        <Donut data={props.attendance} title={props.title}/>
-      </div>
+
+        <Donut data={props.attendance} userName={props.userName} userCommitmentScore={props.userCommitmentScore} title={props.title}/>
+
       <CommitmentStatus/>
       {/* <LeaderboardTable/> */}
     </div>
