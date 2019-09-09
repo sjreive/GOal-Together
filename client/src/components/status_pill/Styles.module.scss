@@ -28,6 +28,14 @@
   @include flexThis(space-between, center, row);
 }
 
+.statPill {
+  @include flexThis(space-between, center, row);
+  h3 {
+    width: 75%;
+    display: block;
+  }
+}
+
 .generalPill {
   @include flexThis(center, flex-start, column);
 

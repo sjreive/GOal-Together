@@ -6,6 +6,7 @@ import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
 
 import UserStatus from "../status_pill/UserStatus";
 import GeneralPill from "../status_pill/GeneralPill";
+import StatPill from "../status_pill/StatPill";
 import urls from '../../actions/urls';
 
 export default function Profile(props) {
@@ -18,7 +19,8 @@ export default function Profile(props) {
           <Image cloudName={urls.CLOUD_NAME} publicId={props.user.avatar_url} width="auto" dpr="auto" responsive crop="scale" alt="Freepik sloth from https://www.flaticon.com"/>
         </div>
         <UserStatus name={props.user.first_name} score={15}/>
-        <GeneralPill header="Description" body="hi" />
+        <StatPill header="Total Commitments" score={3} />
+        <StatPill header="Total Activities" score={28} />
       </div>
     </section>
   );
