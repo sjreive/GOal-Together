@@ -24,4 +24,8 @@ const determineUserAttendanceStatusAndImage = (score, activityCount) => {
   }
 };
 
-export { convertDateToString, determineUserAttendanceStatusAndImage };
+const findTopTenAttendanceMembers = members => {
+  
+}
+
+  export { convertDateToString, determineUserAttendanceStatusAndImage, findTopTenAttendanceMembers };

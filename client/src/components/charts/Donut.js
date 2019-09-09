@@ -56,7 +56,7 @@ export default function Donut(props) {
           <Pie
             data={data}
             margin={{ top: 20, right: 20, left: 20, bottom: 20 }}
-            innerRadius="50%"
+            innerRadius="45%"
             outerRadius="60%"
             fill="#2d3cb1"
             paddingAngle={5}
