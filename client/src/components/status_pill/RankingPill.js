@@ -16,7 +16,7 @@ export default function RankingPill(props) {
         <h3><strong>{props.name}</strong></h3>
         <h4>Score: <strong>{props.score}%</strong></h4>
       </div>
-      <Image cloudName={urls.CLOUD_NAME} publicId={props.imageId} alt="Icon from flatIcon.com" width="auto" dpr="auto" responsive crop="scale" alt="Freepik sloth from https://www.flaticon.com"/>
+      <Image cloudName={urls.CLOUD_NAME} publicId={props.imageId} alt="Icon from flatIcon.com" width="auto" dpr="auto" responsive crop="scale" />
     </div>
   );
 };

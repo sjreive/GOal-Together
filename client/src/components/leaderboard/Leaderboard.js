@@ -14,17 +14,14 @@ export default function Leaderboard(props) {
     const memberObject = {};
     memberObject[name] = commitmentScore;
     return memberObject;
-  })
-
-  const keenest = props.attendance[props.attendance.length - 1];
-  const flakiest = props.attendance[0];
+  });
 
   return (
     <section className={classes.profileSection}>
       {props.attendance.length > 0 && (
         <div className={classes.wrapper}>
-          {keenest.commitmentScore > flakiest.commitmentScore && <RankingPill positive={true} header="Keenest Keener:" name={keenest.name} score={keenest.commitmentScore} imageId="pfhshugcpcfiboh9rhq5" />}
-          {keenest.commitmentScore > flakiest.commitmentScore && <RankingPill negative={true} header="Flakiest Flake:" name={flakiest.name} score={flakiest.commitmentScore} imageId="c73xjbgjfszmycs1upz1" />}
+          {props.keenest.commitmentScore > props.flakiest.commitmentScore && <RankingPill positive={true} header="Keenest Keener:" name={props.keenest.name} score={props.keenest.commitmentScore} imageId={props.keenest.imageId} />}
+          {props.keenest.commitmentScore > props.flakiest.commitmentScore && <RankingPill negative={true} header="Flakiest Flake:" name={props.flakiest.name} score={props.flakiest.commitmentScore} imageId={props.flakiest.imageId} />}
           <Donut data={chartAttendanceData} userName={props.userName} userCommitmentScore={props.userCommitmentScore} title={props.title}/>
           <LeaderboardTable attendance={props.attendance} />
         </div>
