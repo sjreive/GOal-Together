@@ -16,7 +16,7 @@ export default function Profile(props) {
       <div className={classes.wrapper}>
         <div className={classes.avatarContainer}>
           <h2>{props.user.first_name} {props.user.last_name}</h2>
-          <Image cloudName={urls.CLOUD_NAME} publicId={props.user.avatar_url} width="auto" dpr="auto" responsive crop="scale" alt="Freepik sloth from https://www.flaticon.com"/>
+          {props.user.avatar_url && <Image cloudName={urls.CLOUD_NAME} publicId={props.user.avatar_url} width="auto" dpr="auto" responsive crop="scale" alt="Freepik sloth from https://www.flaticon.com"/>}
         </div>
         <UserStatus name={props.user.first_name} score={props.userCommitmentScore} activityCount={props.numberOfActivities} />
         <StatPill header="Total Commitments" score={props.numberOfCommitments} />

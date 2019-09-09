@@ -32,6 +32,7 @@ export default function Register(props) {
         axios.post(`${reactAppURLS.API_URL}/user_token`, request)
         .then(response =>  {
           localStorage.setItem("jwt", response.data.jwt);
+          console.log(user.data);
           props.setUser(user.data)
         })
       })

@@ -10,6 +10,7 @@ module Api
 
     def find
       @user = User.find_by(email: params[:user][:email])
+      users_api_data = append_commitment_score
       if @user
         render json: @user
       else
@@ -71,13 +72,18 @@ module Api
           render json: @user.errors, status: :conflict
         else
           @user.update_attributes(user_params)
-          render json: @user.as_json(only: [:id, :first_name]), status: :created
+          @user[:commitment_score] = 0
+          render json: @user.as_json(except: [:password_digest]), status: :created
         end
       else
+
         @user = User.new(user_params)
-        
+        if @user.avatar_url == ""
+          @user.avatar_url = 'uiujwq03yj9pglrudhq1'
+        end
+
         if @user.save
-          render json: @user.as_json(only: [:id, :first_name]), status: :created
+          render json: @user.as_json(except: [:password_digest]), status: :created
         else
           render json: @user.errors, status: :unprocessable_entity
         end
