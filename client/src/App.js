@@ -160,7 +160,7 @@ function App() {
         path="/profile"
         render={props =>
           state.user && state.user.id ? (
-            <ProfilePage {...props} setTitle={setTitle} state={state} />
+            <ProfilePage {...props} setTitle={setTitle} user={state.user} />
           ) : (
             <Redirect to="/login" />
           )
@@ -298,12 +298,12 @@ function NewCommitment({ history, setNewCommitment, setTitle }) {
   return <NewCommitmentForm history={history} setNewCommitment={setNewCommitment} />;
 }
 
-function ProfilePage({ match, state, setTitle }) {
+function ProfilePage({ match, user, setTitle }) {
   if (document.title !== "Profile") {
     setTitle("Profile");
   }
 
-  return <Profile state={state} />;
+  return <Profile user={user} />;
 }
 
 function LeaderBoardPage({ attendance, setTitle }) {

@@ -9,6 +9,25 @@
   padding-top: 3vh;
   padding-bottom: 3vh;
   @include flexThis(flex-start, center, column);
+
+  .avatarContainer {
+    width: 80%;
+    @include flexThis(center, center, column);
+
+    h2 {
+      color: $primary-blue;
+      margin-bottom: 2vh;
+    }
+
+    img {
+
+      border-radius: 100%;
+      
+      width: 60%;
+      height: auto;
+
+    }
+  }
 }
 
 .wrapper {

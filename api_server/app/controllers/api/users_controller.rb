@@ -5,7 +5,7 @@ module Api
     before_action :authenticate_user, except: [:create]
 
     def find_current_user
-      render :json => current_user.as_json(only: [:id, :first_name])
+      render :json => current_user.as_json(except: [:password_digest])
     end
 
     def find
