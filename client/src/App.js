@@ -278,13 +278,14 @@ function CommitmentPage({
     const name = members[memberId].first_name;
     if (name) {
       const commitmentScore = commitment.attendance[memberId];
-      attendance.push({ name, commitmentScore });
+      const imageId = members[memberId].avatar_url;
+      attendance.push({ name, commitmentScore, imageId });
     }
   }
 
   attendance = attendance.sort((a, b) => b.commitmentScore - a.commitmentScore);
-  const keenest = attendance[0].commitmentScore === attendance[1].commitmentScore ? { name: "it's too close to call!", commitmentScore: attendance[0].commitmentScore} : attendance[0];
-  const flakiest = attendance[attendance.length - 1].commitmentScore === attendance[attendance.length - 2].commitmentScore ? { name: "it's too close to call!", commitmentScore: attendance[attendance.length - 1].commitmentScore} : attendance[attendance.length - 1];
+  const keenest = attendance[0].commitmentScore === attendance[1].commitmentScore ? { name: "it's too close to call!", commitmentScore: attendance[0].commitmentScore, imageId: "qb3bao7kv87dznw2jnl8"} : attendance[0];
+  const flakiest = attendance[attendance.length - 1].commitmentScore === attendance[attendance.length - 2].commitmentScore ? { name: "it's too close to call!", commitmentScore: attendance[attendance.length - 1].commitmentScore, imageId: "qb3bao7kv87dznw2jnl8"} : attendance[attendance.length - 1];
   
   return (
     <Commitment
