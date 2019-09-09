@@ -178,7 +178,7 @@ function App() {
         path="/leaderboard"
         render={props =>
           state.user && state.user.id ? (
-            <LeaderBoardPage {...props} attendance={state.attendance} setTitle={setTitle} />
+            <LeaderBoardPage {...props} members={state.members} setTitle={setTitle} />
           ) : (
             <Redirect to="/login" />
           )
@@ -318,10 +318,18 @@ function ProfilePage({ user, setTitle, numberOfCommitments, numberOfActivities, 
   return loading === false ? <Profile user={user} numberOfActivities={numberOfActivities} numberOfCommitments={numberOfCommitments} userCommitmentScore={userCommitmentScore} /> : <div></div>;
 }
 
-function LeaderBoardPage({ attendance, setTitle }) {
+function LeaderBoardPage({ setTitle, members }) {
   if (document.title !== "Leaderboard") {
     setTitle("Leaderboard");
   }
+  const attendance = [];
+  for (const id in members) {
+    const name = members[id].first_name
+    const commitmentScore = members[id].commitment_score
+    attendance.push({ name, commitmentScore });
+  }
+  attendance.sort((a, b) => a.commitmentScore - b.commitmentScore);
+  console.log("attendance", attendance);
   return <Leaderboard attendance={attendance} title={document.title}/>;
 }
 

@@ -8,13 +8,23 @@ import RankingPill from "../status_pill/RankingPill";
 import LeaderboardTable from "../charts/LeaderboardTable";
 
 export default function Leaderboard(props) {
+  const chartAttendanceData = props.attendance.map(member => {
+    const name = member.name;
+    const commitmentScore = member.commitmentScore;
+    const memberObject = {};
+    memberObject[name] = commitmentScore;
+    return memberObject;
+  })
+
+  const keenest = props.attendance[props.attendance.length - 1];
+  const flakiest = props.attendance[0];
 
   return (
     <section className={classes.profileSection}>
       <div className={classes.wrapper}>
-        <RankingPill positive={true} header="Keenest Keener:" name="Jane" score={95} imageId="pfhshugcpcfiboh9rhq5" />
-        <RankingPill negative={true} header="Flakiest Flake:" name="Kendall" score={10} imageId="c73xjbgjfszmycs1upz1" />
-        <Donut data={props.attendance} title={props.title}/>
+        {keenest.commitmentScore > flakiest.commitmentScore && <RankingPill positive={true} header="Keenest Keener:" name={keenest.name} score={keenest.commitmentScore} imageId="pfhshugcpcfiboh9rhq5" />}
+        {keenest.commitmentScore > flakiest.commitmentScore && <RankingPill negative={true} header="Flakiest Flake:" name={flakiest.name} score={flakiest.commitmentScore} imageId="c73xjbgjfszmycs1upz1" />}
+        <Donut data={chartAttendanceData} title={props.title}/>
         <LeaderboardTable />
       </div>
     </section>
