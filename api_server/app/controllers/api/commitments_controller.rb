@@ -15,21 +15,23 @@ module Api
         @activity = activity.as_json
         @attendance = get_members_attendance(@activity)
 
-        @attendance.each do |member, attendance|     
+        @attendance.each do |member, attendance| 
+
           if commitment_score[member] && attendance == true
-            commitment_score[member] += 1
+            commitment_score[member] += 100
           elsif commitment_score[member] && attendance == false
             commitment_score[member] += 0
           elsif !commitment_score[member]  && attendance == false
             commitment_score[member] = 0
           else 
-            commitment_score[member] = 1
+            commitment_score[member] = 100
           end
+
         end
       end
 
       commitment_score.each do |member, attendance|
-        commitment_score[member] = attendance / activity_count * 100
+        commitment_score[member] = attendance / activity_count
       end
 
      return commitment_score
@@ -38,7 +40,6 @@ module Api
     
   # append attendance record to the commitment record
   def append_attendance_record commitments
-    
     commitments_api_data = {};
 
     commitments.each do |commitment|

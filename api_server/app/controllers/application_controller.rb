@@ -8,7 +8,7 @@ class ApplicationController < ActionController::API
   trueVotesCount = Vote.where("attendee_id = ? AND activity_id = ? AND attended = ?", member_id, @activity["id"], true).count
   falseVotesCount = Vote.where("attendee_id = ? AND activity_id = ? AND attended = ?", member_id, @activity["id"], false).count
 
-  if trueVotesCount > falseVotesCount
+  if trueVotesCount > falseVotesCount || (trueVotesCount == 0 && falseVotesCount == 0)
     return true
   else
     return false
@@ -20,26 +20,26 @@ end
       
     commitment_score = {}
     activity_count = commitment.activities.count
-
+    "-------------- #{activity_count} ---------------"
     commitment.activities.each do |activity|
       @activity = activity.as_json
       @attendance = get_members_attendance(@activity)
 
       @attendance.each do |member, attendance|     
-        if commitment_score[member] && attendance = true
-          commitment_score[member] += 1
-        elsif commitment_score[member] && attendance = false
+        if commitment_score[member] && attendance == true
+          commitment_score[member] += 100
+        elsif commitment_score[member] && attendance == false
           commitment_score[member] += 0
-        elsif !commitment_score[member]  && attendance = false
+        elsif !commitment_score[member]  && attendance == false
           commitment_score[member] = 0
         else 
-          commitment_score[member] = 1
+          commitment_score[member] = 100
         end
       end
     end
 
     commitment_score.each do |member, attendance|
-      commitment_score[member] = attendance / activity_count * 100
+      commitment_score[member] = attendance / activity_count
     end
 
    return commitment_score
