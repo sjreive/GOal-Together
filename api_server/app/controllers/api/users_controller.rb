@@ -30,13 +30,8 @@ module Api
         if (commitment_score(commitment) != {})
         commitment_count += 1
         commitment_score = commitment_score(commitment)
-        puts "****************************************"
-        puts "****************************************"
-        puts "This is the score for #{commitment.id} : #{commitment_score.inspect} for #{user.id}"
+      
         user_commitment_score += commitment_score[user.id]
-        puts "This is the user commitment score #{user_commitment_score}"
-        puts "****************************************"
-        puts "****************************************"
 
         end
       end
@@ -94,7 +89,6 @@ module Api
             @user.avatar_url = 'uiujwq03yj9pglrudhq1'
           end
           @user.save
-          puts "##AFTER## #{@user.avatar_url}"
           hashed_user = @user.as_json
           hashed_user[:commitment_score] = 0
           render json: hashed_user.as_json(except: [:password_digest]), status: :created

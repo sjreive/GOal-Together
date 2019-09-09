@@ -45,6 +45,9 @@ module Api
     commitments.each do |commitment|
       hashed_commitment = commitment.as_json
       hashed_commitment[:attendance] =  commitment_score(commitment)
+
+      hashed_commitment[:joined] = commitment.user_has_joined?(current_user.id)
+
       commitments_api_data[commitment["id"]] = hashed_commitment
     end
 
@@ -54,11 +57,9 @@ module Api
     # GET /commitments
     def index
       commitments = current_user.commitments
-      joined_commitments = commitments.select do |commit|
-        commit.user_has_joined?(current_user.id)
-      end
 
-      commitments_api_data = append_attendance_record(joined_commitments)
+      commitments_api_data = append_attendance_record(commitments)
+     
       render json: commitments_api_data
     end
 
