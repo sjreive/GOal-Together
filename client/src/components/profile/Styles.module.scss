@@ -11,21 +11,19 @@
   @include flexThis(flex-start, center, column);
 
   .avatarContainer {
-    width: 80%;
+    width: 60%;
     @include flexThis(center, center, column);
 
     h2 {
       color: $primary-blue;
-      margin-bottom: 2vh;
+      margin-bottom: 4vh;
     }
 
     img {
-
       border-radius: 100%;
-      
       width: 60%;
       height: auto;
-
+      margin-bottom: 2vh;
     }
   }
 }

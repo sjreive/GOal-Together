@@ -33,6 +33,11 @@ const reducer = (state, action) => {
         ...state,
         notifications: action.notifications
       };
+    case "SET_LOADING_STATUS":
+      return {
+        ...state,
+        loading: action.loading
+      };
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -49,7 +54,8 @@ export default function useApplicationData() {
     user: {},
     error: "",
     activities: [],
-    notifications: []
+    notifications: [],
+    loading: true
   });
 
   useEffect(() => {
@@ -105,6 +111,7 @@ export default function useApplicationData() {
             attendance: all[4].data
           });
         })
+        .then(response => dispatch({ type: "SET_LOADING_STATUS", loading: false }))
         .catch(error => {
           console.log(error);
 

@@ -9,7 +9,7 @@ export default function MemberEmailItem(props) {
   return (
     <Form.Group controlId={"newCommitForm.ControlInput" + (3 + props.index)}>
       <Form.Row>
-        <Col >
+        <Col xs={1} sm={1} xl={1} md={1} lg={1} >
           <Button
               formRemove={true}
               smallCircle={true}
@@ -17,7 +17,7 @@ export default function MemberEmailItem(props) {
               innerContent="-"
             />
         </Col>
-        <Col xs={50} sm={50} xl={50} md={50} lg={50}>
+        <Col >
           <Form.Control name={"email" + props.index} placeholder="Enter email" type="email" value={props.memberEmail} onChange={props.setMemberEmail} />
         </Col>
       </Form.Row>

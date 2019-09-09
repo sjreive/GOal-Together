@@ -166,6 +166,7 @@ function App() {
             numberOfCommitments={Object.keys(state.commitments).length}
             numberOfActivities={Object.keys(state.activities).length}
             members={state.members}
+            loading={state.loading}
             />
           ) : (
             <Redirect to="/login" />
@@ -304,7 +305,7 @@ function NewCommitment({ history, setNewCommitment, setTitle }) {
   return <NewCommitmentForm history={history} setNewCommitment={setNewCommitment} />;
 }
 
-function ProfilePage({ user, setTitle, numberOfCommitments, numberOfActivities, members }) {
+function ProfilePage({ user, setTitle, numberOfCommitments, numberOfActivities, members, loading }) {
   if (document.title !== "Profile") {
     setTitle("Profile");
   }
@@ -314,7 +315,7 @@ function ProfilePage({ user, setTitle, numberOfCommitments, numberOfActivities, 
       userCommitmentScore = members[member].commitment_score
     }
   }
-  return <Profile user={user} numberOfActivities={numberOfActivities} numberOfCommitments={numberOfCommitments} userCommitmentScore={userCommitmentScore} />;
+  return loading === false ? <Profile user={user} numberOfActivities={numberOfActivities} numberOfCommitments={numberOfCommitments} userCommitmentScore={userCommitmentScore} /> : <div></div>;
 }
 
 function LeaderBoardPage({ attendance, setTitle }) {

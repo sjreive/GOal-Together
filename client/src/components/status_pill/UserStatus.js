@@ -8,7 +8,7 @@ const classNames = require('classnames');
 
 export default function UserStatus(props) {
   const userStatus = classNames(classes.statusContainer, classes.statusPill);
-  const statusImageObject = determineUserAttendanceStatusAndImage(props.score)
+  const statusImageObject = determineUserAttendanceStatusAndImage(props.score, props.activityCount)
   return (
     <div className={userStatus}>
       <div className={classes.userNameContainer}>
