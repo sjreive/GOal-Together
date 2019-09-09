@@ -5,15 +5,16 @@ import classes from "./ActivityList.module.scss";
 import ActivityListItem from "./ActivityListItem";
 
 export default function ActivityList(props) {
-  const notifications = props.notifications;
-
-  console.log(`Activity List Props: ${notifications}`);
-
-  console.log(Object);
+  // Will display either activities or notifications, depending on page
+  const activities = props.notifications
+    ? props.notifications
+        .filter(notification => notification)
+        .sort((a, b) => new Date(a.date) - new Date(b.date))
+    : props.activities.sort((a, b) => new Date(a.date) - new Date(b.date));
 
   const activityListItems =
-    notifications &&
-    notifications.map(activity => (
+    activities &&
+    activities.map(activity => (
       <ActivityListItem
         members={props.members}
         user={props.user}
@@ -21,6 +22,7 @@ export default function ActivityList(props) {
         key={activity.id}
         date={activity.date}
         submitVote={props.submitVote}
+        title={props.title}
       />
     ));
 

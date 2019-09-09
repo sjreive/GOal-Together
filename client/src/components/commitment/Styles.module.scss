@@ -3,8 +3,13 @@
 
 .commitmentSection {
   margin-bottom: 10vh;
-  
+
   .commitmentStatsContainer {
     @include flexThis(space-between, center, column);
+  }
+
+  .commitmentActivitiesContainer {
+    @include flexThis(space-between, center, column);
+    padding-top: 2rem;
   }
 }

@@ -2,7 +2,7 @@ module Api
   class VotesController < ApplicationController
     before_action :set_vote, only: [:show, :update, :destroy]
     include ::ControllerHelpers
-    before_action :authenticate_user
+    # before_action :authenticate_user
 
       # Checks votes to determine if a member attended
       def didAttend? member_id

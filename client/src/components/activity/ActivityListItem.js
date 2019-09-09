@@ -17,8 +17,9 @@ export default function ActivityListItem(props) {
   const activityDate = new Date(
     formatDate[0],
     formatDate[1] - 1,
-    formatDate[2].substring(0, 1)
+    formatDate[2].substring(0, 2)
   );
+
   const dateString = activityDate
     .toString()
     .split(" ")
@@ -29,6 +30,10 @@ export default function ActivityListItem(props) {
   const now = Date.now();
   console.log(now);
 
+  //Function to handle transition after voting
+  const transitionAfterVote = () =>
+    props.title ? transition("VOTED") : transition("BLANK");
+
   return (
     <div>
       {mode === "FIRST" && (
@@ -37,7 +42,7 @@ export default function ActivityListItem(props) {
             {now < activityDate ? (
               <section className={classes.activityTile__txt}>
                 <p className={classes.activityTile__category}>
-                  You have an activity coming up on {dateString}:
+                  You have an activity coming up:
                 </p>
                 <h3 className={classes.activityTile__name}>
                   {props.activity.title}
@@ -53,7 +58,6 @@ export default function ActivityListItem(props) {
                 </h3>
               </section>
             )}
-
             <section className={classes.activityTile__icon}>
               {now < activityDate ? (
                 <FontAwesomeIcon
@@ -81,9 +85,24 @@ export default function ActivityListItem(props) {
           user={props.user}
           activity={props.activity}
           submitVote={props.submitVote}
-          transition={e => transition("BLANK")}
+          transition={transitionAfterVote}
           clickBack={e => back()}
         />
+      )}
+
+      {mode === "VOTED" && (
+        <main className={classes.activityTile}>
+          <section className={classes.activityTile__top}>
+            <section className={classes.activityTile__txt}>
+              <h3 className={classes.activityTile__name}>
+                {props.activity.title}
+              </h3>
+            </section>
+          </section>
+          <section className={classes.activityTile__info}>
+            <p className={classes.activityTile__category}>{dateString}</p>
+          </section>
+        </main>
       )}
     </div>
   );

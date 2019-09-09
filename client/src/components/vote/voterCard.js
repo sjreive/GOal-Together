@@ -29,7 +29,7 @@ export default function MemberList(props) {
   const activityDate = new Date(
     formatDate[0],
     formatDate[1] - 1,
-    formatDate[2].substring(0, 1)
+    formatDate[2].substring(0, 2)
   );
   const dateString = activityDate
     .toString()
