@@ -21,12 +21,15 @@ export default function Leaderboard(props) {
 
   return (
     <section className={classes.profileSection}>
-      <div className={classes.wrapper}>
-        {keenest.commitmentScore > flakiest.commitmentScore && <RankingPill positive={true} header="Keenest Keener:" name={keenest.name} score={keenest.commitmentScore} imageId="pfhshugcpcfiboh9rhq5" />}
-        {keenest.commitmentScore > flakiest.commitmentScore && <RankingPill negative={true} header="Flakiest Flake:" name={flakiest.name} score={flakiest.commitmentScore} imageId="c73xjbgjfszmycs1upz1" />}
-        <Donut data={chartAttendanceData} title={props.title}/>
-        <LeaderboardTable />
-      </div>
+      {props.attendance.length > 0 && (
+        <div className={classes.wrapper}>
+          {keenest.commitmentScore > flakiest.commitmentScore && <RankingPill positive={true} header="Keenest Keener:" name={keenest.name} score={keenest.commitmentScore} imageId="pfhshugcpcfiboh9rhq5" />}
+          {keenest.commitmentScore > flakiest.commitmentScore && <RankingPill negative={true} header="Flakiest Flake:" name={flakiest.name} score={flakiest.commitmentScore} imageId="c73xjbgjfszmycs1upz1" />}
+          <Donut data={chartAttendanceData} userName={props.userName} userCommitmentScore={props.userCommitmentScore} title={props.title}/>
+          <LeaderboardTable />
+        </div>
+      )}
+      {props.attendance.length === 0 && <div className={classes.wrapper}><h2>Create a commitment and do some activities to start seeing your stats!</h2></div>}
     </section>
   );
 };

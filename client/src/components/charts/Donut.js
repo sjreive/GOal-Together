@@ -71,8 +71,8 @@ export default function Donut(props) {
         </PieChart>
       </ResponsiveContainer>
       <span className={classes.chartLabel}>
-        <h5>Liz</h5>
-        <p>30%</p>
+        <h5>{props.userName}</h5>
+        <p>{props.userCommitmentScore}%</p>
       </span>
     </div>
   );

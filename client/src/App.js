@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import useApplicationData from "./hooks/useApplicationData";
 import classes from "./App.module.scss";
+import { findUserCommitmentScore } from "./helpers/helpers";
 
 import ActivityList from "./components/activity/ActivityList";
 import CommitmentList from "./components/commitments/CommitmentList";
@@ -178,7 +179,7 @@ function App() {
         path="/leaderboard"
         render={props =>
           state.user && state.user.id ? (
-            <LeaderBoardPage {...props} members={state.members} setTitle={setTitle} />
+            <LeaderBoardPage {...props} members={state.members} setTitle={setTitle} user={state.user} />
           ) : (
             <Redirect to="/login" />
           )
@@ -309,16 +310,13 @@ function ProfilePage({ user, setTitle, numberOfCommitments, numberOfActivities, 
   if (document.title !== "Profile") {
     setTitle("Profile");
   }
-  let userCommitmentScore = 0;
-  for (const member in members) {
-    if (members[member].email === user.email) {
-      userCommitmentScore = members[member].commitment_score
-    }
-  }
+  
+  let userCommitmentScore = findUserCommitmentScore(user.email, members);
+  
   return loading === false ? <Profile user={user} numberOfActivities={numberOfActivities} numberOfCommitments={numberOfCommitments} userCommitmentScore={userCommitmentScore} /> : <div></div>;
 }
 
-function LeaderBoardPage({ setTitle, members }) {
+function LeaderBoardPage({ setTitle, members, user }) {
   if (document.title !== "Leaderboard") {
     setTitle("Leaderboard");
   }
@@ -329,8 +327,10 @@ function LeaderBoardPage({ setTitle, members }) {
     attendance.push({ name, commitmentScore });
   }
   attendance.sort((a, b) => a.commitmentScore - b.commitmentScore);
-  console.log("attendance", attendance);
-  return <Leaderboard attendance={attendance} title={document.title}/>;
+
+  let userCommitmentScore = findUserCommitmentScore(user.email, members);
+
+  return <Leaderboard attendance={attendance} title={document.title} userName={user.first_name} userCommitmentScore={userCommitmentScore} />;
 }
 
 export default App;

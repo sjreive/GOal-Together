@@ -28,4 +28,14 @@ const findTopTenAttendanceMembers = members => {
   
 }
 
-  export { convertDateToString, determineUserAttendanceStatusAndImage, findTopTenAttendanceMembers };
+const findUserCommitmentScore = (email, members) => {
+  let userCommitmentScore = 0;
+  for (const member in members) {
+    if (members[member].email === email) {
+      userCommitmentScore = members[member].commitment_score
+    }
+  }
+  return userCommitmentScore;
+}
+
+  export { convertDateToString, determineUserAttendanceStatusAndImage, findTopTenAttendanceMembers, findUserCommitmentScore };
