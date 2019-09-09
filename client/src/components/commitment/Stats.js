@@ -9,13 +9,21 @@ import GeneralPill from "../status_pill/GeneralPill";
 import LeaderboardTable from "../charts/LeaderboardTable";
 
 export default function Stats(props) {
-  console.log("HERE ATT:",props.attendance)
+
+  const chartAttendanceData = props.attendance.map(member => {
+    const name = member.name;
+    const commitmentScore = member.commitmentScore;
+    const memberObject = {};
+    memberObject[name] = commitmentScore;
+    return memberObject;
+  })
+
   return (
     <div className={classes.commitmentStatsContainer}>
       <GeneralPill header="Description" body={props.commitment.description} />
-      <Donut data={props.attendance} userName={props.userName} userCommitmentScore={props.userCommitmentScore} title={props.title}/>
+      <Donut data={chartAttendanceData} userName={props.userName} userCommitmentScore={props.userCommitmentScore} title={props.title}/>
       <CommitmentStatus flakiest={props.flakiest} stakes={props.commitment.stakes} />
-      {/* <LeaderboardTable/> */}
+      <LeaderboardTable attendance={props.attendance}/>
     </div>
   );
 };

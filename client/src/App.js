@@ -278,18 +278,18 @@ function CommitmentPage({
     const name = members[memberId].first_name;
     if (name) {
       const commitmentScore = commitment.attendance[memberId];
-      const memberScoreObject = {};
-      memberScoreObject[name] = commitmentScore;
-      attendance.push(memberScoreObject);
+      attendance.push({ name, commitmentScore });
     }
   }
 
-  attendance = attendance.sort((a, b) => Object.values(b)[0] - Object.values(a)[0]);
-   console.log(attendance);
+  attendance = attendance.sort((a, b) => b.commitmentScore - a.commitmentScore);
+  const keenest = attendance[0].commitmentScore === attendance[1].commitmentScore ? { name: "it's too close to call!", commitmentScore: attendance[0].commitmentScore} : attendance[0];
+  const flakiest = attendance[attendance.length - 1].commitmentScore === attendance[attendance.length - 2].commitmentScore ? { name: "it's too close to call!", commitmentScore: attendance[attendance.length - 1].commitmentScore} : attendance[attendance.length - 1];
+  
   return (
     <Commitment
-      flakiest={attendance[attendance.length - 1]} 
-      keenest={attendance[0]}
+      flakiest={flakiest} 
+      keenest={keenest}
       attendance={attendance.slice(0, 10)} 
       activities={commitment_activities}
       commitment={commitment}
@@ -362,21 +362,24 @@ function LeaderBoardPage({ setTitle, members, user }) {
   if (document.title !== "Leaderboard") {
     setTitle("Leaderboard");
   }
-  const attendance = [];
+  let attendance = [];
   for (const id in members) {
-    const name = members[id].first_name
+    const name = members[id].first_name;
     if (name) {
-      const commitmentScore = members[id].commitment_score
-      attendance.push({ name, commitmentScore });
+      const commitmentScore = members[id].commitment_score;
+      const imageId = members[id].avatar_url;
+      attendance.push({ name, commitmentScore, imageId });
     }
   }
-  attendance.sort((a, b) => b.commitmentScore - a.commitmentScore);
+  attendance = attendance.sort((a, b) => b.commitmentScore - a.commitmentScore);
+  const keenest = attendance[0].commitmentScore === attendance[1].commitmentScore ? { name: "It's too close to call!", commitmentScore: attendance[0].commitmentScore, imageId: "qb3bao7kv87dznw2jnl8" } : attendance[0];
+  const flakiest = attendance[attendance.length - 1].commitmentScore === attendance[attendance.length - 2].commitmentScore ? { name: "It's too close to call!", commitmentScore: attendance[attendance.length - 1].commitmentScore, imageId: "qb3bao7kv87dznw2jnl8" } : attendance[attendance.length - 1];
 
   let userCommitmentScore = findUserCommitmentScore(user.email, members);
 
   return <Leaderboard 
-    flakiest={attendance[attendance.length - 1]} 
-    keenest={attendance[0]}
+    flakiest={flakiest} 
+    keenest={keenest}
     attendance={attendance.slice(0, 10)} 
     title={document.title} 
     userName={user.first_name} 
