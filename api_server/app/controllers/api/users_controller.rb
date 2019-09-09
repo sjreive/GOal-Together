@@ -10,7 +10,8 @@ module Api
 
     def find
       @user = User.find_by(email: params[:user][:email])
-      users_api_data = append_commitment_score
+      @users = User.all
+      users_api_data = append_commitment_score(@users)
       if @user
         render json: @user
       else
@@ -39,11 +40,11 @@ module Api
     end
         
       # append attendance record to the commitment record
-      def append_commitment_score
-        @users = User.all
+      def append_commitment_score(users)
+        
         users_api_data = {};
     
-        @users.each do |user|
+        users.each do |user|
           hashed_user = user.as_json
           hashed_user[:commitment_score] =  user_commitment_score(user)
           users_api_data[user["id"]] = hashed_user
@@ -55,7 +56,19 @@ module Api
     
     # GET /users
     def index
-      users_api_data = append_commitment_score
+      users = []
+      @commitments = current_user.commitments
+      puts "COMMIEMENTS::::::: #{current_user.commitments}"
+      @commitments.each do |commitment| 
+        commitment.members.each do |member|
+          user = User.find(member.user_id)
+          if user && !users.include?(user)
+            users.push(user)
+          end
+        end
+      end
+
+      users_api_data = append_commitment_score(users)
       render json: users_api_data
     end
 
@@ -67,7 +80,7 @@ module Api
     # POST /users
     def create
       @user = User.find_by(email: user_params[:email])
-      if @user 
+      if @user
         if @user.first_name
           render json: @user.errors, status: :conflict
         else
