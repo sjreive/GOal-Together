@@ -6,7 +6,6 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import Button from "../button/Button";
 import Form from "react-bootstrap/Form";
-import ActivityListItem from "../activity/ActivityListItem";
 
 export default function NewActivity(props) {
   console.log("commitment:", props.commitment.id);
@@ -22,32 +21,26 @@ export default function NewActivity(props) {
     transition("CREATED");
   };
 
-  const activity = (activityTitle, activityDate, commitment_id) => {
-    return {
-      title: activityTitle,
-      date: activityDate,
-      commitment_id: props.commitment.id
-    };
-  };
-
   return (
-    <div>
+    <div className={classes.newActivityContainer}>
       {mode === "BUTTON" && (
-        <Button
-          className={classes.addActivityButton}
-          wide={true}
-          innerContent={<FontAwesomeIcon icon={faPlus} />}
-          onClick={() => transition("NEWACTIVITY")}
-        />
+        <div>
+          <Button
+            className={classes.addActivityButton}
+            wide={true}
+            innerContent={<FontAwesomeIcon icon={faPlus} />}
+            onClick={() => transition("NEWACTIVITY")}
+          />
+        </div>
       )}
 
       {mode === "NEWACTIVITY" && (
         <Form.Group
           controlId="newActivityForm"
-          className={classes.newActivityForm}
+          className={classes.newCommitFor__activity}
         >
           <Form.Label>
-            <h7>Name of this Activity:</h7>
+            <h6>Name of this Activity:</h6>
           </Form.Label>
           <Form.Control
             type="text"
@@ -57,7 +50,7 @@ export default function NewActivity(props) {
             onChange={e => setActivityTitle(e.target.value)}
           />
           <Form.Label>
-            <h7>Activity Date:</h7>
+            <h6>Activity Date:</h6>
           </Form.Label>
           <Form.Control
             type="date"

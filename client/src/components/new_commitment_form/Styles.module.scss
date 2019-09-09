@@ -13,16 +13,17 @@
   text-align: center;
   overflow: scroll;
 
+  &__activity {
+    margin: 0 auto;
+  }
+
   h2 {
     color: $primary-blue;
   }
 
-
   .formInput {
     position: relative;
-
   }
-  
 
   input,
   select,
@@ -31,9 +32,17 @@
   p {
     margin-bottom: 1.5rem !important;
   }
-
 }
 
 .submitContainer {
-  @include flexThis(center,center,column)
+  @include flexThis(center, center, column);
+}
+
+.newActivityContainer {
+  width: 85%;
+  text-align: center;
+  background-color: $white;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  color: $primary-blue;
 }
