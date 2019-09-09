@@ -12,8 +12,8 @@ export default function Leaderboard(props) {
   return (
     <section className={classes.profileSection}>
       <div className={classes.wrapper}>
-        <RankingPill header="Keenest Keener:" name="Jane" score={95} imageId="pfhshugcpcfiboh9rhq5" />
-        <RankingPill header="Flakiest Flake:" name="Kendall" score={10} imageId="c73xjbgjfszmycs1upz1" />
+        <RankingPill positive={true} header="Keenest Keener:" name="Jane" score={95} imageId="pfhshugcpcfiboh9rhq5" />
+        <RankingPill negative={true} header="Flakiest Flake:" name="Kendall" score={10} imageId="c73xjbgjfszmycs1upz1" />
         <Donut data={props.attendance} title={props.title}/>
         <LeaderboardTable />
       </div>

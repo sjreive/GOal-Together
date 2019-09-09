@@ -7,7 +7,7 @@ import urls from '../../actions/urls';
 const classNames = require('classnames');
 
 export default function RankingPill(props) {
-  const rankingPill = classNames(classes.statusContainer, classes.statusPill);
+  const rankingPill = classNames(classes.statusContainer, classes.statusPill, props.negative ? classes.negative : null, props.positive ? classes.positive : null);
 
   return (
     <div className={rankingPill}>

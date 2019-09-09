@@ -41,3 +41,15 @@
 
 
 }
+
+.negative {
+  strong {
+    color: $red !important;
+  }
+}
+
+.positive {
+  strong {
+    color: $green !important;
+  }
+}
