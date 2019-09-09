@@ -160,7 +160,13 @@ function App() {
         path="/profile"
         render={props =>
           state.user && state.user.id ? (
-            <ProfilePage {...props} setTitle={setTitle} user={state.user} />
+            <ProfilePage {...props} 
+            setTitle={setTitle}
+            user={state.user}
+            numberOfCommitments={Object.keys(state.commitments).length}
+            numberOfActivities={Object.keys(state.activities).length}
+            members={state.members}
+            />
           ) : (
             <Redirect to="/login" />
           )
@@ -298,12 +304,17 @@ function NewCommitment({ history, setNewCommitment, setTitle }) {
   return <NewCommitmentForm history={history} setNewCommitment={setNewCommitment} />;
 }
 
-function ProfilePage({ match, user, setTitle }) {
+function ProfilePage({ user, setTitle, numberOfCommitments, numberOfActivities, members }) {
   if (document.title !== "Profile") {
     setTitle("Profile");
   }
-
-  return <Profile user={user} />;
+  let userCommitmentScore = 0;
+  for (const member in members) {
+    if (members[member].email === user.email) {
+      userCommitmentScore = members[member].commitment_score
+    }
+  }
+  return <Profile user={user} numberOfActivities={numberOfActivities} numberOfCommitments={numberOfCommitments} userCommitmentScore={userCommitmentScore} />;
 }
 
 function LeaderBoardPage({ attendance, setTitle }) {

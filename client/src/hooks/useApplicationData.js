@@ -44,7 +44,7 @@ export default function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
     commitments: [],
     votes: [],
-    members: [],
+    members: {},
     title: "",
     user: {},
     error: "",
