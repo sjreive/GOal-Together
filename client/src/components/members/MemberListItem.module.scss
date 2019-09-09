@@ -10,6 +10,11 @@
     &_image {
       max-height: 3rem;
       border-radius: 16px;
+
+      img {
+        max-height: 3rem;
+        border-radius: 16px;
+      }
     }
 
     &--selected {

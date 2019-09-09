@@ -55,7 +55,7 @@ export default function MemberList(props) {
   //Function to handle submission of vote card
   const submitVoteHandler = () => {
     props.submitVote(submitData(activityVotes, props.activity, props.user));
-    props.transition();
+    props.transition("BLANK");
   };
 
   const memberListItems = Object.keys(members).map((id, member) => {
