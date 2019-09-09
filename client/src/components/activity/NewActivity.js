@@ -19,7 +19,7 @@ export default function NewActivity(props) {
   const activitySubmissionHandler = activity => {
     console.log("activity data:", activity);
     props.submitActivity(activity);
-    transition("SHOW");
+    transition("CREATED");
   };
 
   const activity = (activityTitle, activityDate, commitment_id) => {
@@ -90,19 +90,19 @@ export default function NewActivity(props) {
         </Form.Group>
       )}
 
-      {mode === "SHOW" && (
-        <ActivityListItem
-          members={props.members}
-          user={props.user}
-          activity={{
-            title: activityTitle,
-            date: activityDate,
-            commitment_id: props.commitment.id
-          }}
-          key={activity.id}
-          date={activityDate}
-          submitVote={props.submitVote}
-        />
+      {mode === "CREATED" && (
+        <div>
+          <p>
+            The activity <b>{activityTitle}</b> on <b>{activityDate}</b> has
+            been created for this commitment!
+          </p>
+          <Button
+            className={classes.addActivityButton}
+            wide={true}
+            innerContent={<FontAwesomeIcon icon={faPlus} />}
+            onClick={() => transition("NEWACTIVITY")}
+          />
+        </div>
       )}
     </div>
   );
