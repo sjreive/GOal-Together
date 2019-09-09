@@ -16,9 +16,11 @@ export default function NewActivity(props) {
   const [activityDate, setActivityDate] = useState("");
 
   const activitySubmissionHandler = activity => {
-    console.log("activity data:", activity);
-    props.submitActivity(activity);
-    transition("CREATED");
+    if (activityDate) {
+      console.log("activity data:", activity);
+      props.submitActivity(activity);
+      transition("CREATED");
+    }
   };
 
   return (
