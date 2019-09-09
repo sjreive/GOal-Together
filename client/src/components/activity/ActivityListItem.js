@@ -12,10 +12,6 @@ import {
 export default function ActivityListItem(props) {
   const { mode, transition, back } = useVisualMode("FIRST");
 
-  //State used to set title & date in new activity form
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
-
   // Date formatting
   const formatDate = props.date.split("-");
   const activityDate = new Date(

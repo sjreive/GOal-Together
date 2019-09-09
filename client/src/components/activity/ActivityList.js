@@ -7,7 +7,7 @@ import ActivityListItem from "./ActivityListItem";
 export default function ActivityList(props) {
   // Will display either activities or notifications, depending on page
   const activities = props.notifications
-    ? props.notifications
+    ? props.notifications.filter(notification => notification)
     : props.activities;
 
   const activityListItems =
