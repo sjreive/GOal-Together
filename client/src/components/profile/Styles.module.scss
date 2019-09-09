@@ -29,9 +29,7 @@
 }
 
 .wrapper {
-  @include flexThis(flex-start, center, column);
-  width: 80%;
-  min-height: 100%;
+  @include wrapper-styles;
 }
 
 

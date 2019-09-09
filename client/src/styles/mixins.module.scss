@@ -21,3 +21,9 @@
 @mixin button-active {
   cursor: pointer;
 }
+
+@mixin wrapper-styles {
+  @include flexThis(flex-start, center, column);
+  width: 80%;
+  min-height: 100%;
+}

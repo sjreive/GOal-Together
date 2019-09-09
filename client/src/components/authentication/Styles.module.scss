@@ -50,3 +50,7 @@
   width: 100%;
   @include flexThis(space-between, center, column)
 }
+
+.wrapper {
+  @include wrapper-styles;
+}
