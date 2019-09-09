@@ -46,7 +46,7 @@ export default function NewCommitmentForm(props) {
         commitment: commitment,
         member_emails: membersArray.filter(memberEmail => memberEmail !== "")
       })
-      .then(response => props.history.push(`/commitments/${response.id}`));
+      .then(response => props.history.push(`/commitments/${response.data.id}`));
   };
 
   return (

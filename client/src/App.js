@@ -265,9 +265,9 @@ function CommitmentPage({
 }) {
   const commitment = commitments[parseInt(match.params.commitmentId, 10)];
 
-  const commitment_activities = Object.values(activities).filter(
+  const commitment_activities = Object.keys(activities).length > 0 ? Object.values(activities).filter(
     activity => activity.commitment_id === commitment.id
-  );
+  ) : {};
 
   if (commitment && document.title !== commitment.name) {
     setTitle(commitment.name);

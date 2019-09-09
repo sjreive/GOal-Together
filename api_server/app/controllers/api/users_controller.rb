@@ -32,7 +32,6 @@ module Api
         commitment_score = commitment_score(commitment)
         puts "****************************************"
         puts "****************************************"
-
         puts "This is the score for #{commitment.id} : #{commitment_score.inspect} for #{user.id}"
         user_commitment_score += commitment_score[user.id]
         puts "This is the user commitment score #{user_commitment_score}"
@@ -91,8 +90,9 @@ module Api
           render json: @user.errors, status: :conflict
         else
           @user.update_attributes(user_params)
-          @user[:commitment_score] = 0
-          render json: @user.as_json(except: [:password_digest]), status: :created
+          hashed_user = @user.as_json
+          hashed_user[:commitment_score] = 0
+          render json: hashed_user(except: [:password_digest]), status: :created
         end
       else
 
