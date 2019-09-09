@@ -10,7 +10,7 @@ export default function ActivityList(props) {
     ? props.notifications
         .filter(notification => notification)
         .sort((a, b) => new Date(a.date) - new Date(b.date))
-    : props.activities.sort((a, b) => new Date(a.date) - new Date(b.date));
+    : props.activites && props.activities.sort((a, b) => new Date(a.date) - new Date(b.date));
 
   const activityListItems =
     activities &&

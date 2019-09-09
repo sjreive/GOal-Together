@@ -9,7 +9,7 @@ const convertDateToString = date => {
 }
 
 const determineUserAttendanceStatusAndImage = (score, activityCount) => {
-  if (score === 0 && activityCount === 0) {
+  if (activityCount === 0) {
     return { statusName: "New But Excited Kitty", imageId: statusImage.kitty }
   } else if (score < 20) { 
     return { statusName: "Don't Hold Your Breath Sloth", imageId: statusImage.sloth }

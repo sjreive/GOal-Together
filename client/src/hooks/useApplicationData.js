@@ -36,8 +36,16 @@ const reducer = (state, action) => {
         }
       };
     case "SET_USER":
+      console.log("ACTION",action);
       return {
         ...state,
+        members: {
+          ...state.members,
+          [action.user.id]: {
+            ...state.members[action.user.id],
+            avatar_url: action.user.avatar_url
+          }
+        },
         user: action.user
       };
     case "GET_NOTIFICATIONS":

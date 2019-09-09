@@ -377,8 +377,12 @@ function LeaderBoardPage({ setTitle, members, user }) {
     }
   }
   attendance = attendance.sort((a, b) => b.commitmentScore - a.commitmentScore);
-  const keenest = attendance[0].commitmentScore === attendance[1].commitmentScore ? { name: "It's too close to call!", commitmentScore: attendance[0].commitmentScore, imageId: "qb3bao7kv87dznw2jnl8" } : attendance[0];
-  const flakiest = attendance[attendance.length - 1].commitmentScore === attendance[attendance.length - 2].commitmentScore ? { name: "It's too close to call!", commitmentScore: attendance[attendance.length - 1].commitmentScore, imageId: "qb3bao7kv87dznw2jnl8" } : attendance[attendance.length - 1];
+  let keenest = undefined;
+  let flakiest = undefined;
+  if (attendance.length > 0) {
+    keenest = attendance[0].commitmentScore === attendance[1].commitmentScore ? { name: "It's too close to call!", commitmentScore: attendance[0].commitmentScore, imageId: "qb3bao7kv87dznw2jnl8" } : attendance[0];
+    flakiest = attendance[attendance.length - 1].commitmentScore === attendance[attendance.length - 2].commitmentScore ? { name: "It's too close to call!", commitmentScore: attendance[attendance.length - 1].commitmentScore, imageId: "qb3bao7kv87dznw2jnl8" } : attendance[attendance.length - 1];
+  }
 
   let userCommitmentScore = findUserCommitmentScore(user.email, members);
 
