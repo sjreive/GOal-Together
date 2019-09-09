@@ -4,17 +4,18 @@ import "./Styles.module.scss";
 import { useVisualMode } from "../../hooks/useVisualMode";
 
 import Donut from "../charts/Donut";
-import UserStatus from "../status_pill/UserStatus";
-import Leaderboard from "../charts/LeaderboardTable";
+import RankingPill from "../status_pill/RankingPill";
+import LeaderboardTable from "../charts/LeaderboardTable";
 
-export default function Profile(props) {
+export default function Leaderboard(props) {
 
   return (
     <section className={classes.profileSection}>
       <div className={classes.wrapper}>
-        <UserStatus name="Kendall" score={70} />
+        <RankingPill header="Keenest Keener:" name="Jane" score={95} imageId="pfhshugcpcfiboh9rhq5" />
+        <RankingPill header="Flakiest Flake:" name="Kendall" score={10} imageId="c73xjbgjfszmycs1upz1" />
         <Donut data={props.attendance} title={props.title}/>
-        <Leaderboard />
+        <LeaderboardTable />
       </div>
     </section>
   );
