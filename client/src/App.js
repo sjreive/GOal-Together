@@ -329,7 +329,6 @@ function LeaderBoardPage({ setTitle, members, user }) {
   attendance.sort((a, b) => a.commitmentScore - b.commitmentScore);
 
   let userCommitmentScore = findUserCommitmentScore(user.email, members);
-
   return <Leaderboard attendance={attendance} title={document.title} userName={user.first_name} userCommitmentScore={userCommitmentScore} />;
 }
 
