@@ -19,4 +19,13 @@ class Commitment < ApplicationRecord
       MemberMailer.with(user: @user, commitment: self, inviting_user: inviting_user).invite_member.deliver_now
     end
   end
+
+  def user_has_joined? user_id
+    self.members.each do |member|
+      if member.user_id == user_id
+        return true
+      end
+    end
+    return false
+  end
 end

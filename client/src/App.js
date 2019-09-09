@@ -284,8 +284,12 @@ function CommitmentPage({
   }
 
   attendance = attendance.sort((a, b) => b.commitmentScore - a.commitmentScore);
-  const keenest = attendance[0].commitmentScore === attendance[1].commitmentScore ? { name: "it's too close to call!", commitmentScore: attendance[0].commitmentScore, imageId: "qb3bao7kv87dznw2jnl8"} : attendance[0];
-  const flakiest = attendance[attendance.length - 1].commitmentScore === attendance[attendance.length - 2].commitmentScore ? { name: "it's too close to call!", commitmentScore: attendance[attendance.length - 1].commitmentScore, imageId: "qb3bao7kv87dznw2jnl8"} : attendance[attendance.length - 1];
+  let keenest = { name: "it's too close to call!", commitmentScore: 100, imageId: "qb3bao7kv87dznw2jnl8"}
+  let flakiest = { name: "it's too close to call!", commitmentScore: 100, imageId: "qb3bao7kv87dznw2jnl8"}
+  if (attendance.length > 0) {
+    keenest = attendance[0].commitmentScore === attendance[1].commitmentScore ? { name: "it's too close to call!", commitmentScore: attendance[0].commitmentScore, imageId: "qb3bao7kv87dznw2jnl8"} : attendance[0];
+    flakiest = attendance[attendance.length - 1].commitmentScore === attendance[attendance.length - 2].commitmentScore ? { name: "it's too close to call!", commitmentScore: attendance[attendance.length - 1].commitmentScore, imageId: "qb3bao7kv87dznw2jnl8"} : attendance[attendance.length - 1];
+  }
   
   return (
     <Commitment
@@ -298,7 +302,7 @@ function CommitmentPage({
       submitVote={submitVote}
       members={members}
       user={user}
-      userCommitmentScore={members[user.id].commitment_score}
+      userCommitmentScore={commitment.attendance ? commitment.attendance[user.id] : 100}
       submitActivity={submitActivity}
     />
   );
