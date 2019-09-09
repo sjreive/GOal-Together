@@ -12,7 +12,7 @@ export default function Profile(props) {
   return (
     <section className={classes.profileSection}>
       <div className={classes.wrapper}>
-        <UserStatus />
+        <UserStatus name="Kendall" score={50} />
         <Donut data={props.attendance} title={props.title}/>
         <Leaderboard />
       </div>

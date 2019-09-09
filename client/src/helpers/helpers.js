@@ -10,9 +10,9 @@ const convertDateToString = date => {
 
 const determineUserAttendanceStatusAndImage = score => {
   if (score < 20) {
-    return { "Sloth": statusImage.sloth }
+    return { statusName: "Sloth", imageId: statusImage.sloth }
   } else {
-    return { "Eager Beaver": statusImage.beaver }
+    return { statusName: "Eager Beaver", imageId: statusImage.beaver }
   }
 };
 

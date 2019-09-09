@@ -17,7 +17,7 @@ export default function Profile(props) {
           <h2>{props.user.first_name} {props.user.last_name}</h2>
           <Image cloudName={urls.CLOUD_NAME} publicId={props.user.avatar_url} width="auto" dpr="auto" responsive crop="scale" alt="Freepik sloth from https://www.flaticon.com"/>
         </div>
-        <UserStatus />
+        <UserStatus name={props.user.first_name} score={15}/>
         <GeneralPill header="Description" body="hi" />
       </div>
     </section>
