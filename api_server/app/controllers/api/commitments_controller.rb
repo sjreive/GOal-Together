@@ -37,11 +37,11 @@ module Api
     end
     
   # append attendance record to the commitment record
-  def append_attendance_record
-    @commitments = Commitment.all
+  def append_attendance_record commitments
+    
     commitments_api_data = {};
 
-    @commitments.each do |commitment|
+    commitments.each do |commitment|
       hashed_commitment = commitment.as_json
       hashed_commitment[:attendance] =  commitment_score(commitment)
       commitments_api_data[commitment["id"]] = hashed_commitment
@@ -52,7 +52,9 @@ module Api
   end
     # GET /commitments
     def index
-      commitments_api_data = append_attendance_record
+      commitments = current_user.commitments
+
+      commitments_api_data = append_attendance_record(commitments)
       render json: commitments_api_data
     end
 

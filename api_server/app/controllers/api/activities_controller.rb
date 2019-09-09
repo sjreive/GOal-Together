@@ -24,11 +24,10 @@ module Api
     end 
 
     # append attendance & voting record to the activity record
-    def append_attendance_record
-      @activities = Activity.all
+    def append_attendance_record(activities)
       activities_api_data = {};
 
-      @activities.each do |activity|
+      activities.each do |activity|
         @activity = activity.as_json
         attendance_record, voting_record = get_members_attendance(@activity)
         @activity[:attendance] = attendance_record
@@ -46,8 +45,16 @@ module Api
     
     # GET /activities
     def index
-      
-      activities_api_data = append_attendance_record
+      activities = []
+      @commitments = current_user.commitments
+
+      @commitments.each do |commitment| 
+        commitment.activities.each do |activity| 
+          activities.push(activity)
+        end
+      end
+
+      activities_api_data = append_attendance_record(activities)
       render json: activities_api_data
     end
   
