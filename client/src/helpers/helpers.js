@@ -8,9 +8,17 @@ const convertDateToString = date => {
   return `${year}-${month}-${day}`
 }
 
-const determineUserAttendanceStatusAndImage = score => {
-  if (score < 20) {
-    return { statusName: "Sloth", imageId: statusImage.sloth }
+const determineUserAttendanceStatusAndImage = (score, activityCount) => {
+  if (score === 0 && activityCount === 0) {
+    return { statusName: "New But Excited Kitty", imageId: statusImage.kitty }
+  } else if (score < 20) { 
+    return { statusName: "Don't Hold Your Breath Sloth", imageId: statusImage.sloth }
+  } else if (score < 40) {
+    return { statusName: "Getting There Turtle", imageId: statusImage.turtle }
+  } else if (score < 60) {
+    return { statusName: "Distractible Pup", imageId: statusImage.pup }
+  } else if (score < 80) {
+    return { statusName: "Busy Bee", imageId: statusImage.bee }
   } else {
     return { statusName: "Eager Beaver", imageId: statusImage.beaver }
   }
