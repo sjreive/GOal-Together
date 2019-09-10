@@ -374,7 +374,7 @@ function Commitments({ match, state, setTitle, Link }) {
   const commitments = {};
 
   for (const id in state.commitments) {
-    if (state.commitments && state.commitments[id].joined) {
+    if (state.commitments[id] && state.commitments[id].joined) {
       commitments[id] = state.commitments[id];
     }
   }
