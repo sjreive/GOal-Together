@@ -29,6 +29,7 @@ function App() {
     setTitle,
     setNewCommitment,
     getNotifications,
+    getActivities,
     getCommitment,
     submitActivity,
     setUser,
@@ -41,9 +42,13 @@ function App() {
   }, [state.title]);
 
   useEffect(() => {
+    getActivities();
+  }, []);
+
+  useEffect(() => {
     getNotifications();
     getInvitations();
-  }, [state.activities, state.commitments]);
+  }, [state.activities, state.commitments, state.votes]);
 
   return (
     <Router>
@@ -140,6 +145,7 @@ function App() {
                 members={state.members}
                 submitVote={submitVote}
                 user={state.user}
+                getActivities={getActivities}
                 submitActivity={submitActivity}
               />
             ) : (
@@ -155,6 +161,8 @@ function App() {
           state.user && state.user.id ? (
             <Notifications
               {...props}
+              getActivities={getActivities}
+              getNotifications={getNotifications}
               activities={state.activities}
               setTitle={setTitle}
               submitVote={submitVote}
@@ -174,13 +182,14 @@ function App() {
         path="/profile"
         render={props =>
           state.user && state.user.id ? (
-            <ProfilePage {...props} 
-            setTitle={setTitle}
-            user={state.user}
-            numberOfCommitments={Object.keys(state.commitments).length}
-            numberOfActivities={Object.keys(state.activities).length}
-            members={state.members}
-            loading={state.loading}
+            <ProfilePage
+              {...props}
+              setTitle={setTitle}
+              user={state.user}
+              numberOfCommitments={Object.keys(state.commitments).length}
+              numberOfActivities={Object.keys(state.activities).length}
+              members={state.members}
+              loading={state.loading}
             />
           ) : (
             <Redirect to="/login" />
@@ -192,7 +201,12 @@ function App() {
         path="/leaderboard"
         render={props =>
           state.user && state.user.id ? (
-            <LeaderBoardPage {...props} members={state.members} setTitle={setTitle} user={state.user} />
+            <LeaderBoardPage
+              {...props}
+              members={state.members}
+              setTitle={setTitle}
+              user={state.user}
+            />
           ) : (
             <Redirect to="/login" />
           )
@@ -215,7 +229,15 @@ function App() {
           )
         }
       />
-      <BottomNav notifications={state.notifications} invitations={state.invitations} Link={Link} />
+      <BottomNav
+        notifications={state.notifications}
+        activities={state.activities}
+        votes={state.votes}
+        invitations={state.invitations}
+        Link={Link}
+        getActivities={getActivities}
+        getNotifications={getNotifications}
+      />
     </Router>
   );
 }
@@ -262,13 +284,17 @@ function CommitmentPage({
   submitActivity,
   members,
   user,
-  getNotifications
+  getNotifications,
+  getActivities
 }) {
   const commitment = commitments[parseInt(match.params.commitmentId, 10)];
 
-  const commitment_activities = Object.keys(activities).length > 0 ? Object.values(activities).filter(
-    activity => activity.commitment_id === commitment.id
-  ) : {};
+  const commitment_activities =
+    Object.keys(activities).length > 0
+      ? Object.values(activities).filter(
+          activity => activity.commitment_id === commitment.id
+        )
+      : {};
 
   if (commitment && document.title !== commitment.name) {
     setTitle(commitment.name);
@@ -286,26 +312,52 @@ function CommitmentPage({
   }
 
   attendance = attendance.sort((a, b) => b.commitmentScore - a.commitmentScore);
-  let keenest = { name: "it's too close to call!", commitmentScore: 100, imageId: "qb3bao7kv87dznw2jnl8"}
-  let flakiest = { name: "it's too close to call!", commitmentScore: 100, imageId: "qb3bao7kv87dznw2jnl8"}
+  let keenest = {
+    name: "it's too close to call!",
+    commitmentScore: 100,
+    imageId: "qb3bao7kv87dznw2jnl8"
+  };
+  let flakiest = {
+    name: "it's too close to call!",
+    commitmentScore: 100,
+    imageId: "qb3bao7kv87dznw2jnl8"
+  };
   if (attendance.length > 0) {
-    keenest = attendance[0].commitmentScore === attendance[1].commitmentScore ? { name: "it's too close to call!", commitmentScore: attendance[0].commitmentScore, imageId: "qb3bao7kv87dznw2jnl8"} : attendance[0];
-    flakiest = attendance[attendance.length - 1].commitmentScore === attendance[attendance.length - 2].commitmentScore ? { name: "it's too close to call!", commitmentScore: attendance[attendance.length - 1].commitmentScore, imageId: "qb3bao7kv87dznw2jnl8"} : attendance[attendance.length - 1];
+    keenest =
+      attendance[0].commitmentScore === attendance[1].commitmentScore
+        ? {
+            name: "it's too close to call!",
+            commitmentScore: attendance[0].commitmentScore,
+            imageId: "qb3bao7kv87dznw2jnl8"
+          }
+        : attendance[0];
+    flakiest =
+      attendance[attendance.length - 1].commitmentScore ===
+      attendance[attendance.length - 2].commitmentScore
+        ? {
+            name: "it's too close to call!",
+            commitmentScore: attendance[attendance.length - 1].commitmentScore,
+            imageId: "qb3bao7kv87dznw2jnl8"
+          }
+        : attendance[attendance.length - 1];
   }
-  
+
   return (
     <Commitment
-      flakiest={flakiest} 
+      flakiest={flakiest}
       keenest={keenest}
-      attendance={attendance.slice(0, 10)} 
+      attendance={attendance.slice(0, 10)}
       activities={commitment_activities}
       commitment={commitment}
       title={title}
       submitVote={submitVote}
       members={members}
       user={user}
-      userCommitmentScore={commitment.attendance ? commitment.attendance[user.id] : 100}
+      userCommitmentScore={
+        commitment.attendance ? commitment.attendance[user.id] : 100
+      }
       submitActivity={submitActivity}
+      getActivities={getActivities}
     />
   );
 }
@@ -341,7 +393,9 @@ function Notifications({
   members,
   user,
   notifications,
-  invitations
+  invitations,
+  getActivities,
+  getNotifications
 }) {
   if (document.title !== "Notifications") {
     setTitle("Notifications");
@@ -353,6 +407,8 @@ function Notifications({
       activities={activities}
       members={members}
       submitVote={submitVote}
+      getActivities={getActivities}
+      getNotifications={getNotifications}
       user={user}
     />
   );
@@ -362,17 +418,35 @@ function NewCommitment({ history, setNewCommitment, setTitle }) {
   if (document.title !== "New Commitment") {
     setTitle("New Commitment");
   }
-  return <NewCommitmentForm history={history} setNewCommitment={setNewCommitment} />;
+  return (
+    <NewCommitmentForm history={history} setNewCommitment={setNewCommitment} />
+  );
 }
 
-function ProfilePage({ user, setTitle, numberOfCommitments, numberOfActivities, members, loading }) {
+function ProfilePage({
+  user,
+  setTitle,
+  numberOfCommitments,
+  numberOfActivities,
+  members,
+  loading
+}) {
   if (document.title !== "Profile") {
     setTitle("Profile");
   }
-  
+
   let userCommitmentScore = findUserCommitmentScore(user.email, members);
-  
-  return loading === false ? <Profile user={user} numberOfActivities={numberOfActivities} numberOfCommitments={numberOfCommitments} userCommitmentScore={userCommitmentScore} /> : <div></div>;
+
+  return loading === false ? (
+    <Profile
+      user={user}
+      numberOfActivities={numberOfActivities}
+      numberOfCommitments={numberOfCommitments}
+      userCommitmentScore={userCommitmentScore}
+    />
+  ) : (
+    <div></div>
+  );
 }
 
 function LeaderBoardPage({ setTitle, members, user }) {
@@ -389,23 +463,36 @@ function LeaderBoardPage({ setTitle, members, user }) {
     }
   }
   attendance = attendance.sort((a, b) => b.commitmentScore - a.commitmentScore);
-  let keenest = undefined;
-  let flakiest = undefined;
-  if (attendance.length > 0) {
-    keenest = attendance[0].commitmentScore === attendance[1].commitmentScore ? { name: "It's too close to call!", commitmentScore: attendance[0].commitmentScore, imageId: "qb3bao7kv87dznw2jnl8" } : attendance[0];
-    flakiest = attendance[attendance.length - 1].commitmentScore === attendance[attendance.length - 2].commitmentScore ? { name: "It's too close to call!", commitmentScore: attendance[attendance.length - 1].commitmentScore, imageId: "qb3bao7kv87dznw2jnl8" } : attendance[attendance.length - 1];
-  }
+  const keenest =
+    attendance[0].commitmentScore === attendance[1].commitmentScore
+      ? {
+          name: "It's too close to call!",
+          commitmentScore: attendance[0].commitmentScore,
+          imageId: "qb3bao7kv87dznw2jnl8"
+        }
+      : attendance[0];
+  const flakiest =
+    attendance[attendance.length - 1].commitmentScore ===
+    attendance[attendance.length - 2].commitmentScore
+      ? {
+          name: "It's too close to call!",
+          commitmentScore: attendance[attendance.length - 1].commitmentScore,
+          imageId: "qb3bao7kv87dznw2jnl8"
+        }
+      : attendance[attendance.length - 1];
 
   let userCommitmentScore = findUserCommitmentScore(user.email, members);
 
-  return <Leaderboard 
-    flakiest={flakiest} 
-    keenest={keenest}
-    attendance={attendance.slice(0, 10)} 
-    title={document.title} 
-    userName={user.first_name} 
-    userCommitmentScore={userCommitmentScore} 
-  />;
+  return (
+    <Leaderboard
+      flakiest={flakiest}
+      keenest={keenest}
+      attendance={attendance.slice(0, 10)}
+      title={document.title}
+      userName={user.first_name}
+      userCommitmentScore={userCommitmentScore}
+    />
+  );
 }
 
 export default App;

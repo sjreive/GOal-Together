@@ -34,8 +34,15 @@ const reducer = (state, action) => {
           [action.activity.id]: action.activity
         }
       };
+
+    case "SUBMIT_VOTE":
+      return {
+        ...state,
+        votes: [...state.votes, action.vote]
+      };
+
     case "SET_USER":
-      console.log("ACTION",action);
+      console.log("ACTION", action);
       return {
         ...state,
         members: {
@@ -51,6 +58,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         notifications: action.notifications
+      };
+
+    case "GET_ACTIVITIES":
+      return {
+        ...state,
+        activities: action.activities
       };
     case "SET_INVITATIONS":
       return {
@@ -132,7 +145,7 @@ export default function useApplicationData() {
           });
         })
         .then(response => {
-          dispatch({ type: "SET_LOADING_STATUS", loading: false })
+          dispatch({ type: "SET_LOADING_STATUS", loading: false });
         })
         .catch(error => {
           console.log(error);
@@ -145,13 +158,41 @@ export default function useApplicationData() {
     }
   }, [state.user]);
 
-  const submitVote = function(voteData) {
-    let token = "Bearer " + localStorage.getItem("jwt");
-    return axios({
-      method: "post",
-      url: `${reactAppURLS.API_URL}/votes/`,
-      headers: { Authorization: token },
-      data: { voteData }
+  const submitVote = voteData => {
+    return new Promise((resolve, reject) => {
+      let token = "Bearer " + localStorage.getItem("jwt");
+      return axios({
+        method: "post",
+        url: `${reactAppURLS.API_URL}/votes/`,
+        headers: { Authorization: token },
+        data: { voteData }
+      }).then(async response => {
+        console.log(response);
+        await dispatch({
+          type: "SUBMIT_VOTE",
+          vote: response.data
+        });
+        resolve(response);
+      });
+    });
+  };
+
+  const getActivities = () => {
+    return new Promise((resolve, reject) => {
+      let token = "Bearer " + localStorage.getItem("jwt");
+      console.log("getActivities function was called");
+      axios({
+        method: "get",
+        url: `${reactAppURLS.API_URL}/activities`,
+        headers: { Authorization: token }
+      }).then(async response => {
+        console.log("Response from the API....", response);
+        await dispatch({
+          type: "GET_ACTIVITIES",
+          activities: response.data
+        });
+        resolve(response);
+      });
     });
   };
 
@@ -166,9 +207,13 @@ export default function useApplicationData() {
         data: { activity }
       }).then(async response => {
         console.log(response);
+        // rest of app expects there to be .voted and .attendance
+        let activity = response.data;
+        activity.voted = {};
+        activity.attendance = {};
         await dispatch({
           type: "SET_NEW_ACTIVITY",
-          activity: response.data
+          activity: activity
         });
         resolve(response);
       });
@@ -211,7 +256,7 @@ export default function useApplicationData() {
     for (const id in state.commitments) {
       if (!state.commitments[id].joined) {
         invitations.push(state.commitments[id]);
-      } 
+      }
     }
     dispatch({ type: "SET_INVITATIONS", invitations });
   };
@@ -226,7 +271,6 @@ export default function useApplicationData() {
         headers: { Authorization: token },
         data: { commitment, member_emails }
       }).then(async response => {
-
         await dispatch({
           type: "SET_NEW_COMMITMENT",
           commitment: response.data
@@ -251,6 +295,7 @@ export default function useApplicationData() {
     submitVote,
     getNotifications,
     submitActivity,
+    getActivities,
     getInvitations
   };
 }

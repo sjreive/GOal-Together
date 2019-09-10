@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./Nav.module.scss";
 import "./Nav.module.scss";
 
@@ -14,14 +14,30 @@ import {
 
 const classNames = require("classnames");
 
-export default function BottomNav({ Link, notifications, invitations }) {
+export default function BottomNav({
+  Link,
+  notifications,
+  invitations,
+  activities,
+  votes
+}) {
   const bottomNavClass = classNames(classes.nav, classes.bottomNav);
+
+  const [numberOfNotifications, setNumberOfNotifications] = useState(0);
   console.log(
     "bottom nav props",
     notifications.filter(activity => activity).length
   );
 
-  const numberOfNotifications = notifications.filter(activity => activity).length + invitations.length;
+  useEffect(() => {
+    console.log(
+      "notifications:",
+      notifications.filter(activity => activity).length
+    );
+    setNumberOfNotifications(
+      notifications.filter(activity => activity).length + invitations.length
+    );
+  }, [notifications, votes]);
 
   return (
     <nav className={bottomNavClass} notifications={notifications}>

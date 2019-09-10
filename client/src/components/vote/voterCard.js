@@ -56,6 +56,7 @@ export default function MemberList(props) {
   const submitVoteHandler = () => {
     props.submitVote(submitData(activityVotes, props.activity, props.user));
     props.transition("BLANK");
+    props.getActivities();
   };
 
   const memberListItems = Object.keys(members).map((id, member) => {

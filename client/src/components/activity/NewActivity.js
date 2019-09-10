@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "../new_commitment_form/Styles.module.scss";
 import { useVisualMode } from "../../hooks/useVisualMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,11 +15,16 @@ export default function NewActivity(props) {
   const [activityTitle, setActivityTitle] = useState("");
   const [activityDate, setActivityDate] = useState("");
 
+  const setNewActivityInfo = async activity => {
+    const newActivity = await props.submitActivity(activity);
+    console.log("New Activity", newActivity.data);
+  };
+
   const activitySubmissionHandler = activity => {
-    if (activityDate) {
+    if (activity.date && activity.title) {
       console.log("activity data:", activity);
-      props.submitActivity(activity);
-      transition("CREATED");
+      transition("BUTTON");
+      setNewActivityInfo(activity);
     }
   };
 

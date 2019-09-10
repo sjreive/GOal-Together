@@ -68,7 +68,7 @@ module Api
     def create
 
       @activity = Activity.new(activity_params)
-  
+      
       if @activity.save
         render json: @activity, status: :created
       else
