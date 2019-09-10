@@ -490,6 +490,7 @@ function LeaderBoardPage({ setTitle, members, user }) {
   }
   attendance = attendance.sort((a, b) => b.commitmentScore - a.commitmentScore);
   const keenest =
+    attendance[0] &&
     attendance[0].commitmentScore === attendance[1].commitmentScore
       ? {
           name: "It's too close to call!",
@@ -498,8 +499,9 @@ function LeaderBoardPage({ setTitle, members, user }) {
         }
       : attendance[0];
   const flakiest =
+    attendance[0] &&
     attendance[attendance.length - 1].commitmentScore ===
-    attendance[attendance.length - 2].commitmentScore
+      attendance[attendance.length - 2].commitmentScore
       ? {
           name: "It's too close to call!",
           commitmentScore: attendance[attendance.length - 1].commitmentScore,
