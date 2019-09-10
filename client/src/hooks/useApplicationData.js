@@ -35,6 +35,13 @@ const reducer = (state, action) => {
           [action.activity.id]: action.activity
         }
       };
+
+    case "SUBMIT_VOTE":
+      return {
+        ...state,
+        votes: [...state.votes, action.vote]
+      };
+
     case "SET_USER":
       return {
         ...state,
@@ -44,6 +51,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         notifications: action.notifications
+      };
+
+    case "GET_ACTIVITIES":
+      return {
+        ...state,
+        activities: action.activities
       };
     case "SET_LOADING_STATUS":
       return {
@@ -138,13 +151,40 @@ export default function useApplicationData() {
     }
   }, [state.user]);
 
-  const submitVote = function(voteData) {
-    let token = "Bearer " + localStorage.getItem("jwt");
-    return axios({
-      method: "post",
-      url: `${reactAppURLS.API_URL}/votes/`,
-      headers: { Authorization: token },
-      data: { voteData }
+  const submitVote = voteData => {
+    return new Promise((resolve, reject) => {
+      let token = "Bearer " + localStorage.getItem("jwt");
+      return axios({
+        method: "post",
+        url: `${reactAppURLS.API_URL}/votes/`,
+        headers: { Authorization: token },
+        data: { voteData }
+      }).then(async response => {
+        console.log(response);
+        await dispatch({
+          type: "SUBMIT_VOTE",
+          vote: response.data
+        });
+        resolve(response);
+      });
+    });
+  };
+
+  const getActivities = () => {
+    return new Promise((resolve, reject) => {
+      let token = "Bearer " + localStorage.getItem("jwt");
+      axios({
+        method: "get",
+        url: `${reactAppURLS.API_URL}/activities`,
+        headers: { Authorization: token }
+      }).then(async response => {
+        console.log(response);
+        await dispatch({
+          type: "GET_ACTIVITIES",
+          activities: response.data
+        });
+        resolve(response);
+      });
     });
   };
 
@@ -234,6 +274,7 @@ export default function useApplicationData() {
     setUser,
     submitVote,
     getNotifications,
-    submitActivity
+    submitActivity,
+    getActivities
   };
 }
