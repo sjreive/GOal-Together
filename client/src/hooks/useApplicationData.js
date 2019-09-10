@@ -209,7 +209,6 @@ export default function useApplicationData() {
     const invitations = [];
 
     for (const id in state.commitments) {
-
       if (!state.commitments[id].joined) {
         invitations.push(state.commitments[id]);
       } 
@@ -227,7 +226,7 @@ export default function useApplicationData() {
         headers: { Authorization: token },
         data: { commitment, member_emails }
       }).then(async response => {
-        console.log(response);
+
         await dispatch({
           type: "SET_NEW_COMMITMENT",
           commitment: response.data

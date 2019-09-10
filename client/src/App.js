@@ -161,6 +161,7 @@ function App() {
               members={state.members}
               user={state.user}
               notifications={state.notifications}
+              invitations={state.invitations}
             />
           ) : (
             <Redirect to="/login" />
@@ -214,7 +215,7 @@ function App() {
           )
         }
       />
-      <BottomNav notifications={state.notifications} Link={Link} />
+      <BottomNav notifications={state.notifications} invitations={state.invitations} Link={Link} />
     </Router>
   );
 }
@@ -331,7 +332,8 @@ function Notifications({
   submitVote,
   members,
   user,
-  notifications
+  notifications,
+  invitations
 }) {
   if (document.title !== "Notifications") {
     setTitle("Notifications");
@@ -339,6 +341,7 @@ function Notifications({
   return (
     <ActivityList
       notifications={notifications}
+      invitations={invitations}
       activities={activities}
       members={members}
       submitVote={submitVote}

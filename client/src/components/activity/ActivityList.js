@@ -3,6 +3,7 @@ import { useVisualMode } from "../../hooks/useVisualMode";
 
 import classes from "./ActivityList.module.scss";
 import ActivityListItem from "./ActivityListItem";
+import InvitationListItem from "./InvitationListItem";
 
 export default function ActivityList(props) {
   // Will display either activities or notifications, depending on page
@@ -26,5 +27,20 @@ export default function ActivityList(props) {
       />
     ));
 
-  return <ul className={classes.activityList}>{activityListItems}</ul>;
+    const invitationListItems = 
+      props.invitations.length > 0 &&
+      props.invitations.map(invite => (
+        <InvitationListItem 
+          name={invite.name}
+          description={invite.description}
+
+          thumbnail={invite.thumbnail}
+
+        />
+      ));
+
+  return <ul className={classes.activityList}>
+    {invitationListItems}
+    {activityListItems  
+  }</ul>;
 }

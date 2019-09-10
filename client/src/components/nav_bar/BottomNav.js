@@ -14,15 +14,14 @@ import {
 
 const classNames = require("classnames");
 
-export default function BottomNav({ Link, notifications }) {
+export default function BottomNav({ Link, notifications, invitations }) {
   const bottomNavClass = classNames(classes.nav, classes.bottomNav);
   console.log(
     "bottom nav props",
     notifications.filter(activity => activity).length
   );
 
-  const numberOfNotifications = notifications.filter(activity => activity)
-    .length;
+  const numberOfNotifications = notifications.filter(activity => activity).length + invitations.length;
 
   return (
     <nav className={bottomNavClass} notifications={notifications}>
