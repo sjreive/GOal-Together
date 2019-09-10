@@ -13,7 +13,7 @@ export default function ActivityListItem(props) {
   const { mode, transition, back } = useVisualMode("FIRST");
 
   // Date formatting
-  const formatDate = props.date.split("-");
+  const formatDate = props.date && props.date.split("-");
   const activityDate = new Date(
     formatDate[0],
     formatDate[1] - 1,
@@ -120,21 +120,30 @@ export default function ActivityListItem(props) {
           submitVote={props.submitVote}
           transition={transitionAfterVote}
           clickBack={e => back()}
+          getActivities={props.getActivities}
         />
       )}
 
       {mode === "VOTED" && (
         <main className={classes.activityTile}>
-          <section className={classes.activityTile__top}>
-            <section className={classes.activityTile__txt}>
-              <h3 className={classes.activityTile__name}>
-                {props.activity.title}
-              </h3>
+          <div className={classes.Tile__past}>
+            <section className={classes.activityTile__top}>
+              <section className={classes.activityTile__txt}>
+                <h3 className={classes.activityTile__name}>
+                  {props.activity.title}
+                </h3>
+                <p className={classes.activityTile__name}>
+                  This activity has taken place. You
+                  {props.activity.attendance[props.user.id]
+                    ? " attended."
+                    : " did not attend."}
+                </p>
+              </section>
             </section>
-          </section>
-          <section className={classes.activityTile__info}>
-            <p className={classes.activityTile__category}>{dateString}</p>
-          </section>
+            <section className={classes.activityTile__info}>
+              <p className={classes.activityTile__category}>{dateString}</p>
+            </section>
+          </div>
         </main>
       )}
     </div>

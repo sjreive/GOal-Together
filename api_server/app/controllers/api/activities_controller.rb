@@ -66,7 +66,7 @@ module Api
   
     # POST /activities
     def create
-      puts [activity_params]
+
       @activity = Activity.new(activity_params)
   
       if @activity.save

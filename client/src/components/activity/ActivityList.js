@@ -3,6 +3,7 @@ import { useVisualMode } from "../../hooks/useVisualMode";
 
 import classes from "./ActivityList.module.scss";
 import ActivityListItem from "./ActivityListItem";
+import InvitationListItem from "./InvitationListItem";
 
 export default function ActivityList(props) {
   const [activityList, setActivityList] = useState([]);
@@ -12,7 +13,9 @@ export default function ActivityList(props) {
       !props.notifications &&
       props.activities &&
       props.activities
-        .filter(activity => activity.voted[props.user.id] === true)
+        .filter(
+          activity => activity.voted && activity.voted[props.user.id] === true
+        )
         .sort((a, b) => new Date(a.date) - new Date(b.date));
 
     const actionActivities =
@@ -33,7 +36,7 @@ export default function ActivityList(props) {
             .sort((a, b) => new Date(a.date) - new Date(b.date))
         : sortedActivities
     );
-  }, []);
+  }, [props.activities]);
 
   const activityListItems =
     activityList &&
@@ -45,9 +48,26 @@ export default function ActivityList(props) {
         key={activity.id}
         date={activity.date}
         submitVote={props.submitVote}
+        getActivities={props.getActivities}
         title={props.title}
       />
     ));
 
-  return <ul className={classes.activityList}>{activityListItems}</ul>;
+  const invitationListItems =
+    props.invitations &&
+    props.invitations.length > 0 &&
+    props.invitations.map(invite => (
+      <InvitationListItem
+        name={invite.name}
+        description={invite.description}
+        thumbnail={invite.thumbnail}
+      />
+    ));
+
+  return (
+    <ul className={classes.activityList}>
+      {invitationListItems}
+      {activityListItems}
+    </ul>
+  );
 }

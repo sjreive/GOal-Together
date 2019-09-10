@@ -22,11 +22,12 @@ export default function Stats(props) {
   return (
     <div className={classes.commitmentStatsContainer}>
       <GeneralPill header="Description" body={props.commitment.description} />
-      <Donut data={chartAttendanceData} userName={props.userName} userCommitmentScore={props.userCommitmentScore} title={props.title}/>
-      <CommitmentStatus flakiest={props.flakiest} stakes={props.commitment.stakes} />
+      {chartAttendanceData.length === 0 && <GeneralPill header="No stats available yet" body="Book an activity and get voting start tracking your stats!" />}
+      {chartAttendanceData.length > 0 && <Donut data={chartAttendanceData} userName={props.userName} userCommitmentScore={props.userCommitmentScore} title={props.title}/>}
+      {chartAttendanceData.length > 0 && <CommitmentStatus flakiest={props.flakiest} stakes={props.commitment.stakes} />}
       {props.keenest.commitmentScore > props.flakiest.commitmentScore && <RankingPill positive={true} header="Keenest Keener:" name={props.keenest.name} score={props.keenest.commitmentScore} imageId={props.keenest.imageId} />}
-          {props.keenest.commitmentScore > props.flakiest.commitmentScore && <RankingPill negative={true} header="Flakiest Flake:" name={props.flakiest.name} score={props.flakiest.commitmentScore} imageId={props.flakiest.imageId} />}
-      <LeaderboardTable attendance={props.attendance}/>
+      {props.keenest.commitmentScore > props.flakiest.commitmentScore && <RankingPill negative={true} header="Flakiest Flake:" name={props.flakiest.name} score={props.flakiest.commitmentScore} imageId={props.flakiest.imageId} />}
+      {chartAttendanceData.length > 0 && <LeaderboardTable attendance={props.attendance}/>}
     </div>
   );
 };

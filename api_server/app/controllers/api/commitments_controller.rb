@@ -10,7 +10,7 @@ module Api
       
       commitment_score = {}
       activity_count = commitment.activities.count
-
+      "-------------- #{activity_count} ---------------"
       commitment.activities.each do |activity|
         @activity = activity.as_json
         @attendance = get_members_attendance(@activity)
@@ -45,6 +45,9 @@ module Api
     commitments.each do |commitment|
       hashed_commitment = commitment.as_json
       hashed_commitment[:attendance] =  commitment_score(commitment)
+
+      hashed_commitment[:joined] = commitment.user_has_joined?(current_user.id)
+
       commitments_api_data[commitment["id"]] = hashed_commitment
     end
 
@@ -54,8 +57,9 @@ module Api
     # GET /commitments
     def index
       commitments = current_user.commitments
-
+    
       commitments_api_data = append_attendance_record(commitments)
+     
       render json: commitments_api_data
     end
 

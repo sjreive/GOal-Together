@@ -42,6 +42,7 @@ export default function Commitment(props) {
             members={props.members}
             submitVote={props.submitVote}
             user={props.user}
+            getActivities={props.getActivities}
           />
         </div>
       )}
