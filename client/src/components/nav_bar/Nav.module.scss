@@ -4,6 +4,7 @@
 $top-nav-vertical-padding: 10px;
 $top-nav-horizontal-padding: 30px;
 $border-radius-value: 15px;
+$side-nav-width: 250px;
 
 .nav {
   position: fixed;
@@ -170,5 +171,29 @@ $border-radius-value: 15px;
   li:last-of-type {
     border-radius: 0 0 0 $border-radius-value;
     border-bottom: 1px solid transparent;
+  }
+}
+
+body {
+    padding: 0;
+    padding-left: $side-nav-width !important;
+}
+
+.sideNav {
+  
+  border-radius: 0 ($border-radius-value * 2) ($border-radius-value * 2) 0;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  width: $side-nav-width;
+  background-color: $white;
+  z-index: 9999;
+}
+
+@media only screen and (max-width: 900px) {
+  body {
+    padding: $nav-height 0 !important;
   }
 }

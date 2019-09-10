@@ -9,6 +9,7 @@ import {
 import useApplicationData from "./hooks/useApplicationData";
 import classes from "./App.module.scss";
 import { findUserCommitmentScore } from "./helpers/helpers";
+import Media from 'react-media';
 
 import ActivityList from "./components/activity/ActivityList";
 import CommitmentList from "./components/commitments/CommitmentList";
@@ -22,6 +23,7 @@ import Login from "./components/authentication/Login";
 import Logout from "./components/authentication/Logout";
 import Register from "./components/authentication/Register";
 import Leaderboard from "./components/leaderboard/Leaderboard";
+import SideNav from "./components/nav_bar/SideNav";
 
 function App() {
   const {
@@ -49,7 +51,60 @@ function App() {
 
   return (
     <Router>
-      <TopNav Link={Link} user={state.user} />
+      <Media query="(max-width: 900px)">
+              {matches =>
+              matches ? (
+                <TopNav Link={Link} user={state.user} />
+                
+              ) : (
+                <SideNav/>
+              )}
+      </Media>
+      <Media query="(max-width: 900px)">
+              {matches =>
+              matches ? (
+                <BottomNav notifications={state.notifications} invitations={state.invitations} Link={Link} />
+                
+              ) : (
+                <div></div>
+              )}
+      </Media>
+      <Media query="(max-width: 1100px)">
+              {matches =>
+              matches ? (
+                <Route
+                  exact
+                  path="/profile"
+                  render={props =>
+                    state.user && state.user.id ? (
+                      <ProfilePage {...props} 
+                      setTitle={setTitle}
+                      user={state.user}
+                      numberOfCommitments={Object.keys(state.commitments).length}
+                      numberOfActivities={Object.keys(state.activities).length}
+                      members={state.members}
+                      loading={state.loading}
+                      />
+                    ) : (
+                      <Redirect to="/login" />
+                    )
+                  }
+                />
+              ) : (
+                <Route
+                  exact
+                  path="/profile"
+                  render={props =>
+                    state.user && state.user.id ? (
+                      <Redirect to="/leaderboard" />
+                    ) : (
+                      <Redirect to="/login" />
+                    )
+                  }
+                />
+              )}
+      </Media>          
+      
       <Route
         exact
         path="/"
@@ -172,25 +227,6 @@ function App() {
           )
         }
       />
-
-      <Route
-        exact
-        path="/profile"
-        render={props =>
-          state.user && state.user.id ? (
-            <ProfilePage {...props} 
-            setTitle={setTitle}
-            user={state.user}
-            numberOfCommitments={Object.keys(state.commitments).length}
-            numberOfActivities={Object.keys(state.activities).length}
-            members={state.members}
-            loading={state.loading}
-            />
-          ) : (
-            <Redirect to="/login" />
-          )
-        }
-      />
       <Route
         exact
         path="/leaderboard"
@@ -219,7 +255,6 @@ function App() {
           )
         }
       />
-      <BottomNav notifications={state.notifications} invitations={state.invitations} Link={Link} />
     </Router>
   );
 }
@@ -273,9 +308,6 @@ function CommitmentPage({
   const commitment_activities = Object.keys(activities).length > 0 ? Object.values(activities).filter(
     activity => activity.commitment_id === commitment.id
   ) : [];
-  console.log("COMMITMENT AT ROUTE", commitment);
-
-  console.log("COMMITMENT ACTIVITIES:::: ", commitment_activities);
 
   if (commitment && document.title !== commitment.name) {
     setTitle(commitment.name);
