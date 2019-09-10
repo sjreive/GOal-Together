@@ -11,7 +11,7 @@ $border-radius-value: 15px;
   right: 0;
   height: $nav-height;
   background-color: $white;
-  z-index: 9999;
+  z-index: 9998;
   padding: $top-nav-vertical-padding $top-nav-horizontal-padding;
 
   h1 {
@@ -88,6 +88,7 @@ $border-radius-value: 15px;
     .settingsHamburgerIcon {
       height: 100%;
       width: 100%;
+      z-index: 9999;
     }
 
     .settingsHamburger {

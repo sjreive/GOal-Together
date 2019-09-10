@@ -25,7 +25,6 @@ export default function Commitment(props) {
     }
   ];
 
-  
   console.log("COMMITMENT ACTIVITIES:::: ", props.activities);
   return (
     <section className={classes.commitmentSection}>
