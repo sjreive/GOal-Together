@@ -8,7 +8,7 @@ import classes from "./CommitmentListItem.module.scss";
 import MemberList from "../members/MemberList";
 
 export default function CommimentListItem(props) {
-  console.log("img:", determineCommitmentImage(props.category));
+  console.log("commitment item props", props);
   return (
     <main className={classes.commitmentTile}>
       <section className={classes.commitmentTile__top}>

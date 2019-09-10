@@ -41,12 +41,17 @@ module Api
   # append attendance record to the commitment record
   def append_attendance_record commitments
     commitments_api_data = {};
-
+    
     commitments.each do |commitment|
+      commitment_members = commitment.members
+      members = []
+      commitment_members.each do |member|
+      members.push(member.user_id)
+      end
       hashed_commitment = commitment.as_json
       hashed_commitment[:attendance] =  commitment_score(commitment)
-
       hashed_commitment[:joined] = commitment.user_has_joined?(current_user.id)
+      hashed_commitment[:members] = members
 
       commitments_api_data[commitment["id"]] = hashed_commitment
     end

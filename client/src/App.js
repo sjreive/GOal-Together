@@ -52,6 +52,8 @@ function App() {
     getInvitations();
   }, [state.activities, state.commitments, state.votes]);
 
+  console.log("APP STATE:", state);
+
   return (
     <Router>
       <TopNav Link={Link} user={state.user} />
