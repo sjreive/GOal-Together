@@ -130,7 +130,6 @@ function App() {
             state.user && state.user.id ? (
               <CommitmentPage
                 {...props}
-                attendance={state.attendance}
                 title={state.title}
                 commitments={state.commitments}
                 setTitle={setTitle}
