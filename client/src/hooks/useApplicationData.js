@@ -42,7 +42,6 @@ const reducer = (state, action) => {
       };
 
     case "SET_USER":
-      console.log("ACTION", action);
       return {
         ...state,
         members: {
@@ -53,6 +52,14 @@ const reducer = (state, action) => {
           }
         },
         user: action.user
+      };
+    case "UPDATE_COMMITMENT":
+      return {
+        ...state,
+        commitments: {
+          ...state.commitments,
+          [action.id]: action.commitment
+        }
       };
     case "GET_NOTIFICATIONS":
       return {
@@ -75,6 +82,17 @@ const reducer = (state, action) => {
         ...state,
         loading: action.loading
       };
+    case "ACCEPT_INVITATION":
+      return {
+        ...state,
+        commitments: {
+          ...state.commitments,
+          [action.commitment.id]: {
+            ...state.commitments[action.commitment.id],
+            joined: true
+          }
+        }
+      }
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -226,15 +244,61 @@ export default function useApplicationData() {
       title
     });
   };
+  // put 'commitments/:id/members/:id', to: 'commitments#accept_invitation'
+  // delete 'commitments/:id/members/:id', to: 'commitments#decline_invitation'
+
+
+  const acceptCommitmentInvitation = commitment => {
+    return new Promise((resolve, reject) => {
+      let token = "Bearer " + localStorage.getItem("jwt");
+      return axios({
+        method: "put",
+        url: `${reactAppURLS.API_URL}/commitments/${commitment.id}/members/${state.user.id}`,
+        headers: { Authorization: token },
+        data: { commitment }
+      })
+      .then(async response => {
+        dispatch({
+          type: "ACCEPT_INVITATION",
+          commitment
+        });
+        getNotifications();
+        resolve(response);
+      })
+      .catch(e => reject(e))
+    })
+  };
+
+  const declineCommitmentInvitation = commitment => {
+    const id = commitment.id;
+    return new Promise((resolve, reject) => {
+      let token = "Bearer " + localStorage.getItem("jwt");
+      return axios({
+        method: "delete",
+        url: `${reactAppURLS.API_URL}/commitments/${commitment.id}/members/${state.user.id}`,
+        headers: { Authorization: token },
+        data: { commitment }
+      })
+      .then(async response => {
+        dispatch({
+          type: "UPDATE_COMMITMENT",
+          id,
+          commitment: null
+        });
+        resolve(response);
+      })
+      .catch(e => reject(e))
+    })
+  };
 
   const getNotifications = () => {
     // copy of notifications state
-    const notifications = [...state.notifications];
+    let notifications = [];
 
     Object.values(state.activities).filter(activity => activity === {});
-
+    console.log("STATE ACTIVITIES:::: ", state.activities);
     state.activities &&
-      Object.keys(state.activities).map(id => {
+      Object.keys(state.activities).forEach(id => {
         if (
           state.activities[id].voted &&
           state.activities[id].voted[state.user.id] === false
@@ -243,7 +307,12 @@ export default function useApplicationData() {
         }
       });
 
-    notifications.filter(activity => activity !== null);
+    notifications = notifications.filter(activity => activity !== null);
+    notifications = notifications.filter(activity => {
+      const commitment = state.commitments[activity.commitment_id]
+      return commitment && commitment.joined;
+    });
+
     dispatch({
       type: "GET_NOTIFICATIONS",
       notifications
@@ -254,7 +323,7 @@ export default function useApplicationData() {
     const invitations = [];
 
     for (const id in state.commitments) {
-      if (!state.commitments[id].joined) {
+      if (state.commitments[id] &&!state.commitments[id].joined) {
         invitations.push(state.commitments[id]);
       }
     }
@@ -296,6 +365,8 @@ export default function useApplicationData() {
     getNotifications,
     submitActivity,
     getActivities,
-    getInvitations
+    getInvitations,
+    acceptCommitmentInvitation,
+    declineCommitmentInvitation
   };
 }

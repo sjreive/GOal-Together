@@ -34,7 +34,9 @@ function App() {
     submitActivity,
     setUser,
     submitVote,
-    getInvitations
+    getInvitations,
+    acceptCommitmentInvitation,
+    declineCommitmentInvitation
   } = useApplicationData();
   console.log(state);
   useEffect(() => {
@@ -170,6 +172,8 @@ function App() {
               user={state.user}
               notifications={state.notifications}
               invitations={state.invitations}
+              acceptCommitmentInvitation={acceptCommitmentInvitation}
+              declineCommitmentInvitation={declineCommitmentInvitation}
             />
           ) : (
             <Redirect to="/login" />
@@ -294,7 +298,7 @@ function CommitmentPage({
       ? Object.values(activities).filter(
           activity => activity.commitment_id === commitment.id
         )
-      : {};
+      : [];
 
   if (commitment && document.title !== commitment.name) {
     setTitle(commitment.name);
@@ -370,7 +374,7 @@ function Commitments({ match, state, setTitle, Link }) {
   const commitments = {};
 
   for (const id in state.commitments) {
-    if (state.commitments[id].joined) {
+    if (state.commitments && state.commitments[id].joined) {
       commitments[id] = state.commitments[id];
     }
   }
@@ -395,7 +399,9 @@ function Notifications({
   notifications,
   invitations,
   getActivities,
-  getNotifications
+  getNotifications,
+  acceptCommitmentInvitation,
+  declineCommitmentInvitation
 }) {
   if (document.title !== "Notifications") {
     setTitle("Notifications");
@@ -410,6 +416,8 @@ function Notifications({
       getActivities={getActivities}
       getNotifications={getNotifications}
       user={user}
+      acceptCommitmentInvitation={acceptCommitmentInvitation}
+      declineCommitmentInvitation={declineCommitmentInvitation}
     />
   );
 }

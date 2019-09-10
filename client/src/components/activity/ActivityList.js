@@ -54,21 +54,19 @@ export default function ActivityList(props) {
       />
     ));
 
-  const invitationListItems =
-    props.invitations &&
-    props.invitations.length > 0 &&
-    props.invitations.map(invite => (
-      <InvitationListItem
-        name={invite.name}
-        description={invite.description}
-        thumbnail={invite.thumbnail}
-      />
-    ));
+    const invitationListItems = 
+      props.invitations && props.invitations.length > 0 &&
+      props.invitations.map(invite => (
+        <InvitationListItem 
+          name={invite.name}
+          commitment={invite}
+          acceptCommitmentInvitation={props.acceptCommitmentInvitation}
+          declineCommitmentInvitation={props.declineCommitmentInvitation}
+        />
+      ));
 
-  return (
-    <ul className={classes.activityList}>
-      {invitationListItems}
-      {activityListItems}
-    </ul>
-  );
+  return <ul className={classes.activityList}>
+    {invitationListItems}
+    {activityListItems}
+  </ul>;
 }

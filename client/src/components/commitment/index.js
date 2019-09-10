@@ -25,8 +25,8 @@ export default function Commitment(props) {
     }
   ];
 
-  console.log("FLAKIEST: ", props.flakiest);
-
+  
+  console.log("COMMITMENT ACTIVITIES:::: ", props.activities);
   return (
     <section className={classes.commitmentSection}>
       <PageTabs mode={mode} tabs={tabs} transition={transition} />
