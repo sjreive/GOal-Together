@@ -43,12 +43,12 @@ function App() {
 
   useEffect(() => {
     getActivities();
-  }, [state.votes]);
+  }, []);
 
   useEffect(() => {
     getNotifications();
     getInvitations();
-  }, [state.activities, state.commitments]);
+  }, [state.activities, state.commitments, state.votes]);
 
   return (
     <Router>
@@ -231,6 +231,8 @@ function App() {
       />
       <BottomNav
         notifications={state.notifications}
+        activities={state.activities}
+        votes={state.votes}
         invitations={state.invitations}
         Link={Link}
         getActivities={getActivities}

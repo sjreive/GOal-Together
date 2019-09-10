@@ -50,6 +50,7 @@ export default function ActivityList(props) {
         submitVote={props.submitVote}
         getActivities={props.getActivities}
         title={props.title}
+        getNotifications={props.getNotifications}
       />
     ));
 
