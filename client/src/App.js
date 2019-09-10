@@ -34,7 +34,8 @@ function App() {
     setUser,
     submitVote,
     getInvitations,
-    acceptCommitmentInvitation
+    acceptCommitmentInvitation,
+    declineCommitmentInvitation
   } = useApplicationData();
   console.log(state);
   useEffect(() => {
@@ -164,6 +165,7 @@ function App() {
               notifications={state.notifications}
               invitations={state.invitations}
               acceptCommitmentInvitation={acceptCommitmentInvitation}
+              declineCommitmentInvitation={declineCommitmentInvitation}
             />
           ) : (
             <Redirect to="/login" />
@@ -320,7 +322,7 @@ function Commitments({ match, state, setTitle, Link }) {
   const commitments = {};
 
   for (const id in state.commitments) {
-    if (state.commitments[id].joined) {
+    if (state.commitments && state.commitments[id].joined) {
       commitments[id] = state.commitments[id];
     }
   }
@@ -344,7 +346,8 @@ function Notifications({
   user,
   notifications,
   invitations,
-  acceptCommitmentInvitation
+  acceptCommitmentInvitation,
+  declineCommitmentInvitation
 }) {
   if (document.title !== "Notifications") {
     setTitle("Notifications");
@@ -358,6 +361,7 @@ function Notifications({
       submitVote={submitVote}
       user={user}
       acceptCommitmentInvitation={acceptCommitmentInvitation}
+      declineCommitmentInvitation={declineCommitmentInvitation}
     />
   );
 }

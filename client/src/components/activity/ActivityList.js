@@ -34,11 +34,12 @@ export default function ActivityList(props) {
           name={invite.name}
           commitment={invite}
           acceptCommitmentInvitation={props.acceptCommitmentInvitation}
+          declineCommitmentInvitation={props.declineCommitmentInvitation}
         />
       ));
 
   return <ul className={classes.activityList}>
     {invitationListItems}
     {activityListItems}
-  }</ul>;
+  </ul>;
 }

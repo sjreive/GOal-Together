@@ -35,7 +35,6 @@ const reducer = (state, action) => {
         }
       };
     case "SET_USER":
-      console.log("ACTION",action);
       return {
         ...state,
         members: {
@@ -46,6 +45,14 @@ const reducer = (state, action) => {
           }
         },
         user: action.user
+      };
+    case "UPDATE_COMMITMENT":
+      return {
+        ...state,
+        commitments: {
+          ...state.commitments,
+          [action.id]: action.commitment
+        }
       };
     case "GET_NOTIFICATIONS":
       return {
@@ -216,6 +223,28 @@ export default function useApplicationData() {
     })
   };
 
+  const declineCommitmentInvitation = commitment => {
+    const id = commitment.id;
+    return new Promise((resolve, reject) => {
+      let token = "Bearer " + localStorage.getItem("jwt");
+      return axios({
+        method: "delete",
+        url: `${reactAppURLS.API_URL}/commitments/${commitment.id}/members/${state.user.id}`,
+        headers: { Authorization: token },
+        data: { commitment }
+      })
+      .then(async response => {
+        dispatch({
+          type: "UPDATE_COMMITMENT",
+          id,
+          commitment: null
+        });
+        resolve(response);
+      })
+      .catch(e => reject(e))
+    })
+  };
+
   const getNotifications = () => {
     // copy of notifications state
     const notifications = [...state.notifications];
@@ -243,7 +272,7 @@ export default function useApplicationData() {
     const invitations = [];
 
     for (const id in state.commitments) {
-      if (!state.commitments[id].joined) {
+      if (state.commitments[id] &&!state.commitments[id].joined) {
         invitations.push(state.commitments[id]);
       } 
     }
@@ -286,6 +315,7 @@ export default function useApplicationData() {
     getNotifications,
     submitActivity,
     getInvitations,
-    acceptCommitmentInvitation
+    acceptCommitmentInvitation,
+    declineCommitmentInvitation
   };
 }

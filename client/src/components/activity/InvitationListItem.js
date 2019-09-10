@@ -35,7 +35,7 @@ export default function InvitationListItem(props) {
             <Button
               invite={true}
               smallCircle={true}
-              onClick={e => console.log("hi")}
+              onClick={e => props.declineCommitmentInvitation(props.commitment)}
               innerContent={<FontAwesomeIcon icon={faMinus}/>}
             />
             <Button

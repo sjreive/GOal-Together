@@ -120,7 +120,8 @@ module Api
 
     # DELETE /commitments/1/members/1
     def decline_invitation
-      @member = @commitment.members.find(current_user.id)
+      @commitment = Commitment.find(params[:commitment][:id])
+      @member = @commitment.members.find_by(user_id: current_user.id)
       @member.destroy
     end
 
