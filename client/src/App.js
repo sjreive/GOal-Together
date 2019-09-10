@@ -273,6 +273,9 @@ function CommitmentPage({
   const commitment_activities = Object.keys(activities).length > 0 ? Object.values(activities).filter(
     activity => activity.commitment_id === commitment.id
   ) : {};
+  console.log("COMMITMENT AT ROUTE", commitment);
+
+  console.log("COMMITMENT ACTIVITIES:::: ", commitment_activities);
 
   if (commitment && document.title !== commitment.name) {
     setTitle(commitment.name);
@@ -344,7 +347,7 @@ function Notifications({
   submitVote,
   members,
   user,
-  notifications,
+  notifications,  
   invitations,
   acceptCommitmentInvitation,
   declineCommitmentInvitation

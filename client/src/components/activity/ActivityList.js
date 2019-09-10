@@ -6,13 +6,14 @@ import ActivityListItem from "./ActivityListItem";
 import InvitationListItem from "./InvitationListItem";
 
 export default function ActivityList(props) {
+  console.log("NOTIFICATIONS IN LIST::: ", props.notifications);
+  console.log("ACTIVITIES IN LIST", props.activities);
   // Will display either activities or notifications, depending on page
-  const activities = props.notifications
+  let activities = props.notifications
     ? props.notifications
         .filter(notification => notification)
         .sort((a, b) => new Date(a.date) - new Date(b.date))
-    : props.activites && props.activities.sort((a, b) => new Date(a.date) - new Date(b.date));
-
+    : props.activities.sort((a, b) => new Date(a.date) - new Date(b.date));
   const activityListItems =
     activities &&
     activities.map(activity => (
@@ -26,7 +27,10 @@ export default function ActivityList(props) {
         title={props.title}
       />
     ));
-
+    if (!activities) {
+      activities = [];
+    }
+    console.log("ACTIVITIES:::: ", activities);
     const invitationListItems = 
       props.invitations && props.invitations.length > 0 &&
       props.invitations.map(invite => (

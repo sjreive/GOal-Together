@@ -254,26 +254,24 @@ export default function useApplicationData() {
 
   const getNotifications = () => {
     // copy of notifications state
-    let notifications = [...state.notifications];
+    let notifications = [];
 
     Object.values(state.activities).filter(activity => activity === {});
-
+    console.log("STATE ACTIVITIES:::: ", state.activities);
     state.activities &&
-      Object.keys(state.activities).map(id => {
+      Object.keys(state.activities).forEach(id => {
         if (
           state.activities[id].voted &&
-          state.activities[id].voted[state.user.id] === false
+          state.activities[id].voted[state.user.id] === false &&
+          state.commitments[state.activities[id].commitment_id] &&
+          state.commitments[state.activities[id].commitment_id].joined
         ) {
           notifications[state.activities[id].id] = state.activities[id];
         }
       });
 
     notifications = notifications.filter(activity => activity !== null);
-    notifications = notifications.filter(activity => {
-      const commitment = state.commitments[activity.commitment_id]
-      return commitment && commitment.joined;
-    });
-    console.log("NOTIFICATIONS:::: ",notifications);
+
     dispatch({
       type: "GET_NOTIFICATIONS",
       notifications
