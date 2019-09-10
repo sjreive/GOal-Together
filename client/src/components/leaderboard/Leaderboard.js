@@ -15,6 +15,7 @@ export default function Leaderboard(props) {
     memberObject[name] = commitmentScore;
     return memberObject;
   });
+  console.log("KEENEST: ", props.keenest);
 
   return (
     <section className={classes.profileSection}>

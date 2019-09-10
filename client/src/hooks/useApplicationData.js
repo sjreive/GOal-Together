@@ -10,8 +10,7 @@ const reducer = (state, action) => {
         commitments: action.commitments,
         votes: action.votes,
         members: action.members,
-        activities: action.activities,
-        attendance: action.attendance
+        activities: action.activities
       };
     case "SET_TITLE":
       return {
@@ -36,14 +35,27 @@ const reducer = (state, action) => {
         }
       };
     case "SET_USER":
+      console.log("ACTION",action);
       return {
         ...state,
+        members: {
+          ...state.members,
+          [action.user.id]: {
+            ...state.members[action.user.id],
+            avatar_url: action.user.avatar_url
+          }
+        },
         user: action.user
       };
     case "GET_NOTIFICATIONS":
       return {
         ...state,
         notifications: action.notifications
+      };
+    case "SET_INVITATIONS":
+      return {
+        ...state,
+        invitations: action.invitations
       };
     case "SET_LOADING_STATUS":
       return {
@@ -59,7 +71,7 @@ const reducer = (state, action) => {
 
 export default function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
-    commitments: [],
+    commitments: {},
     votes: [],
     members: {},
     title: "",
@@ -67,7 +79,8 @@ export default function useApplicationData() {
     error: "",
     activities: [],
     notifications: [],
-    loading: true
+    loading: true,
+    invitations: []
   });
 
   useEffect(() => {
@@ -107,11 +120,6 @@ export default function useApplicationData() {
           method: "get",
           url: `${reactAppURLS.API_URL}/activities`,
           headers: { Authorization: token }
-        }),
-        axios({
-          method: "get",
-          url: `${reactAppURLS.API_URL}/attendance`,
-          headers: { Authorization: token }
         })
       ])
         .then(all => {
@@ -120,13 +128,12 @@ export default function useApplicationData() {
             commitments: all[0].data,
             votes: all[1].data,
             members: all[2].data,
-            activities: all[3].data,
-            attendance: all[4].data
+            activities: all[3].data
           });
         })
-        .then(response =>
+        .then(response => {
           dispatch({ type: "SET_LOADING_STATUS", loading: false })
-        )
+        })
         .catch(error => {
           console.log(error);
 
@@ -183,8 +190,6 @@ export default function useApplicationData() {
 
     state.activities &&
       Object.keys(state.activities).map(id => {
-        console.log(state.activities[id].voted);
-        console.log(state.user.id);
         if (
           state.activities[id].voted &&
           state.activities[id].voted[state.user.id] === false
@@ -200,6 +205,17 @@ export default function useApplicationData() {
     });
   };
 
+  const getInvitations = () => {
+    const invitations = [];
+
+    for (const id in state.commitments) {
+      if (!state.commitments[id].joined) {
+        invitations.push(state.commitments[id]);
+      } 
+    }
+    dispatch({ type: "SET_INVITATIONS", invitations });
+  };
+
   const setNewCommitment = submission => {
     const { commitment, member_emails } = submission;
     return new Promise((resolve, reject) => {
@@ -210,7 +226,7 @@ export default function useApplicationData() {
         headers: { Authorization: token },
         data: { commitment, member_emails }
       }).then(async response => {
-        console.log(response);
+
         await dispatch({
           type: "SET_NEW_COMMITMENT",
           commitment: response.data
@@ -234,6 +250,7 @@ export default function useApplicationData() {
     setUser,
     submitVote,
     getNotifications,
-    submitActivity
+    submitActivity,
+    getInvitations
   };
 }

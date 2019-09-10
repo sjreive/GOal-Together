@@ -1,0 +1,60 @@
+@import "../../styles/variables.module.scss";
+@import "../../styles/mixins.module.scss";
+@import "../../styles/reset.module.scss";
+
+.commitmentTile {
+  background-image: $gradient;
+  height: 13rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+
+  @include flexThis(center, center, column);
+
+  &__top {
+    @include flexThis(space-between, flex-start, row);
+    height: 65%;
+    width: 100%;
+    text-align: right;
+    color: $white;
+    padding: 1rem;
+    div:last-of-type {
+      width: 80%;
+    }
+  }
+
+  &__img {
+    height: 100%;
+    width: auto;
+    padding: 0.5rem 0;
+    flex-shrink: 1;
+  }
+
+  &__info {
+    height: 35%;
+    width: 100%;
+    border-radius: 0.5rem;
+    padding: 1rem 1rem 1rem 1rem;
+    color: $white;
+    @include flexThis(space-between, flex-end, row);
+
+    button:first-of-type {
+      background-color: $red;
+      border-color: $red;
+      color: $primary-blue;
+    }
+
+    button:hover,
+    button:focus {
+      border: 1px solid transparent;
+    }
+  }
+
+  &__category {
+    margin: 0;
+  }
+
+  &__txt {
+    // width: 50%;
+  }
+}

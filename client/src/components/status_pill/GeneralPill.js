@@ -10,7 +10,7 @@ export default function GeneralPill(props) {
   return (
     <div className={generalPill}>
       <h3>{props.header}</h3>
-      <p>{props.body}</p>
+      {props.body && <p>{props.body}</p>}
     </div>
   );
 };

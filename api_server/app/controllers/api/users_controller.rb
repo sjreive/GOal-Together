@@ -30,13 +30,8 @@ module Api
         if (commitment_score(commitment) != {})
         commitment_count += 1
         commitment_score = commitment_score(commitment)
-        puts "****************************************"
-        puts "****************************************"
-        puts "This is the score for #{commitment.id} : #{commitment_score.inspect} for #{user.id}"
+      
         user_commitment_score += commitment_score[user.id]
-        puts "This is the user commitment score #{user_commitment_score}"
-        puts "****************************************"
-        puts "****************************************"
 
         end
       end
@@ -87,12 +82,16 @@ module Api
       @user = User.find_by(email: user_params[:email])
       if @user
         if @user.first_name
-          render json: @user.errors, status: :conflict
+          render json: user.errors, status: :conflict
         else
           @user.update_attributes(user_params)
+          if @user.avatar_url == ""
+            @user.avatar_url = 'uiujwq03yj9pglrudhq1'
+          end
+          @user.save
           hashed_user = @user.as_json
           hashed_user[:commitment_score] = 0
-          render json: hashed_user(except: [:password_digest]), status: :created
+          render json: hashed_user.as_json(except: [:password_digest]), status: :created
         end
       else
 
