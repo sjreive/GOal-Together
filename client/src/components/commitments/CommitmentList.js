@@ -4,7 +4,9 @@ import classes from "./CommitmentList.module.scss";
 import CommitmentListItem from "./CommitmentListItem";
 
 export default function CommitmentList({ Link, match, members, commitments }) {
-  console.log("commitments props:", commitments);
+  console.log("member props:", commitments);
+
+  // const commitment_members = Object.values(members).filter(member => commitment.members.includes(member.id))
 
   const commitmentListItems =
     commitments &&
@@ -16,7 +18,9 @@ export default function CommitmentList({ Link, match, members, commitments }) {
           name={commitments[id].name}
           thumbnail={commitments[id].thumbnail}
           description={commitments[id].description}
-          members={members}
+          members={Object.values(members).filter(member =>
+            commitments[id].members.includes(member.id)
+          )}
         />
       </Link>
     ));
