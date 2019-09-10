@@ -262,7 +262,10 @@ export default function useApplicationData() {
           type: "ACCEPT_INVITATION",
           commitment
         });
-        getNotifications();
+        console.log("BEFORE:",state.notifications);
+        getActivities();
+        console.log("AFTER:",state.notifications);
+
         resolve(response);
       })
       .catch(e => reject(e))
@@ -296,7 +299,7 @@ export default function useApplicationData() {
     let notifications = [];
 
     Object.values(state.activities).filter(activity => activity === {});
-    console.log("STATE ACTIVITIES:::: ", state.activities);
+ 
     state.activities &&
       Object.keys(state.activities).forEach(id => {
         if (
