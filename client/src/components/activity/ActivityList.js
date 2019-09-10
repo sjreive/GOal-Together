@@ -32,13 +32,13 @@ export default function ActivityList(props) {
       props.invitations.map(invite => (
         <InvitationListItem 
           name={invite.name}
-          description={invite.description}
-          thumbnail={invite.thumbnail}
+          commitment={invite}
+          acceptCommitmentInvitation={props.acceptCommitmentInvitation}
         />
       ));
 
   return <ul className={classes.activityList}>
     {invitationListItems}
-    {activityListItems  
+    {activityListItems}
   }</ul>;
 }

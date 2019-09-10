@@ -16,7 +16,7 @@ export default function InvitationListItem(props) {
       <div className={classes.commitmentTile__top}>
         <img
           className={classes.commitmentTile__img}
-          src={props.thumbnail}
+          src={props.commitment.thumbnail}
           alt="commitment_category"
         />
         <div className={classes.commitmentTile__txt}>
@@ -27,7 +27,7 @@ export default function InvitationListItem(props) {
         <div className={classes.commitmentTile__txt}>
           <h2 className={classes.commitmentTile__name}>{props.name}</h2>
           <p className={classes.commitmentTile__category}>
-            {props.description}
+            {props.commitment.description}
           </p>
         </div>
         <div>
@@ -41,7 +41,7 @@ export default function InvitationListItem(props) {
             <Button
               invite={true}
               smallCircle={true}
-              onClick={e => console.log("hi")}
+              onClick={e => props.acceptCommitmentInvitation(props.commitment)}
               innerContent={<FontAwesomeIcon icon={faPlus}/>}
             />
           </div>

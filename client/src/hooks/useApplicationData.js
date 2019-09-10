@@ -62,6 +62,17 @@ const reducer = (state, action) => {
         ...state,
         loading: action.loading
       };
+    case "ACCEPT_INVITATION":
+      return {
+        ...state,
+        commitments: {
+          ...state.commitments,
+          [action.commitment.id]: {
+            ...state.commitments[action.commitment.id],
+            joined: true
+          }
+        }
+      }
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -181,6 +192,29 @@ export default function useApplicationData() {
       title
     });
   };
+  // put 'commitments/:id/members/:id', to: 'commitments#accept_invitation'
+  // delete 'commitments/:id/members/:id', to: 'commitments#decline_invitation'
+
+
+  const acceptCommitmentInvitation = commitment => {
+    return new Promise((resolve, reject) => {
+      let token = "Bearer " + localStorage.getItem("jwt");
+      return axios({
+        method: "put",
+        url: `${reactAppURLS.API_URL}/commitments/${commitment.id}/members/${state.user.id}`,
+        headers: { Authorization: token },
+        data: { commitment }
+      })
+      .then(async response => {
+        dispatch({
+          type: "ACCEPT_INVITATION",
+          commitment
+        });
+        resolve(response);
+      })
+      .catch(e => reject(e))
+    })
+  };
 
   const getNotifications = () => {
     // copy of notifications state
@@ -251,6 +285,7 @@ export default function useApplicationData() {
     submitVote,
     getNotifications,
     submitActivity,
-    getInvitations
+    getInvitations,
+    acceptCommitmentInvitation
   };
 }

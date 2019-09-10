@@ -33,7 +33,8 @@ function App() {
     submitActivity,
     setUser,
     submitVote,
-    getInvitations
+    getInvitations,
+    acceptCommitmentInvitation
   } = useApplicationData();
   console.log(state);
   useEffect(() => {
@@ -162,6 +163,7 @@ function App() {
               user={state.user}
               notifications={state.notifications}
               invitations={state.invitations}
+              acceptCommitmentInvitation={acceptCommitmentInvitation}
             />
           ) : (
             <Redirect to="/login" />
@@ -341,7 +343,8 @@ function Notifications({
   members,
   user,
   notifications,
-  invitations
+  invitations,
+  acceptCommitmentInvitation
 }) {
   if (document.title !== "Notifications") {
     setTitle("Notifications");
@@ -354,6 +357,7 @@ function Notifications({
       members={members}
       submitVote={submitVote}
       user={user}
+      acceptCommitmentInvitation={acceptCommitmentInvitation}
     />
   );
 }
