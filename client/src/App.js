@@ -379,10 +379,15 @@ function Commitments({ match, state, setTitle, Link }) {
     }
   }
 
+  // Filter for active members who have joined a commitment
+  const activeMembers = Object.values(state.members).filter(
+    member => member.avatar_url
+  );
+
   return (
     <CommitmentList
       commitments={commitments}
-      members={state.members}
+      members={activeMembers}
       Link={Link}
       match={match}
     />
@@ -406,12 +411,25 @@ function Notifications({
   if (document.title !== "Notifications") {
     setTitle("Notifications");
   }
+
+  // Filter for active members who have joined a commitment
+  const activeMembers = Object.values(members).filter(
+    member => member.avatar_url
+  );
+
+  const memberObject = {};
+  activeMembers.forEach(member => {
+    memberObject[member.id] = member;
+  });
+
+  console.log("member Object", memberObject);
+
   return (
     <ActivityList
       notifications={notifications}
       invitations={invitations}
       activities={activities}
-      members={members}
+      members={memberObject}
       submitVote={submitVote}
       getActivities={getActivities}
       getNotifications={getNotifications}
