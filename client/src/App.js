@@ -293,6 +293,10 @@ function CommitmentPage({
   getNotifications,
   getActivities
 }) {
+  // Filter for active members who have joined a commitment
+  const activeMembers = Object.values(members).filter(
+    member => member.avatar_url
+  );
   const commitment = commitments[parseInt(match.params.commitmentId, 10)];
 
   const commitment_activities =
@@ -308,11 +312,13 @@ function CommitmentPage({
 
   let attendance = [];
 
-  for (const memberId in commitment.attendance) {
-    const name = members[memberId].first_name;
+  for (const memberId in commitment.members) {
+    const name = activeMembers[memberId].first_name;
     if (name) {
-      const commitmentScore = commitment.attendance[memberId];
-      const imageId = members[memberId].avatar_url;
+      const commitmentScore = commitment.attendance[memberId]
+        ? commitment.attendance[memberId]
+        : 100;
+      const imageId = activeMembers[memberId].avatar_url;
       attendance.push({ name, commitmentScore, imageId });
     }
   }
@@ -357,7 +363,7 @@ function CommitmentPage({
       commitment={commitment}
       title={title}
       submitVote={submitVote}
-      members={members}
+      members={activeMembers}
       user={user}
       userCommitmentScore={
         commitment.attendance ? commitment.attendance[user.id] : 100
