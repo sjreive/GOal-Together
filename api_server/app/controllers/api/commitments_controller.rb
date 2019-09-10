@@ -57,7 +57,7 @@ module Api
     # GET /commitments
     def index
       commitments = current_user.commitments
-
+    
       commitments_api_data = append_attendance_record(commitments)
      
       render json: commitments_api_data

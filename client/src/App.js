@@ -315,9 +315,17 @@ function Commitments({ match, state, setTitle, Link }) {
     setTitle("Commitments");
   }
 
+  const commitments = {};
+
+  for (const id in state.commitments) {
+    if (state.commitments[id].joined) {
+      commitments[id] = state.commitments[id];
+    }
+  }
+
   return (
     <CommitmentList
-      commitments={state.commitments}
+      commitments={commitments}
       members={state.members}
       Link={Link}
       match={match}

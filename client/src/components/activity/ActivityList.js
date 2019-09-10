@@ -33,9 +33,7 @@ export default function ActivityList(props) {
         <InvitationListItem 
           name={invite.name}
           description={invite.description}
-
           thumbnail={invite.thumbnail}
-
         />
       ));
 
