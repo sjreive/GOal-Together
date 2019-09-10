@@ -92,7 +92,7 @@ const reducer = (state, action) => {
             joined: true
           }
         }
-      }
+      };
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -247,7 +247,6 @@ export default function useApplicationData() {
   // put 'commitments/:id/members/:id', to: 'commitments#accept_invitation'
   // delete 'commitments/:id/members/:id', to: 'commitments#decline_invitation'
 
-
   const acceptCommitmentInvitation = commitment => {
     return new Promise((resolve, reject) => {
       let token = "Bearer " + localStorage.getItem("jwt");
@@ -257,19 +256,16 @@ export default function useApplicationData() {
         headers: { Authorization: token },
         data: { commitment }
       })
-      .then(async response => {
-        dispatch({
-          type: "ACCEPT_INVITATION",
-          commitment
-        });
-        console.log("BEFORE:",state.notifications);
-        getActivities();
-        console.log("AFTER:",state.notifications);
-
-        resolve(response);
-      })
-      .catch(e => reject(e))
-    })
+        .then(async response => {
+          dispatch({
+            type: "ACCEPT_INVITATION",
+            commitment
+          });
+          getActivities();
+          resolve(response);
+        })
+        .catch(e => reject(e));
+    });
   };
 
   const declineCommitmentInvitation = commitment => {
@@ -282,16 +278,16 @@ export default function useApplicationData() {
         headers: { Authorization: token },
         data: { commitment }
       })
-      .then(async response => {
-        dispatch({
-          type: "UPDATE_COMMITMENT",
-          id,
-          commitment: null
-        });
-        resolve(response);
-      })
-      .catch(e => reject(e))
-    })
+        .then(async response => {
+          dispatch({
+            type: "UPDATE_COMMITMENT",
+            id,
+            commitment: null
+          });
+          resolve(response);
+        })
+        .catch(e => reject(e));
+    });
   };
 
   const getNotifications = () => {
@@ -312,7 +308,7 @@ export default function useApplicationData() {
 
     notifications = notifications.filter(activity => activity !== null);
     notifications = notifications.filter(activity => {
-      const commitment = state.commitments[activity.commitment_id]
+      const commitment = state.commitments[activity.commitment_id];
       return commitment && commitment.joined;
     });
 
@@ -326,7 +322,7 @@ export default function useApplicationData() {
     const invitations = [];
 
     for (const id in state.commitments) {
-      if (state.commitments[id] &&!state.commitments[id].joined) {
+      if (state.commitments[id] && !state.commitments[id].joined) {
         invitations.push(state.commitments[id]);
       }
     }

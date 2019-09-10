@@ -39,7 +39,7 @@ export default function NewCommitmentForm(props) {
       end_date: endDate,
       stakes,
       activity_type: type,
-      thumbnail: ""
+      thumbnail: "zfprpyjvsixvf6wwfsf2"
     };
     props
       .setNewCommitment({
