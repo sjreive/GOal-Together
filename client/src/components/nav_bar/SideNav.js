@@ -5,7 +5,7 @@ import Media from 'react-media';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCircle
+  faPlusCircle
 } from "@fortawesome/free-solid-svg-icons";
 
 
@@ -14,7 +14,8 @@ export default function SideNav({
   notifications,
   invitations,
   activities,
-  votes
+  votes,
+  user
 }) {
   const [numberOfNotifications, setNumberOfNotifications] = useState(0);
   console.log(
@@ -34,7 +35,7 @@ export default function SideNav({
         <span>
           <img className={classes.logo} src="/images/hands_together.svg" alt="Teamwork by Pham Duy Phuang Hung of the Noun Project"/>
           <h1>{document.title}</h1>
-          <ul>
+          <ul className={classes.mainNavigationList}>
             <Media query="(max-width: 1100px)">
               {matches => 
                 matches ? (
@@ -73,7 +74,20 @@ export default function SideNav({
             </li>
           </ul>
         </span>
-        
+        <span>
+          <ul className={classes.authenticationNavigationList}>
+          { !user.id && <li><Link to={`/login`}>Login</Link></li>}
+          { !user.id && <li><Link to={`/register`}>Register</Link></li>}
+          { user.id && <li><Link to={`/logout`}>Logout</Link></li>}
+          </ul>
+            
+          <Link to={`/commitments/new`} className={classes.newCommitButton}>
+            <FontAwesomeIcon
+              className={classes.newCommitIcon}
+              icon={faPlusCircle}
+            />
+          </Link>
+        </span>
 
       </div>
     </nav>

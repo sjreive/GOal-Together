@@ -114,6 +114,7 @@ function App() {
               notifications={state.notifications}
               activities={state.activities}
               votes={state.votes}
+              user={state.user}
               invitations={state.invitations}
               Link={Link}
               getActivities={getActivities}

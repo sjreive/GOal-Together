@@ -189,7 +189,8 @@ $side-nav-width: 275px;
     height: 100%;
     width: 100%;
     position: relative;
-    @include flexThis(flex-start, center, column);
+    @include flexThis(space-between, center, column);
+    padding-bottom: 55%;
   }
   
   span {
@@ -201,6 +202,17 @@ $side-nav-width: 275px;
    ul {
      width: 100%;
      text-align: center;
+    }
+    
+    .mainNavigationList {
+      border-top: 2.5px solid $primary-blue;
+    }
+    .authenticationNavigationList {
+      border-bottom: 2.5px solid $primary-blue;
+    }
+
+   li:first-of-type {
+     margin-top: .75rem;
    }
 
   li {
@@ -216,7 +228,7 @@ $side-nav-width: 275px;
       display: block;
       transition: 0.3s;
       border-bottom: 1px solid transparent;
-      padding-bottom: .5rem;
+      padding-bottom: .75rem;
     }
 
     a:hover {
@@ -226,9 +238,14 @@ $side-nav-width: 275px;
   }
 
   h1 {
+    width: 100%;
+    padding-bottom: 1rem;
     margin-top: 2rem;
     color: $primary-blue;
     font-size: 1.8rem;
+    height: 5rem;
+    text-align: center;
+    
   }
 
   .logo {
@@ -260,6 +277,8 @@ $side-nav-width: 275px;
     bottom: 0;
     text-align: center;
   }
+
+  
 }
 
 .invisible {
