@@ -52,6 +52,11 @@ const reducer = (state, action) => {
         ...state,
         notifications: action.notifications
       };
+    case "SET_INVITATIONS":
+      return {
+        ...state,
+        invitations: action.invitations
+      };
     case "SET_LOADING_STATUS":
       return {
         ...state,
@@ -66,7 +71,7 @@ const reducer = (state, action) => {
 
 export default function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
-    commitments: [],
+    commitments: {},
     votes: [],
     members: {},
     title: "",
@@ -74,7 +79,8 @@ export default function useApplicationData() {
     error: "",
     activities: [],
     notifications: [],
-    loading: true
+    loading: true,
+    invitations: []
   });
 
   useEffect(() => {
@@ -125,9 +131,9 @@ export default function useApplicationData() {
             activities: all[3].data
           });
         })
-        .then(response =>
+        .then(response => {
           dispatch({ type: "SET_LOADING_STATUS", loading: false })
-        )
+        })
         .catch(error => {
           console.log(error);
 
@@ -199,6 +205,18 @@ export default function useApplicationData() {
     });
   };
 
+  const getInvitations = () => {
+    const invitations = [];
+
+    for (const id in state.commitments) {
+
+      if (!state.commitments[id].joined) {
+        invitations.push(state.commitments[id]);
+      } 
+    }
+    dispatch({ type: "SET_INVITATIONS", invitations });
+  };
+
   const setNewCommitment = submission => {
     const { commitment, member_emails } = submission;
     return new Promise((resolve, reject) => {
@@ -233,6 +251,7 @@ export default function useApplicationData() {
     setUser,
     submitVote,
     getNotifications,
-    submitActivity
+    submitActivity,
+    getInvitations
   };
 }

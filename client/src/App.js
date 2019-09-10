@@ -32,7 +32,8 @@ function App() {
     getCommitment,
     submitActivity,
     setUser,
-    submitVote
+    submitVote,
+    getInvitations
   } = useApplicationData();
   console.log(state);
   useEffect(() => {
@@ -41,7 +42,8 @@ function App() {
 
   useEffect(() => {
     getNotifications();
-  }, [state.activities]);
+    getInvitations();
+  }, [state.activities, state.commitments]);
 
   return (
     <Router>
