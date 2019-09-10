@@ -8,7 +8,7 @@
   border-radius: 0.5rem;
   margin-top: 1rem;
   margin-bottom: 2rem;
-  padding: 1rem 1rem 0 1rem;
+
   @include flexThis(center, center, column);
 
   &__top {
@@ -17,11 +17,15 @@
     width: 100%;
     text-align: right;
     color: $white;
-
+    padding: 1rem;
+    div:last-of-type {
+      width: 80%;
+    }
   }
 
   &__img {
-    max-height: 8rem;
+    height: 100%;
+    width: auto;
     padding: 0.5rem 0;
     flex-shrink: 1;
   }
@@ -30,9 +34,20 @@
     height: 35%;
     width: 100%;
     border-radius: 0.5rem;
-    padding-bottom: 1rem 0 1rem 1rem;
+    padding: 1rem 1rem 1rem 1rem;
     color: $white;
-    @include flexThis(space-between, flex-start, row);
+    @include flexThis(space-between, flex-end, row);
+
+    button:first-of-type {
+      background-color: $red;
+      border-color: $red;
+      color: $primary-blue;
+    }
+
+    button:hover,
+    button:focus {
+      border: 1px solid transparent;
+    }
   }
 
   &__category {

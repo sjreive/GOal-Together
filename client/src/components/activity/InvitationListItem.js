@@ -1,6 +1,12 @@
 import React from "react";
 import { Image } from 'cloudinary-react';
 import urls from '../../actions/urls';
+import Button from '../button/Button';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMinus,
+  faPlus
+} from "@fortawesome/free-solid-svg-icons";
 
 import classes from "./InvitationListItem.module.scss";
 
@@ -14,7 +20,6 @@ export default function InvitationListItem(props) {
           alt="commitment_category"
         />
         <div className={classes.commitmentTile__txt}>
-          
           <h2 className={classes.commitmentTile__name}>You've been invited to a commitment!</h2>
         </div>
       </div>
@@ -26,7 +31,20 @@ export default function InvitationListItem(props) {
           </p>
         </div>
         <div>
-          {/* <MemberList members={props.members} /> */}
+          <div>
+            <Button
+              invite={true}
+              smallCircle={true}
+              onClick={e => console.log("hi")}
+              innerContent={<FontAwesomeIcon icon={faMinus}/>}
+            />
+            <Button
+              invite={true}
+              smallCircle={true}
+              onClick={e => console.log("hi")}
+              innerContent={<FontAwesomeIcon icon={faPlus}/>}
+            />
+          </div>
         </div>
       </div>
     </article>
