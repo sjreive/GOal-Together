@@ -272,7 +272,7 @@ function CommitmentPage({
 
   const commitment_activities = Object.keys(activities).length > 0 ? Object.values(activities).filter(
     activity => activity.commitment_id === commitment.id
-  ) : {};
+  ) : [];
   console.log("COMMITMENT AT ROUTE", commitment);
 
   console.log("COMMITMENT ACTIVITIES:::: ", commitment_activities);
