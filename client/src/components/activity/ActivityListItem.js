@@ -30,6 +30,12 @@ export default function ActivityListItem(props) {
   const now = Date.now();
   console.log(now);
 
+  // console.log(
+  //   "attended? activity",
+  //   props.activity.title,
+  //   props.activity.attendance[props.user.id]
+  // );
+
   //Function to handle transition after voting
   const transitionAfterVote = () =>
     props.title ? transition("VOTED") : transition("BLANK");
@@ -38,44 +44,71 @@ export default function ActivityListItem(props) {
     <div>
       {mode === "FIRST" && (
         <main className={classes.activityTile}>
-          <section className={classes.activityTile__top}>
-            {now < activityDate ? (
-              <section className={classes.activityTile__txt}>
-                <p className={classes.activityTile__category}>
-                  You have an activity coming up:
-                </p>
-                <h3 className={classes.activityTile__name}>
-                  {props.activity.title}
-                </h3>
+          {now < activityDate ? (
+            <div className={classes.Tile}>
+              <section className={classes.activityTile__top}>
+                <section className={classes.activityTile__txt}>
+                  <p className={classes.activityTile__category}>
+                    You have an activity coming up:
+                  </p>
+                  <h3 className={classes.activityTile__name}>
+                    {props.activity.title}
+                  </h3>
+                </section>
+                <section className={classes.activityTile__icon}>
+                  <FontAwesomeIcon
+                    className={classes.members__icon_cal}
+                    icon={faCalendarAlt}
+                  />
+                </section>
               </section>
-            ) : (
-              <section className={classes.activityTile__txt}>
-                <p className={classes.activityTile__category}>
-                  Click to confirm who attended
-                </p>
-                <h3 className={classes.activityTile__name}>
-                  {props.activity.title}
-                </h3>
+              <section className={classes.activityTile__info}>
+                <p className={classes.activityTile__category}>{dateString}</p>
               </section>
-            )}
-            <section className={classes.activityTile__icon}>
-              {now < activityDate ? (
-                <FontAwesomeIcon
-                  className={classes.members__icon_cal}
-                  icon={faCalendarAlt}
-                />
-              ) : (
-                <FontAwesomeIcon
-                  onClick={e => transition("VOTE")}
-                  className={classes.members__icon_exclam}
-                  icon={faExclamationCircle}
-                />
-              )}
-            </section>
-          </section>
-          <section className={classes.activityTile__info}>
-            <p className={classes.activityTile__category}>{dateString}</p>
-          </section>
+            </div>
+          ) : now > activityDate && !props.activity.voted[props.user.id] ? (
+            <div className={classes.Tile}>
+              <section className={classes.activityTile__top}>
+                <section className={classes.activityTile__txt}>
+                  <p className={classes.activityTile__category}>
+                    Click to confirm who attended
+                  </p>
+                  <h3 className={classes.activityTile__name}>
+                    {props.activity.title}
+                  </h3>
+                </section>
+                <section className={classes.activityTile__icon}>
+                  <FontAwesomeIcon
+                    onClick={e => transition("VOTE")}
+                    className={classes.members__icon_exclam}
+                    icon={faExclamationCircle}
+                  />
+                </section>
+              </section>
+              <section className={classes.activityTile__info}>
+                <p className={classes.activityTile__category}>{dateString}</p>
+              </section>
+            </div>
+          ) : (
+            <div className={classes.Tile__past}>
+              <section className={classes.activityTile__top}>
+                <section className={classes.activityTile__txt}>
+                  <h3 className={classes.activityTile__name}>
+                    {props.activity.title}
+                  </h3>
+                  <p className={classes.activityTile__name}>
+                    This activity has taken place. You
+                    {props.activity.attendance[props.user.id]
+                      ? " attended."
+                      : " did not attend."}
+                  </p>
+                </section>
+              </section>
+              <section className={classes.activityTile__info}>
+                <p className={classes.activityTile__category}>{dateString}</p>
+              </section>
+            </div>
+          )}
         </main>
       )}
 

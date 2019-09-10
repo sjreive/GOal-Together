@@ -2,6 +2,15 @@
 @import "../../styles/mixins.module.scss";
 @import "../../styles/reset.module.scss";
 
+.Tile {
+  width: 100%;
+
+  &__past {
+    width: 100%;
+    opacity: 0.6;
+  }
+}
+
 .activityTile {
   height: 6 rem;
   border-radius: 0.5rem;
