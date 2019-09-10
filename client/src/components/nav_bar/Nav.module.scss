@@ -4,6 +4,7 @@
 $top-nav-vertical-padding: 10px;
 $top-nav-horizontal-padding: 30px;
 $border-radius-value: 15px;
+$side-nav-width: 250px;
 
 .nav {
   position: fixed;
@@ -170,5 +171,101 @@ $border-radius-value: 15px;
   li:last-of-type {
     border-radius: 0 0 0 $border-radius-value;
     border-bottom: 1px solid transparent;
+  }
+}
+
+.sideNav {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  width: $side-nav-width;
+  background-color: $white;
+  z-index: 9999;
+  padding: 1rem;
+  border-radius: 0 ($border-radius-value * 2) ($border-radius-value * 2) 0 ;
+ 
+  .sideNavContainer {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    @include flexThis(flex-start, center, column);
+  }
+  
+  span {
+
+    width: 100%;
+    @include flexThis(flex-start, center, column);
+  }
+
+   ul {
+     margin-top: 1rem;
+     width: 100%;
+     text-align: center;
+   }
+
+  li {
+    margin: 1rem 0;
+    padding: 1rem 0;
+    width: 100%;
+
+    a {
+      width: 100%;
+      height: 100%;
+      font-size: 1.3rem;
+      display: block;
+      transition: 0.3s;
+      border-bottom: 1px solid transparent;
+      padding-bottom: .5rem;
+    }
+
+    a:hover {
+      color: $primary-blue;
+      border-bottom: 1px solid $primary-blue;
+    }
+  }
+
+  h1 {
+    margin-top: 2rem;
+    color: $primary-blue;
+    font-size: 1.8rem;
+  }
+
+  .logo {
+      width: 70%;
+      height: auto;
+  }
+
+  .notifications {
+    position: absolute;
+    left: 1rem;
+    bottom: 1.5rem;
+  }
+
+  .alertIcon {
+    position: absolute;
+    color: red;
+    left: 28px;
+    top: -5px;
+  }
+
+  .notificationsNumber {
+    color: white;
+    position: absolute;
+    font-size: 0.8rem;
+    left: 33px;
+    top: -5px;
+  }
+  
+}
+
+// Padding according to side or vertical nav bars visible
+body {
+  padding: $nav-height 0 !important;
+}
+
+@media only screen and (min-width: 900px) {
+  body {
+    padding: 0 0 0 $side-nav-width !important;
   }
 }
