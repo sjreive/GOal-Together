@@ -35,6 +35,7 @@ export default function Commitment(props) {
           <NewActivityForm
             commitment={props.commitment}
             submitActivity={props.submitActivity}
+            getActivities={props.getActivities}
           />
           <ActivityList
             title={props.title}

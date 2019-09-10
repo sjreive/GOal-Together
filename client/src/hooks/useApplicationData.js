@@ -207,9 +207,13 @@ export default function useApplicationData() {
         data: { activity }
       }).then(async response => {
         console.log(response);
+        // rest of app expects there to be .voted and .attendance
+        let activity = response.data;
+        activity.voted = {};
+        activity.attendance = {};
         await dispatch({
           type: "SET_NEW_ACTIVITY",
-          activity: response.data
+          activity: activity
         });
         resolve(response);
       });
