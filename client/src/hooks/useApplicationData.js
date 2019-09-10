@@ -141,6 +141,13 @@ export default function useApplicationData() {
         })
       ])
         .then(all => {
+          let activities = all[3].data;
+          for (const id in activities) {
+            const commitment = all[0].data[activities[id].commitment_id]
+             if(!commitment.joined) {
+               delete activities[id]
+             }
+          }
           dispatch({
             type: "SET_APPLICATION_DATA",
             commitments: all[0].data,
@@ -247,7 +254,7 @@ export default function useApplicationData() {
 
   const getNotifications = () => {
     // copy of notifications state
-    const notifications = [...state.notifications];
+    let notifications = [...state.notifications];
 
     Object.values(state.activities).filter(activity => activity === {});
 
@@ -261,7 +268,12 @@ export default function useApplicationData() {
         }
       });
 
-    notifications.filter(activity => activity !== null);
+    notifications = notifications.filter(activity => activity !== null);
+    notifications = notifications.filter(activity => {
+      const commitment = state.commitments[activity.commitment_id]
+      return commitment && commitment.joined;
+    });
+    console.log("NOTIFICATIONS:::: ",notifications);
     dispatch({
       type: "GET_NOTIFICATIONS",
       notifications
