@@ -9,5 +9,7 @@ Rails.application.routes.draw do
     get 'commitments/:id/attendance', to: 'commitments#attendance'
     get 'commitments/:id/activities/:id/attendance', to: 'activities#attendance'
     post 'user_token' => 'user_token#create'
+    put 'commitments/:id/members/:id', to: 'commitments#accept_invitation'
+    delete 'commitments/:id/members/:id', to: 'commitments#decline_invitation'
   end
 end

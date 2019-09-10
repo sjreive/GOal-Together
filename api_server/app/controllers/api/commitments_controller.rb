@@ -106,6 +106,23 @@ module Api
       }
     end
 
+    # PUT /commitments/1/members/1
+    def accept_invitation 
+      @member = @commitment.members.find(current_user.id)
+
+      if @member.update_attributes(:joined, true)
+        render json: @member
+      else
+        render json: @member.errors, status: :unprocessable_entity
+      end
+    end
+
+    # DELETE /commitments/1/members/1
+    def decline_invitation
+      @member = @commitment.members.find(current_user.id)
+      @member.destroy
+    end
+
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_commitment
