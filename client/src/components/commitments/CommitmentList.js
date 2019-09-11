@@ -3,6 +3,8 @@ import React from "react";
 import classes from "./CommitmentList.module.scss";
 import CommitmentListItem from "./CommitmentListItem";
 
+import EmptyPagePill from"../status_pill/EmptyPagePill";
+
 export default function CommitmentList({ Link, match, members, commitments }) {
   // const commitment_members = Object.values(members).filter(member => commitment.members.includes(member.id))
 
@@ -23,5 +25,7 @@ export default function CommitmentList({ Link, match, members, commitments }) {
       </Link>
     ));
 
-  return <ul className={classes.commitmentList}>{commitmentListItems}</ul>;
+  return <ul className={classes.commitmentList}>
+    {commitmentListItems && commitmentListItems.length > 0 ? commitmentListItems : <div className={classes.wrapper}><EmptyPagePill header="Start some commitments to see your list of commitments!" imageId={"t8nwn9azvmtosi5bsnzn"} /></div>}
+  </ul>;
 }

@@ -44,6 +44,7 @@ export default function Register(props) {
     uploadPreset: urls.PRESET}, (error, result) => { 
       if (!error && result && result.event === "success") { 
         setAvatarTitle("Uploaded!");
+        console.log(result.info.public_id);
         setAvatarUrl(result.info.public_id); 
       }
     }
