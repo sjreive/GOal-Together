@@ -250,6 +250,7 @@ export default function useApplicationData() {
           type: "SET_NEW_ACTIVITY",
           activity: activity
         });
+        getActivities();
         resolve(response);
       });
     });

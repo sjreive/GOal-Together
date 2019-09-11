@@ -10,9 +10,10 @@ import useApplicationData from "./hooks/useApplicationData";
 import "./App.module.scss";
 import classes from "./App.module.scss";
 import { findUserCommitmentScore } from "./helpers/helpers";
-import Media from 'react-media';
+import Media from "react-media";
 
 import ActivityList from "./components/activity/ActivityList";
+import NotificationList from "./components/activity/NotificationList";
 import CommitmentList from "./components/commitments/CommitmentList";
 import VoterCard from "./components/vote/voterCard";
 import TopNav from "./components/nav_bar/TopNav";
@@ -61,7 +62,7 @@ function App() {
     <Router>
       {/* If on desktop, render profile page as side component, otherwise, use mobile view */}
       <Media query="(max-width: 1250px)">
-        {matches => 
+        {matches =>
           matches ? (
             <Route
               exact
@@ -82,39 +83,44 @@ function App() {
                 )
               }
             />
-          ) : (
-            state.user.id ? (
+          ) : state.user.id ? (
             <section className={classes.dashboardProfile}>
               <Profile
                 user={state.user}
                 numberOfActivities={Object.keys(state.activities).length}
                 numberOfCommitments={Object.keys(state.commitments).length}
-                userCommitmentScore={findUserCommitmentScore(state.user.email, state.members)}
+                userCommitmentScore={findUserCommitmentScore(
+                  state.user.email,
+                  state.members
+                )}
               />
-            </section> ) : (
-              <section className={classes.dashboardNotLoggedIn}>
-                <h1>GOal Together</h1>
-                <img className={classes.logo} src="/images/hands_together.svg" alt="Teamwork by Pham Duy Phuang Hung of the Noun Project"/>
-              </section>
-            )
-          )}  
+            </section>
+          ) : (
+            <section className={classes.dashboardNotLoggedIn}>
+              <h1>GOal Together</h1>
+              <img
+                className={classes.logo}
+                src="/images/hands_together.svg"
+                alt="Teamwork by Pham Duy Phuang Hung of the Noun Project"
+              />
+            </section>
+          )
+        }
       </Media>
       <Media query="(max-width: 1250px)">
-        {matches => (
+        {matches =>
           !matches && (
             <Route
               exact
               path="/profile"
-              render={() => (
-                <Redirect to="/leaderboard" />
-              )}
+              render={() => <Redirect to="/leaderboard" />}
             />
-            
-         ))}
+          )
+        }
       </Media>
       {/* Add side nav bar for desktop instead of top and bottom navs */}
       <Media query="(max-width: 900px)">
-        {matches => 
+        {matches =>
           matches ? (
             <div>
               <TopNav Link={Link} user={state.user} />
@@ -129,7 +135,7 @@ function App() {
               />
             </div>
           ) : (
-            <SideNav 
+            <SideNav
               notifications={state.notifications}
               activities={state.activities}
               votes={state.votes}
@@ -139,9 +145,10 @@ function App() {
               getActivities={getActivities}
               getNotifications={getNotifications}
             />
-          )}
+          )
+        }
       </Media>
-      
+
       <Route
         exact
         path="/"
@@ -268,7 +275,6 @@ function App() {
         }
       />
 
-      
       <Route
         exact
         path="/leaderboard"
@@ -393,7 +399,6 @@ function CommitmentPage({
     imageId: "qb3bao7kv87dznw2jnl8"
   };
   if (attendance.length > 1) {
-
     keenest =
       attendance[0].commitmentScore === attendance[1].commitmentScore
         ? {
@@ -489,9 +494,8 @@ function Notifications({
     memberObject[member.id] = member;
   });
 
-
   return (
-    <ActivityList
+    <NotificationList
       notifications={notifications}
       invitations={invitations}
       activities={activities}

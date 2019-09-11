@@ -5,38 +5,22 @@ import classes from "./ActivityList.module.scss";
 import ActivityListItem from "./ActivityListItem";
 import InvitationListItem from "./InvitationListItem";
 
-export default function ActivityList(props) {
-  const [activityList, setActivityList] = useState([]);
-  console.log(props.activities);
+export default function NotificationList(props) {
+  const [notificationList, setNotificationList] = useState([]);
 
   useEffect(() => {
-    console.log("Firing Use Effect");
-    const inactivities =
-      props.activities &&
-      props.activities
-        .filter(
-          activity => activity.voted && activity.voted[props.user.id] === true
-        )
-        .sort((a, b) => new Date(a.date) - new Date(b.date));
-
-    const actionActivities =
-      props.activities &&
-      props.activities
-        .filter(activity => !inactivities.includes(activity))
-        .sort((a, b) => new Date(a.date) - new Date(b.date));
-
-    const sortedActivities = props.activities && [
-      ...actionActivities,
-      ...inactivities
-    ];
-
-    setActivityList(sortedActivities);
-    console.log("activity List:", activityList);
-  }, [props.activities]);
+    console.log("notification List", notificationList);
+    setNotificationList(
+      props.notifications &&
+        props.notifications
+          .filter(notification => notification)
+          .sort((a, b) => new Date(a.date) - new Date(b.date))
+    );
+  }, [props.notifications]);
 
   const activityListItems =
-    activityList &&
-    activityList.map(activity => (
+    notificationList &&
+    notificationList.map(activity => (
       <ActivityListItem
         members={props.members}
         user={props.user}
@@ -46,6 +30,7 @@ export default function ActivityList(props) {
         submitVote={props.submitVote}
         getActivities={props.getActivities}
         title={props.title}
+        getNotifications={props.getNotifications}
       />
     ));
 
