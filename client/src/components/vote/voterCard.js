@@ -72,6 +72,11 @@ export default function MemberList(props) {
     );
   });
 
+  const memberListNames = members.forEach(member => {
+    console.log("member name:", member.name);
+    return <li>member.name</li>;
+  });
+
   return (
     <section className={classes.voterCard}>
       <FontAwesomeIcon
@@ -86,6 +91,7 @@ export default function MemberList(props) {
         Click on a member to change their attendance.
       </p>
       <ul className={classes.voterCard__list}>{memberListItems}</ul>
+      <ul>{memberListNames}</ul>
       <section className={classes.voterCard__submit}>
         <form onSubmit={event => event.preventDefault()}>
           <Button
