@@ -95,6 +95,26 @@ cmt2 = Commitment.create(
   thumbnail: "https://pbs.twimg.com/profile_images/1652308321/BookStairs_Icon_400x400.gif"
 )
 
+cmt3 = Commitment.create(
+  name: "Get Fit",
+  description: "Go to the gym regularly during bootcamp",
+  start_date: 20.days.ago,
+  end_date: 3.days.from_now,
+  activity_type: "Fitness",
+  stakes: "Secret Dare",
+  thumbnail: "https://media.gettyimages.com/vectors/flat-dumbbell-icon-vector-id501279419?s=612x612"
+)
+
+cmt4 = Commitment.create(
+  name: "Book Club",
+  description: "Mostly we just drink wine...",
+  start_date: 20.days.ago,
+  end_date: 3.days.from_now,
+  activity_type: "Fitness",
+  stakes: "Buys everyone a pint",
+  thumbnail: "https://media.gettyimages.com/vectors/flat-dumbbell-icon-vector-id501279419?s=612x612"
+)
+
 Member.create!(
   commitment_id: 1,
   user_id: 1,
@@ -124,6 +144,38 @@ Member.create!(
 Member.create!(
   commitment_id: 2,
   user_id: 3,
+  joined: true
+)
+
+
+# New members
+Member.create!(
+  commitment_id: 3,
+  user_id: 4,
+  joined: true
+)
+
+Member.create!(
+  commitment_id: 3,
+  user_id: 6,
+  joined: true
+)
+
+Member.create!(
+  commitment_id: 3,
+  user_id: 7,
+  joined: true
+)
+
+Member.create!(
+  commitment_id: 4,
+  user_id: 4,
+  joined: false
+)
+
+Member.create!(
+  commitment_id: 4,
+  user_id: 5,
   joined: true
 )
 
