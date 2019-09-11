@@ -1,6 +1,29 @@
 @import "./styles/variables.module.scss";
 @import "./styles/mixins.module.scss";
 
+.dashboardNotLoggedIn {
+  position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: $profile-dashboard-width;
+    background-color: $white;
+    @include flexThis(center, center, column);
+    border-radius: ($border-radius-value * 4) 0 0 ($border-radius-value * 4) ;
+    
+    h1 {
+      font-size: 3rem;
+      text-align: center;
+      color: $primary-blue;
+      margin-bottom: 1.5rem;
+    }
+    img {
+      width: 40%;
+      height: auto;
+    }
+}
+
 // Padding according to side or vertical nav bars visible
 body {
   padding: $nav-height 0 !important;
@@ -27,4 +50,5 @@ body {
     background-color: $white;
 
   }
+
 }

@@ -81,6 +81,7 @@ function App() {
               }
             />
           ) : (
+            state.user.id ? (
             <section className={classes.dashboardProfile}>
               <Profile
                 user={state.user}
@@ -88,7 +89,12 @@ function App() {
                 numberOfCommitments={Object.keys(state.commitments).length}
                 userCommitmentScore={findUserCommitmentScore(state.user.email, state.members)}
               />
-            </section>
+            </section> ) : (
+              <section className={classes.dashboardNotLoggedIn}>
+                <h1>GOal Together</h1>
+                <img className={classes.logo} src="/images/hands_together.svg" alt="Teamwork by Pham Duy Phuang Hung of the Noun Project"/>
+              </section>
+            )
           )}  
       </Media>
       <Media query="(max-width: 1250px)">
