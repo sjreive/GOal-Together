@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import classes from "./Styles.module.scss";
 import "./Styles.module.scss";
+import Media from 'react-media';
 
 import LeaderboardTableRow from "./LeaderboardTableRow";
 
@@ -10,7 +11,12 @@ export default function LeaderboardTable(props) {
     <table className={classes.userLeaderboard}>
       <thead>
         <tr>
-          <th>Rank</th>
+        <Media query="(min-width: 300px)">
+        {matches => (
+          matches && (
+            <th>Rank</th> 
+         ))}
+         </Media>
           <th>Name</th>
           <th>Committed Score</th>
         </tr>

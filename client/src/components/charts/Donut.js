@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import classes from "./Styles.module.scss";
 import "./Styles.module.scss";
+import Media from 'react-media';
 
 export default function Donut(props) {
   
@@ -50,30 +51,35 @@ export default function Donut(props) {
   }
 
   return (
-    <div className={classes.pieChartContainer}>
-      <ResponsiveContainer  width="100%" height={"100%"}>
-        <PieChart >
-          <Pie
-            data={data}
-            margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
-            innerRadius="45%"
-            outerRadius="55%"
-            fill="#2d3cb1"
-            paddingAngle={5}
-            dataKey="value"
-            label={renderLabel}
-            isAnimationActive={false}
-          >
-            {
-              data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
-            }
-          </Pie>
-        </PieChart>
-      </ResponsiveContainer>
-      <span className={classes.chartLabel}>
-        <h5>{props.userName}</h5>
-        <p>{props.userCommitmentScore}%</p>
-      </span>
-    </div>
+    <Media query="(min-width: 300px)">
+        {matches => (
+          matches && (
+            <div className={classes.pieChartContainer}>
+              <ResponsiveContainer  width="100%" height={"100%"}>
+                <PieChart >
+                  <Pie
+                    data={data}
+                    margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
+                    innerRadius="45%"
+                    outerRadius="55%"
+                    fill="#2d3cb1"
+                    paddingAngle={5}
+                    dataKey="value"
+                    label={renderLabel}
+                    isAnimationActive={false}
+                  >
+                    {
+                      data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+                    }
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
+              <span className={classes.chartLabel}>
+                <h5>{props.userName}</h5>
+                <p>{props.userCommitmentScore}%</p>
+              </span>
+            </div>  
+         ))}
+    </Media>
   );
 };
