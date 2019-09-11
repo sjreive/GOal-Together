@@ -8,5 +8,12 @@
   margin: 0 auto;
   padding: 2rem 0;
   padding-top: 1.5rem;
+  padding-bottom: 7rem;
   min-height: 100%;
+}
+
+@media only screen and (min-width: 900px) {
+  .activityList {
+    padding-bottom: 0;
+  }
 }

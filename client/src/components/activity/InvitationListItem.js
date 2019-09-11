@@ -7,6 +7,7 @@ import {
   faMinus,
   faPlus
 } from "@fortawesome/free-solid-svg-icons";
+import { determineCommitmentImage } from "../../helpers/helpers";
 
 import classes from "./InvitationListItem.module.scss";
 
@@ -14,11 +15,17 @@ export default function InvitationListItem(props) {
   return (
     <article className={classes.commitmentTile}>
       <div className={classes.commitmentTile__top}>
-        <img
-          className={classes.commitmentTile__img}
-          src={props.commitment.thumbnail}
-          alt="commitment_category"
-        />
+        <div className={classes.imageContainer}>
+          <Image
+              cloudName={urls.CLOUD_NAME}
+              publicId={determineCommitmentImage(props.commitment.category)}
+              width="auto"
+              dpr="auto"
+              responsive
+              crop="scale"
+              alt="Commitment Image"
+            />
+        </div>
         <div className={classes.commitmentTile__txt}>
           <h2 className={classes.commitmentTile__name}>You've been invited to a commitment!</h2>
         </div>
