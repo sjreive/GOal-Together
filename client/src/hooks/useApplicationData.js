@@ -67,6 +67,12 @@ const reducer = (state, action) => {
         notifications: action.notifications
       };
 
+    case "GET_COMMITMENTS":
+      return {
+        ...state,
+        commitments: action.commitments
+      };
+
     case "GET_ACTIVITIES":
       return {
         ...state,
@@ -214,6 +220,25 @@ export default function useApplicationData() {
     });
   };
 
+  const getCommitments = () => {
+    return new Promise((resolve, reject) => {
+      let token = "Bearer " + localStorage.getItem("jwt");
+      console.log("getCommitments function was called");
+      axios({
+        method: "get",
+        url: `${reactAppURLS.API_URL}/commitments`,
+        headers: { Authorization: token }
+      }).then(async response => {
+        console.log("Response from the API....", response);
+        await dispatch({
+          type: "GET_COMMITMENTS",
+          commitments: response.data
+        });
+        resolve(response);
+      });
+    });
+  };
+
   const submitActivity = activity => {
     console.log("submitting:", activity);
     return new Promise((resolve, reject) => {
@@ -295,7 +320,7 @@ export default function useApplicationData() {
     let notifications = [];
 
     Object.values(state.activities).filter(activity => activity === {});
- 
+
     state.activities &&
       Object.keys(state.activities).forEach(id => {
         if (
@@ -343,6 +368,7 @@ export default function useApplicationData() {
           type: "SET_NEW_COMMITMENT",
           commitment: response.data
         });
+        getCommitments();
         resolve(response);
       });
     });

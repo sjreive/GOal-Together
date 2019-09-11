@@ -79,9 +79,9 @@ export default function MemberList(props) {
         className={classes.voterCard__icon}
         icon={faArrowLeft}
       />
-      <h3 className={classes.voterCard__header}>
+      <h5 className={classes.voterCard__header}>
         Who attended {props.activity.title} on {dateString} ?
-      </h3>
+      </h5>
       <p className={classes.voterCard__txt}>
         Click on a member to change their attendance.
       </p>

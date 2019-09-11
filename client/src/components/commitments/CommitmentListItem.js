@@ -8,7 +8,7 @@ import classes from "./CommitmentListItem.module.scss";
 import MemberList from "../members/MemberList";
 
 export default function CommimentListItem(props) {
-  console.log("commitment item props", props);
+  const displayMembers = props.members.slice(0, 3);
   return (
     <main className={classes.commitmentTile}>
       <section className={classes.commitmentTile__top}>
@@ -26,13 +26,13 @@ export default function CommimentListItem(props) {
       </section>
       <section className={classes.commitmentTile__info}>
         <section className={classes.commitmentTile__txt}>
-          <h2 className={classes.commitmentTile__name}>{props.name}</h2>
+          <h4 className={classes.commitmentTile__name}>{props.name}</h4>
           <p className={classes.commitmentTile__category}>
             {props.description}
           </p>
         </section>
         <section>
-          <MemberList members={props.members} />
+          <MemberList members={displayMembers} />
         </section>
       </section>
     </main>

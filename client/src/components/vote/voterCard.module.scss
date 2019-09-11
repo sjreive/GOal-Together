@@ -2,7 +2,7 @@
 @import "../../styles/variables.module.scss";
 
 .voterCard {
-  height: 15rem;
+  height: 17rem;
   width: 100%;
   margin: 0 auto;
   padding: 2rem;
@@ -14,6 +14,7 @@
     @include flexThis(center, center, row);
   }
   &__list {
+    padding-top: 1rem;
     width: 80%;
     margin: 0 auto;
     @include flexThis(center, center, row);
@@ -26,5 +27,9 @@
   &__icon {
     font-size: 1rem;
     color: $primary-blue;
+  }
+  button {
+    max-height: 2rem;
+    font-size: 0.8rem;
   }
 }

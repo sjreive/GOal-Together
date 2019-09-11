@@ -334,7 +334,8 @@ function CommitmentPage({
     commitmentScore: 100,
     imageId: "qb3bao7kv87dznw2jnl8"
   };
-  if (attendance.length > 0) {
+  if (attendance.length > 1) {
+    console.log(attendance[0].commitmentScore);
     keenest =
       attendance[0].commitmentScore === attendance[1].commitmentScore
         ? {
