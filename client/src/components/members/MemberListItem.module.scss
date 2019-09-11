@@ -43,10 +43,15 @@
       @include button-active--opacity;
     }
 
-    &:hover + .members__item_name {
-      display: inline;
+    &:hover + &_name {
+      opacity: 1;
     }
   }
+
+  &:hover + &_name {
+    opacity: 1;
+  }
+
   &__icon_true {
     color: green;
   }
