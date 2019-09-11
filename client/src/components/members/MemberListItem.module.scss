@@ -18,6 +18,15 @@
       }
     }
 
+    &_name {
+      opacity: 0;
+      padding-right: 1rem;
+    }
+
+    &_name:hover {
+      opacity: 1;
+    }
+
     &--selected {
       color: $primary-blue;
       background-color: $white;
@@ -30,15 +39,12 @@
       user-select: none;
     }
 
-    &--selected &-image {
-      width: 28px;
-      height: 28px;
-      margin-right: 0.5rem;
-    }
-
-    &--selected,
     &:hover {
       @include button-active--opacity;
+    }
+
+    &:hover + .members__item_name {
+      display: inline;
     }
   }
   &__icon_true {
@@ -48,4 +54,8 @@
   &__icon_false {
     color: red;
   }
+}
+
+.members__item_image:hover + .members__item_name {
+  opacity: 1;
 }
