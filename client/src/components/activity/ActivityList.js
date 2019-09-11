@@ -39,6 +39,7 @@ export default function ActivityList(props) {
     activityList.map(activity => (
       <ActivityListItem
         members={props.members}
+        commitment={props.commitment}
         user={props.user}
         activity={activity}
         key={activity.id}

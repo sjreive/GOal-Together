@@ -257,6 +257,7 @@ function App() {
           state.user && state.user.id ? (
             <Notifications
               {...props}
+              commitments={state.commitments}
               getActivities={getActivities}
               getNotifications={getNotifications}
               activities={state.activities}
@@ -474,6 +475,7 @@ function Notifications({
   members,
   user,
   notifications,
+  commitments,
   invitations,
   getActivities,
   getNotifications,
@@ -497,6 +499,7 @@ function Notifications({
   return (
     <NotificationList
       notifications={notifications}
+      commitments={commitments}
       invitations={invitations}
       activities={activities}
       members={memberObject}

@@ -23,6 +23,7 @@ export default function NotificationList(props) {
     notificationList.map(activity => (
       <ActivityListItem
         members={props.members}
+        commitment={props.commitments[activity.commitment_id]}
         user={props.user}
         activity={activity}
         key={activity.id}

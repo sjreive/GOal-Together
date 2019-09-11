@@ -11,6 +11,9 @@ export default function MemberList(props) {
   const [activityVotes, addActivityVotes] = useState({});
   const members = props.members;
 
+  console.log("activity voters:", activityVotes);
+  console.log("members:", members);
+
   // switches attendance from true to false on click
   const changeAttendance = function(value, id) {
     addActivityVotes({ ...activityVotes, [id]: !value });
@@ -38,6 +41,7 @@ export default function MemberList(props) {
 
   // sets attendance value to true initially
   useEffect(() => {
+    console.log("Firing Use Effect");
     const newVotes = Object.values(members).reduce((votes, member) => {
       const value =
         typeof activityVotes[member.id] === "boolean"
@@ -46,7 +50,7 @@ export default function MemberList(props) {
       return { ...votes, [member.id]: value };
     }, {});
     addActivityVotes(newVotes);
-  }, [props.members]);
+  }, [members]);
 
   //Function to handle submission of vote card
   const submitVoteHandler = () => {
@@ -55,15 +59,15 @@ export default function MemberList(props) {
     props.getActivities();
   };
 
-  const memberListItems = Object.keys(members).map((id, member) => {
+  const memberListItems = members.map(member => {
     return (
       <Attendee
-        value={activityVotes[id]}
-        id={members[id].id}
+        value={activityVotes[member.id]}
+        id={member.id}
         clickHandler={changeAttendance}
-        key={members[id].id}
-        name={members[id].name}
-        avatar={members[id].avatar_url}
+        key={member.id}
+        name={member.name}
+        avatar={member.avatar_url}
       />
     );
   });
