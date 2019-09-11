@@ -35,6 +35,43 @@ usr3 = User.create(
   avatar_url: "pfhshugcpcfiboh9rhq5"
 )
 
+
+usr4 = User.create(
+  first_name: "Sarah",
+  last_name: "Reive",
+  email: "sarahjreive@gmail.com",
+  password: "123456",
+  password_confirmation: "123456",
+  avatar_url: "mdaijyu0shsvhwywfxma"
+)
+
+usr5 = User.create(
+  first_name: "Kendall",
+  last_name: "Rowe",
+  email: "kendall.rowe312@gmail.com",
+  password: "123456",
+  password_confirmation: "123456",
+  avatar_url: "j7goqehca3grbnhrysn4"
+)
+
+usr6 = User.create(
+  first_name: "Jessie",
+  last_name: "Wang",
+  email: "jessie@jessie.com",
+  password: "123456",
+  password_confirmation: "123456",
+  avatar_url: "rd6dqy6twvadw5wa6dal"
+)
+
+usr7 = User.create(
+  first_name: "T",
+  last_name: "Dog",
+  email: "T@Dog.com",
+  password: "123456",
+  password_confirmation: "123456",
+  avatar_url: "ojjzwmlvfm0yw7nx6yen"
+)
+
 # Commitments
 Commitment.destroy_all
 puts "Re-creating Commitments ..."

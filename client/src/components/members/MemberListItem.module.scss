@@ -61,6 +61,6 @@
   }
 }
 
-.members__item_image:hover + .members__item_name {
+.members__item_name + .members__item_image:hover {
   opacity: 1;
 }
