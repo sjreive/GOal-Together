@@ -190,7 +190,6 @@
  
   .sideNavContainer {
     height: 100%;
-    word-break: break-all;
     width: 100%;
     position: relative;
     @include flexThis(space-between, center, column);
@@ -302,7 +301,6 @@
 
 @media only screen and (max-height: 675px) {
   .sideNav {
-    overflow: scroll;
     h1 {
       font-size: 1.2rem;
       height: 2.5rem;
