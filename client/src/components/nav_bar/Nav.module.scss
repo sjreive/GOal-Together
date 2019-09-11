@@ -323,4 +323,22 @@
 
 }
 
+@media only screen and (min-height: 675px) {
+
+
+  .bottomNav {
+    a {
+      margin: 0 5px;
+    }
+
+    .navIcon {
+      height: $nav-link-size * .8;
+      width: $nav-link-size * .8;
+      transition: 0.3s;
+    }
+  }
+
+
+}
+
 

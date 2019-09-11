@@ -5,10 +5,16 @@
 .pieChartContainer {
   position: relative;
   width: 100%;
+  min-height: 400px;
+  height: 400px;
   @include flexThis(center, center, row);
+
+  svg {
+    overflow: visible;
+  }
   
   .chartLabel {
-    $label-header-font-size: 2rem;
+    $label-header-font-size: 1.5rem;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -52,7 +58,8 @@
   
   th,
   td {
-    padding: 10px 20px;
+    font-size: .9rem;
+    padding: 3% 4%;
     border: 1px solid $light-gray-bkgrd;
   }
   
@@ -65,4 +72,35 @@
     padding-bottom: 15px;
   }
 
+}
+
+@media only screen and (min-width: 500px) {
+  .pieChartContainer {
+    $label-header-font-size: 2rem;
+    
+    .chartLabel {
+      height: $label-header-font-size * 2;
+      width: $label-header-font-size * 2;
+      margin-left: -$label-header-font-size;
+      margin-top: -$label-header-font-size;
+  
+      h5 {
+        font-size: $label-header-font-size;
+
+      }
+      p {
+        font-size: $label-header-font-size / 1.5;
+      }
+    }
+  
+  }
+
+  .userLeaderboard {
+    
+    th,
+    td {
+      font-size: 1.2rem;
+      
+    }
+  }
 }

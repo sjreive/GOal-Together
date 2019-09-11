@@ -3,6 +3,7 @@
 
 .commitmentSection {
   margin-bottom: 10vh;
+  @include flexThis(center, center, column);
 
   .commitmentStatsContainer {
     @include flexThis(space-between, center, column);
@@ -11,6 +12,7 @@
   .commitmentActivitiesContainer {
     @include flexThis(space-between, center, column);
     padding-top: 2rem;
+    width: 80%;
   }
 }
 

@@ -51,13 +51,13 @@ export default function Donut(props) {
 
   return (
     <div className={classes.pieChartContainer}>
-      <ResponsiveContainer  width="100%" height={400}>
+      <ResponsiveContainer  width="100%" height={"100%"}>
         <PieChart >
           <Pie
             data={data}
-            margin={{ top: 20, right: 20, left: 20, bottom: 20 }}
+            margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
             innerRadius="45%"
-            outerRadius="60%"
+            outerRadius="55%"
             fill="#2d3cb1"
             paddingAngle={5}
             dataKey="value"

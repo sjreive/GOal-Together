@@ -11,12 +11,13 @@
   @include flexThis(flex-start, center, column);
 
   &__top {
-    height: 65%;
+    height: 60%;
   }
 
   &__img {
     max-height: 8rem;
     padding: 0.5rem 0;
+    
     flex-shrink: 1;
 
     img {
@@ -25,7 +26,7 @@
   }
 
   &__info {
-    height: 35%;
+    height: 40%;
     width: 100%;
     border-radius: 0.5rem;
     background-image: $gradient;
@@ -33,6 +34,10 @@
     color: $white;
     justify-content: space-between;
     @include flexThis(space-beteween, flex-start, row);
+
+    img {
+      margin-bottom: .25rem;
+    }
   }
 
   &__category {
@@ -40,6 +45,11 @@
   }
 
   &__txt {
-    // width: 50%;
+
+
+    p {
+      margin-top: .2rem;
+      line-height: 1rem;
+    }
   }
 }
