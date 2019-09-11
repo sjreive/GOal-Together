@@ -8,8 +8,8 @@ export default function CommitmentList({ Link, match, members, commitments }) {
 
   const commitmentListItems =
     commitments &&
-    Object.keys(commitments).map((id, commitment) => (
-      <Link to={`${match.url}/${id}`}>
+    Object.keys(commitments).map((id, index) => (
+      <Link key={index} to={`${match.url}/${id}`}>
         <CommitmentListItem
           key={commitments[id].id}
           category={commitments[id].activity_type}

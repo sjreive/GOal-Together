@@ -22,6 +22,7 @@ export default function Commitment(props) {
       mode: "STATS"
     }
   ];
+  
 
   return (
     <section className={classes.commitmentSection}>

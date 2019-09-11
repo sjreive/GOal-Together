@@ -6,6 +6,7 @@ import { useVisualMode } from "../../hooks/useVisualMode";
 import Donut from "../charts/Donut";
 import RankingPill from "../status_pill/RankingPill";
 import LeaderboardTable from "../charts/LeaderboardTable";
+import EmptyPagePill from"../status_pill/EmptyPagePill";
 
 export default function Leaderboard(props) {
   const chartAttendanceData = props.attendance.map(member => {
@@ -26,7 +27,7 @@ export default function Leaderboard(props) {
           <LeaderboardTable attendance={props.attendance} />
         </div>
       )}
-      {props.attendance.length === 0 && <div className={classes.wrapper}><h2>Create a commitment and do some activities to start seeing your stats!</h2></div>}
+      {props.attendance.length === 0 && <div className={classes.wrapper}><RankingPill negative={true} header="Create a commitment and do some activities to start seeing your stats!:" name={props.flakiest.name} score={props.flakiest.commitmentScore} imageId={props.flakiest.imageId} /></div>}
     </section>
   );
 };

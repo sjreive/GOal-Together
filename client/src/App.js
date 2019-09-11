@@ -358,11 +358,14 @@ function CommitmentPage({
   getNotifications,
   getActivities
 }) {
+
+  let attendance = [];
+
+  const commitment = commitments[parseInt(match.params.commitmentId, 10)];
   // Filter for active members who have joined a commitment
   const activeMembers = Object.values(members).filter(
     member => member.avatar_url
   );
-  const commitment = commitments[parseInt(match.params.commitmentId, 10)];
 
   const commitment_activities =
     Object.keys(activities).length > 0
@@ -375,18 +378,19 @@ function CommitmentPage({
     setTitle(commitment.name);
   }
 
-  let attendance = [];
+  commitment.members.map(id => {
+    return activeMembers.find(member => member.id === id);
+  })
+  .filter(member => member)
+  .forEach(realMember => {
+    const name = realMember.first_name
+    const commitmentScore = commitment.attendance[realMember.id]
+      ? commitment.attendance[realMember.id]
+      : 100;
+    const imageId = realMember.avatar_url;
+    attendance.push({ name, commitmentScore, imageId });
 
-  for (const memberId in commitment.members) {
-    const name = activeMembers[memberId].first_name;
-    if (name) {
-      const commitmentScore = commitment.attendance[memberId]
-        ? commitment.attendance[memberId]
-        : 100;
-      const imageId = activeMembers[memberId].avatar_url;
-      attendance.push({ name, commitmentScore, imageId });
-    }
-  }
+  });
 
   attendance = attendance.sort((a, b) => b.commitmentScore - a.commitmentScore);
   let keenest = {

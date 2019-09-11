@@ -1,0 +1,20 @@
+import React, { useState } from "react";
+import classes from "./Styles.module.scss";
+import "./Styles.module.scss";
+import { Image } from 'cloudinary-react';
+import { determineUserAttendanceStatusAndImage } from "../../helpers/helpers";
+import urls from '../../actions/urls';
+const classNames = require('classnames');
+
+export default function EmptyPagePill(props) {
+  const rankingPill = classNames(classes.statusContainer, classes.statusPill, props.negative ? classes.negative : null, props.positive ? classes.positive : null);
+
+  return (
+    <div className={rankingPill}>
+      <div className={classes.userNameContainer}>
+        <h3>{props.header}</h3>
+      </div>
+      <Image cloudName={urls.CLOUD_NAME} publicId={props.imageId} alt="Icon from flatIcon.com" width="auto" dpr="auto" responsive crop="scale" />
+    </div>
+  );
+};
