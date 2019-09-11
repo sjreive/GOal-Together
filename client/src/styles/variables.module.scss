@@ -23,6 +23,15 @@ $gradient: linear-gradient(
   #e793c6
 );
 
+$transparent-primary-blue: rgba(45, 60, 177, 0.4);
+
 $nav-height: 75px;
 $nav-link-size: 30px;
 $viewport-height: calc(100vh - ($nav-height * 2));
+
+$top-nav-vertical-padding: 10px;
+$top-nav-horizontal-padding: 30px;
+$border-radius-value: 15px;
+$side-nav-width: 275px;
+
+$profile-dashboard-width: 30%;

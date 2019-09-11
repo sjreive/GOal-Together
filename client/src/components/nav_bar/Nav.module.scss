@@ -1,10 +1,7 @@
 @import "../../styles/variables.module.scss";
 @import "../../styles/mixins.module.scss";
 
-$top-nav-vertical-padding: 10px;
-$top-nav-horizontal-padding: 30px;
-$border-radius-value: 15px;
-$side-nav-width: 275px;
+
 
 .nav {
   position: fixed;
@@ -190,7 +187,6 @@ $side-nav-width: 275px;
     width: 100%;
     position: relative;
     @include flexThis(space-between, center, column);
-    padding-bottom: 55%;
   }
   
   span {
@@ -278,6 +274,18 @@ $side-nav-width: 275px;
     text-align: center;
   }
 
+  .newCommitContainer {
+    position: relative;
+    padding-top: 3rem;
+    height: 10rem;
+    @include flexThis(flex-start, center, column);
+
+    .newCommitButton {
+      position: static;
+      transition: 0.3s;
+      margin-left: 0 !important;
+    }
+  }
   
 }
 
@@ -285,13 +293,5 @@ $side-nav-width: 275px;
   visibility: hidden;
 }
 
-// Padding according to side or vertical nav bars visible
-body {
-  padding: $nav-height 0 !important;
-}
 
-@media only screen and (min-width: 900px) {
-  body {
-    padding: 0 0 0 $side-nav-width !important;
-  }
-}
+

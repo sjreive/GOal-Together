@@ -7,7 +7,7 @@ import urls from '../../actions/urls';
 const classNames = require('classnames');
 
 export default function UserStatus(props) {
-  const userStatus = classNames(classes.statusContainer, classes.statusPill);
+  const userStatus = classNames(classes.statusContainer, classes.statusPill, props.profilePill ? classes.profilePill : null);
   const statusImageObject = determineUserAttendanceStatusAndImage(props.score, props.activityCount)
   return (
     <div className={userStatus}>

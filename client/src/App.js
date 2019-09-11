@@ -7,6 +7,7 @@ import {
   Redirect
 } from "react-router-dom";
 import useApplicationData from "./hooks/useApplicationData";
+import "./App.module.scss";
 import classes from "./App.module.scss";
 import { findUserCommitmentScore } from "./helpers/helpers";
 import Media from 'react-media';
@@ -57,7 +58,7 @@ function App() {
   return (
     <Router>
       {/* If on desktop, render profile page as side component, otherwise, use mobile view */}
-      <Media query="(max-width: 1100px)">
+      <Media query="(max-width: 1250px)">
         {matches => 
           matches ? (
             <Route
@@ -80,18 +81,28 @@ function App() {
               }
             />
           ) : (
+            <section className={classes.dashboardProfile}>
+              <Profile
+                user={state.user}
+                numberOfActivities={Object.keys(state.activities).length}
+                numberOfCommitments={Object.keys(state.commitments).length}
+                userCommitmentScore={findUserCommitmentScore(state.user.email, state.members)}
+              />
+            </section>
+          )}  
+      </Media>
+      <Media query="(max-width: 1250px)">
+        {matches => (
+          !matches && (
             <Route
               exact
               path="/profile"
-              render={props =>
-                state.user && state.user.id ? (
-                  <Redirect to="/leaderboard" />
-                ) : (
-                  <Redirect to="/login" />
-                )
-              }
+              render={() => (
+                <Redirect to="/leaderboard" />
+              )}
             />
-          )}
+            
+         ))}
       </Media>
       {/* Add side nav bar for desktop instead of top and bottom navs */}
       <Media query="(max-width: 900px)">

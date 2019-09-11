@@ -1,40 +1,35 @@
 @import "./styles/variables.module.scss";
 @import "./styles/mixins.module.scss";
 
-.App {
-  text-align: center;
+// Padding according to side or vertical nav bars visible
+body {
+  padding: $nav-height 0 !important;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+@media only screen and (min-width: 900px) {
+  body {
+    padding: 0 0 0 $side-nav-width !important;
   }
 }
 
+@media only screen and (min-width: 1250px) {
+  body {
+    padding: 0 $profile-dashboard-width 0 $side-nav-width !important;
+  }
 
+  .dashboardProfile {
+    padding-top: 2.5rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: $profile-dashboard-width;
+    background-color: $white;
 
+    section {
+      overflow: hidden;
+    }
 
-// .bigSquare {
-//   height: 200px;
-//   width: 200px;
-//   background-image: $gradient;
-// }
+  }
+}

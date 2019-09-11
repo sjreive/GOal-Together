@@ -36,7 +36,7 @@ export default function SideNav({
           <img className={classes.logo} src="/images/hands_together.svg" alt="Teamwork by Pham Duy Phuang Hung of the Noun Project"/>
           <h1>{document.title}</h1>
           <ul className={classes.mainNavigationList}>
-            <Media query="(max-width: 1100px)">
+            <Media query="(max-width: 1250px)">
               {matches => 
                 matches ? (
                   <li>
@@ -62,31 +62,33 @@ export default function SideNav({
               <Link className={classes.notificationsLink} to={`/notifications`}>
                 Notifications
                 {numberOfNotifications > 0 && (
-                  // <div className={classes.notifications}>
                     <div className={classes.notificationContainer}>
                       <p className={classes.notificationsNumber}>
                         {numberOfNotifications}
                       </p>
-                    </div>
-                  // </div>notifications.filter(activity => activity).length + invitations.length 
+                    </div> 
                 )}
               </Link>
             </li>
           </ul>
         </span>
         <span>
-          <ul className={classes.authenticationNavigationList}>
-          { !user.id && <li><Link to={`/login`}>Login</Link></li>}
-          { !user.id && <li><Link to={`/register`}>Register</Link></li>}
-          { user.id && <li><Link to={`/logout`}>Logout</Link></li>}
-          </ul>
-            
-          <Link to={`/commitments/new`} className={classes.newCommitButton}>
-            <FontAwesomeIcon
-              className={classes.newCommitIcon}
-              icon={faPlusCircle}
-            />
-          </Link>
+          <span>
+            <ul className={classes.authenticationNavigationList}>
+              { !user.id && <li><Link to={`/login`}>Login</Link></li>}
+              { !user.id && <li><Link to={`/register`}>Register</Link></li>}
+              { user.id && <li><Link to={`/logout`}>Logout</Link></li>}
+            </ul>
+          </span>
+
+          <span className={classes.newCommitContainer}>
+            <Link to={`/commitments/new`} className={classes.newCommitButton}>
+              <FontAwesomeIcon
+                className={classes.newCommitIcon}
+                icon={faPlusCircle}
+              />
+            </Link>
+          </span>
         </span>
 
       </div>
