@@ -1,9 +1,7 @@
 @import "../../styles/variables.module.scss";
 @import "../../styles/mixins.module.scss";
 
-$top-nav-vertical-padding: 10px;
-$top-nav-horizontal-padding: 30px;
-$border-radius-value: 15px;
+
 
 .nav {
   position: fixed;
@@ -43,7 +41,7 @@ $border-radius-value: 15px;
 
   .alertIcon {
     position: absolute;
-    color: red;
+    color: $red;
     left: 28px;
     top: -5px;
   }
@@ -178,3 +176,151 @@ $border-radius-value: 15px;
     border-bottom: 1px solid transparent;
   }
 }
+
+.sideNav {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  width: $side-nav-width;
+  background-color: $white;
+  z-index: 9999;
+  padding: 1rem;
+  border-radius: 0 ($border-radius-value * 4) ($border-radius-value * 4) 0 ;
+ 
+  .sideNavContainer {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    @include flexThis(space-between, center, column);
+  }
+  
+  span {
+
+    width: 100%;
+    @include flexThis(flex-start, center, column);
+  }
+
+   ul {
+     width: 100%;
+     text-align: center;
+    }
+    
+    .mainNavigationList {
+      border-top: 2.5px solid $primary-blue;
+    }
+    .authenticationNavigationList {
+      border-bottom: 2.5px solid $primary-blue;
+    }
+
+   li:first-of-type {
+     margin-top: .75rem;
+   }
+
+  li {
+    margin: 1.25rem 0;
+    width: 100%;
+    
+    a {
+      padding: .75rem 0;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      font-size: 1.3rem;
+      display: block;
+      transition: 0.3s;
+      border-bottom: 1px solid transparent;
+      padding-bottom: .75rem;
+    }
+
+    a:hover {
+      color: $primary-blue;
+      border-bottom: 1px solid $primary-blue;
+    }
+  }
+
+  h1 {
+    width: 100%;
+    padding-bottom: 1rem;
+    margin-top: 2rem;
+    color: $primary-blue;
+    font-size: 1.8rem;
+    height: 5rem;
+    text-align: center;
+    
+  }
+
+  .logo {
+      width: 70%;
+      height: auto;
+  }
+
+  .notificationsLink {
+    @include flexThis(center, center, row);
+  }
+  .notificationContainer {
+    margin-left: .5rem;
+    position: relative;
+    height: 25px;
+    width: 25px;
+    background-color: $red;
+    border-radius: 100%;
+  }
+
+  .notificationsNumber {
+    color: white;
+    position: absolute;
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+  }
+
+  .newCommitContainer {
+    position: relative;
+    padding-top: 3rem;
+    height: 10rem;
+    @include flexThis(flex-start, center, column);
+
+    .newCommitButton {
+      position: static;
+      transition: 0.3s;
+      margin-left: 0 !important;
+    }
+  }
+  
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+@media only screen and (max-height: 675px) {
+  .sideNav {
+    overflow: scroll;
+    h1 {
+      font-size: 1.2rem;
+      height: 2.5rem;
+    }
+    
+    li {
+      margin: .75rem 0;
+
+      a {
+        font-size: 1rem;
+        display: block;
+        transition: 0.3s;
+        border-bottom: 1px solid transparent;
+        padding-bottom: .75rem;
+      }
+    }
+  }
+
+
+}
+
+

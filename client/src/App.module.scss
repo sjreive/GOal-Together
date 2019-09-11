@@ -1,40 +1,54 @@
 @import "./styles/variables.module.scss";
 @import "./styles/mixins.module.scss";
 
-.App {
-  text-align: center;
+.dashboardNotLoggedIn {
+  position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: $profile-dashboard-width;
+    background-color: $white;
+    @include flexThis(center, center, column);
+    border-radius: ($border-radius-value * 4) 0 0 ($border-radius-value * 4) ;
+    
+    h1 {
+      font-size: 3rem;
+      text-align: center;
+      color: $primary-blue;
+      margin-bottom: 1.5rem;
+    }
+    img {
+      width: 40%;
+      height: auto;
+    }
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+// Padding according to side or vertical nav bars visible
+body {
+  padding: $nav-height 0 !important;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media only screen and (min-width: 900px) {
+  body {
+    padding: 0 0 0 $side-nav-width !important;
   }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
+@media only screen and (min-width: 1250px) {
+  body {
+    padding: 0 $profile-dashboard-width 0 $side-nav-width !important;
+  }
 
+  .dashboardProfile {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: $profile-dashboard-width;
+    background-color: $white;
 
+  }
 
-// .bigSquare {
-//   height: 200px;
-//   width: 200px;
-//   background-image: $gradient;
-// }
+}

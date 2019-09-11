@@ -9,6 +9,7 @@ export default function ActivityList(props) {
   const [activityList, setActivityList] = useState([]);
 
   useEffect(() => {
+    console.log("HAPPENING NOW::::", activityList);
     const inactivities =
       !props.notifications &&
       props.activities &&
@@ -27,16 +28,17 @@ export default function ActivityList(props) {
 
     const sortedActivities = !props.notifications &&
       props.activities && [...actionActivities, ...inactivities];
-
-    // Will display either activities or notifications, depending on page
-    setActivityList(
-      props.notifications
+      // Will display either activities or notifications, depending on page
+      setActivityList(
+        props.notifications
         ? props.notifications
-            .filter(notification => notification)
-            .sort((a, b) => new Date(a.date) - new Date(b.date))
+        .filter(notification => notification)
+        .sort((a, b) => new Date(a.date) - new Date(b.date))
         : sortedActivities
-    );
-  }, [props.activites]);
+        );
+  }, [props.activites, props.notifications]);
+
+
 
   const activityListItems =
     activityList &&

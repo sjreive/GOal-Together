@@ -7,8 +7,10 @@ import {
   Redirect
 } from "react-router-dom";
 import useApplicationData from "./hooks/useApplicationData";
+import "./App.module.scss";
 import classes from "./App.module.scss";
 import { findUserCommitmentScore } from "./helpers/helpers";
+import Media from 'react-media';
 
 import ActivityList from "./components/activity/ActivityList";
 import CommitmentList from "./components/commitments/CommitmentList";
@@ -22,6 +24,7 @@ import Login from "./components/authentication/Login";
 import Logout from "./components/authentication/Logout";
 import Register from "./components/authentication/Register";
 import Leaderboard from "./components/leaderboard/Leaderboard";
+import SideNav from "./components/nav_bar/SideNav";
 
 function App() {
   const {
@@ -56,7 +59,89 @@ function App() {
 
   return (
     <Router>
-      <TopNav Link={Link} user={state.user} />
+      {/* If on desktop, render profile page as side component, otherwise, use mobile view */}
+      <Media query="(max-width: 1250px)">
+        {matches => 
+          matches ? (
+            <Route
+              exact
+              path="/profile"
+              render={props =>
+                state.user && state.user.id ? (
+                  <ProfilePage
+                    {...props}
+                    setTitle={setTitle}
+                    user={state.user}
+                    numberOfCommitments={Object.keys(state.commitments).length}
+                    numberOfActivities={Object.keys(state.activities).length}
+                    members={state.members}
+                    loading={state.loading}
+                  />
+                ) : (
+                  <Redirect to="/login" />
+                )
+              }
+            />
+          ) : (
+            state.user.id ? (
+            <section className={classes.dashboardProfile}>
+              <Profile
+                user={state.user}
+                numberOfActivities={Object.keys(state.activities).length}
+                numberOfCommitments={Object.keys(state.commitments).length}
+                userCommitmentScore={findUserCommitmentScore(state.user.email, state.members)}
+              />
+            </section> ) : (
+              <section className={classes.dashboardNotLoggedIn}>
+                <h1>GOal Together</h1>
+                <img className={classes.logo} src="/images/hands_together.svg" alt="Teamwork by Pham Duy Phuang Hung of the Noun Project"/>
+              </section>
+            )
+          )}  
+      </Media>
+      <Media query="(max-width: 1250px)">
+        {matches => (
+          !matches && (
+            <Route
+              exact
+              path="/profile"
+              render={() => (
+                <Redirect to="/leaderboard" />
+              )}
+            />
+            
+         ))}
+      </Media>
+      {/* Add side nav bar for desktop instead of top and bottom navs */}
+      <Media query="(max-width: 900px)">
+        {matches => 
+          matches ? (
+            <div>
+              <TopNav Link={Link} user={state.user} />
+              <BottomNav
+                notifications={state.notifications}
+                activities={state.activities}
+                votes={state.votes}
+                invitations={state.invitations}
+                Link={Link}
+                getActivities={getActivities}
+                getNotifications={getNotifications}
+              />
+            </div>
+          ) : (
+            <SideNav 
+              notifications={state.notifications}
+              activities={state.activities}
+              votes={state.votes}
+              user={state.user}
+              invitations={state.invitations}
+              Link={Link}
+              getActivities={getActivities}
+              getNotifications={getNotifications}
+            />
+          )}
+      </Media>
+      
       <Route
         exact
         path="/"
@@ -183,25 +268,7 @@ function App() {
         }
       />
 
-      <Route
-        exact
-        path="/profile"
-        render={props =>
-          state.user && state.user.id ? (
-            <ProfilePage
-              {...props}
-              setTitle={setTitle}
-              user={state.user}
-              numberOfCommitments={Object.keys(state.commitments).length}
-              numberOfActivities={Object.keys(state.activities).length}
-              members={state.members}
-              loading={state.loading}
-            />
-          ) : (
-            <Redirect to="/login" />
-          )
-        }
-      />
+      
       <Route
         exact
         path="/leaderboard"
@@ -234,15 +301,6 @@ function App() {
             <Redirect to="/login" />
           )
         }
-      />
-      <BottomNav
-        notifications={state.notifications}
-        activities={state.activities}
-        votes={state.votes}
-        invitations={state.invitations}
-        Link={Link}
-        getActivities={getActivities}
-        getNotifications={getNotifications}
       />
     </Router>
   );
@@ -305,6 +363,8 @@ function CommitmentPage({
           activity => activity.commitment_id === commitment.id
         )
       : [];
+
+      console.log("THESE ARE THE ACTIVITIES", commitment_activities);
 
   console.log("commitment name:", commitment.name);
   console.log("document title:", document.title);

@@ -5,7 +5,7 @@ import "./Styles.module.scss";
 const classNames = require('classnames');
 
 export default function StatPill(props) {
-  const generalPill = classNames(classes.statusContainer, classes.statPill);
+  const generalPill = classNames(classes.statusContainer, classes.statPill, props.profilePill ? classes.profilePill : null);
   
   return (
     <div className={generalPill}>

@@ -31,16 +31,19 @@ export default function Profile(props) {
         </div>
         <UserStatus
           className={classes.profilePill}
+          profilePill={true}
           score={props.userCommitmentScore}
           activityCount={props.numberOfActivities}
         />
         <StatPill
           className={classes.profilePill}
+          profilePill={true}
           header="Total Commitments"
           score={props.numberOfCommitments}
         />
         <StatPill
           className={classes.profilePill}
+          profilePill={true}
           header="Total Activities"
           score={props.numberOfActivities}
         />

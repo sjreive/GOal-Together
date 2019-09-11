@@ -31,3 +31,19 @@
 .wrapper {
   @include wrapper-styles;
 }
+
+@media only screen and (min-width: 1250px) {
+  .profileSection {
+    
+    h2 {
+      color: $primary-blue !important;
+      font-size: 2.5rem;
+    }
+    div {
+      width: 95% !important;
+    }
+  }
+
+}
+
+
