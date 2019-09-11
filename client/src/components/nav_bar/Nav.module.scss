@@ -293,5 +293,28 @@
   visibility: hidden;
 }
 
+@media only screen and (max-height: 675px) {
+  .sideNav {
+    overflow: scroll;
+    h1 {
+      font-size: 1.2rem;
+      height: 2.5rem;
+    }
+    
+    li {
+      margin: .75rem 0;
+
+      a {
+        font-size: 1rem;
+        display: block;
+        transition: 0.3s;
+        border-bottom: 1px solid transparent;
+        padding-bottom: .75rem;
+      }
+    }
+  }
+
+
+}
 
 

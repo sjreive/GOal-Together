@@ -33,7 +33,12 @@ export default function SideNav({
     <nav className={classes.sideNav}>
       <div className={classes.sideNavContainer}>
         <span>
-          <img className={classes.logo} src="/images/hands_together.svg" alt="Teamwork by Pham Duy Phuang Hung of the Noun Project"/>
+        <Media query="(max-height: 800px)">
+        {matches => 
+          !matches && (
+            <img className={classes.logo} src="/images/hands_together.svg" alt="Teamwork by Pham Duy Phuang Hung of the Noun Project"/>
+          )}
+      </Media>
           <h1>{document.title}</h1>
           <ul className={classes.mainNavigationList}>
             <Media query="(max-width: 1250px)">

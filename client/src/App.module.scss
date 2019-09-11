@@ -18,7 +18,6 @@ body {
   }
 
   .dashboardProfile {
-    padding-top: 2.5rem;
     position: absolute;
     right: 0;
     top: 0;
@@ -26,10 +25,6 @@ body {
     height: 100%;
     width: $profile-dashboard-width;
     background-color: $white;
-
-    section {
-      overflow: hidden;
-    }
 
   }
 }
