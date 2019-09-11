@@ -2,15 +2,18 @@
 @import "../../styles/mixins.module.scss";
 
 .statusContainer {
+  @include flexThis(center, center, column);
+  text-align: center;
   width: 80%;
   background-color: $white;
   border-radius: 20px;
-  padding: 1rem 2rem;
+  padding: 0;
   margin: 2vh 0;
   min-height: 17rem;
 
   .userNameContainer {
     width: 70%;
+    margin-bottom: 1rem;
   }
 
   h3 {
@@ -33,13 +36,11 @@
   }
 }
 
-.statusPill {
-  @include flexThis(center, center, column);
-}
+
 
 .statPill {
 
-  text-align: center;
+ 
   overflow-wrap: break-word;
   h3 {
     padding-top: 0.5rem;
@@ -54,7 +55,6 @@
 }
 
 .generalPill {
-  @include flexThis(center, flex-start, column);
   min-height: 11rem;
 }
 
@@ -70,20 +70,17 @@
   }
 }
 .profilePill {
-    @include flexThis(space-between, center, row);
-    text-align: left;
-    min-height: 9rem;
+    text-align: center;
+    min-height: 11rem;
   }
 
 
 @media only screen and (min-width: 400px) {
-
-  .statusPill {
+  
+  .statusContainer {
     @include flexThis(space-between, center, row);
     text-align: left;
-  }
-
-  .statusContainer {
+    padding: 1rem 2rem;
     h3 {
 
       font-size: 1.5rem;
@@ -96,8 +93,14 @@
     }
   }
 
+  .userNameContainer {
+    margin-bottom: 0;
+  }
+
   .profilePill {
     @include flexThis(space-between, center, row);
+    text-align: left;
+    min-height: 9em;
     
     h3, 
     h4 {
