@@ -306,6 +306,9 @@ function CommitmentPage({
         )
       : [];
 
+  console.log("commitment name:", commitment.name);
+  console.log("document title:", document.title);
+
   if (commitment && document.title !== commitment.name) {
     setTitle(commitment.name);
   }
