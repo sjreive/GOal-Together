@@ -76,7 +76,7 @@ export default function Donut(props) {
               </ResponsiveContainer>
               <span className={classes.chartLabel}>
                 <h5>{props.userName}</h5>
-                <p>{props.userCommitmentScore}%</p>
+                <p>{props.userCommitmentScore ? props.userCommitmentScore : 100}%</p>
               </span>
             </div>  
          ))}
