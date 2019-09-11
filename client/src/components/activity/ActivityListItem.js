@@ -12,6 +12,7 @@ import {
 export default function ActivityListItem(props) {
   const { mode, transition, back } = useVisualMode("FIRST");
 
+  console.log("commitment props", props.commitment);
 
   // Date formatting
   const formatDate = props.activity && props.date.split("-");
@@ -29,11 +30,19 @@ export default function ActivityListItem(props) {
       .slice(0, 4)
       .join(" ");
 
-
   const now = Date.now();
   //Function to handle transition after voting
   const transitionAfterVote = () =>
     props.title && props.activity ? transition("VOTED") : transition("BLANK");
+
+  const members_list =
+    props && Array.isArray(props.members)
+      ? props.members.filter(member =>
+          props.commitment.members.includes(member.id)
+        )
+      : Object.values(props.members).filter(member =>
+          props.commitment.members.includes(member.id)
+        );
 
   return (
     props.activity && (
@@ -113,7 +122,7 @@ export default function ActivityListItem(props) {
 
         {mode === "VOTE" && props.activity && (
           <VoterCard
-            members={props.members}
+            members={members_list}
             user={props.user}
             activity={props.activity}
             submitVote={props.submitVote}

@@ -34,6 +34,7 @@ export default function Commitment(props) {
             getActivities={props.getActivities}
           />
           <ActivityList
+            commitment={props.commitment}
             title={props.title}
             activities={props.activities}
             members={props.members}
