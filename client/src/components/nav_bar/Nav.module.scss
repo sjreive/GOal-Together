@@ -23,8 +23,8 @@
   @include flexThis(space-between, center, row);
 
   .navIcon {
-    height: $nav-link-size;
-    width: $nav-link-size;
+    height: $nav-link-size * .8;
+    width: $nav-link-size * .8;
     transition: 0.3s;
   }
   .rightSpan {
@@ -35,14 +35,14 @@
 
   .notifications {
     position: absolute;
-    left: 1 rem;
+    left: 1rem;
     bottom: 1.5rem;
   }
 
   .alertIcon {
     position: absolute;
     color: $red;
-    left: 28px;
+    left: 34px;
     top: -5px;
   }
 
@@ -50,12 +50,12 @@
     color: white;
     position: absolute;
     font-size: 0.8rem;
-    left: 33px;
+    left: 39px;
     top: -5px;
   }
 
   a {
-    margin: 0 15px;
+    margin: 0 5px;
   }
 }
 .navIcon:hover,
@@ -323,18 +323,33 @@
 
 }
 
-@media only screen and (min-height: 675px) {
-
+@media only screen and (min-width: 350px) {
+  
 
   .bottomNav {
     a {
-      margin: 0 5px;
+      margin: 0 15px;
     }
 
     .navIcon {
-      height: $nav-link-size * .8;
-      width: $nav-link-size * .8;
+      height: $nav-link-size;
+      width: $nav-link-size;
       transition: 0.3s;
+    }
+
+    .alertIcon {
+      position: absolute;
+      color: $red;
+      left: 73px;
+      top: -5px;
+    }
+  
+    .notificationsNumber {
+      color: white;
+      position: absolute;
+      font-size: 0.8rem;
+      left: 77px;
+      top: -5px;
     }
   }
 
