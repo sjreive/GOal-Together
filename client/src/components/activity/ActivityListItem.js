@@ -12,7 +12,6 @@ import {
 export default function ActivityListItem(props) {
   const { mode, transition, back } = useVisualMode("FIRST");
 
-  console.log("ACtiviyListItem", props);
 
   // Date formatting
   const formatDate = props.activity && props.date.split("-");
@@ -29,17 +28,9 @@ export default function ActivityListItem(props) {
       .split(" ")
       .slice(0, 4)
       .join(" ");
-  console.log("datestring", dateString);
+
 
   const now = Date.now();
-  console.log(now);
-
-  // console.log(
-  //   "attended? activity",
-  //   props.activity.title,
-  //   props.activity.attendance[props.user.id]
-  // );
-
   //Function to handle transition after voting
   const transitionAfterVote = () =>
     props.title && props.activity ? transition("VOTED") : transition("BLANK");

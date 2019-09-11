@@ -11,7 +11,7 @@ export default function LeaderboardTable(props) {
     <table className={classes.userLeaderboard}>
       <thead>
         <tr>
-        <Media query="(min-width: 300px)">
+        <Media query="(min-width: 400px)">
         {matches => (
           matches && (
             <th>Rank</th> 

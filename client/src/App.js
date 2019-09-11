@@ -364,11 +364,6 @@ function CommitmentPage({
         )
       : [];
 
-      console.log("THESE ARE THE ACTIVITIES", commitment_activities);
-
-  console.log("commitment name:", commitment.name);
-  console.log("document title:", document.title);
-
   if (commitment && document.title !== commitment.name) {
     setTitle(commitment.name);
   }
@@ -398,7 +393,7 @@ function CommitmentPage({
     imageId: "qb3bao7kv87dznw2jnl8"
   };
   if (attendance.length > 1) {
-    console.log(attendance[0].commitmentScore);
+
     keenest =
       attendance[0].commitmentScore === attendance[1].commitmentScore
         ? {
@@ -494,7 +489,6 @@ function Notifications({
     memberObject[member.id] = member;
   });
 
-  console.log("member Object", memberObject);
 
   return (
     <ActivityList

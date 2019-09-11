@@ -9,7 +9,7 @@ export default function ActivityList(props) {
   const [activityList, setActivityList] = useState([]);
 
   useEffect(() => {
-    console.log("HAPPENING NOW::::", activityList);
+
     const inactivities =
       !props.notifications &&
       props.activities &&

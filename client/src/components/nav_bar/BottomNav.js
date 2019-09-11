@@ -24,16 +24,10 @@ export default function BottomNav({
   const bottomNavClass = classNames(classes.nav, classes.bottomNav);
 
   const [numberOfNotifications, setNumberOfNotifications] = useState(0);
-  console.log(
-    "bottom nav props",
-    notifications.filter(activity => activity).length
-  );
+
 
   useEffect(() => {
-    console.log(
-      "notifications:",
-      notifications.filter(activity => activity).length
-    );
+    
     setNumberOfNotifications(
       notifications.filter(activity => activity).length + invitations.length
     );

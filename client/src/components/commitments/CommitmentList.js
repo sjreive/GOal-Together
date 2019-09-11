@@ -4,8 +4,6 @@ import classes from "./CommitmentList.module.scss";
 import CommitmentListItem from "./CommitmentListItem";
 
 export default function CommitmentList({ Link, match, members, commitments }) {
-  console.log("member props:", commitments);
-
   // const commitment_members = Object.values(members).filter(member => commitment.members.includes(member.id))
 
   const commitmentListItems =

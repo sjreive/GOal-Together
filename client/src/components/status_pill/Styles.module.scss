@@ -93,6 +93,10 @@
     }
   }
 
+  .generalPill {
+    @include flexThis(center, flex-start, column);
+  }
+
   .userNameContainer {
     margin-bottom: 0;
   }

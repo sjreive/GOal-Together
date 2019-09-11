@@ -18,10 +18,7 @@ export default function SideNav({
   user
 }) {
   const [numberOfNotifications, setNumberOfNotifications] = useState(0);
-  console.log(
-    "bottom nav props",
-    notifications.filter(activity => activity).length
-  );
+
 
   useEffect(() => {
     const count = notifications.filter(activity => activity).length + invitations.length;

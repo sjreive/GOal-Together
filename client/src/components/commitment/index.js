@@ -12,8 +12,6 @@ import NewActivityForm from "../activity/NewActivity";
 export default function Commitment(props) {
   const { mode, transition } = useVisualMode("ACTIVITIES");
 
-  console.log("commitment props:", props);
-
   const tabs = [
     {
       label: "Activities",
@@ -25,7 +23,6 @@ export default function Commitment(props) {
     }
   ];
 
-  console.log("COMMITMENT ACTIVITIES:::: ", props.activities);
   return (
     <section className={classes.commitmentSection}>
       <PageTabs mode={mode} tabs={tabs} transition={transition} />

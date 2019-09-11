@@ -8,7 +8,7 @@ import Button from "../button/Button";
 import Form from "react-bootstrap/Form";
 
 export default function NewActivity(props) {
-  console.log("commitment:", props.commitment.id);
+
   const { mode, transition, back } = useVisualMode("BUTTON");
 
   //State used to set title & date in new activity form
@@ -17,12 +17,10 @@ export default function NewActivity(props) {
 
   const setNewActivityInfo = async activity => {
     const newActivity = await props.submitActivity(activity);
-    console.log("New Activity", newActivity.data);
   };
 
   const activitySubmissionHandler = activity => {
     if (activity.date && activity.title) {
-      console.log("activity data:", activity);
       transition("BUTTON");
       setNewActivityInfo(activity);
     }

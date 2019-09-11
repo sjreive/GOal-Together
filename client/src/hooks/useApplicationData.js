@@ -122,7 +122,6 @@ export default function useApplicationData() {
 
   useEffect(() => {
     let token = "Bearer " + localStorage.getItem("jwt");
-    console.log(reactAppURLS.API_URL);
     axios({
       method: "get",
       url: `${reactAppURLS.API_URL}/find_user`,
@@ -191,7 +190,6 @@ export default function useApplicationData() {
         headers: { Authorization: token },
         data: { voteData }
       }).then(async response => {
-        console.log(response);
         await dispatch({
           type: "SUBMIT_VOTE",
           vote: response.data
@@ -204,13 +202,11 @@ export default function useApplicationData() {
   const getActivities = () => {
     return new Promise((resolve, reject) => {
       let token = "Bearer " + localStorage.getItem("jwt");
-      console.log("getActivities function was called");
       axios({
         method: "get",
         url: `${reactAppURLS.API_URL}/activities`,
         headers: { Authorization: token }
       }).then(async response => {
-        console.log("Response from the API....", response);
         await dispatch({
           type: "GET_ACTIVITIES",
           activities: response.data
@@ -223,13 +219,11 @@ export default function useApplicationData() {
   const getCommitments = () => {
     return new Promise((resolve, reject) => {
       let token = "Bearer " + localStorage.getItem("jwt");
-      console.log("getCommitments function was called");
       axios({
         method: "get",
         url: `${reactAppURLS.API_URL}/commitments`,
         headers: { Authorization: token }
       }).then(async response => {
-        console.log("Response from the API....", response);
         await dispatch({
           type: "GET_COMMITMENTS",
           commitments: response.data
@@ -240,7 +234,6 @@ export default function useApplicationData() {
   };
 
   const submitActivity = activity => {
-    console.log("submitting:", activity);
     return new Promise((resolve, reject) => {
       let token = "Bearer " + localStorage.getItem("jwt");
       return axios({
@@ -249,7 +242,6 @@ export default function useApplicationData() {
         headers: { Authorization: token },
         data: { activity }
       }).then(async response => {
-        console.log(response);
         // rest of app expects there to be .voted and .attendance
         let activity = response.data;
         activity.voted = {};

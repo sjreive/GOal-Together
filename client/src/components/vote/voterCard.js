@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 export default function MemberList(props) {
-  console.log("voterCard props", props);
   const [activityVotes, addActivityVotes] = useState({});
   const members = props.members;
 
@@ -36,17 +35,14 @@ export default function MemberList(props) {
     .split(" ")
     .slice(0, 4)
     .join(" ");
-  console.log(dateString);
 
   // sets attendance value to true initially
   useEffect(() => {
     const newVotes = Object.values(members).reduce((votes, member) => {
-      console.log(`member ${member.id}`);
       const value =
         typeof activityVotes[member.id] === "boolean"
           ? activityVotes[member.id]
           : true;
-      console.log(`ACTIVITIY VOTES ${activityVotes}`);
       return { ...votes, [member.id]: value };
     }, {});
     addActivityVotes(newVotes);

@@ -5,7 +5,7 @@ export default function LeaderboardTableRow(props) {
   
   return (
     <tr>
-      <Media query="(min-width: 300px)">
+      <Media query="(min-width: 400px)">
         {matches => (
           matches && (
             <td>{props.rank}</td>
