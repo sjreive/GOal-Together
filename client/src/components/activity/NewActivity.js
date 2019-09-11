@@ -8,7 +8,6 @@ import Button from "../button/Button";
 import Form from "react-bootstrap/Form";
 
 export default function NewActivity(props) {
-
   const { mode, transition, back } = useVisualMode("BUTTON");
 
   //State used to set title & date in new activity form
@@ -17,6 +16,7 @@ export default function NewActivity(props) {
 
   const setNewActivityInfo = async activity => {
     const newActivity = await props.submitActivity(activity);
+    return newActivity;
   };
 
   const activitySubmissionHandler = activity => {
