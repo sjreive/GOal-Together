@@ -319,15 +319,13 @@ export default function useApplicationData() {
     // copy of notifications state
     let notifications = [];
 
-    Object.values(state.activities).filter(activity => activity === {});
-
     state.activities &&
       Object.keys(state.activities).forEach(id => {
         if (
           state.activities[id].voted &&
-          state.activities[id].voted[state.user.id] === false
+          !state.activities[id].voted[state.user.id]
         ) {
-          notifications[state.activities[id].id] = state.activities[id];
+          notifications.push(state.activities[id]);
         }
       });
 
