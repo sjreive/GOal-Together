@@ -60,21 +60,17 @@ export default function MemberList(props) {
   };
 
   const memberListItems = members.map(member => {
+    console.log("member:", member);
     return (
       <Attendee
         value={activityVotes[member.id]}
         id={member.id}
+        name={member.first_name}
         clickHandler={changeAttendance}
         key={member.id}
-        name={member.name}
         avatar={member.avatar_url}
       />
     );
-  });
-
-  const memberListNames = members.forEach(member => {
-    console.log("member name:", member.name);
-    return <li>member.name</li>;
   });
 
   return (
@@ -91,7 +87,6 @@ export default function MemberList(props) {
         Click on a member to change their attendance.
       </p>
       <ul className={classes.voterCard__list}>{memberListItems}</ul>
-      <ul>{memberListNames}</ul>
       <section className={classes.voterCard__submit}>
         <form onSubmit={event => event.preventDefault()}>
           <Button
