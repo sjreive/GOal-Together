@@ -112,13 +112,16 @@
 
 .newCommitButton:hover,
 .newCommitButton:focus {
-  transform: scale(1.1);
+  .newCommitIcon {
+    transform: scale(1.1);
+  }
 }
 
 .newCommitIcon {
   height: $nav-link-size * 2 !important;
   width: $nav-link-size * 2 !important;
   color: $primary-blue;
+  transition: 0.3s;
 }
 
 .tabNav {

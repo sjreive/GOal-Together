@@ -5,6 +5,8 @@ import classes from "./ActivityList.module.scss";
 import ActivityListItem from "./ActivityListItem";
 import InvitationListItem from "./InvitationListItem";
 
+import EmptyPagePill from"../status_pill/EmptyPagePill";
+
 export default function NotificationList(props) {
   const [notificationList, setNotificationList] = useState([]);
 
@@ -47,10 +49,17 @@ export default function NotificationList(props) {
       />
     ));
 
+    const invitationsArePresent = invitationListItems && invitationListItems.length > 0;  
+    const activitiesArePresent = activityListItems && activityListItems.length > 0;
+
   return (
-    <ul className={classes.activityList}>
-      {invitationListItems}
-      {activityListItems}
-    </ul>
+    <div className={classes.notificationContainer}>
+      <ul className={classes.activityList}>
+        {invitationsArePresent && invitationListItems}
+        {activitiesArePresent && activityListItems}
+        {!invitationsArePresent && !activitiesArePresent && <div className={classes.wrapper}><EmptyPagePill header="Looks like you don't have any notifications!" imageId={"iuz0nq8v2fvs5v6wnihc"} /></div>}
+
+      </ul>
+    </div>
   );
 }

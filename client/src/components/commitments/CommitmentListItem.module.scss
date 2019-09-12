@@ -1,15 +1,15 @@
 @import "../../styles/variables.module.scss";
 @import "../../styles/mixins.module.scss";
 @import "../../styles/reset.module.scss";
-
 .commitmentTile {
   height: 13rem;
+  width: 100%;
   border-radius: 0.5rem;
   background-color: $white;
   margin-top: 1rem;
   margin-bottom: 2rem;
   @include flexThis(flex-start, center, column);
-
+  
   &__top {
     height: 60%;
   }

@@ -378,7 +378,7 @@ function CommitmentPage({
     setTitle(commitment.name);
   }
 
-  commitment.members.map(id => {
+  commitment.members && commitment.members.map(id => {
     return activeMembers.find(member => member.id === id);
   })
   .filter(member => member)

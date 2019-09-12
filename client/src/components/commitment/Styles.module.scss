@@ -12,7 +12,7 @@
   .commitmentActivitiesContainer {
     @include flexThis(space-between, center, column);
     padding-top: 2rem;
-    width: 80%;
+    width: 100%;
   }
 }
 

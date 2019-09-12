@@ -26,6 +26,6 @@ export default function CommitmentList({ Link, match, members, commitments }) {
     ));
 
   return <ul className={classes.commitmentList}>
-    {commitmentListItems && commitmentListItems.length > 0 ? commitmentListItems : <div className={classes.wrapper}><EmptyPagePill header="Start some commitments to see your list of commitments!" imageId={"t8nwn9azvmtosi5bsnzn"} /></div>}
+    {commitmentListItems && commitmentListItems.length > 0 ? commitmentListItems : <div className={classes.wrapper}><EmptyPagePill header="You've got to join a commitment before you can see any!" imageId={"t8nwn9azvmtosi5bsnzn"} /></div>}
   </ul>;
 }

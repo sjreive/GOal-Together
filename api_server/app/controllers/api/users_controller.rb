@@ -82,7 +82,7 @@ module Api
       @user = User.find_by(email: user_params[:email])
       if @user
         if @user.first_name
-          render json: user.errors, status: :conflict
+          render json: @user.errors, status: :conflict
         else
           @user.update_attributes(user_params)
           if @user.avatar_url == ""

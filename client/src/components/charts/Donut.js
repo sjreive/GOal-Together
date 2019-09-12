@@ -63,7 +63,7 @@ export default function Donut(props) {
                     innerRadius="45%"
                     outerRadius="55%"
                     fill="#2d3cb1"
-                    paddingAngle={5}
+                    paddingAngle={data.length === 1 ? 0 : 5}
                     dataKey="value"
                     label={renderLabel}
                     isAnimationActive={false}

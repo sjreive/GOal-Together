@@ -27,7 +27,7 @@ export default function Leaderboard(props) {
           <LeaderboardTable attendance={props.attendance} />
         </div>
       )}
-      {props.attendance.length === 0 && <div className={classes.wrapper}><EmptyPagePill header="Start some commitments to start seeing stats!" imageId={"oroufrgpuiwvevbpskx8"} /></div>}
+      {props.attendance.length === 0 && <div className={classes.wrapper}><EmptyPagePill header="Join some commitments to see some stats!" imageId={"oroufrgpuiwvevbpskx8"} /></div>}
     </section>
   );
 };
