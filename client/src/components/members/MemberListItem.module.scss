@@ -64,3 +64,21 @@
 .members__item_name + .members__item_image:hover {
   opacity: 1;
 }
+
+@media only screen and (max-width: 400px) {
+  .members {
+    &__item {
+      
+  
+      &_image {
+        
+  
+        img {
+          max-height: 1.5rem;
+          min-height: 1.5rem;
+        }
+      }
+    
+    }
+  }
+}
