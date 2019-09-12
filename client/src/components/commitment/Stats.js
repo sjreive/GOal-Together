@@ -12,8 +12,10 @@ import RankingPill from "../status_pill/RankingPill";
 const classNames = require("classnames");
 
 export default function Stats(props) {
-  const wrapperContainer = classNames(classes.commitmentStatsContainer, classes.wrapper);
-
+  const wrapperContainer = classNames(
+    classes.commitmentStatsContainer,
+    classes.wrapper
+  );
 
   const chartAttendanceData = props.attendance.map(member => {
     const name = member.name;
@@ -21,17 +23,52 @@ export default function Stats(props) {
     const memberObject = {};
     memberObject[name] = commitmentScore;
     return memberObject;
-  })
+  });
 
   return (
     <div className={wrapperContainer}>
-        <GeneralPill header="Description" body={props.commitment.description} />
-        {chartAttendanceData.length === 0 && <GeneralPill header="No stats available yet" body="Book an activity and get voting start tracking your stats!" />}
-        {chartAttendanceData.length > 0 && <Donut data={chartAttendanceData} userName={props.userName} userCommitmentScore={props.userCommitmentScore} title={props.title}/>}
-        {chartAttendanceData.length > 0 && <CommitmentStatus flakiest={props.flakiest} stakes={props.commitment.stakes} />}
-        {props.keenest.commitmentScore > props.flakiest.commitmentScore && <RankingPill positive={true} header="Keenest Keener:" name={props.keenest.name} score={props.keenest.commitmentScore} imageId={props.keenest.imageId} />}
-        {props.keenest.commitmentScore > props.flakiest.commitmentScore && <RankingPill negative={true} header="Flakiest Flake:" name={props.flakiest.name} score={props.flakiest.commitmentScore} imageId={props.flakiest.imageId} />}
-        {chartAttendanceData.length > 0 && <LeaderboardTable attendance={props.attendance}/>}
+      <GeneralPill header="Description" body={props.commitment.description} />
+      {chartAttendanceData.length === 0 && (
+        <GeneralPill
+          header="No stats available yet"
+          body="Book an activity and get voting start tracking your stats!"
+        />
+      )}
+      {chartAttendanceData.length > 0 && (
+        <Donut
+          data={chartAttendanceData}
+          userName={props.userName}
+          userCommitmentScore={props.userCommitmentScore}
+          title={props.title}
+        />
+      )}
+      {chartAttendanceData.length > 0 && (
+        <CommitmentStatus
+          flakiest={props.flakiest}
+          stakes={props.commitment.stakes}
+        />
+      )}
+      {props.keenest.commitmentScore > props.flakiest.commitmentScore && (
+        <RankingPill
+          positive={true}
+          header="Keenest Keener:"
+          name={props.keenest.name}
+          score={props.keenest.commitmentScore}
+          imageId={props.keenest.imageId}
+        />
+      )}
+      {props.keenest.commitmentScore > props.flakiest.commitmentScore && (
+        <RankingPill
+          negative={true}
+          header="Flakiest Flake:"
+          name={props.flakiest.name}
+          score={props.flakiest.commitmentScore}
+          imageId={props.flakiest.imageId}
+        />
+      )}
+      {chartAttendanceData.length > 0 && (
+        <LeaderboardTable attendance={props.attendance} />
+      )}
     </div>
   );
-};
+}
