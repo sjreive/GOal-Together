@@ -119,7 +119,7 @@ cmt4 = Commitment.create(
   description: "Mostly we just drink wine...",
   start_date: 20.days.ago,
   end_date: 3.days.from_now,
-  activity_type: "Fitness",
+  activity_type: "Social",
   stakes: "Buys everyone a pint",
   thumbnail: "https://media.gettyimages.com/vectors/flat-dumbbell-icon-vector-id501279419?s=612x612"
 )
@@ -208,11 +208,6 @@ act2 = Activity.create(
   commitment_id: cmt1.id
 )
 
-act3 = Activity.create(
-  title: "Getting Loaded & Reading the Hobbit",
-  date: 200.days.from_now,
-  commitment_id: cmt2.id
-)
 
 act3 = Activity.create(
   title: "Body Pump",
@@ -222,13 +217,13 @@ act3 = Activity.create(
 
 act4 = Activity.create(
   title: "Spin Class",
-  date: 10.days.ago
+  date: 10.days.ago,
   commitment_id: cmt3.id
 )
 
 act5 = Activity.create(
   title: "Body Pump",
-  date: 5.days.ago
+  date: 5.days.ago,
   commitment_id: cmt3.id
 )
 
@@ -238,7 +233,7 @@ act7 = Activity.create(
   commitment_id: cmt3.id
 )
 
-act6 = Activity.create(
+act8 = Activity.create(
   title: "Body Pump",
   date: 10.days.ago,
   commitment_id: cmt3.id
@@ -471,7 +466,7 @@ act5.votes.create!({
 
 #activity 6
 act6.votes.create!({
-  attended: true,
+  attended: false,
   attendee_id: usr4.id,
   voter_id: usr7.id
 })
@@ -548,7 +543,7 @@ act5.votes.create!({
 
 #activity 6
 act6.votes.create!({
-  attended: true,
+  attended: false,
   attendee_id: usr4.id,
   voter_id: usr8.id
 })
