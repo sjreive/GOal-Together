@@ -35,6 +35,7 @@ export default function VoterListItem(props) {
             icon={faTimesCircle}
           />
         )}
+        <p className={classes.members__item_name}>{props.name}</p>
       </div>
     </li>
   );

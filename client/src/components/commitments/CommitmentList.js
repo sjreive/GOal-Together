@@ -6,8 +6,6 @@ import CommitmentListItem from "./CommitmentListItem";
 import EmptyPagePill from"../status_pill/EmptyPagePill";
 
 export default function CommitmentList({ Link, match, members, commitments }) {
-  // const commitment_members = Object.values(members).filter(member => commitment.members.includes(member.id))
-
   const commitmentListItems =
     commitments &&
     Object.keys(commitments).map((id, index) => (

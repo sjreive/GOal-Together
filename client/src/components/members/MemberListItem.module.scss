@@ -12,10 +12,19 @@
       border-radius: 16px;
 
       img {
-        max-height: 1.8rem;
-        min-height: 1.8rem;
+        max-height: 2.5rem;
+        min-height: 2.5rem;
         border-radius: 16px;
       }
+    }
+
+    &_name {
+      opacity: 0;
+      padding-right: 1rem;
+    }
+
+    &_name:hover {
+      opacity: 1;
     }
 
     &--selected {
@@ -30,17 +39,19 @@
       user-select: none;
     }
 
-    &--selected &-image {
-      width: 28px;
-      height: 28px;
-      margin-right: 0.5rem;
-    }
-
-    &--selected,
     &:hover {
       @include button-active--opacity;
     }
+
+    &:hover + &_name {
+      opacity: 1;
+    }
   }
+
+  &:hover + &_name {
+    opacity: 1;
+  }
+
   &__icon_true {
     color: green;
   }
@@ -48,4 +59,8 @@
   &__icon_false {
     color: red;
   }
+}
+
+.members__item_name + .members__item_image:hover {
+  opacity: 1;
 }

@@ -60,13 +60,14 @@ export default function MemberList(props) {
   };
 
   const memberListItems = members.map(member => {
+    console.log("member:", member);
     return (
       <Attendee
         value={activityVotes[member.id]}
         id={member.id}
+        name={member.first_name}
         clickHandler={changeAttendance}
         key={member.id}
-        name={member.name}
         avatar={member.avatar_url}
       />
     );

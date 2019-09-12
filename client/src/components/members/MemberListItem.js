@@ -16,6 +16,7 @@ export default function MemberListItem(props) {
           responsive
           crop="scale"
           alt="Avatar Img"
+          title={"NAME"}
         />
       </div>
 
