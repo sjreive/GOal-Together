@@ -40,8 +40,9 @@ export default function NotificationList(props) {
   const invitationListItems =
     props.invitations &&
     props.invitations.length > 0 &&
-    props.invitations.map(invite => (
+    props.invitations.map((invite, index) => (
       <InvitationListItem
+        key={index}
         name={invite.name}
         commitment={invite}
         acceptCommitmentInvitation={props.acceptCommitmentInvitation}
