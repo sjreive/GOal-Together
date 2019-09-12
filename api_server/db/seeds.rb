@@ -72,6 +72,15 @@ usr7 = User.create(
   avatar_url: "ojjzwmlvfm0yw7nx6yen"
 )
 
+usr8 = User.create(
+  first_name: "Jay Jay",
+  last_name: "Ting",
+  email: "Jay@Jay.com",
+  password: "123456",
+  password_confirmation: "123456",
+  avatar_url: "kiwq5lxaj1o8xqbi5c3h"
+)
+
 # Commitments
 Commitment.destroy_all
 puts "Re-creating Commitments ..."
@@ -168,6 +177,12 @@ Member.create!(
 )
 
 Member.create!(
+  commitment_id: 3,
+  user_id: 8,
+  joined: true
+)
+
+Member.create!(
   commitment_id: 4,
   user_id: 4,
   joined: false
@@ -202,7 +217,31 @@ act3 = Activity.create(
 act3 = Activity.create(
   title: "Body Pump",
   date: 100.days.from_now,
-  commitment_id: cmt1.id
+  commitment_id: cmt3.id
+)
+
+act4 = Activity.create(
+  title: "Spin Class",
+  date: 10.days.ago
+  commitment_id: cmt3.id
+)
+
+act5 = Activity.create(
+  title: "Body Pump",
+  date: 5.days.ago
+  commitment_id: cmt3.id
+)
+
+act7 = Activity.create(
+  title: "Yoga",
+  date: 5.days.from_now,
+  commitment_id: cmt3.id
+)
+
+act6 = Activity.create(
+  title: "Body Pump",
+  date: 10.days.ago,
+  commitment_id: cmt3.id
 )
 
 puts "Finding or Creating Votes ..."
@@ -244,4 +283,290 @@ act1.votes.create!({
   attended: true,
   attendee_id: usr3.id,
   voter_id: usr2.id
+})
+
+#User 4 votes
+# activity 4
+
+
+#activity 5
+act5.votes.create!({
+  attended: false,
+  attendee_id: usr4.id,
+  voter_id: usr4.id
+})
+
+act5.votes.create!({
+  attended: true,
+  attendee_id: usr6.id,
+  voter_id: usr4.id
+})
+
+act5.votes.create!({
+  attended: false,
+  attendee_id: usr7.id,
+  voter_id: usr4.id
+})
+
+act5.votes.create!({
+  attended: true,
+  attendee_id: usr8.id,
+  voter_id: usr4.id
+})
+
+#activity 6
+act6.votes.create!({
+  attended: true,
+  attendee_id: usr4.id,
+  voter_id: usr4.id
+})
+
+act6.votes.create!({
+  attended: true,
+  attendee_id: usr6.id,
+  voter_id: usr4.id
+})
+
+act6.votes.create!({
+  attended: true,
+  attendee_id: usr7.id,
+  voter_id: usr4.id
+})
+
+act6.votes.create!({
+  attended: true,
+  attendee_id: usr8.id,
+  voter_id: usr4.id
+})
+
+
+#User 6 votes
+# activity 4
+act4.votes.create!({
+  attended: false,
+  attendee_id: usr4.id,
+  voter_id: usr6.id
+})
+
+act4.votes.create!({
+  attended: true,
+  attendee_id: usr6.id,
+  voter_id: usr6.id
+})
+
+act4.votes.create!({
+  attended: true,
+  attendee_id: usr7.id,
+  voter_id: usr6.id
+})
+
+act4.votes.create!({
+  attended: true,
+  attendee_id: usr8.id,
+  voter_id: usr6.id
+})
+
+#activity 5
+act5.votes.create!({
+  attended: false,
+  attendee_id: usr4.id,
+  voter_id: usr6.id
+})
+
+act5.votes.create!({
+  attended: true,
+  attendee_id: usr6.id,
+  voter_id: usr6.id
+})
+
+act5.votes.create!({
+  attended: false,
+  attendee_id: usr7.id,
+  voter_id: usr6.id
+})
+
+act5.votes.create!({
+  attended: true,
+  attendee_id: usr8.id,
+  voter_id: usr6.id
+})
+
+#activity 6
+act6.votes.create!({
+  attended: true,
+  attendee_id: usr4.id,
+  voter_id: usr6.id
+})
+
+act6.votes.create!({
+  attended: true,
+  attendee_id: usr6.id,
+  voter_id: usr6.id
+})
+
+act6.votes.create!({
+  attended: true,
+  attendee_id: usr7.id,
+  voter_id: usr6.id
+})
+
+act6.votes.create!({
+  attended: true,
+  attendee_id: usr8.id,
+  voter_id: usr6.id
+})
+
+
+#User 7 votes
+
+# activity 4
+act4.votes.create!({
+  attended: false,
+  attendee_id: usr4.id,
+  voter_id: usr7.id
+})
+
+act4.votes.create!({
+  attended: true,
+  attendee_id: usr6.id,
+  voter_id: usr7.id
+})
+
+act4.votes.create!({
+  attended: true,
+  attendee_id: usr7.id,
+  voter_id: usr7.id
+})
+
+act4.votes.create!({
+  attended: true,
+  attendee_id: usr8.id,
+  voter_id: usr6.id
+})
+
+#activity 5
+act5.votes.create!({
+  attended: false,
+  attendee_id: usr4.id,
+  voter_id: usr7.id
+})
+
+act5.votes.create!({
+  attended: true,
+  attendee_id: usr6.id,
+  voter_id: usr7.id
+})
+
+act5.votes.create!({
+  attended: false,
+  attendee_id: usr7.id,
+  voter_id: usr7.id
+})
+
+act5.votes.create!({
+  attended: true,
+  attendee_id: usr8.id,
+  voter_id: usr7.id
+})
+
+#activity 6
+act6.votes.create!({
+  attended: true,
+  attendee_id: usr4.id,
+  voter_id: usr7.id
+})
+
+act6.votes.create!({
+  attended: true,
+  attendee_id: usr6.id,
+  voter_id: usr7.id
+})
+
+act6.votes.create!({
+  attended: true,
+  attendee_id: usr7.id,
+  voter_id: usr7.id
+})
+
+act6.votes.create!({
+  attended: true,
+  attendee_id: usr8.id,
+  voter_id: usr7.id
+})
+
+#User 8 votes
+
+# activity 4
+act4.votes.create!({
+  attended: false,
+  attendee_id: usr4.id,
+  voter_id: usr8.id
+})
+
+act4.votes.create!({
+  attended: true,
+  attendee_id: usr6.id,
+  voter_id: usr8.id
+})
+
+act4.votes.create!({
+  attended: true,
+  attendee_id: usr7.id,
+  voter_id: usr8.id
+})
+
+act4.votes.create!({
+  attended: true,
+  attendee_id: usr8.id,
+  voter_id: usr8.id
+})
+
+#activity 5
+act5.votes.create!({
+  attended: false,
+  attendee_id: usr4.id,
+  voter_id: usr8.id
+})
+
+act5.votes.create!({
+  attended: true,
+  attendee_id: usr6.id,
+  voter_id: usr8.id
+})
+
+act5.votes.create!({
+  attended: false,
+  attendee_id: usr7.id,
+  voter_id: usr8.id
+})
+
+act5.votes.create!({
+  attended: true,
+  attendee_id: usr8.id,
+  voter_id: usr8.id
+})
+
+#activity 6
+act6.votes.create!({
+  attended: true,
+  attendee_id: usr4.id,
+  voter_id: usr8.id
+})
+
+act6.votes.create!({
+  attended: true,
+  attendee_id: usr6.id,
+  voter_id: usr8.id
+})
+
+act6.votes.create!({
+  attended: true,
+  attendee_id: usr7.id,
+  voter_id: usr8.id
+})
+
+act6.votes.create!({
+  attended: true,
+  attendee_id: usr8.id,
+  voter_id: usr8.id
 })
