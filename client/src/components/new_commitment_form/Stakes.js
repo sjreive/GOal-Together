@@ -19,12 +19,12 @@ export default function Stakes(props) {
       </Form.Label>
       
       <Form.Control as="select" name="stakes" value={props.stakes} onChange={props.setStakes}>
-        <option>Buys a round of pints</option>
-        <option>Completes the cinnamon challenge</option>
-        <option>Sings karaoke in front of everyone</option>
-        <option>Buys snacks</option>
-        <option>Eats a hot pepper</option>
-        <option>Mystery dare</option>
+        <option>Has to buy a round of pints</option>
+        <option>Must complete the cinnamon challenge</option>
+        <option>Has to sing karaoke in front of everyone</option>
+        <option>Has to buys snacks</option>
+        <option>Must eat a hot pepper</option>
+        <option>Must do a mystery dare</option>
       </Form.Control>
       <Button
         next={true}

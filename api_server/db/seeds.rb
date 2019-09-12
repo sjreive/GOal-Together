@@ -110,7 +110,7 @@ cmt3 = Commitment.create(
   start_date: 20.days.ago,
   end_date: 3.days.from_now,
   activity_type: "Fitness",
-  stakes: "Secret Dare",
+  stakes: "Must do a secret dare",
   thumbnail: "https://media.gettyimages.com/vectors/flat-dumbbell-icon-vector-id501279419?s=612x612"
 )
 
