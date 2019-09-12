@@ -5,19 +5,21 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Welcome to GOal Together, <%= @user.first_name %></h1>
+    <h1>Welcome to GOal Together <%= @user.first_name %></h1>
     <p>
-      GOal Together is the new and exciting tool to help you achieve your goals, stick to your commitments, and connect with your friends.<br>
+      GOal Together is the new and exciting tool to help you achieve your goals, stick to your commitments, and connect with your friends.
     <br>
-      <%= @inviting_user.first_name %> has invited you to join <%= @commitment.name %>, on GOal Together.<br>
     <br>
-      To join the commitment with <%= @inviting_user.first_name %>, you can create your account by registering using the provided email address: <%= @user.email %>.<br>
+      <%= @inviting_user.first_name %> has invited you to join <%= @commitment.name %>, on GOal Together.
     <br>
-    </p>
-    <p>
+    <br>
+      To join the commitment with <%= @inviting_user.first_name %>, you can create your account by registering using the provided email address: <%= @user.email %>.
+    <br>
+    <br>
       To login to the site, just follow this link: <%= @url %>.
-    </p>
     <br>
-    <p>Thanks for joining and have a great day! Remember, if you want to go fast, go alone. If you want to go far, GOal Together.</p>
+    <br>
+      Thanks for joining and have a great day! Remember, if you want to go fast, go alone. If you want to go far, GOal Together.
+    </p>
   </body>
 </html>
