@@ -74,6 +74,7 @@ REACT_APP_PRESET=ovfn6v7o
 !["Leaderboard page"](client/public/docs/desktop-leaderboard.png)
 
 8. Oh and did we mention is responsive? It's responsive...
+
 !["Commitment page on mobile"](client/public/docs/mobile-commitments.png)
 !["Profile page on mobile"](client/public/docs/mobile-profile.png)
 
