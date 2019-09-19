@@ -1,0 +1,21 @@
+{
+  "name": "goal-together",
+  "version": "1.0.0",
+  "description": "Lighthouse Labs Final Project",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd client && npm install && npm build && cd ..",
+    "deploy": "cp -a client/build/. public/",
+    "postinstall": "npm build && npm deploy && echo 'Client built!'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sjreive/final-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sjreive/final-project/issues"
+  },
+  "homepage": "https://github.com/sjreive/final-project#readme"
+}
