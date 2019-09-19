@@ -124,7 +124,7 @@ export default function useApplicationData() {
     let token = "Bearer " + localStorage.getItem("jwt");
     axios({
       method: "get",
-      url: `${reactAppURLS.API_URL}/find_user`,
+      url: `/find_user`,
       headers: { Authorization: token }
     })
       .then(user => {
@@ -139,22 +139,22 @@ export default function useApplicationData() {
       Promise.all([
         axios({
           method: "get",
-          url: `${reactAppURLS.API_URL}/commitments`,
+          url: `/commitments`,
           headers: { Authorization: token }
         }),
         axios({
           method: "get",
-          url: `${reactAppURLS.API_URL}/votes`,
+          url: `/votes`,
           headers: { Authorization: token }
         }),
         axios({
           method: "get",
-          url: `${reactAppURLS.API_URL}/users`,
+          url: `/users`,
           headers: { Authorization: token }
         }),
         axios({
           method: "get",
-          url: `${reactAppURLS.API_URL}/activities`,
+          url: `/activities`,
           headers: { Authorization: token }
         })
       ])
@@ -186,7 +186,7 @@ export default function useApplicationData() {
       let token = "Bearer " + localStorage.getItem("jwt");
       return axios({
         method: "post",
-        url: `${reactAppURLS.API_URL}/votes/`,
+        url: `/votes/`,
         headers: { Authorization: token },
         data: { voteData }
       }).then(async response => {
@@ -204,7 +204,7 @@ export default function useApplicationData() {
       let token = "Bearer " + localStorage.getItem("jwt");
       axios({
         method: "get",
-        url: `${reactAppURLS.API_URL}/activities`,
+        url: `/activities`,
         headers: { Authorization: token }
       }).then(async response => {
         await dispatch({
@@ -221,7 +221,7 @@ export default function useApplicationData() {
       let token = "Bearer " + localStorage.getItem("jwt");
       axios({
         method: "get",
-        url: `${reactAppURLS.API_URL}/commitments`,
+        url: `/commitments`,
         headers: { Authorization: token }
       }).then(async response => {
         await dispatch({
@@ -238,7 +238,7 @@ export default function useApplicationData() {
       let token = "Bearer " + localStorage.getItem("jwt");
       return axios({
         method: "post",
-        url: `${reactAppURLS.API_URL}/activities/`,
+        url: `/activities/`,
         headers: { Authorization: token },
         data: { activity }
       }).then(async response => {
@@ -270,7 +270,7 @@ export default function useApplicationData() {
       let token = "Bearer " + localStorage.getItem("jwt");
       return axios({
         method: "put",
-        url: `${reactAppURLS.API_URL}/commitments/${commitment.id}/members/${state.user.id}`,
+        url: `/commitments/${commitment.id}/members/${state.user.id}`,
         headers: { Authorization: token },
         data: { commitment }
       })
@@ -292,7 +292,7 @@ export default function useApplicationData() {
       let token = "Bearer " + localStorage.getItem("jwt");
       return axios({
         method: "delete",
-        url: `${reactAppURLS.API_URL}/commitments/${commitment.id}/members/${state.user.id}`,
+        url: `/commitments/${commitment.id}/members/${state.user.id}`,
         headers: { Authorization: token },
         data: { commitment }
       })
@@ -351,7 +351,7 @@ export default function useApplicationData() {
       let token = "Bearer " + localStorage.getItem("jwt");
       return axios({
         method: "post",
-        url: `${reactAppURLS.API_URL}/commitments`,
+        url: `/commitments`,
         headers: { Authorization: token },
         data: { commitment, member_emails }
       }).then(async response => {

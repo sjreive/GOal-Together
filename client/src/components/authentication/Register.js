@@ -34,15 +34,13 @@ export default function Register(props) {
       password_confirmation: passwordConfirmation
     };
     axios
-      .post(`${reactAppURLS.API_URL}/users`, { user })
+      .post(`/users`, { user })
       .then(user => {
         const request = { auth: { email, password } };
-        axios
-          .post(`${reactAppURLS.API_URL}/user_token`, request)
-          .then(response => {
-            localStorage.setItem("jwt", response.data.jwt);
-            props.setUser(user.data);
-          });
+        axios.post(`/user_token`, request).then(response => {
+          localStorage.setItem("jwt", response.data.jwt);
+          props.setUser(user.data);
+        });
       })
       .catch(error => console.log("error", error));
   };
