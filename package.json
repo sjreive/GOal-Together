@@ -2,7 +2,7 @@
   "name": "goal-together",
   "version": "1.0.0",
   "description": "Lighthouse Labs Final Project",
-  "main": "index.js",
+  "main": "App.js",
   "scripts": {
     "build": "cd client && npm install && npm build && cd ..",
     "deploy": "cp -a client/build/. public/",
