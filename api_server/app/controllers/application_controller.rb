@@ -1,5 +1,11 @@
 class ApplicationController < ActionController::API
   include Knock::Authenticable
+  
+  # Fallback route for all routes or paths that don't match
+  def fallback_index_html
+    render :file => 'public/index.html'
+  end
+  
   # Before action: authentication
  
   # Checks votes to determine if a member attended
