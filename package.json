@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "Lighthouse Labs Final Project",
   "engines": {
-    "node": "8.9.4"
+    "node": "8.9."
   },
   "main": "App.js",
   "scripts": {
-    "build": "cd client && npm install && npm build && cd ..",
+    "build": "cd client && npm install && npm run build && cd ..",
     "deploy": "cp -a client/build/. public/",
-    "postinstall": "npm build && npm deploy && echo 'Client built!'"
+    "postinstall": "npm run build && npm run deploy && echo 'Client built!'"
   },
   "repository": {
     "type": "git",
